@@ -13,8 +13,8 @@ Resources
 ---------
 
 Developer Homepage: 	http://www.theme-force.com/developers
-GitHub Homepage: 		https://github.com/themeforce/framework
-Discussion & News: 		http://www.facebook.com/pages/Theme-Force/111741295576685
+GitHub Homepage: 	https://github.com/themeforce/framework
+Discussion & News: 	http://www.facebook.com/themeforce
 
  /* Definitions
 =========================================*/
@@ -29,7 +29,12 @@ define( 'TF_URL', get_bloginfo( 'template_directory' ) . '/' . TF_DIR_SLUG );
 
 // Template Hooks
 	require_once( TF_PATH . '/core_general/tf.template-hooks.php' );
-    require_once( TF_PATH . '/core_general/tf.business-general.php' );
+        require_once( TF_PATH . '/core_general/tf.business-general.php' );
+        
+// Business Options
+if( current_theme_supports( 'tf_settings_api' ) )        
+	require_once( TF_PATH . '/core_general/tf.business-options.php' );
+        require_once( TF_PATH . '/core_options/tf.options-list.php' );
         
 // Shortcodes - Business
 	require_once( TF_PATH . '/core_general/tf.business-shortcodes.php' );        
