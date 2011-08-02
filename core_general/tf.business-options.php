@@ -134,10 +134,9 @@ function themeforce_location_page() {
 );
 
     tf_display_settings($options);
-    echo '<input type="hidden" name="update_tf_options" value="1"/>';
-    echo '<input type="submit" name="options_submit" value="' . __( 'Save Changes' ) . '" />';
     ?> 
-    
+	    <input type="submit" name="options_submit" value=" <?php _e( 'Save Changes' )  ?>" />
+	   
     </form>
 
         

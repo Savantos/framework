@@ -49,7 +49,7 @@ function tf_display_settings($options) {
 
         <tr>
             <th><label for="<?php echo $value['id']; ?>"><?php echo $value['name']; ?></label></th>
-            <td><input type="<?php echo 'tf[' . $value['type'] . ']'; ?>" value="<?php if ( get_settings( $value['id'] ) != "") { echo stripslashes(get_settings( $value['id'])  ); } else { echo $value['std']; } ?>"></td>
+            <td><input name="<?php echo $value['id'] ?>" type="<?php echo 'tf[' . $value['type'] . ']'; ?>" value="<?php if ( get_settings( $value['id'] ) != "") { echo stripslashes(get_settings( $value['id'])  ); } else { echo $value['std']; } ?>"></td>
         </tr>
 
         <?php
@@ -107,7 +107,19 @@ function tf_display_settings($options) {
 
         <?php break;
         }
-        }
+	}
+	
+	foreach( $options as $option ) 
+		if( !empty( $option['id'] ) )
+			$option_ids[] = $option['id'];
+	
+	?>
+	
+	<input type="hidden" name="action" value="update" />
+	<input type="hidden" name="page_options" value="<?php echo implode(',', $option_ids) ?>" />
+    <?php wp_nonce_field( 'update-options' ); ?>
+	    
+    <?php
 }
 
 ?>
