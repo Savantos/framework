@@ -29,19 +29,23 @@ define( 'TF_URL', get_bloginfo( 'template_directory' ) . '/' . TF_DIR_SLUG );
 
 // Template Hooks
 	require_once( TF_PATH . '/core_general/tf.template-hooks.php' );
-        require_once( TF_PATH . '/core_general/tf.business-general.php' );
+    require_once( TF_PATH . '/core_general/tf.business-general.php' );
         
 // Business Options
 if( current_theme_supports( 'tf_settings_api' ) )        
 	require_once( TF_PATH . '/core_general/tf.business-options.php' );
-        require_once( TF_PATH . '/core_options/tf.options-list.php' );
+    require_once( TF_PATH . '/core_options/tf.options-list.php' );
         
 // Shortcodes - Business
 	require_once( TF_PATH . '/core_general/tf.business-shortcodes.php' );        
 	
 // Common Assets
 	require_once( TF_PATH . '/core_general/tf.assets.php' );
-        require_once( TF_PATH . '/core_general/tf.slider.php' );
+    require_once( TF_PATH . '/core_general/tf.slider.php' );
+        
+// Colors      
+    require_once( TF_PATH . '/core_colors/tf.colors.php' );
+        
 
 // Food Menu
 if( current_theme_supports( 'tf_food_menu' ) )
