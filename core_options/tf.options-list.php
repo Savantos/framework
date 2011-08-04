@@ -80,7 +80,10 @@ function tf_display_settings($options) {
 
         <tr>
             <th><label for="<?php echo $value['id']; ?>"><?php echo $value['name']; ?></label></th>
-            <td><input name="<?php echo $value['id'] ?>" type="<?php echo $value['type']; ?>" value="<?php if ( get_settings( $value['id'] ) != "") { echo stripslashes(get_settings( $value['id'])  ); } else { echo $value['std']; } ?>"></td>
+            <td>
+                <input name="<?php echo $value['id'] ?>" type="<?php echo $value['type']; ?>" value="<?php if ( get_settings( $value['id'] ) != "") { echo stripslashes(get_settings( $value['id'])  ); } else { echo $value['std']; } ?>">
+                <br /><span><?php echo $value['desc'] ?></span>
+            </td>
         </tr>
 
         <?php
