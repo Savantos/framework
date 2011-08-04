@@ -38,14 +38,14 @@ function themeforce_logo_page() {
 	// new 3.2.2					
 	 array( "name" => "Logo",
                 "desc" => "The street address. For exampl: 1600 Amphitheatre Pkwy",
-                "id" => $shortname."_address_street",
+                "id" => $shortname."_logo",
                 "std" => "",
                 "type" => "image"),
 		
 	// new 3.2.2		
 	array( "name" => "Favicon",
                 "desc" => "The locality. For example, Mountain View, Miami, Sydney, etc.",
-                "id" => $shortname."_address_locality",
+                "id" => $shortname."_favicon",
                 "std" => "",
                 "type" => "image"),					
       
