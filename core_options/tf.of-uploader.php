@@ -10,9 +10,8 @@ define( 'TF_OPTIONS_FRAMEWORK_URL', TF_URL . '/core_options/' );
 if ( is_admin() ) {
 	
 	// Load additional css and js for image uploads on the Options Framework page
-	$of_page= 'your-business_page_themeforce_logo';
-	add_action( "admin_print_styles-$of_page", 'tf_optionsframework_mlu_css', 0 );
-	add_action( "admin_print_scripts-$of_page", 'tf_optionsframework_mlu_js', 0 );
+	add_action( "admin_print_styles", 'tf_optionsframework_mlu_css', 0 );
+	add_action( "admin_print_scripts", 'tf_optionsframework_mlu_js', 0 );
 	add_action( "admin_print_styles-media-upload-popup", "tf_optionsframework_mlu_insidepopup" );
 }
 
