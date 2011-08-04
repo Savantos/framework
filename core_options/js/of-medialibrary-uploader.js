@@ -78,10 +78,10 @@
         
         // Display a custom title for each Thickbox popup.
         var woo_title = '';
-        
+
 		if ( $(this).parents('.section').find('.heading') ) { woo_title = $(this).parents('.section').find('.heading').text(); } // End IF Statement
         
-		tb_show( woo_title, 'media-upload.php?post_id='+formID+'&TB_iframe=1' );
+		tb_show( woo_title, 'media-upload.php?is_optionsframework=yes&post_id='+formID+'&TB_iframe=1' );
 		return false;
 	});
             
