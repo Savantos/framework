@@ -5,6 +5,35 @@
  * 
  */
 
+// Register Menu Pages
+
+function themeforce_options() {
+    // TODO Need to amend capability for basic view of hosted
+    add_menu_page( 'Dummy Header', 'Your Business', 'manage_options', 'themeforce_options','', get_bloginfo('template_url').'/themeforce/assets/images/general_16.png', 25); // $function, $icon_url, $position 
+    add_submenu_page('themeforce_options', 'Business Details', 'Business Details', 'manage_options', 'themeforce_business', 'themeforce_business_page');
+    add_submenu_page('themeforce_options', 'Your Logo', 'Upload your Logo', 'manage_options', 'themeforce_logo', 'themeforce_logo_page');   
+    add_submenu_page('themeforce_options', 'Your Location', 'Location', 'manage_options', 'themeforce_location', 'themeforce_location_page');
+}
+add_action('admin_menu','themeforce_options');
+
+// Load jQuery & relevant CSS
+// -----------------------------------------
+
+// js
+function themeforce_business_options_scripts() {
+    wp_enqueue_script( 'tfoptions', TF_URL . '/assets/js/themeforce-options.js', array('jquery'));
+    wp_enqueue_script( 'iphone-checkbox', TF_URL . '/assets/js/jquery.iphone-style-checkboxes.js', array('jquery'));
+}
+
+add_action( 'admin_print_scripts', 'themeforce_business_options_scripts' );
+
+// css
+function themeforce_business_options_styles() {
+    wp_enqueue_style( 'tfoptions', TF_URL . '/assets/css/themeforce-options.css');
+}
+
+add_action( 'admin_print_styles', 'themeforce_business_options_styles' );
+
 // Validation
 
 function tf_settings_validate($input) {
@@ -49,7 +78,7 @@ function tf_display_settings($options) {
 
         <tr>
             <th><label for="<?php echo $value['id']; ?>"><?php echo $value['name']; ?></label></th>
-            <td><input name="<?php echo $value['id'] ?>" type="<?php echo 'tf[' . $value['type'] . ']'; ?>" value="<?php if ( get_settings( $value['id'] ) != "") { echo stripslashes(get_settings( $value['id'])  ); } else { echo $value['std']; } ?>"></td>
+            <td><input name="<?php echo $value['id'] ?>" type="<?php echo $value['type']; ?>" value="<?php if ( get_settings( $value['id'] ) != "") { echo stripslashes(get_settings( $value['id'])  ); } else { echo $value['std']; } ?>"></td>
         </tr>
 
         <?php
@@ -102,6 +131,18 @@ function tf_display_settings($options) {
             <td>
             <?php foreach ($value['options'] as $option) { ?>
                 <div><input type="radio" name="<?php echo $value['id']; ?>" <?php if (get_settings( $value['id'] ) == $option) { echo 'checked'; } ?> /><?php echo $option; ?></div><?php } ?>
+            </td>
+        </tr>
+        
+        <?php
+        
+        case "image":
+        ?>
+
+        <tr>
+            <th><label for="<?php echo $value['id']; ?>"><?php echo $value['name']; ?></label></th>
+            <td>
+            <?php // TODO Upload Function ?>
             </td>
         </tr>
 

@@ -7,39 +7,11 @@
  * 
  */
 
-// Register Menu Pages
-// -----------------------------------------
-
-function themeforce_business_options_addmenu() {
-    // TODO Need to amend capability for basic view of hosted
-    add_menu_page( 'Dummy Header', 'Your Business', 'manage_options', 'themeforce_options','', get_bloginfo('template_url').'/themeforce/assets/images/general_16.png', 25); // $function, $icon_url, $position 
-    add_submenu_page('themeforce_options', 'Your Business Location', 'Location', 'manage_options', 'themeforce_location', 'themeforce_location_page');
-}
-add_action('admin_menu','themeforce_business_options_addmenu');
-
-// Load jQuery & relevant CSS
-// -----------------------------------------
-
-// js
-function themeforce_business_options_scripts() {
-    wp_enqueue_script( 'tfoptions', TF_URL . '/assets/js/themeforce-options.js', array('jquery'));
-    wp_enqueue_script( 'iphone-checkbox', TF_URL . '/assets/js/jquery.iphone-style-checkboxes.js', array('jquery'));
-}
-
-add_action( 'admin_print_scripts', 'themeforce_business_options_scripts' );
-
-// css
-function themeforce_business_options_styles() {
-    wp_enqueue_style( 'tfoptions', TF_URL . '/assets/css/themeforce-options.css');
-}
-
-add_action( 'admin_print_styles', 'themeforce_business_options_styles' );
-
 // Create Page
 // -----------------------------------------
 // TODO Add functionality to edit existing slides.
 
-function themeforce_location_page() {
+function themeforce_business_page() {
     ?>
     <div class="wrap" id="tf-options-page">
     <div id="tf-options-panel">
@@ -135,10 +107,15 @@ function themeforce_location_page() {
 
     tf_display_settings($options);
     ?> 
-	    <input type="submit" name="options_submit" value=" <?php _e( 'Save Changes' )  ?>" />
-	   
+	 <input type="submit" id="tf-submit" name="options_submit" value=" <?php _e( 'Save Changes' )  ?>" />
+         <div style="clear:both;"></div>
     </form>
-
+        
+        <div id="tf-tip">
+            <h3>Why do you need all this?</h3>
+            <p>The questions asked above are used to provide <strong>search engines & content aggregators</strong> with relevant information about your restaurant. These websites can then automatically generate detailed profiles about your business, generating more traffic for your website.</p>
+            <!-- <img src="http://1.bp.blogspot.com/_o5Na_9269nA/S1nnV8U-pYI/AAAAAAAADX0/FkIocIhR7Ig/s400/events-rich-snippets.png" /> -->
+        </div>  
         
     </div>
     <?php

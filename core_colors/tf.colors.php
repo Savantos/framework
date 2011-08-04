@@ -23,7 +23,7 @@ require_once( TF_PATH . '/core_colors/colors.inc.php' );
 function tf_logocolors($colorimage) {
     $hexarray = tf_dynamiccolors($colorimage);
     // Activate Custom Colors
-        update_option('baseforce_custom_colors','#'.$hexarray[0]);
+        update_option('baseforce_custom_colors', 'true');
     // Primary
         update_option('baseforce_color_pri_dark','#'.$hexarray[0]);
         update_option('baseforce_color_pri_light','#'.$hexarray[1]);
@@ -86,9 +86,8 @@ function tf_colorpalette($hex, $type) {
     // Conversion from Hex to RGB to HSL
 
     $rgb = _color_unpack($hex,true);
-    echo '<pre> Unpack to RGB ';print_r($rgb);echo '</pre>';
     $hsl = _color_rgb2hsl($rgb);
-    echo '<pre> RGB to HSL ';print_r($hsl);echo '</pre>';
+    
     // Extract HSL values
     
     $h = $hsl[0];
