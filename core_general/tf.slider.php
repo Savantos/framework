@@ -37,7 +37,7 @@ add_action( 'init', 'create_slider_postype' );
 // Register Page
 
 function themeforce_slider_addpage() {
-    add_options_page('Slider Page Title', 'Manage Sliders', 'manage_options', 'themeforce_slider', 'themeforce_slider_page');
+    add_submenu_page('themes.php','Slider Page Title', 'Manage Sliders', 'manage_options', 'themeforce_slider', 'themeforce_slider_page');
 }
 
 add_action('admin_menu','themeforce_slider_addpage');
@@ -57,7 +57,7 @@ function themeforce_slider_scripts() {
     wp_enqueue_script( 'tfslider', TF_URL . '/assets/js/themeforce-slider.js', array('jquery'));
 }
 
-add_action( 'admin_print_scripts-settings_page_themeforce_slider', 'themeforce_slider_scripts' );
+add_action( 'admin_print_scripts', 'themeforce_slider_scripts' );
 
 // css
 function themeforce_slider_styles() {
@@ -65,7 +65,7 @@ function themeforce_slider_styles() {
     wp_enqueue_style( 'tfslider', TF_URL . '/assets/css/themeforce-slider.css');
 }
 
-add_action( 'admin_print_styles-settings_page_themeforce_slider', 'themeforce_slider_styles' );
+add_action( 'admin_print_styles', 'themeforce_slider_styles' );
 
 // Create Page
 // TODO Add functionality to edit existing slides.
@@ -76,6 +76,7 @@ function themeforce_slider_page() {
     <?php screen_icon(); ?>
     <h2>Slider Options</h2>
     <h3>Manage Slides</h3>
+    <div id="tf-options-page">
     <form method="post" action="" name="" onsubmit="return checkformf(this);">
     <ul id="tf-slider-list"> 
     
@@ -206,7 +207,7 @@ function themeforce_slider_page() {
         <input type="submit" name="submitpost" class="button-primary menu-save" value="Post"/> 
 
     </form>
-
+</div>
     <?php
         
 }

@@ -23,6 +23,7 @@ add_action('admin_menu','themeforce_options');
 function themeforce_business_options_scripts() {
     wp_enqueue_script( 'tfoptions', TF_URL . '/assets/js/themeforce-options.js', array('jquery'));
     wp_enqueue_script( 'iphone-checkbox', TF_URL . '/assets/js/jquery.iphone-style-checkboxes.js', array('jquery'));
+    wp_enqueue_script( 'farbtastic', TF_URL . '/assets/js/jquery.farbtastic.js', array('jquery'));
 }
 
 add_action( 'admin_print_scripts', 'themeforce_business_options_scripts' );
@@ -30,6 +31,7 @@ add_action( 'admin_print_scripts', 'themeforce_business_options_scripts' );
 // css
 function themeforce_business_options_styles() {
     wp_enqueue_style( 'tfoptions', TF_URL . '/assets/css/themeforce-options.css');
+    wp_enqueue_style( 'farbtastic', TF_URL . '/assets/css/farbtastic.css');
 }
 
 add_action( 'admin_print_styles', 'themeforce_business_options_styles' );
@@ -134,7 +136,7 @@ function tf_display_settings($options) {
             </td>
         </tr>
         
-        <?php
+        <?php break;
         
         case "image":
         ?>
@@ -145,7 +147,41 @@ function tf_display_settings($options) {
             <?php // TODO Upload Function ?>
             </td>
         </tr>
+        
+        <?php break;
+        
+        case "open-farbtastic":
+        ?>
+        
+        </table>
+        <div style="clear:both;"></div>
+        <div id="farbtastic-wrap">
+        <div id="farbtastic-picker"><div id="picker-bg"></div></div>
+        <table> 
+        
+        
+        <?php break;
+        
+        case "colorpicker":
+        ?>
 
+        <tr>
+            <th><label for="<?php echo $value['id']; ?>"><?php echo $value['name']; ?></label></th>
+            <td>
+            <input class="colorwell" name="<?php echo $value['id'] ?>" type="text" value="<?php if ( get_settings( $value['id'] ) != "") { echo stripslashes(get_settings( $value['id'])  ); } else { echo $value['std']; } ?>">
+            </td>
+        </tr>
+        
+         <?php break;
+        
+        case "close-farbtastic":
+        ?>
+            
+        </table>
+        </div>
+        <div style="clear:both;"></div>
+        <table>      
+        
         <?php break;
         }
 	}
