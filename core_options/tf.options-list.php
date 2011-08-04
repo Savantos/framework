@@ -7,6 +7,8 @@
 
 // Register Menu Pages
 
+require_once( TF_PATH . '/core_options/tf.of-uploader.php' );
+
 function themeforce_options() {
     // TODO Need to amend capability for basic view of hosted
     add_menu_page( 'Dummy Header', 'Your Business', 'manage_options', 'themeforce_options','', get_bloginfo('template_url').'/themeforce/assets/images/general_16.png', 25); // $function, $icon_url, $position 
@@ -147,7 +149,10 @@ function tf_display_settings($options) {
         <tr>
             <th><label for="<?php echo $value['id']; ?>"><?php echo $value['name']; ?></label></th>
             <td>
-            <?php // TODO Upload Function ?>
+            <?php
+            if ( get_settings( $value['id'] ) != "") { $val = stripslashes(get_settings( $value['id'])  ); } else { $val =  $value['std']; }
+            ?>
+            <?php echo tf_optionsframework_medialibrary_uploader( $value['id'], $val ); ?>
             </td>
         </tr>
         
