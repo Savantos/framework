@@ -9,18 +9,19 @@ jQuery(document).ready(function($) {
     
     // Farbtastic Settings
     
-    var f = $.farbtastic('#picker-bg');
-    var p = $('#picker-bg').css('opacity', 0.25);
-    var selected;
-    $('.colorwell')
-      .each(function () { f.linkTo(this); $(this).css('opacity', 0.75); })
-      .focus(function() {
-        if (selected) {
-          $(selected).css('opacity', 0.75).removeClass('colorwell-selected');
-        }
-        f.linkTo(this);
-        p.css('opacity', 1);
-        $(selected = this).css('opacity', 1).addClass('colorwell-selected');
-      });
-    
+    if( jQuery( '#picker-bg' ).length ) {
+    	var f = $.farbtastic( '#picker-bg');
+    	var p = $('#picker-bg').css('opacity', 0.25);
+    	var selected;
+    	$('.colorwell')
+    	  .each(function () { f.linkTo(this); $(this).css('opacity', 0.75); })
+    	  .focus(function() {
+    	    if (selected) {
+    	      $(selected).css('opacity', 0.75).removeClass('colorwell-selected');
+    	    }
+    	    f.linkTo(this);
+    	    p.css('opacity', 1);
+    	    $(selected = this).css('opacity', 1).addClass('colorwell-selected');
+    	  });
+    }
 });

@@ -57,7 +57,7 @@ function themeforce_slider_scripts() {
     wp_enqueue_script( 'tfslider', TF_URL . '/assets/js/themeforce-slider.js', array('jquery'));
 }
 
-add_action( 'admin_print_scripts', 'themeforce_slider_scripts' );
+add_action( 'admin_print_scripts-appearance_page_themeforce_slider', 'themeforce_slider_scripts' );
 
 // css
 function themeforce_slider_styles() {

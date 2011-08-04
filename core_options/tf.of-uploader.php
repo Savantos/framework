@@ -10,9 +10,9 @@ define( 'TF_OPTIONS_FRAMEWORK_URL', TF_URL . '/core_options/' );
 if ( is_admin() ) {
 	
 	// Load additional css and js for image uploads on the Options Framework page
-	$of_page= 'your-business_page_themeforce_logo';
-	add_action( "admin_print_styles-$of_page", 'tf_optionsframework_mlu_css', 0 );
-	add_action( "admin_print_scripts-$of_page", 'tf_optionsframework_mlu_js', 0 );	
+	add_action( "admin_print_styles", 'tf_optionsframework_mlu_css', 0 );
+	add_action( "admin_print_scripts", 'tf_optionsframework_mlu_js', 0 );
+	add_action( "admin_print_styles-media-upload-popup", "tf_optionsframework_mlu_insidepopup" );
 }
 
 /**
@@ -38,6 +38,7 @@ if ( ! function_exists( 'tf_optionsframework_mlu_init' ) ) {
 		) );
 	}
 }
+tf_optionsframework_mlu_init();
 
 /**
  * Adds the Thickbox CSS file and specific loading and button images to the header
@@ -287,6 +288,8 @@ if ( ! function_exists( 'tf_optionsframework_mlu_modify_tabs' ) ) {
 
 	function tf_optionsframework_mlu_modify_tabs ( $tabs ) {
 		$tabs['gallery'] = str_replace( __( 'Gallery', 'optionsframework' ), __( 'Previously Uploaded', 'optionsframework' ), $tabs['gallery'] );
+
+		unset($tabs['library']);
 		return $tabs;
 	}
 }
