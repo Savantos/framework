@@ -3,14 +3,14 @@
 }
 
 #tf-slider-list li {
-    margin:10px 0;
+    margin:10px 0px;
     padding:10px;
     border:1px #DFDFDF solid !important;
     overflow:auto;
     -webkit-border-radius: 10px;
     -moz-border-radius: 10px;
     border-radius: 10px;
-    width:700px;
+    width:680px;
 }
 
 #tf-slider-list li h4 {
@@ -84,10 +84,10 @@
 }
 
 #tf-slider-list .ui-state-highlight {
-    height:40px;
+    height:115px;
     background:#eafbea !important;
 }
-
+/*
 #add-tf-slider label {
     padding:5px;
     display:block;
@@ -140,3 +140,4 @@
     color:#21759b;
     line-height:10px;
 }
+*/

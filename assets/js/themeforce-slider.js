@@ -1,4 +1,6 @@
 jQuery(document).ready(function($) {
+  
+    $('tr.extra-options').hide();  
     
   // Sortable List and Update
   
@@ -53,6 +55,14 @@ jQuery(document).ready(function($) {
      imgurl = jQuery('img',html).attr('src');
      jQuery('#tfslider_image').val(imgurl);
      tb_remove();
-    }    
+    }
+    
+    // Show Additional Options
+    
+    $('#slidertype').change(function(){
+      if($(this).val() == 'content'){
+        $('tr.extra-options').show();
+      }
+    });
 
   });

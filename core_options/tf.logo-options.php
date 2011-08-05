@@ -21,7 +21,7 @@ function themeforce_logo_page() {
     
     // List of Options used within Dropdowns, etc.
     
-    $shortname = "tf";
+    $shortname = "baseforce";
     $options_yesno = array ('yes','no');
     
     // Options

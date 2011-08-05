@@ -163,7 +163,7 @@ function tf_display_settings($options) {
         
         </table>
         <div style="clear:both;"></div>
-        <div id="farbtastic-wrap">
+        <div id="tf-settings-wrap" class="tf-farbtastic">
         <div id="farbtastic-picker"><div id="picker-bg"></div></div>
         <table> 
         

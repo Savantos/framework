@@ -52,7 +52,7 @@ function themeforce_slider_scripts() {
     wp_enqueue_script('thickbox');
     // other
     wp_enqueue_script( 'jalerts', TF_URL . '/assets/js/jquery.alerts.js' );
-    wp_enqueue_script( 'media-uploader-extensions', TF_URL . '/assets/js/media-uploader.extensions.js' );
+    // wp_enqueue_script( 'media-uploader-extensions', TF_URL . '/assets/js/media-uploader.extensions.js' );
     // option page settings
     wp_enqueue_script( 'tfslider', TF_URL . '/assets/js/themeforce-slider.js', array('jquery'));
 }
@@ -73,10 +73,10 @@ add_action( 'admin_print_styles', 'themeforce_slider_styles' );
 function themeforce_slider_page() {
     ?>
     <div class="wrap" id="tf-slider-page">
+    <div id="tf-options-page">    
     <?php screen_icon(); ?>
     <h2>Slider Options</h2>
     <h3>Manage Slides</h3>
-    <div id="tf-options-page">
     <form method="post" action="" name="" onsubmit="return checkformf(this);">
     <ul id="tf-slider-list"> 
     
@@ -105,7 +105,7 @@ function themeforce_slider_page() {
             $order = $custom["_tfslider_order"][0];
             $link = $custom["tfslider_link"][0];
             $button = $custom["tfslider_button"][0];
-            $image = $custom["_tfslider_image"][0];
+            $image = $custom["tfslider_image"][0];
             $thumbnail = wpthumb( $image, 'width=250&height=100&crop=1', false);
                     
              echo '<li id="listItem_' . $id . '" class="menu-item-handle slider-item">';
@@ -145,68 +145,76 @@ function themeforce_slider_page() {
     
     <input type="hidden" name="update_post" value="1"/> 
     
-    <input type="submit" name="updatepost" value="Update" class="button-primary" /> 
+    <input type="submit" name="updatepost" value="Update" id="tf-submit" /> 
     </form>
     
 <?php
 // Create New Slide
 ?>
     
-    <h3>Create New Slide</h3>
+    <div id="tf-options-panel">
     
-    <form method="post" action="" name="" onsubmit="return checkformf(this);">
-    <div id="add-tf-slider">    
-        <div id="add-tf-box">
-            <strong>Image</strong>
-            <div class="input-row">
-                <label>Type of Slide<div class="required">*</div></label>
-                <ul>
+    <h3>Create New Slide</h3>
+    <div class="tf-settings-wrap">
+    <form class="form-table"method="post" action="" name="" onsubmit="return checkformf(this);">
+    
+    <table>
+            <tr>
+                <th><label>Type of Slide<span class="required">*</span></label></th>
+                <td><ul>
                     <select name='_tfslider_type' id='slidertype' class='postform' > 
                         <option value="image">Image Alone</option> 
                         <option value="content">Image & Text</option> 
                     </select> 
-                </ul>
-            </div>
+                </ul></td>
+            </tr>   
             
-            <div class="input-row">
+            <tr>
                 <?php // TODO Would be nice to have the 250x100 thumbnail replace the upload button once the image is ready ?>
-                <label>Pick an Image<div class="required">*</div></label><input id="tfslider_image" type="text" name="_tfslider_image" value="" /><input id="upload_image_button" type="button" value="Upload Image" />
-            </div>
+                <th><label>Pick an Image<span class="required">*</span></label></th><!-- <input id="tfslider_image" type="text" name="_tfslider_image" value="" /><input id="upload_image_button" type="button" value="Upload Image" /> -->
+                <td><?php
+                if ( get_settings( $value['id'] ) != "") { $val = stripslashes(get_settings( $value['id'])  ); } else { $val =  $value['std']; }
+                ?>
+                <?php echo tf_optionsframework_medialibrary_uploader( 'tfslider_image', $val ); ?>
+                </td>
+            </tr>
             
-            <div class="input-row">
-                <label>Slide Link</label><input type="text" name="tfslider_link" size="45" id="input-title"/>
-                <span>If you'd like your slide to link to a page, enter the URL here.</span>
-            </div> 
+            <tr>
+                <th><label>Slide Link</label></th>
+                <td>
+                    <input type="text" name="tfslider_link" size="45" id="input-title"/><br />
+                    <span>If you'd like your slide to link to a page, enter the URL here.</span>
+                </td>
+            </tr> 
+            <tr class="extra-options">
+                <th><label>Slider Header</label></th>
+                    <td><input type="text" name="post_title" size="45" id="input-title"/></td>
+            </tr>
+   
+
+            <tr class="extra-options">
+
+                <th><label>Slide Description</label></th>
+                <td><textarea rows="5" name="post_content" cols="66" id="text-desc"></textarea></td>
+            </tr>
+
             
-        </div>
-        
-        <div style="clear:both"></div>
-        
-        <div id="add-tf-box">
-            <strong>Additional Fields for Content Slides</strong>
+            <tr class="extra-options">
 
-            <div class="input-row">
-                <label>Slider Header</label><input type="text" name="post_title" size="45" id="input-title"/>
-            </div>    
+                <th><label>Button Text</label></th>
+                <td><input type="text" name="tfslider_button" size="45" id="input-title"/>
+                <span>If you've chosen a link above, it'll turn into a button for content slides.</span></td>
+            </tr>
 
-            <div class="input-row">
-                <label>Slide Description</label>
-                <textarea rows="5" name="post_content" cols="66" id="text-desc"></textarea></br>
-            </div> 
-            
-            <div class="input-row">
-                <label>Button Text</label><input type="text" name="tfslider_button" size="45" id="input-title"/>
-                <span>If you've chosen a link above, it'll turn into a button for content slides.</span>
-            </div> 
-
-
-        </div>
+        </table>
         </div>
         <input type="hidden" name="new_post" value="1"/> 
-
+        
         <input type="submit" name="submitpost" class="button-primary menu-save" value="Post"/> 
-
+        
     </form>
+    </div>
+    </div>
 </div>
     <?php
         
@@ -220,7 +228,7 @@ function themeforce_slider_catch_submit() {
         $post_title = $_POST['post_title'];
         $post_content = $_POST['post_content'];
         $slidertype = $_POST['_tfslider_type'];
-        $imageurl = $_POST['_tfslider_image'];
+        $imageurl = $_POST['tfslider_image'];
         $link = $_POST['tfslider_link'];
         $button = $_POST['tfslider_button'];
         $new_post = array(
@@ -239,7 +247,7 @@ function themeforce_slider_catch_submit() {
         $order_id = intval($post_id)*100;
         update_post_meta( $post_id,'_tfslider_type', $slidertype);
         update_post_meta( $post_id,'_tfslider_order', $order_id);
-        update_post_meta( $post_id,'_tfslider_image', $imageurl);
+        update_post_meta( $post_id,'tfslider_image', $imageurl);
         update_post_meta( $post_id,'tfslider_link', $link);
         update_post_meta( $post_id,'tfslider_button', $button);
         
