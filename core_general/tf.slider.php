@@ -128,10 +128,10 @@ function themeforce_slider_page() {
              
              // Content
              echo '<div class="slider-content">';
-             echo '<select style="display:none;margin-bottom:15px;" name="' . 'slider[type][' . $id . ']" id="slidertype" class="postform" > 
-                        <option value="image"'. $imageselect .'>Image Alone</option> 
-                        <option value="content"'. $contentselect .'>Image & Text</option> 
-                    </select>';
+             echo '<select style="display:none;margin-bottom:15px;" name="' . 'slider[type][' . $id . ']" id="slidertype" class="postform" >';
+             echo '<option value="image"'. $imageselect .'>Image Alone</option> ';
+             echo '<option value="content"'. $contentselect .'>Image & Text</option>';
+             echo '</select>';
              echo '<h3><span>' . get_the_title($id) . '</span><input placeholder=" Title (Optional)" style="display:none;" type="text" name="' . 'slider[title][' . $id . ']" size="45" id="input-title" value="' . get_the_title($id)  . '" /></h3>';
              echo '<p><span>' . get_the_content($id) . '</span><textarea placeholder=" Content (Optional)" style="display:none;" rows="5" cols="40" name="' . 'slider[content][' . $id . ']">' . get_the_content($id)  . '</textarea></p>';
              echo '<p><span>' . $link . '</span><input style="display:none;" placeholder=" Link (Optional)" type="text" name="' . 'slider[link][' . $id . ']" size="45" id="input-title" value="' . $link  . '" /></p>';
@@ -301,11 +301,11 @@ function themeforce_slider_catch_update() {
             wp_update_post( $my_post );
             
             // Update Meta
-            $type = intval($_POST['slider']['link'][$type]);
-            $button = intval($_POST['slider']['button'][$key]);
-            $link = intval($_POST['slider']['link'][$key]);
+            $type = $_POST['slider']['type'][$key];
+            $button = $_POST['slider']['button'][$key];
+            $link = $_POST['slider']['link'][$key];
             $slider_order = intval($_POST['slider']['order'][$key]);
-            if ($type) {update_post_meta($key, '_tfslider_type', $type);}
+            update_post_meta($key, '_tfslider_type', $type);
             if ($button) {update_post_meta($key, 'tfslider_button', $button);}
             if ($link) {update_post_meta($key, 'tfslider_link', $link);}
             update_post_meta($key, '_tfslider_order', $slider_order);
