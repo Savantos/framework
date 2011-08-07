@@ -49,6 +49,9 @@
 
 #tf-slider-list .slider-content h3 {
     margin-top:0px;
+    padding:0;
+    margin-bottom:0;
+    border:none;
 }
 
 #tf-slider-list .slider-content h3, p {

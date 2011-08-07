@@ -152,9 +152,9 @@ function themeforce_slider_page() {
     
     <input type="hidden" name="update_post" value="1"/> 
     
-    <input type="submit" name="updatepost" value="Update Slides" id="tf-submit" /> 
+    <input style="margin-top:10px" type="submit" name="updatepost" value="Update Slides" id="tf-submit" /> 
     </form>
-    
+    <div style="clear:both"></div>
 <?php
 // Create New Slide
 ?>
@@ -192,27 +192,27 @@ function themeforce_slider_page() {
             <tr>
                 <th><label>Slide Link</label></th>
                 <td>
-                    <input type="text" name="tfslider_link" size="45" id="input-title"/><br />
+                    <input type="text"  placeholder="http://" name="tfslider_link" size="45" id="input-title"/><br />
                     <span class="desc">If you'd like your slide to link to a page, enter the URL here.</span>
                 </td>
             </tr> 
             <tr class="extra-options">
                 <th><label>Slider Header</label></th>
-                    <td><input type="text" name="post_title" size="45" id="input-title"/></td>
+                    <td><input  placeholder="Header" type="text" name="post_title" size="45" id="input-title"/></td>
             </tr>
    
 
             <tr class="extra-options">
 
                 <th><label>Slide Description</label></th>
-                <td><textarea rows="5" name="post_content" cols="66" id="text-desc"></textarea></td>
+                <td><textarea rows="5"  placeholder="Content" name="post_content" cols="66" id="text-desc"></textarea></td>
             </tr>
 
             
             <tr class="extra-options">
 
                 <th><label>Button Text</label></th>
-                <td><input type="text" name="tfslider_button" size="45" id="input-title"/>
+                <td><input type="text"  placeholder="Button Text" name="tfslider_button" size="45" id="input-title"/>
                 <span class="desc">If you've chosen a link above, it'll turn into a button for content slides.</span></td>
                 
             </tr>
@@ -221,7 +221,7 @@ function themeforce_slider_page() {
         </div>
         <input type="hidden" name="new_post" value="1"/> 
         
-        <input type="submit" name="submitpost" id="tf-submit" value="Create New Slide"/> 
+        <input style="margin-top:25px" type="submit" name="submitpost" id="tf-submit" value="Create New Slide"/> 
         
     </form>
     </div>

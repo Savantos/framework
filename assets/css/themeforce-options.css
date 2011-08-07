@@ -9,6 +9,7 @@ Theme Force Stylesheet - Options & Settings
 */
 
 #tf-options-page {
+    width:700px;
     margin:10px 0px 0px 20px;
 }
 
@@ -26,9 +27,9 @@ Theme Force Stylesheet - Options & Settings
      padding:10px 0px 20px 10px;
  }
 
-#tf-options-panel h3 {
+#tf-options-page h3 {
     font-size:18px;
-    margin:20px 0px 10px 0px;
+    margin:20px 0px 20px 0px;
     padding-bottom:20px;
     border-bottom:1px solid #ddd;
 }
