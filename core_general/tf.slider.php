@@ -103,6 +103,9 @@ function themeforce_slider_page() {
             $custom = get_post_custom(get_the_ID());
             $id = ($my_query->post->ID);
             $order = $custom["_tfslider_order"][0];
+            $type = $custom["_tfslider_type"][0];
+                if ($type=='image') {$imageselect = ' selected="selected"';} else {$imageselect = '';}
+                if ($type=='content') {$contentselect = ' selected="selected"';} else {$contentselect = '';}
             $link = $custom["tfslider_link"][0];
             $button = $custom["tfslider_button"][0];
             $image = $custom["tfslider_image"][0];
@@ -125,10 +128,14 @@ function themeforce_slider_page() {
              
              // Content
              echo '<div class="slider-content">';
-             echo '<h3><span>' . get_the_title($id) . '</span><input style="display:none;" type="text" name="' . 'slider[title][' . $id . ']" size="45" id="input-title" value="' . get_the_title($id)  . '" /></h3>';
-             echo '<p><span>' . get_the_content($id) . '</span><textarea style="display:none;" rows="5" cols="40" name="' . 'slider[content][' . $id . ']">' . get_the_content($id)  . '</textarea></p>';
-             echo '<p><span>' . $link . '</span><input style="display:none;" type="text" name="' . 'slider[link][' . $id . ']" size="45" id="input-title" value="' . $link  . '" /></p>';
-             echo '<p><span>' . $button . '</span><input style="display:none;" type="text" name="' . 'slider[button][' . $id . ']" size="45" id="input-title" value="' . $button  . '" /></p>';
+             echo '<select style="display:none;margin-bottom:15px;" name="' . 'slider[type][' . $id . ']" id="slidertype" class="postform" > 
+                        <option value="image"'. $imageselect .'>Image Alone</option> 
+                        <option value="content"'. $contentselect .'>Image & Text</option> 
+                    </select>';
+             echo '<h3><span>' . get_the_title($id) . '</span><input placeholder=" Title (Optional)" style="display:none;" type="text" name="' . 'slider[title][' . $id . ']" size="45" id="input-title" value="' . get_the_title($id)  . '" /></h3>';
+             echo '<p><span>' . get_the_content($id) . '</span><textarea placeholder=" Content (Optional)" style="display:none;" rows="5" cols="40" name="' . 'slider[content][' . $id . ']">' . get_the_content($id)  . '</textarea></p>';
+             echo '<p><span>' . $link . '</span><input style="display:none;" placeholder=" Link (Optional)" type="text" name="' . 'slider[link][' . $id . ']" size="45" id="input-title" value="' . $link  . '" /></p>';
+             echo '<p><span>' . $button . '</span><input style="display:none;" placeholder=" Button Text (Optional)"type="text" name="' . 'slider[button][' . $id . ']" size="45" id="input-title" value="' . $button  . '" /></p>';
              echo '</div>';
              
              // Update Sortable List
@@ -145,7 +152,7 @@ function themeforce_slider_page() {
     
     <input type="hidden" name="update_post" value="1"/> 
     
-    <input type="submit" name="updatepost" value="Update" id="tf-submit" /> 
+    <input type="submit" name="updatepost" value="Update Slides" id="tf-submit" /> 
     </form>
     
 <?php
@@ -159,15 +166,18 @@ function themeforce_slider_page() {
     <form class="form-table"method="post" action="" name="" onsubmit="return checkformf(this);">
     
     <table>
+            
+            <?php if( TF_SLIDERJS == 'bxslider' ) { ?>
             <tr>
                 <th><label>Type of Slide<span class="required">*</span></label></th>
                 <td><ul>
-                    <select name='_tfslider_type' id='slidertype' class='postform' > 
+                    <select name='_tfslider_type' id='slidertype_new' class='postform' > 
                         <option value="image">Image Alone</option> 
                         <option value="content">Image & Text</option> 
                     </select> 
                 </ul></td>
             </tr>   
+            <?php } else { echo '<input type="hidden" name="_tfslider_type" value="image">';} ?>
             
             <tr>
                 <?php // TODO Would be nice to have the 250x100 thumbnail replace the upload button once the image is ready ?>
@@ -183,7 +193,7 @@ function themeforce_slider_page() {
                 <th><label>Slide Link</label></th>
                 <td>
                     <input type="text" name="tfslider_link" size="45" id="input-title"/><br />
-                    <span>If you'd like your slide to link to a page, enter the URL here.</span>
+                    <span class="desc">If you'd like your slide to link to a page, enter the URL here.</span>
                 </td>
             </tr> 
             <tr class="extra-options">
@@ -203,14 +213,15 @@ function themeforce_slider_page() {
 
                 <th><label>Button Text</label></th>
                 <td><input type="text" name="tfslider_button" size="45" id="input-title"/>
-                <span>If you've chosen a link above, it'll turn into a button for content slides.</span></td>
+                <span class="desc">If you've chosen a link above, it'll turn into a button for content slides.</span></td>
+                
             </tr>
 
         </table>
         </div>
         <input type="hidden" name="new_post" value="1"/> 
         
-        <input type="submit" name="submitpost" class="button-primary menu-save" value="Post"/> 
+        <input type="submit" name="submitpost" id="tf-submit" value="Create New Slide"/> 
         
     </form>
     </div>
@@ -226,9 +237,11 @@ function themeforce_slider_catch_submit() {
         // Grab POST Data
         if(isset($_POST['new_post']) == '1') {
         $post_title = $_POST['post_title'];
+        if (!$post_title) {$post_title = 'Image Slide (No Title)';}
         $post_content = $_POST['post_content'];
         $slidertype = $_POST['_tfslider_type'];
         $imageurl = $_POST['tfslider_image'];
+        if (!$imageurl) {$imageurl = TF_URL . '/assets/images/slider-empty.jpg'; }
         $link = $_POST['tfslider_link'];
         $button = $_POST['tfslider_button'];
         $new_post = array(
@@ -248,8 +261,8 @@ function themeforce_slider_catch_submit() {
         update_post_meta( $post_id,'_tfslider_type', $slidertype);
         update_post_meta( $post_id,'_tfslider_order', $order_id);
         update_post_meta( $post_id,'tfslider_image', $imageurl);
-        update_post_meta( $post_id,'tfslider_link', $link);
-        update_post_meta( $post_id,'tfslider_button', $button);
+        if ($link) {update_post_meta( $post_id,'tfslider_link', $link);}
+        if ($button) {update_post_meta( $post_id,'tfslider_button', $button);}
         
         // Exit
         wp_redirect(wp_get_referer());
@@ -275,8 +288,7 @@ function themeforce_slider_catch_update() {
         
         // Grab Delete Setting
         $delete = $_POST['slider']['delete'][$key];
-        
-        
+              
         if ($delete == 'true') {
             
             // Delete selected sliders
@@ -289,11 +301,13 @@ function themeforce_slider_catch_update() {
             wp_update_post( $my_post );
             
             // Update Meta
+            $type = intval($_POST['slider']['link'][$type]);
             $button = intval($_POST['slider']['button'][$key]);
             $link = intval($_POST['slider']['link'][$key]);
             $slider_order = intval($_POST['slider']['order'][$key]);
-            update_post_meta($key, 'tfslider_button', $button);
-            update_post_meta($key, 'tfslider_link', $link);
+            if ($type) {update_post_meta($key, '_tfslider_type', $type);}
+            if ($button) {update_post_meta($key, 'tfslider_button', $button);}
+            if ($link) {update_post_meta($key, 'tfslider_link', $link);}
             update_post_meta($key, '_tfslider_order', $slider_order);
         }
     }    
@@ -312,72 +326,53 @@ add_action('admin_init', 'themeforce_slider_catch_update');
 //TODO Change function to match custom post types, not options.
 function themeforce_slider_display() {
 
-        ob_start();
+    // Query Custom Post Types  
+        $args = array(
+            'post_type' => 'tf_slider',
+            'post_status' => 'publish',
+            'orderby' => 'meta_value_num',
+            'meta_key' => '_tfslider_order',
+            'order' => 'ASC',
+            'posts_per_page' => 99
+        );
 
-        // counter
-        $c = 1;
+        // - query -
+        $my_query = null;
+        $my_query = new WP_query($args);
 
-        // - loop -
-        while($c <= 5):
-
-        $raw_image = get_option('baseforce_slider_' . $c);
-        $type = get_option('baseforce_slider_' . $c . 'type');
-        $url = get_option('baseforce_slider_' . $c . 'url');
-        $text = get_option('baseforce_slider_' . $c . 'text');
-        $button = get_option('baseforce_slider_' . $c . 'button');
-
-        // check if image exists
-        if ( $raw_image != '' ) {
-		
-            if ( $type == 'image' ) {
-                
-            $image = wpthumb( $raw_image, 'width=960&height=300&crop=1', false);
-            
-            // show image
-                
-                echo '<li>';
-                if($url != '') { echo '<a href="' . $url . '">'; }
-                echo '<img src="' . $image . '" alt="' . __('Slide', 'themeforce') . ' ' . $c . '"';
-                echo ' />';
-                if($url != '') { echo '</a>'; }
-                echo '</li>';
-            
-            } else {
-                
-            // show content                 
-                
-                echo '<li style="background: url(' . $image . ')">';
-                echo '<div class="content-text">';
-                echo '<span>'. $text . '</span>';
-                if($url != '') {echo '<a href="' . $url . '"><div class="content-button">' . $button . '</div></a>';}
-                echo '</div>';
-                echo '</li>';
-                
-            }
-            		
-            $noslides .= $raw_image;
-		
-        // increase counter
-            
-        $c++;
+        while ($my_query->have_posts()) : $my_query->the_post();
         
-        }
-        endwhile;
-                if ( $noslides == '' ) {
-            // - check slide pause -
-                if ( !get_option('baseforce_slider_pause')) {
-                    update_option('baseforce_slider_pause', '4000');
-                    }
-				echo '<img src="' . get_bloginfo('template_url') . '/images/default_food_1.jpg" />';
-				echo '<img src="' . get_bloginfo('template_url') . '/images/default_food_2.jpg" />';
-				echo '<img src="' . get_bloginfo('template_url') . '/images/default_food_3.jpg" />';
+            // - variables -
+            $custom = get_post_custom(get_the_ID());
+            $id = ($my_query->post->ID);
+            $title = get_the_title($id);
+            $content = get_the_content($id);
+            $order = $custom["_tfslider_order"][0];
+            $type = $custom["_tfslider_type"][0];
+            $image = $custom["tfslider_image"][0];
+            $slideimage = wpthumb( $image, 'width='. TF_SLIDERWIDTH .'&height=' . TF_SLIDERHEIGHT . '&crop=1', false);
+            $link = $custom["tfslider_link"][0];
+            $button = $custom["tfslider_button"][0];
+       
+            // output
+            // todo if-else on TF_SLIDERTYPE
+            
+            echo '<li>';
+            if ($link) {echo '<a href="' . $link . '">';}
+            echo '<div style="width:'. TF_SLIDERWIDTH .'px;height:' . TF_SLIDERHEIGHT . 'px;background: url(' . $slideimage . ')">';
+            if ($type == 'content')
+                {
+                echo '<div class="content-text">';
+                    if ($title) {echo '<h2>'. $title . '</h2>';}
+                    if ($content) {echo '<span>'. $content .'</span>';}
+                    if ($button) {echo '<div class="content-button">' . $button . '</div>';}
+                echo '</div>';
                 }
-				
-		$output = ob_get_contents();
-        ob_end_clean();
+            echo '</div>';
+            if ($link) {echo '</a>';}
+            echo '</li>';
+        
+        endwhile;
 
-        return $output;
-		
-		}
-	
+        }
 ?>

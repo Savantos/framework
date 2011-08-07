@@ -24,4 +24,9 @@ jQuery(document).ready(function($) {
     	    $(selected = this).css('opacity', 1).addClass('colorwell-selected');
     	  });
     }
+    
+    // Chosen
+    
+    $(".chzn-select").chosen();
+    
 });

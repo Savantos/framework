@@ -33,10 +33,7 @@ define( 'TF_URL', get_bloginfo( 'template_directory' ) . '/' . TF_DIR_SLUG );
         
 // Business Options
 if( current_theme_supports( 'tf_settings_api' ) )     
-    require_once( TF_PATH . '/core_options/tf.options-list.php' );
-    require_once( TF_PATH . '/core_options/tf.business-options.php' );
-    require_once( TF_PATH . '/core_options/tf.location-options.php' );
-    require_once( TF_PATH . '/core_options/tf.logo-options.php' );
+    require_once( TF_PATH . '/core_options/tf.options-master.php' );
 
 // Shortcodes - Business
 	require_once( TF_PATH . '/core_general/tf.business-shortcodes.php' );        
@@ -450,7 +447,7 @@ function tf_modify_admin_menu() {
 
 	global $menu, $submenu;
 	
-	array_shift( $submenu['themeforce_options'] );
+	array_shift( $submenu['themeforce_business_options'] );
 
 }
 add_action( 'admin_menu', 'tf_modify_admin_menu' );

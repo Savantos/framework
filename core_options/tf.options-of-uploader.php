@@ -141,7 +141,7 @@ if ( ! function_exists( 'tf_optionsframework_medialibrary_uploader' ) ) {
                         // TODO Not sure why this isn't playing along, just outputs the full image, ideas?
                         $wpthumb = wpthumb($value,'width=400&height=200&crop=1', false);
 			if ( $image ) {
-				$output .= '<img src="' . $wpthumb . '" alt="" />'.$remove.'';
+				$output .= '<img class="tf-options-img" src="' . $wpthumb . '" alt="" />'.$remove.'';
 			} else {
 				$parts = explode( "/", $value );
 				for( $i = 0; $i < sizeof( $parts ); ++$i ) {

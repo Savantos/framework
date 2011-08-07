@@ -44,7 +44,7 @@
 #tf-slider-list .slider-content {
     float:left;
     display:block;
-    min-width:360px;
+    width:360px;
 }
 
 #tf-slider-list .slider-content h3 {
@@ -77,8 +77,8 @@
     display:inline;
 }
 
-#tf-slider-list .slider-content textarea, #tf-slider-list .slider-content input {
-    width:340px;
+#tf-slider-list .slider-content textarea, #tf-slider-list .slider-content input, #tf-slider-list .slider-content select {
+    width:360px;
     margin:0;
     padding:10px;
 }

@@ -1,6 +1,6 @@
 jQuery(document).ready(function($) {
   
-    $('tr.extra-options').hide();  
+  $('tr.extra-options').hide();  
     
   // Sortable List and Update
   
@@ -24,7 +24,7 @@ jQuery(document).ready(function($) {
     
     $('.slider-edit').click(function () {
         $(this).hide();
-        $(this).parent().parent().find('input, textarea').show();
+        $(this).parent().parent().find('input, textarea, select').show();
         $(this).parent().parent().find('span').hide();
     });
     
@@ -59,7 +59,7 @@ jQuery(document).ready(function($) {
     
     // Show Additional Options
     
-    $('#slidertype').change(function(){
+    $('#slidertype_new').change(function(){
       if($(this).val() == 'content'){
         $('tr.extra-options').show();
       }
