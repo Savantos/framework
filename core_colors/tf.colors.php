@@ -24,13 +24,13 @@ function themeforce_update_logo_colors() {
     
     if(isset($_POST['grab_logo_colors']) == '1') {
 
-    $logo = get_option('tf_logo');
-    tf_logocolors($logo);
+        $logo = get_option('tf_logo');
+        tf_logocolors($logo);
+        wp_redirect(wp_get_referer());
+        exit;
         
     }    
-        
-    wp_redirect(wp_get_referer());
-    exit;
+
 }
 
 add_action('admin_init', 'themeforce_update_logo_colors');
