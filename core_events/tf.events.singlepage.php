@@ -35,7 +35,7 @@
 	if ( TF_THEME == 'baseforce' ) {
 		$headertags = '<div class="page-title-wrap"><h1 class="entry-title" itemprop="summary">'.$title.'</h1></div><div class="clearfix"></div>';
 	} else {
-		$headertags = '<h1 class="post-title" itemprop="summary">'.$title.'</h1></div><div class="clearfix"></div>';
+		$headertags = '<h1 class="post-title" itemprop="summary">'.$title.'</h1><div class="clearfix"></div>';
 	}
 
 ?>
@@ -66,7 +66,7 @@
         <!-- location --> <div class="events-single-meta-details"><?php _e('Location: ','themeforce');?><span itemprop="location"><?php echo get_option('tf_business_name');?>, <?php echo get_option('tf_business_address');?></span></div>
      
     	</div> 
-        
+        <div class="clearfix" style="margin-top:20px"></div>
         <div class="post">
        
         <!-- desc --><span itemprop="description"><?php the_content(); ?></span>
