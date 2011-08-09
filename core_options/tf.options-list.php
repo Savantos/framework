@@ -11,10 +11,10 @@ require_once( TF_PATH . '/core_options/tf.of-uploader.php' );
 
 function themeforce_options() {
     // TODO Need to amend capability for basic view of hosted
-    add_menu_page( 'Dummy Header', 'Your Business', 'manage_options', 'themeforce_options','', get_bloginfo('template_url').'/themeforce/assets/images/general_16.png', 2); // $function, $icon_url, $position 
-    add_submenu_page('themeforce_options', 'Business Details', 'Business Details', 'manage_options', 'themeforce_business', 'themeforce_business_page');
-    add_submenu_page('themeforce_options', 'Your Logo', 'Upload your Logo', 'manage_options', 'themeforce_logo', 'themeforce_logo_page');   
-    add_submenu_page('themeforce_options', 'Your Location', 'Location', 'manage_options', 'themeforce_location', 'themeforce_location_page');
+    add_menu_page( 'Dummy Header', 'Your Business', 'edit_posts', 'themeforce_options','', get_bloginfo('template_url').'/themeforce/assets/images/general_16.png', 3); // $function, $icon_url, $position 
+    add_submenu_page('themeforce_options', 'Business Details', 'Business Details', 'edit_posts', 'themeforce_business', 'themeforce_business_page');
+    add_submenu_page('themeforce_options', 'Your Logo', 'Upload your Logo', 'edit_posts', 'themeforce_logo', 'themeforce_logo_page');   
+    add_submenu_page('themeforce_options', 'Your Location', 'Location', 'edit_posts', 'themeforce_location', 'themeforce_location_page');
 }
 add_action('admin_menu','themeforce_options');
 
