@@ -450,7 +450,8 @@ function tf_modify_admin_menu() {
 
 	global $menu, $submenu;
 	
-	array_shift( $submenu['themeforce_options'] );
+	if( !empty( $submenu['themeforce_options'] ) )
+		array_shift( $submenu['themeforce_options'] );
 
 }
 add_action( 'admin_menu', 'tf_modify_admin_menu' );
