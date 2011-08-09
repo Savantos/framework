@@ -447,8 +447,8 @@ function tf_modify_admin_menu() {
 
 	global $menu, $submenu;
 	
-	if( !empty( $submenu['themeforce_options'] ) )
-        	array_shift( $submenu['themeforce_options'] );
+	if( !empty( $submenu['themeforce_business_options'] ) )
+        	array_shift( $submenu['themeforce_business_options'] );
 
 }
-add_action( 'admin_menu', 'tf_modify_admin_menu' );
+add_action( 'admin_menu', 'tf_modify_admin_menu', 11 );
