@@ -29,11 +29,11 @@ function themeforce_business_options() {
 add_action('admin_menu','themeforce_business_options');
 
 function themeforce_social_options() {
-    add_menu_page( 'Dummy Header', 'Social Proof', 'edit_posts', 'themeforce_social_options','themeforce_social_overview_page', TF_URL . '/assets/images/social_16.png', 35); // $function, $icon_url, $position 
-    add_submenu_page('themeforce_social_options', 'Yelp', 'Yelp', 'edit_posts', 'themeforce_yelp', 'themeforce_social_yelp_page');
-    add_submenu_page('themeforce_social_options', 'Qype', 'Qype', 'edit_posts', 'themeforce_qype', 'themeforce_social_qype_page');
-    add_submenu_page('themeforce_social_options', 'Foursquare', 'Foursquare', 'edit_posts', 'themeforce_foursquare', 'themeforce_social_foursquare_page');   
-    add_submenu_page('themeforce_social_options', 'Gowalla', 'Gowalla', 'edit_posts', 'themeforce_gowalla', 'themeforce_social_gowalla_page');
+    add_menu_page( 'Dummy Header', 'Social Proof', 'manage_options', 'themeforce_social_options','themeforce_social_overview_page', TF_URL . '/assets/images/social_16.png', 35); // $function, $icon_url, $position 
+    add_submenu_page('themeforce_social_options', 'Yelp', 'Yelp', 'manage_options', 'themeforce_yelp', 'themeforce_social_yelp_page');
+    add_submenu_page('themeforce_social_options', 'Qype', 'Qype', 'manage_options', 'themeforce_qype', 'themeforce_social_qype_page');
+    add_submenu_page('themeforce_social_options', 'Foursquare', 'Foursquare', 'manage_options', 'themeforce_foursquare', 'themeforce_social_foursquare_page');   
+    add_submenu_page('themeforce_social_options', 'Gowalla', 'Gowalla', 'manage_options', 'themeforce_gowalla', 'themeforce_social_gowalla_page');
 }
 add_action('admin_menu','themeforce_social_options');
 
@@ -62,12 +62,13 @@ add_action( 'admin_print_styles', 'themeforce_business_options_styles' );
 
 function tf_settings_validate($input) {
     
-        $newinput['text_string'] = trim($input['text_string']);
-        if(!preg_match('/^[a-z0-9]{32}$/i', $newinput['text_string'])) {
+	$newinput['text_string'] = trim($input['text_string']);
+    
+    if(!preg_match('/^[a-z0-9]{32}$/i', $newinput['text_string'])) {
         $newinput['text_string'] = '';
     }
 
-return $newinput;
+	return $newinput;
 }
 
 // Display Settings
