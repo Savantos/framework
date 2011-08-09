@@ -27,6 +27,16 @@
 
 	// - grab categories -
 	$category = tf_list_cats();
+	
+	// - single header tags -
+	
+	$title = get_the_title(get_the_ID());
+	
+	if ( TF_THEME == 'baseforce' ) {
+		$headertags = '<div class="page-title-wrap"><h1 class="entry-title" itemprop="summary">'.$title.'</h1></div><div class="clearfix"></div>';
+	} else {
+		$headertags = '<h1 class="post-title" itemprop="summary">'.$title.'</h1></div><div class="clearfix"></div>';
+	}
 
 ?>
 
@@ -38,12 +48,14 @@
 	
 		<div class="events-single-meta">
 		
-		<?php if($thumbnail != '') {?>
+
+        <!-- url -->  <a itemprop="url" href="<?php the_permalink(); ?>">
+		
+        <!-- name --> <?php echo $headertags; ?>
+        <!-- /url --> </a>
+				<?php if($thumbnail != '') {?>
 		<!-- img -->  <img itemprop="photo" src="<?php echo $thumbnail; ?>" />
 		<?php } ?>
-        <!-- url -->  <a itemprop="url" href="<?php the_permalink(); ?>">
-        <!-- name --> <h1 class="post-title" itemprop="summary"><?php the_title(); ?></h1>
-        <!-- /url --> </a>
         <!-- category --> <?php if ( $category != '') { ?><div class=""><?php _e('Category: ','themeforce');?><span itemprop="eventType"><?php echo $category; ?></span></div><?php } ?>
 	
         <!-- dates, time & duration -->

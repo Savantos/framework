@@ -170,7 +170,7 @@ class TF_MC_Plugin {
 		
 		$notice = '<p>';
 		
-		$notice .= __('You\'ll need to set up the MailChimp signup widget plugin options before using it. ', 'mailchimp-widget') . __('You can make your changes', 'mailchimp-widget') . ' <a href="' . get_admin_url($blog_id) . 'options-general.php?page=mailchimp-widget/lib/TF_MC_plugin.class.php">' . __('here', 'mailchimp-widget') . '.</a>';
+		$notice .= __('You\'ll need to add your MailChimp API key within the options before being able to use it. ', 'mailchimp-widget');
 		
 		$notice .= '</p>';
 		
