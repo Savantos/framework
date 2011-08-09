@@ -119,7 +119,7 @@
           var video = /(^.*\.mp4|m4v|mov|wmv|avi|mpg|ogv|3gp|3g2*)/gi;
           
           if (itemurl.match(image)) {
-            btnContent = '<img src="'+itemurl+'" alt="" /><a href="#" class="mlu_remove button">Remove Image</a>';
+            btnContent = '<img class="tf-options-img" style="max-width:400px" src="'+itemurl+'" alt="" /><a href="#" class="mlu_remove tf-button">Remove Image</a>';
           } else {
           	
           	// No output preview if it's not an image.
@@ -127,7 +127,7 @@
             // Standard generic output if it's not an image.
             
             html = '<a href="'+itemurl+'" target="_blank" rel="external">View File</a>';
-            btnContent = '<div class="no_image"><span class="file_link">'+html+'</span><a href="#" class="mlu_remove button">Remove</a></div>';
+            btnContent = '<div class="no_image"><span class="file_link">'+html+'</span><a href="#" class="mlu_remove tf-button">Remove</a></div>';
           }
           
           $('#' + formfield).val(itemurl);

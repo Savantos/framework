@@ -95,7 +95,7 @@ if ( ! function_exists( 'tf_optionsframework_mlu_js' ) ) {
 
 if ( ! function_exists( 'tf_optionsframework_medialibrary_uploader' ) ) {
 
-	function tf_optionsframework_medialibrary_uploader( $_id, $_value, $_mode = 'full', $_desc = '', $_postid = 0, $_name = '') {
+	function tf_optionsframework_medialibrary_uploader( $_id, $_value, $_mode = 'full', $_desc = '', $_postid = 0, $_name = '', $size='400') {
 	
 		$tf_optionsframework_settings = get_option('optionsframework');
 		
@@ -126,8 +126,8 @@ if ( ! function_exists( 'tf_optionsframework_medialibrary_uploader' ) ) {
 		}
 		
 		if ( $value ) { $class = ' has-file'; }
-		$output .= '<input id="' . $id . '" class="upload' . $class . '" type="hidden" name="'.$name.'" value="' . $value . '" />' . "\n";
-		$output .= '<input id="upload_' . $id . '" class="upload_button button" type="button" value="' . __( 'Upload' ) . '" rel="' . $int . '" />' . "\n";
+		$output .= '<input id="' . $id . '" class="upload' . $class . ' tf-button" type="hidden" name="'.$name.'" value="' . $value . '" />' . "\n";
+		$output .= '<input id="upload_' . $id . '" class="upload_button tf-button" type="button" value="' . __( 'Upload' ) . '" rel="' . $int . '" />' . "\n";
 		
 		if ( $_desc != '' ) {
 			$output .= '<span class="of_metabox_desc">' . $_desc . '</span>' . "\n";
@@ -138,8 +138,10 @@ if ( ! function_exists( 'tf_optionsframework_medialibrary_uploader' ) ) {
 		if ( $value != '' ) { 
 			$remove = '<a href="javascript:(void);" class="mlu_remove button">Remove</a>';
 			$image = preg_match( '/(^.*\.jpg|jpeg|png|gif|ico*)/i', $value );
+                        // TODO Not sure why this isn't playing along, just outputs the full image, ideas?
+                        $wpthumb = wpthumb($value,'width=400&height=200&crop=1', false);
 			if ( $image ) {
-				$output .= '<img src="' . $value . '" alt="" />'.$remove.'';
+				$output .= '<img class="tf-options-img" src="' . $wpthumb . '" alt="" />'.$remove.'';
 			} else {
 				$parts = explode( "/", $value );
 				for( $i = 0; $i < sizeof( $parts ); ++$i ) {

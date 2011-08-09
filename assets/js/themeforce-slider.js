@@ -1,4 +1,6 @@
 jQuery(document).ready(function($) {
+  
+  $('tr.extra-options').hide();  
     
   // Sortable List and Update
   
@@ -22,7 +24,7 @@ jQuery(document).ready(function($) {
     
     $('.slider-edit').click(function () {
         $(this).hide();
-        $(this).parent().parent().find('input, textarea').show();
+        $(this).parent().parent().find('input, textarea, select').show();
         $(this).parent().parent().find('span').hide();
     });
     
@@ -53,6 +55,14 @@ jQuery(document).ready(function($) {
      imgurl = jQuery('img',html).attr('src');
      jQuery('#tfslider_image').val(imgurl);
      tb_remove();
-    }    
+    }
+    
+    // Show Additional Options
+    
+    $('#slidertype_new').change(function(){
+      if($(this).val() == 'content'){
+        $('tr.extra-options').show();
+      }
+    });
 
   });

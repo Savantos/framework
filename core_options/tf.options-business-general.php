@@ -54,7 +54,7 @@ function themeforce_business_page() {
                 "desc" => "The cuisine of the restaurant. Uses the Yelp cuisine categorization.",
                 "id" => "tf_schema_cuisine",
                 "std" => "",
-                "type" => "select",
+                "type" => "multiple-select",
                 "class" => "small", //mini, tiny, small
                 "options" => $options_cuisine),
 

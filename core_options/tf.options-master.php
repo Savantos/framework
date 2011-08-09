@@ -9,14 +9,25 @@
 
 require_once( TF_PATH . '/core_options/tf.of-uploader.php' );
 
-function themeforce_options() {
-    // TODO Need to amend capability for basic view of hosted
-    add_menu_page( 'Dummy Header', 'Your Business', 'edit_posts', 'themeforce_options','', get_bloginfo('template_url').'/themeforce/assets/images/general_16.png', 3); // $function, $icon_url, $position 
-    add_submenu_page('themeforce_options', 'Business Details', 'Business Details', 'edit_posts', 'themeforce_business', 'themeforce_business_page');
-    add_submenu_page('themeforce_options', 'Your Logo', 'Upload your Logo', 'edit_posts', 'themeforce_logo', 'themeforce_logo_page');   
-    add_submenu_page('themeforce_options', 'Your Location', 'Location', 'edit_posts', 'themeforce_location', 'themeforce_location_page');
+// Register Pages
+// -----------------------------------------
+
+function themeforce_business_options() {
+    add_menu_page( 'Dummy Header', 'Your Business', 'edit_posts', 'themeforce_business_options','', get_bloginfo('template_url').'/themeforce/assets/images/general_16.png', 25); // $function, $icon_url, $position 
+    add_submenu_page('themeforce_business_options', 'Business Details', 'Business Details', 'edit_posts', 'themeforce_business', 'themeforce_business_page');
+    add_submenu_page('themeforce_business_options', 'Logo', 'Logo', 'edit_posts', 'themeforce_logo', 'themeforce_logo_page');   
+    add_submenu_page('themeforce_business_options', 'Your Location', 'Location', 'edit_posts', 'themeforce_location', 'themeforce_location_page');
 }
-add_action('admin_menu','themeforce_options');
+add_action('admin_menu','themeforce_business_options');
+
+function themeforce_social_options() {
+    add_menu_page( 'Dummy Header', 'Social Proof', 'edit_posts', 'themeforce_social_options','themeforce_social_overview_page', get_bloginfo('template_url').'/themeforce/assets/images/social_16.png', 35); // $function, $icon_url, $position 
+    add_submenu_page('themeforce_social_options', 'Yelp', 'Yelp', 'edit_posts', 'themeforce_yelp', 'themeforce_social_yelp_page');
+    add_submenu_page('themeforce_social_options', 'Qype', 'Qype', 'edit_posts', 'themeforce_qype', 'themeforce_social_qype_page');
+    add_submenu_page('themeforce_social_options', 'Foursquare', 'Foursquare', 'edit_posts', 'themeforce_foursquare', 'themeforce_social_foursquare_page');   
+    add_submenu_page('themeforce_social_options', 'Gowalla', 'Gowalla', 'edit_posts', 'themeforce_gowalla', 'themeforce_social_gowalla_page');
+}
+add_action('admin_menu','themeforce_social_options');
 
 // Load jQuery & relevant CSS
 // -----------------------------------------
@@ -26,6 +37,7 @@ function themeforce_business_options_scripts() {
     wp_enqueue_script( 'tfoptions', TF_URL . '/assets/js/themeforce-options.js', array('jquery'));
     wp_enqueue_script( 'iphone-checkbox', TF_URL . '/assets/js/jquery.iphone-style-checkboxes.js', array('jquery'));
     wp_enqueue_script( 'farbtastic', TF_URL . '/assets/js/jquery.farbtastic.js', array('jquery'));
+    wp_enqueue_script( 'chosen', TF_URL . '/assets/js/jquery.chosen.min.js', array('jquery'));
 }
 
 add_action( 'admin_print_scripts', 'themeforce_business_options_scripts' );
@@ -82,7 +94,10 @@ function tf_display_settings($options) {
 
         <tr>
             <th><label for="<?php echo $value['id']; ?>"><?php echo $value['name']; ?></label></th>
-            <td><input name="<?php echo $value['id'] ?>" type="<?php echo $value['type']; ?>" value="<?php if ( get_settings( $value['id'] ) != "") { echo stripslashes(get_settings( $value['id'])  ); } else { echo $value['std']; } ?>"></td>
+            <td>
+                <input name="<?php echo $value['id'] ?>" type="<?php echo $value['type']; ?>" value="<?php if ( get_settings( $value['id'] ) != "") { echo stripslashes(get_settings( $value['id'])  ); } else { echo $value['std']; } ?>">
+                <br /><span class="desc"><?php echo $value['desc'] ?></span>
+            </td>
         </tr>
 
         <?php
@@ -93,7 +108,8 @@ function tf_display_settings($options) {
 
         <tr>
             <th><label for="<?php echo $value['id']; ?>"><?php echo $value['name']; ?></label></th>
-            <td><textarea name="<?php echo $value['id']; ?>" type="<?php echo $value['type']; ?>" cols="" rows=""><?php if ( get_settings( $value['id'] ) != "") { echo stripslashes(get_settings( $value['id']) ); } else { echo $value['std']; } ?></textarea></td>
+            <td><textarea name="<?php echo $value['id']; ?>" type="<?php echo $value['type']; ?>" cols="" rows=""><?php if ( get_settings( $value['id'] ) != "") { echo stripslashes(get_settings( $value['id']) ); } else { echo $value['std']; } ?></textarea>
+            <br /><span class="desc"><?php echo $value['desc'] ?></span></td>
         </tr>
 
         <?php
@@ -109,19 +125,61 @@ function tf_display_settings($options) {
                 <?php foreach ($value['options'] as $option) { ?>
                     <option <?php if (get_settings( $value['id'] ) == $option) { echo 'selected="selected"'; } ?>><?php echo $option; ?></option><?php } ?>
                 </select>
+                <br /><span class="desc"><?php echo $value['desc'] ?></span>
             </td>
         </tr>
-
-        <?php
+         <?php
         break;
-
-        case "checkbox":
+        
+        case 'multiple-select':
         ?>
 
         <tr>
             <th><label for="<?php echo $value['id']; ?>"><?php echo $value['name']; ?></label></th>
             <td>
-                <input type="checkbox" name="<?php echo $value['id']; ?>" class="iphone" id="<?php echo $value['id']; ?>" <?php echo $checked; ?> />
+                <select name="<?php echo $value['id']; ?>" class="chzn-select" multiple id="<?php echo $value['id']; ?>">
+                <?php foreach ($value['options'] as $option) { ?>
+                    <option <?php if (get_settings( $value['id'] ) == $option) { echo 'selected="selected"'; } ?>><?php echo $option; ?></option><?php } ?>
+                </select>
+                <br /><span class="desc"><?php echo $value['desc'] ?></span>
+            </td>
+        </tr>
+
+        <?php
+        
+        
+        break;
+
+        case "checkbox":
+        
+        $std = $value['std'];     
+            
+        $saved_std = get_settings( $value['id'] );
+
+        $checked = '';
+
+        if(!empty($saved_std)) {
+                if($saved_std == 'true') {
+                $checked = 'checked="checked"';
+                }
+                else{
+                   $checked = '';
+                }
+        }
+        elseif( $std == 'true') {
+           $checked = 'checked="checked"';
+        }
+        else {
+                $checked = '';
+        }
+            
+        ?>
+
+        <tr>
+            <th><label for="<?php echo $value['id']; ?>"><?php echo $value['name']; ?></label></th>
+            <td>
+                <input type="checkbox" name="<?php echo $value['id']; ?>" class="iphone" id="<?php echo $value['id']; ?>" value="true" <?php echo $checked; ?> />
+                <br /><span class="desc"><?php echo $value['desc'] ?></span>
             </td>
         </tr>
 
@@ -135,6 +193,7 @@ function tf_display_settings($options) {
             <td>
             <?php foreach ($value['options'] as $option) { ?>
                 <div><input type="radio" name="<?php echo $value['id']; ?>" <?php if (get_settings( $value['id'] ) == $option) { echo 'checked'; } ?> /><?php echo $option; ?></div><?php } ?>
+                <br /><span class="desc"><?php echo $value['desc'] ?></span>
             </td>
         </tr>
         
@@ -160,7 +219,7 @@ function tf_display_settings($options) {
         
         </table>
         <div style="clear:both;"></div>
-        <div id="farbtastic-wrap">
+        <div class="tf-settings-wrap tf-farbtastic">
         <div id="farbtastic-picker"><div id="picker-bg"></div></div>
         <table> 
         

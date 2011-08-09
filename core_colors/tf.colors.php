@@ -20,6 +20,21 @@ require_once( TF_PATH . '/core_colors/colors.inc.php' );
  * TODO: Ability to update other themes (though they may require different color settings)
  */
 
+function themeforce_update_logo_colors() {
+    
+    if(isset($_POST['grab_logo_colors']) == '1') {
+
+        $logo = get_option('tf_logo');
+        tf_logocolors($logo);
+        wp_redirect(wp_get_referer());
+        exit;
+        
+    }    
+
+}
+
+add_action('admin_init', 'themeforce_update_logo_colors');
+
 function tf_logocolors($colorimage) {
     $hexarray = tf_dynamiccolors($colorimage);
     // Activate Custom Colors
@@ -29,6 +44,8 @@ function tf_logocolors($colorimage) {
         update_option('baseforce_color_pri_light','#'.$hexarray[1]);
         update_option('baseforce_color_pri_link','#'.$hexarray[2]);
     // Secondary
+        update_option('baseforce_color_sec_light','#a7ceaa');
+        update_option('baseforce_color_sec_dark','#406541');
     /*
      * Still require better logic to extract secondary.
      */
