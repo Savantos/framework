@@ -1,7 +1,7 @@
 <?php
 
 /*
- * TF OPTIONS: YELP
+ * TF OPTIONS: GOWALLA
  * 
  * Provide easy to use options for Theme Force users.
  * 
@@ -23,46 +23,29 @@ function themeforce_social_gowalla_page() {
     
     $shortname = "tf";
     $options_yesno = array ('yes','no');
-    $options_yelp = array('US', 'CA', 'GB', 'IE', 'FR', 'DE', 'AT', 'NL', 'ES');
     
     // Options
     
     $options = array (
  
-        array( "name" => "Yelp Settings", "type" => "title"),
+        array( "name" => "Gowalla Settings", "type" => "title"),
 
         array( "type" => "open"),   
 
         array( 
-		"name" => "Enable Yelp Bar?",
-		"desc" => "This will show the Yelp bar above in line with Yelp display requirements. The fields below need to be completed in order for this to work.",
-		"id" => "tf_yelp_enabled",
-                "std" => "false",
-                "type" => "select",
-                "class" => "small", //mini, tiny, small
-                "options" => $options_yesno),
-
-        array( 
-               	"name" => "API Key",
-		"desc" => "Required for Yelp Button  <a target='_blank' href='http://www.yelp.com/developers/getting_started/api_overview'>Get it from here (Yelp API)</a>",
-		"id" => "tf_yelp_api_key",
-                "std" => "",
-                "type" => "text"),
-        
-        array( 
-		"name" => "Country",
-		"desc" => "Required so that your Phone Number below can be correctly identified",
-		"id" => "tf_yelp_country_code",
-		"type" => "select",
-		"class" => "mini", //mini, tiny, small
-		"options" => $options_yelp),
-        
-        array( 
-		"name" => "Phone number registered with Yelp",
-		"desc" => "Required for Yelp Button (Used by the API to identify your business). Do not use special characters, only numbers.",
-		"id" => "tf_yelp_phone",
-                "std" => "",
-                "type" => "text"),        
+		"name" => "Spot ID",
+		"desc" => "If your profile URL is http://gowalla.com/spots/12345, then your Spots ID is 12345",
+		"id" => "tf_gowalla_spot_id",
+		"std" => "",
+		"type" => "text"
+	),
+	
+	array( "name" => "API Key",
+		"desc" => "Request API access here, register <a href='http://gowalla.com/api/keys' target='_blank'>here</a>. Callback URL does not matter for the API we'll be using.",
+		"id" => "tf_gowalla_api_key",
+		"std" => "",
+		"type" => "text"
+	),
       
 	array( "type" => "close"), 
  
