@@ -36,10 +36,10 @@ if( current_theme_supports( 'tf_settings_api' ) )
     require_once( TF_PATH . '/core_options/tf.options-master.php' );
 
 // Shortcodes - Business
-	require_once( TF_PATH . '/core_general/tf.business-shortcodes.php' );        
+    require_once( TF_PATH . '/core_general/tf.business-shortcodes.php' );        
 	
 // Common Assets
-	require_once( TF_PATH . '/core_general/tf.assets.php' );
+    require_once( TF_PATH . '/core_general/tf.assets.php' );
     require_once( TF_PATH . '/core_general/tf.slider.php' );
         
 // Colors      

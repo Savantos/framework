@@ -21,7 +21,7 @@ require_once( TF_PATH . '/core_options/tf.options-social-foursquare.php' );
 // -----------------------------------------
 
 function themeforce_business_options() {
-    add_menu_page( 'Dummy Header', 'Your Business', 'edit_posts', 'themeforce_business_options','', TF_URL . '/assets/images/general_16.png', 25); // $function, $icon_url, $position 
+    add_menu_page( 'Business Overview', 'Your Business', 'edit_posts', 'themeforce_business_options','', TF_URL . '/assets/images/general_16.png', 25); // $function, $icon_url, $position 
     add_submenu_page('themeforce_business_options', 'Business Details', 'Business Details', 'edit_posts', 'themeforce_business', 'themeforce_business_page');
     add_submenu_page('themeforce_business_options', 'Logo', 'Logo', 'edit_posts', 'themeforce_logo', 'themeforce_logo_page');   
     add_submenu_page('themeforce_business_options', 'Your Location', 'Location', 'edit_posts', 'themeforce_location', 'themeforce_location_page');
@@ -29,7 +29,7 @@ function themeforce_business_options() {
 add_action('admin_menu','themeforce_business_options');
 
 function themeforce_social_options() {
-    add_menu_page( 'Dummy Header', 'Social Proof', 'manage_options', 'themeforce_social_options','themeforce_social_overview_page', TF_URL . '/assets/images/social_16.png', 35); // $function, $icon_url, $position 
+    add_menu_page( 'Social Proof Overview', 'Social Proof', 'manage_options', 'themeforce_social_options','themeforce_social_overview_page', TF_URL . '/assets/images/social_16.png', 35); // $function, $icon_url, $position 
     add_submenu_page('themeforce_social_options', 'Yelp', 'Yelp', 'manage_options', 'themeforce_yelp', 'themeforce_social_yelp_page');
     add_submenu_page('themeforce_social_options', 'Qype', 'Qype', 'manage_options', 'themeforce_qype', 'themeforce_social_qype_page');
     add_submenu_page('themeforce_social_options', 'Foursquare', 'Foursquare', 'manage_options', 'themeforce_foursquare', 'themeforce_social_foursquare_page');   
@@ -270,6 +270,4 @@ function tf_display_settings($options) {
     <?php wp_nonce_field( 'update-options' ); ?>
 	    
     <?php
-}
-
-?>
+}?>
