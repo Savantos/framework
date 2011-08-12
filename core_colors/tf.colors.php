@@ -35,21 +35,11 @@ function themeforce_update_logo_colors() {
 
 add_action('admin_init', 'themeforce_update_logo_colors');
 
-function tf_logocolors($colorimage) {
-    $hexarray = tf_dynamiccolors($colorimage);
-    // Activate Custom Colors
-        update_option('baseforce_custom_colors', 'true');
-    // Primary
-        update_option('baseforce_color_pri_dark','#'.$hexarray[0]);
-        update_option('baseforce_color_pri_light','#'.$hexarray[1]);
-        update_option('baseforce_color_pri_link','#'.$hexarray[2]);
-    // Secondary
-        update_option('baseforce_color_sec_light','#a7ceaa');
-        update_option('baseforce_color_sec_dark','#406541');
-    /*
-     * Still require better logic to extract secondary.
-     */
-}
+
+/*
+ * tf_logocolors (above) is stored within the individual theme (uses theme options) but calls on tf_dynamiccolors (below)
+ */
+
 
 function tf_dynamiccolors($colorimage) {
     

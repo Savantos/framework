@@ -77,7 +77,6 @@ function themeforce_location_page() {
                 "std" => "Call us at +01 (02) 123 57 89",
                 "type" => "text"),				
 
-      
 	array( "type" => "close"), 
  
 );
@@ -91,7 +90,6 @@ function themeforce_location_page() {
         <div id="tf-tip">
             <h3>Why is Location important?</h3>
             <p>We use location data to enhance content across your website. An example of this are Events: Your location is attached to individual events which means that you can potentially <strong>increase your traffic from Google, Yahoo or Bing</strong> for local event searches.</p>
-            <!-- <img src="http://1.bp.blogspot.com/_o5Na_9269nA/S1nnV8U-pYI/AAAAAAAADX0/FkIocIhR7Ig/s400/events-rich-snippets.png" /> -->
         </div>    
         
     </div>

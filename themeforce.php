@@ -443,6 +443,7 @@ add_action( 'in_admin_footer', 'tf_add_tf_icon_classes_to_widgets' );
  * Make some alterations to the menu that can't be done via add_menu_page().
  * 
  */
+
 function tf_modify_admin_menu() {
 
 	global $menu, $submenu;

@@ -212,12 +212,15 @@ function tf_display_settings($options) {
         ?>
 
         <tr>
-            <th><label for="<?php echo $value['id']; ?>"><?php echo $value['name']; ?></label></th>
+            <th><label for="<?php echo $value['id']; ?>"><?php echo $value['name']; ?></label>
+
+            </th>
             <td>
             <?php
             if ( get_settings( $value['id'] ) != "") { $val = stripslashes(get_settings( $value['id'])  ); } else { $val =  $value['std']; }
             ?>
             <?php echo tf_optionsframework_medialibrary_uploader( $value['id'], $val ); ?>
+            <br /><span class="desc"><?php echo $value['desc'] ?></span>
             </td>
         </tr>
         

@@ -114,7 +114,6 @@ function themeforce_business_page() {
         <div id="tf-tip">
             <h3>Why do you need all this?</h3>
             <p>The questions asked above are used to provide <strong>search engines & content aggregators</strong> with relevant information about your restaurant. These websites can then automatically generate detailed profiles about your business, generating more traffic for your website.</p>
-            <!-- <img src="http://1.bp.blogspot.com/_o5Na_9269nA/S1nnV8U-pYI/AAAAAAAADX0/FkIocIhR7Ig/s400/events-rich-snippets.png" /> -->
         </div>  
         
     </div>

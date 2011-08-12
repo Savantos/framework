@@ -136,7 +136,7 @@ if ( ! function_exists( 'tf_optionsframework_medialibrary_uploader' ) ) {
 		$output .= '<div class="screenshot" id="' . $id . '_image">' . "\n";
 		
 		if ( $value != '' ) { 
-			$remove = '<a href="javascript:(void);" class="mlu_remove button">Remove</a>';
+			$remove = '<div class="clear:both;"></div><a href="javascript:(void);" class="mlu_remove tf-button">Remove</a>';
 			$image = preg_match( '/(^.*\.jpg|jpeg|png|gif|ico*)/i', $value );
                         // TODO Not sure why this isn't playing along, just outputs the full image, ideas?
                         $wpthumb = wpthumb($value,'width=400&height=200&crop=1', false);
