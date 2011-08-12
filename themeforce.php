@@ -379,7 +379,7 @@ add_action( 'wp_ajax_tf_sort_admin_rows', 'tf_sortable_admin_row_request' );
 */	
 
 //upgrader from 2.x - 3.0 -> 3.2
-	require_once( TF_PATH . '/tf.upgrade.php' );  	
+	require_once( TF_PATH . '/tf.upgrade.php' );
 
 
 /* Remaining Functions

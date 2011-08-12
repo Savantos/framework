@@ -125,6 +125,14 @@ Theme Force Stylesheet - Options & Settings
     cursor: pointer;
   }
   
+  .tf-radio-img-img {
+	border:3px solid #fff;
+	margin:0 5px 10px 0;
+
+	cursor:pointer;
+	float:left;
+}
+  
   #tf-options-page input[type=radio]:checked {
     background: transparent url('../images/ui-checks.png') -24px 0px no-repeat;
   }
@@ -151,6 +159,11 @@ Theme Force Stylesheet - Options & Settings
   #tf-options-page .tf-options-img {
     margin:20px 0;  
   }
+  
+ #tf-options-page .image-radio label img {display:block;border:5px solid #eee;padding:10px;margin:0 15px 15px 0;border-radius:5px;}  
+ #tf-options-page .image-radio input[type="radio"] {display:none;width:0px !important; }
+ #tf-options-page .image-radio input[type="radio"]:checked+label img {border:5px solid #0086ba !important; cursor:pointer;}
+ #tf-options-page .image-radio label img:hover {opacity:0.7}
 
 /* Form Table (Wrapped)
    -----------------------

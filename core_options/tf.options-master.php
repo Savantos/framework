@@ -226,6 +226,45 @@ function tf_display_settings($options) {
         
         <?php break;
         
+        case "images":
+        ?>
+        <tr class="image-radio">
+            <th><label><?php echo $value['name']; ?></label>
+
+         </th>
+        <td>
+        <?php
+        
+        $i = 0;
+        $select_value = get_settings($value['id']);
+
+        foreach ($value['options'] as $key => $option) 
+         { 
+         $i++;
+
+                 $checked = '';
+                 $selected = '';
+                   if($select_value != '') {
+                                if ( $select_value == $key) { $checked = ' checked'; $selected = 'tf-radio-img-selected'; } 
+                    } else {
+                                if ($value['std'] == $key) { $checked = ' checked'; $selected = 'tf-radio-img-selected'; }
+                                elseif ($i == 1  && !isset($select_value)) { $checked = ' checked'; $selected = 'tf-radio-img-selected'; }
+                                elseif ($i == 1  && $value['std'] == '') { $checked = ' checked'; $selected = 'tf-radio-img-selected'; }
+                                else { $checked = ''; }
+                        }	
+
+                echo '<span>';
+                echo '<input type="radio" id="' . $value['id'] . $i . '" class="tf-radio-img-radio" value="'.$key.'" name="'. $value['id'].'"'.$checked.' tabindex="'.$i .'" />';
+                echo '<label for="'. $value['id'] . $i . '"><img src="'.$option.'" alt="" class="tf-radio-img-img '. $selected .'" /></label>';
+                echo '</span>';
+
+        } ?>
+        </td>
+        </tr> 
+         
+        <?php
+        break;
+        
         case "open-farbtastic":
         ?>
         
