@@ -104,7 +104,7 @@ function tf_display_settings($options) {
         <tr>
             <th><label for="<?php echo $value['id']; ?>"><?php echo $value['name']; ?></label></th>
             <td>
-                <input name="<?php echo $value['id'] ?>" type="<?php echo $value['type']; ?>" value="<?php if ( get_settings( $value['id'] ) != "") { echo stripslashes(get_settings( $value['id'])  ); } else { echo $value['std']; } ?>">
+                <input name="<?php echo $value['id'] ?>" type="<?php echo $value['type']; ?>" value="<?php if ( get_option( $value['id'] ) != "") { echo stripslashes(get_option( $value['id'])  ); } else { echo $value['std']; } ?>">
                 <br /><span class="desc"><?php echo $value['desc'] ?></span>
             </td>
         </tr>
@@ -117,7 +117,7 @@ function tf_display_settings($options) {
 
         <tr>
             <th><label for="<?php echo $value['id']; ?>"><?php echo $value['name']; ?></label></th>
-            <td><textarea name="<?php echo $value['id']; ?>" type="<?php echo $value['type']; ?>" cols="" rows=""><?php if ( get_settings( $value['id'] ) != "") { echo stripslashes(get_settings( $value['id']) ); } else { echo $value['std']; } ?></textarea>
+            <td><textarea name="<?php echo $value['id']; ?>" type="<?php echo $value['type']; ?>" cols="" rows=""><?php if ( get_option( $value['id'] ) != "") { echo stripslashes(get_option( $value['id']) ); } else { echo $value['std']; } ?></textarea>
             <br /><span class="desc"><?php echo $value['desc'] ?></span></td>
         </tr>
 
@@ -132,7 +132,7 @@ function tf_display_settings($options) {
             <td>
                 <select name="<?php echo $value['id']; ?>" id="<?php echo $value['id']; ?>">
                 <?php foreach ($value['options'] as $option) { ?>
-                    <option <?php if (get_settings( $value['id'] ) == $option) { echo 'selected="selected"'; } ?>><?php echo $option; ?></option><?php } ?>
+                    <option <?php selected( $option, get_option( $value['id'] ) ) ?>><?php echo $option; ?></option><?php } ?>
                 </select>
                 <br /><span class="desc"><?php echo $value['desc'] ?></span>
             </td>
@@ -141,58 +141,60 @@ function tf_display_settings($options) {
         break;
         
         case 'multiple-select':
-        ?>
-
-        <tr>
-            <th><label for="<?php echo $value['id']; ?>"><?php echo $value['name']; ?></label></th>
-            <td>
-                <select name="<?php echo $value['id']; ?>" class="chzn-select" multiple id="<?php echo $value['id']; ?>">
-                <?php foreach ($value['options'] as $option) { ?>
-                    <option <?php if (get_settings( $value['id'] ) == $option) { echo 'selected="selected"'; } ?>><?php echo $option; ?></option><?php } ?>
-                </select>
-                <br /><span class="desc"><?php echo $value['desc'] ?></span>
-            </td>
-        </tr>
-
-        <?php
-        
-        
-        break;
+        	
+        	$current_values = (array) get_option( $value['id'], array() );
+        	?>
+			
+        	<tr>
+        	    <th><label for="<?php echo $value['id']; ?>"><?php echo $value['name']; ?></label></th>
+        	    <td>
+        	        <select name="<?php echo $value['id']; ?>[]" class="chzn-select" multiple id="<?php echo $value['id']; ?>">
+        	        <?php foreach ($value['options'] as $option) { ?>
+        	            <option <?php selected( in_array( $option, $current_values ) ) ?>><?php echo $option; ?></option><?php } ?>
+        	        </select>
+        	        <br /><span class="desc"><?php echo $value['desc'] ?></span>
+        	    </td>
+        	</tr>
+			
+        	<?php
+        	
+        	
+        	break;
 
         case "checkbox":
         
-        $std = $value['std'];     
-            
-        $saved_std = get_settings( $value['id'] );
-
-        $checked = '';
-
-        if(!empty($saved_std)) {
-                if($saved_std == 'true') {
-                $checked = 'checked="checked"';
-                }
-                else{
-                   $checked = '';
-                }
-        }
-        elseif( $std == 'true') {
-           $checked = 'checked="checked"';
-        }
-        else {
-                $checked = '';
-        }
-            
-        ?>
-
-        <tr>
-            <th><label for="<?php echo $value['id']; ?>"><?php echo $value['name']; ?></label></th>
-            <td>
-                <input type="checkbox" name="<?php echo $value['id']; ?>" class="iphone" id="<?php echo $value['id']; ?>" value="true" <?php echo $checked; ?> />
-                <br /><span class="desc"><?php echo $value['desc'] ?></span>
-            </td>
-        </tr>
-
-        <?php break;
+        	$std = $value['std'];     
+        	    
+        	$saved_std = get_option( $value['id'] );
+			
+        	$checked = '';
+			
+        	if(!empty($saved_std)) {
+        	        if($saved_std == 'true') {
+        	        $checked = 'checked="checked"';
+        	        }
+        	        else{
+        	           $checked = '';
+        	        }
+        	}
+        	elseif( $std == 'true') {
+        	   $checked = 'checked="checked"';
+        	}
+        	else {
+        	        $checked = '';
+        	}
+        	    
+        	?>
+			
+        	<tr>
+        	    <th><label for="<?php echo $value['id']; ?>"><?php echo $value['name']; ?></label></th>
+        	    <td>
+        	        <input type="checkbox" name="<?php echo $value['id']; ?>" class="iphone" id="<?php echo $value['id']; ?>" value="true" <?php echo $checked; ?> />
+        	        <br /><span class="desc"><?php echo $value['desc'] ?></span>
+        	    </td>
+        	</tr>
+			
+        	<?php break;
 
         case "radio":
         ?>
@@ -201,7 +203,7 @@ function tf_display_settings($options) {
             <th><label for="<?php echo $value['id']; ?>"><?php echo $value['name']; ?></label></th>
             <td>
             <?php foreach ($value['options'] as $option) { ?>
-                <div><input type="radio" name="<?php echo $value['id']; ?>" <?php if (get_settings( $value['id'] ) == $option) { echo 'checked'; } ?> /><?php echo $option; ?></div><?php } ?>
+                <div><input type="radio" name="<?php echo $value['id']; ?>" <?php if (get_option( $value['id'] ) == $option) { echo 'checked'; } ?> /><?php echo $option; ?></div><?php } ?>
                 <br /><span class="desc"><?php echo $value['desc'] ?></span>
             </td>
         </tr>
@@ -217,7 +219,7 @@ function tf_display_settings($options) {
             </th>
             <td>
             <?php
-            if ( get_settings( $value['id'] ) != "") { $val = stripslashes(get_settings( $value['id'])  ); } else { $val =  $value['std']; }
+            if ( get_option( $value['id'] ) != "") { $val = stripslashes(get_option( $value['id'])  ); } else { $val =  $value['std']; }
             ?>
             <?php echo tf_optionsframework_medialibrary_uploader( $value['id'], $val ); ?>
             <br /><span class="desc"><?php echo $value['desc'] ?></span>
@@ -236,7 +238,7 @@ function tf_display_settings($options) {
         <?php
         
         $i = 0;
-        $select_value = get_settings($value['id']);
+        $select_value = get_option($value['id']);
 
         foreach ($value['options'] as $key => $option) 
          { 
@@ -283,7 +285,7 @@ function tf_display_settings($options) {
         <tr>
             <th><label for="<?php echo $value['id']; ?>"><?php echo $value['name']; ?></label></th>
             <td>
-            <input class="colorwell" name="<?php echo $value['id'] ?>" type="text" value="<?php if ( get_settings( $value['id'] ) != "") { echo stripslashes(get_settings( $value['id'])  ); } else { echo $value['std']; } ?>">
+            <input class="colorwell" name="<?php echo $value['id'] ?>" type="text" value="<?php if ( get_option( $value['id'] ) != "") { echo stripslashes(get_option( $value['id'])  ); } else { echo $value['std']; } ?>">
             </td>
         </tr>
         
