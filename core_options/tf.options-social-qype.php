@@ -65,13 +65,10 @@ function themeforce_social_qype_page() {
 	 <input type="submit" id="tf-submit" name="options_submit" value=" <?php _e( 'Save Changes' )  ?>" />
          <div style="clear:both;"></div>
     </form>
-        <!--
         <div id="tf-tip">
-            <h3>Why is Location important?</h3>
-            <p>We use location data to enhance content across your website. An example of this are Events: Your location is attached to individual events which means that you can potentially <strong>increase your traffic from Google, Yahoo or Bing</strong> for local event searches.</p>
-            <img src="http://1.bp.blogspot.com/_o5Na_9269nA/S1nnV8U-pYI/AAAAAAAADX0/FkIocIhR7Ig/s400/events-rich-snippets.png" />
+            <h3>Where is Qype useful?</h3>
+            <p>Qype is especially useful in <strong>Europe</strong> with some of the more dominant countries being the UK, Germany and Spain.</p>
         </div>    
-        -->
     </div>
     <?php
         
