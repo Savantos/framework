@@ -278,6 +278,11 @@ if ( ! function_exists( 'tf_optionsframework_mlu_js_popup' ) ) {
 	});
 	-->
 	</script>
+	
+	<style type="text/css">
+		.slidetoggle tr.post_title, .slidetoggle tr.image_alt, .slidetoggle tr.post_excerpt, .slidetoggle tr.post_content, .slidetoggle tr.url, .slidetoggle tr.align, .slidetoggle tr.crop-from-position, .slidetoggle tr.image-size, .media-upload-form p.savebutton.ml-submit { display: none !important; }
+	</style>
+
 <?php
 	}
 }
