@@ -147,6 +147,6 @@
                     }
                 $c++;
                 endwhile;
-                update_option('tf_sliderconverion','true');
+                update_option('tf_sliderconversion','true');
                 }
 ?>
