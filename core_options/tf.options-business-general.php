@@ -99,21 +99,22 @@ function themeforce_business_page() {
                 "desc" => "If you don't use the advanced sort, menu items will be sorted alphabetically. ", //See <a href='http://'>this tutorial</a>for more information
                 "id" => "tf_menu_sort_key",
                 "std" => "true",
-                "type" => "checkbox"),
-				
-	if ( TF_THEME == 'chowforce' ) {
-				array( "name" => "Tagline",
+                "type" => "checkbox"),	
+        
+	array( "type" => "close"), 
+ 
+);
+
+if ( TF_THEME == 'chowforce' ) {
+				$options[]= array( "name" => "Tagline",
                 "desc" => "This will appear in the top right of every page. ",
                 "id" => "chowforce_biz_contactinfo",
                 "std" => "Enter your tagline here.",
                 "type" => "text")
 				}
 			
-	}			
-        
-	array( "type" => "close"), 
- 
-);
+	
+
 
     tf_display_settings($options);
     ?> 
