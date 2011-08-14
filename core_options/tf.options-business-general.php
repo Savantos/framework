@@ -25,7 +25,7 @@ function themeforce_business_page() {
     $options_cuisine = array('Afghan', 'African', 'American (New)', 'American (Traditional)', 'Argentine', 'Asian Fusion', 'Barbeque', 'Basque', 'Belgian', 'Brasseries', 'Brazilian', 'Breakfast & Brunch', 'British', 'Buffets', 'Burgers', 'Burmese', 'Cafes', 'Cajun/Creole', 'Cambodian', 'Caribbean', 'Cheesesteaks', 'Chicken Wings', 'Chinese', 'Creperies', 'Cuban', 'Delis', 'Diners', 'Ethiopian', 'Fast Food', 'Filipino', 'Fish & Chips', 'Fondue', 'Food Stands', 'French', 'Gastropubs', 'German', 'Gluten-Free', 'Greek', 'Halal', 'Hawaiian', 'Himalayan/Nepalese', 'Hot Dogs', 'Hungarian', 'Indian', 'Indonesian', 'Irish', 'Italian', 'Japanese', 'Korean', 'Kosher', 'Latin American', 'Live/Raw Food', 'Malaysian', 'Mediterranean', 'Mexican', 'Middle Eastern', 'Modern European', 'Mongolian', 'Moroccan', 'Pakistani', 'Persian/Iranian', 'Peruvian', 'Pizza', 'Polish', 'Portuguese', 'Russian', 'Sandwiches', 'Scandinavian', 'Seafood', 'Singaporean', 'Soul Food', 'Soup', 'Southern', 'Spanish', 'Steakhouses', 'Sushi Bars', 'Taiwanese', 'Tapas Bars', 'Tapas/Small Plates', 'Tex-Mex', 'Thai', 'Turkish', 'Ukrainian', 'Vegan', 'Vegetarian', 'Vietnamese');
     $options_pricerange = array ('$','$$','$$$','$$$$');
     $options_yesno = array ('yes','no');
-    
+	
     // Options
     
     $options = array (
@@ -100,6 +100,16 @@ function themeforce_business_page() {
                 "id" => "tf_menu_sort_key",
                 "std" => "true",
                 "type" => "checkbox"),
+				
+	if ( TF_THEME == 'chowforce' ) {
+				array( "name" => "Tagline",
+                "desc" => "This will appear in the top right of every page. ",
+                "id" => "chowforce_biz_contactinfo",
+                "std" => "Enter your tagline here.",
+                "type" => "text")
+				}
+			
+	}			
         
 	array( "type" => "close"), 
  
