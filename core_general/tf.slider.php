@@ -37,7 +37,7 @@ add_action( 'init', 'create_slider_postype' );
 // Register Page
 
 function themeforce_slider_addpage() {
-    add_submenu_page('themes.php','Slider Page Title', 'Manage Sliders', 'manage_options', 'themeforce_slider', 'themeforce_slider_page');
+    add_submenu_page('themes.php','Slider Page Title', 'Slides', 'manage_options', 'themeforce_slider', 'themeforce_slider_page');
 }
 
 add_action('admin_menu','themeforce_slider_addpage');
