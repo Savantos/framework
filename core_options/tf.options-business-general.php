@@ -100,21 +100,19 @@ function themeforce_business_page() {
                 "id" => "tf_menu_sort_key",
                 "std" => "true",
                 "type" => "checkbox"),	
-        
-	array( "type" => "close"), 
  
 );
 
-	if ( TF_THEME == 'chowforce' ) {
-		$options[]= array( "name" => "Tagline",
-    	"desc" => "This will appear in the top right of every page. ",
-    	"id" => "chowforce_biz_contactinfo",
-    	"std" => "Enter your tagline here.",
-    	"type" => "text");
-	}
+if ( TF_THEME == 'chowforce' ) {
+				$options[]= array( "name" => "Tagline",
+                "desc" => "This will appear in the top right of every page. ",
+                "id" => "chowforce_biz_contactinfo",
+                "std" => "Enter your tagline here.",
+                "type" => "text");
+				}
 			
 	
-
+$options[] = array( "type" => "close");
 
     tf_display_settings($options);
     ?> 
