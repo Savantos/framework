@@ -388,9 +388,17 @@ function themeforce_slider_display() {
                     $c_l_image = wpthumb( $image, 'width=960&height=300&crop=1', false);
                     echo '<li><div class="slideimage-full"><a href="' . $slink . '"><img src="' . $c_l_image . '" alt="' . __('Slide', 'themeforce') . ' ' . $c . '"></a></div></li>';
                     }
-
+                }
+                
+             if( TF_THEME == 'pubforce' )
+                {
+                $p_image = wpthumb( $image, 'width=520&height=303&crop=1', false);
+                if($link != '') { echo '<a href="' . $link . '">'; }
+                echo '<img src="' . $p_image . '" alt="' . __('Slide', 'themeforce') . '"';
+                if($title != '') { echo ' title="'. $title . '"'; }
+                echo ' />';
+                if($link != '') { echo '</a>'; }
                 }                 
-                  
                 
         endwhile;
 
