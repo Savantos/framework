@@ -188,12 +188,12 @@ function themeforce_slider_page() {
                 <?php echo tf_optionsframework_medialibrary_uploader( 'tfslider_image', $val ); ?>
                 </td>
             </tr>
-            
+            <?php if( TF_THEME != 'fineforce' ) { ?>
             <tr>
                 <th><label>Slider Header / Title</label></th>
                     <td><input  placeholder="Header" type="text" name="post_title" size="45" id="input-title"/></td>
             </tr>
-            
+            <?php ;} ?>
             <tr>
                 <th><label>Slide Link</label></th>
                 <td>
@@ -400,7 +400,16 @@ function themeforce_slider_display() {
                 if($title) { echo ' title="'. $title . '"'; }
                 echo ' />';
                 if($link) { echo '</a>'; }
-                }                 
+                }
+                
+             if( TF_THEME == 'fineforce' )
+                {
+                $p_image = wpthumb( $image, 'width=1000&height=250&crop=1', false);
+                if($link) { echo '<a href="' . $link . '">'; }
+                echo '<img src="' . $p_image . '" alt="' . __('Slide', 'themeforce') . '"';
+                echo ' />';
+                if($link) { echo '</a>'; }
+                }     
                 
         endwhile;
 
