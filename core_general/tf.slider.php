@@ -355,21 +355,25 @@ function themeforce_slider_display() {
             // output
             // todo if-else on TF_SLIDERTYPE
             
-            echo '<li>';
-            if ($link && $type == 'image') {echo '<a href="' . $link . '">';}
-            echo '<div style="width:'. TF_SLIDERWIDTH .'px;height:' . TF_SLIDERHEIGHT . 'px;background: url(' . $slideimage . ')">';
-            if ($type == 'content')
+            if( TF_SLIDERJS == 'bxslider' )
+                
                 {
-                echo '<div class="content-text">';
-                    if ($title) {echo '<h2>'. $title . '</h2>';}
-                    if ($content) {echo '<p>'. $content .'</p>';}
-                    if ($button && $link) {echo '<a href="' . $link . '"><div class="slider-button">' . $button . '</div></a>';}
+                echo '<li>';
+                if ($link && $type == 'image') {echo '<a href="' . $link . '">';}
+                echo '<div style="width:'. TF_SLIDERWIDTH .'px;height:' . TF_SLIDERHEIGHT . 'px;background: url(' . $slideimage . ')">';
+                if ($type == 'content')
+                    {
+                    echo '<div class="content-text">';
+                        if ($title) {echo '<h2>'. $title . '</h2>';}
+                        if ($content) {echo '<p>'. $content .'</p>';}
+                        if ($button && $link) {echo '<a href="' . $link . '"><div class="slider-button">' . $button . '</div></a>';}
+                    echo '</div>';
+                    }
                 echo '</div>';
+                if ($link && $type == 'image') {echo '</a>';}
+                echo '</li>';
                 }
-            echo '</div>';
-            if ($link && $type == 'image') {echo '</a>';}
-            echo '</li>';
-        
+            
         endwhile;
 
         }
