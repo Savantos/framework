@@ -319,11 +319,9 @@ function themeforce_slider_catch_update() {
 
 add_action('admin_init', 'themeforce_slider_catch_update');
 
-// Upload Image
-
-
 
 //TODO Change function to match custom post types, not options.
+//TODO Could benefit from using transients api for scalability
 function themeforce_slider_display() {
 
     // Query Custom Post Types  

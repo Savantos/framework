@@ -1,7 +1,9 @@
 <?php
 
 // Update Slides
-// Could use a yellow notice prompt similar to Upgrade Settings used for older TF themes
+// TODO Could use a yellow notice prompt similar to Upgrade Settings used for older
+// TF themes (though for hosted it would make more sense to 'convert' automatically,
+// otherwise their sliders would be down)
 
     // PUBFORCE
 
