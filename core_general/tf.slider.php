@@ -190,16 +190,18 @@ function themeforce_slider_page() {
             </tr>
             
             <tr>
+                <th><label>Slider Header / Title</label></th>
+                    <td><input  placeholder="Header" type="text" name="post_title" size="45" id="input-title"/></td>
+            </tr>
+            
+            <tr>
                 <th><label>Slide Link</label></th>
                 <td>
                     <input type="text"  placeholder="http://" name="tfslider_link" size="45" id="input-title"/><br />
                     <span class="desc">If you'd like your slide to link to a page, enter the URL here.</span>
                 </td>
             </tr> 
-            <tr class="extra-options">
-                <th><label>Slider Header</label></th>
-                    <td><input  placeholder="Header" type="text" name="post_title" size="45" id="input-title"/></td>
-            </tr>
+
    
 
             <tr class="extra-options">
