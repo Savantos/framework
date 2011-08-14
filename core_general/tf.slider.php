@@ -348,19 +348,18 @@ function themeforce_slider_display() {
             $order = $custom["_tfslider_order"][0];
             $type = $custom["_tfslider_type"][0];
             $image = $custom["tfslider_image"][0];
-            $slideimage = wpthumb( $image, 'width='. TF_SLIDERWIDTH .'&height=' . TF_SLIDERHEIGHT . '&crop=1', false);
             $link = $custom["tfslider_link"][0];
             $button = $custom["tfslider_button"][0];
        
             // output
             // todo if-else on TF_SLIDERTYPE
             
-            if( TF_SLIDERJS == 'bxslider' )
-                
+            if( TF_THEME == 'baseforce' )
                 {
+                $b_image = wpthumb( $image, 'width=960&height=300&crop=1', false);
                 echo '<li>';
                 if ($link && $type == 'image') {echo '<a href="' . $link . '">';}
-                echo '<div style="width:'. TF_SLIDERWIDTH .'px;height:' . TF_SLIDERHEIGHT . 'px;background: url(' . $slideimage . ')">';
+                echo '<div style="width:960px;height:300px;background: url(' . $b_image . ')">';
                 if ($type == 'content')
                     {
                     echo '<div class="content-text">';
@@ -374,6 +373,25 @@ function themeforce_slider_display() {
                 echo '</li>';
                 }
             
+             if( TF_THEME == 'chowforce' )
+                {
+                if ($type == 'content') 
+                    {
+                    $c_s_image = wpthumb( $image, 'width=540&height=300&crop=1', false);
+                    echo '<li><div class="slidetext">';
+                    if ( $title ) {echo '<h3>' . $title . '</h3>';}
+                    echo '<p>' . $content . '</p>';
+                    if ( $link ) {echo '<a href="' . $link . '"><div class="slidebutton">' . $button . '</div></a>';}
+                    echo '</div>';
+                    echo '<div class="slideimage"><img src="' . $c_s_image . '" alt="' . __('Slide', 'themeforce') . '"></div></li>';
+                } else {
+                    $c_l_image = wpthumb( $image, 'width=960&height=300&crop=1', false);
+                    echo '<li><div class="slideimage-full"><a href="' . $slink . '"><img src="' . $c_l_image . '" alt="' . __('Slide', 'themeforce') . ' ' . $c . '"></a></div></li>';
+                    }
+
+                }                 
+                  
+                
         endwhile;
 
         }
