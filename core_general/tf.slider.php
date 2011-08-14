@@ -393,11 +393,11 @@ function themeforce_slider_display() {
              if( TF_THEME == 'pubforce' )
                 {
                 $p_image = wpthumb( $image, 'width=520&height=303&crop=1', false);
-                if($link != '') { echo '<a href="' . $link . '">'; }
+                if($link) { echo '<a href="' . $link . '">'; }
                 echo '<img src="' . $p_image . '" alt="' . __('Slide', 'themeforce') . '"';
-                if($title != '') { echo ' title="'. $title . '"'; }
+                if($title) { echo ' title="'. $title . '"'; }
                 echo ' />';
-                if($link != '') { echo '</a>'; }
+                if($link) { echo '</a>'; }
                 }                 
                 
         endwhile;
