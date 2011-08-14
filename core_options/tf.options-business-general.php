@@ -105,13 +105,13 @@ function themeforce_business_page() {
  
 );
 
-if ( TF_THEME == 'chowforce' ) {
-				$options[]= array( "name" => "Tagline",
-                "desc" => "This will appear in the top right of every page. ",
-                "id" => "chowforce_biz_contactinfo",
-                "std" => "Enter your tagline here.",
-                "type" => "text")
-				}
+	if ( TF_THEME == 'chowforce' ) {
+		$options[]= array( "name" => "Tagline",
+    	"desc" => "This will appear in the top right of every page. ",
+    	"id" => "chowforce_biz_contactinfo",
+    	"std" => "Enter your tagline here.",
+    	"type" => "text");
+	}
 			
 	
 
