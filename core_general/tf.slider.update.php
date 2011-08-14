@@ -1,11 +1,11 @@
-<?php 
+<?php
 
-if ( get_option('tf_sliderconversion') != 'true' )
-    {
+// Update Slides
+// Could use a yellow notice prompt similar to Upgrade Settings used for older TF themes
 
     // PUBFORCE
-    
-    if ( TF_THEME == 'pubforce') 
+
+    if ( get_option('pubforce_slider_1') != '' )
             {
 
                 $c = 1;
@@ -46,10 +46,10 @@ if ( get_option('tf_sliderconversion') != 'true' )
                 endwhile;
                 update_option('tf_sliderconverion','true');
                 }
-    
-    // CHOWFORCE
                 
-    if ( TF_THEME == 'chowforce') 
+    // CHOWFORCE
+        $chowforce = get_option('chowforce_s1_img');        
+        if ( $chowforce )
             {
 
                 $c = 1;
@@ -63,13 +63,13 @@ if ( get_option('tf_sliderconversion') != 'true' )
                 $sheader = '';
                 $sdesc = '';
                 $button = '';
-
-                    // check type and load approriate options
-                    if ( $type == 'content') {
-                        $sheader = stripslashes(get_option('chowforce_s' . $c .'_h'));
-                        $sdesc = stripslashes(get_option('chowforce_s' . $c .'_p'));
-                        $button = stripslashes(get_option('chowforce_s' . $c .'_at'));
-                    }
+                // check type and load approriate options
+                if ( $slidertype == 'content') {
+                    $sheader = stripslashes(get_option('chowforce_s' . $c .'_h'));
+                    if ($sheader == '') { $header = 'Legacy Slide' . $c; } else { $header = $sheader; }
+                    $sdesc = stripslashes(get_option('chowforce_s' . $c .'_p'));
+                    $button = stripslashes(get_option('chowforce_s' . $c .'_at'));
+                }
                     
                 $link = get_option('chowforce_s' . $c .'_a');    
                     
@@ -77,8 +77,7 @@ if ( get_option('tf_sliderconversion') != 'true' )
                 if ( $raw_image != '' )
                     {
                     // show goodies
-                    $post_title = $sheader;
-                    $slidertype = 'image';
+                    $post_title = $header;
                     $imageurl = $raw_image;
                     $new_post = array(
                           'ID' => '',
@@ -103,11 +102,11 @@ if ( get_option('tf_sliderconversion') != 'true' )
                 $c++;
                 endwhile;
                 update_option('tf_sliderconverion','true');
-                }                
+               }                
     
     // FINEFORCE
     
-    if ( TF_THEME == 'fineforce') 
+    if ( get_option('fineforce_slider_1') != '')
             {
 
                 $c = 1;
@@ -148,5 +147,4 @@ if ( get_option('tf_sliderconversion') != 'true' )
                 endwhile;
                 update_option('tf_sliderconverion','true');
                 }
-     }
 ?>
