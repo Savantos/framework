@@ -138,8 +138,12 @@ if ( ! function_exists( 'tf_optionsframework_medialibrary_uploader' ) ) {
 		if ( $value != '' ) { 
 			$remove = '<div class="clear:both;"></div><a href="javascript:(void);" class="mlu_remove tf-button">Remove</a>';
 			$image = preg_match( '/(^.*\.jpg|jpeg|png|gif|ico*)/i', $value );
-                        // TODO Not sure why this isn't playing along, just outputs the full image, ideas?
-                        $wpthumb = wpthumb($value,'width=400&height=200&crop=1', false);
+             
+            // TODO Not sure why this isn't playing along, just outputs the full image, ideas?
+            //var_dump( $value );
+            //$wpthumb = wpthumb($value,'width=400&height=200&crop=1', false);
+            $wpthumb = $value;
+            
 			if ( $image ) {
 				$output .= '<img class="tf-options-img" src="' . $wpthumb . '" alt="" />'.$remove.'';
 			} else {
@@ -261,6 +265,9 @@ if ( ! function_exists( 'tf_optionsframework_mlu_js_popup' ) ) {
 		
 		// Change the text of the "Insert into Post" buttons to read "Use this File".
 		$( '.savesend input.button[value*="Insert into Post"], .media-item #go_button' ).attr( 'value', 'Use this File' );
+		
+		// Select the FUll Size option in Size Options (as it's hidden)
+		$( '.image-size input[value="full"]' ).attr('checked', true);
 		
 		// Hide the "Insert Gallery" settings box on the "Gallery" tab.
 		$( 'div#gallery-settings' ).hide();
