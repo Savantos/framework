@@ -265,3 +265,14 @@ function tf_modify_admin_menu() {
 
 }
 add_action( 'admin_menu', 'tf_modify_admin_menu', 11 );
+
+/*
+ * Update Logo
+ */
+
+if (get_option('tf_logo_update') != 'true')
+    {
+    $logo = get_option(TF_THEME . '_logo');
+    if( $logo != '' ){update_option('tf_logo',$logo);}
+    update_option('tf_logo_update','true');
+    }
