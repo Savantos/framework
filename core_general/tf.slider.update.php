@@ -63,10 +63,12 @@ if ( $chowforce ) {
     	$sheader = '';
     	$sdesc = '';
     	$button = '';
+    	$header = 'Legacy Slide' . $c;
+    	
     	// check type and load approriate options
     	if ( $slidertype == 'content') {
     	    $sheader = stripslashes(get_option('chowforce_s' . $c .'_h'));
-    	    if ($sheader == '') { $header = 'Legacy Slide' . $c; } else { $header = $sheader; }
+    	    if ($sheader > '') { $header = $sheader; }
     	    $sdesc = stripslashes(get_option('chowforce_s' . $c .'_p'));
     	    $button = stripslashes(get_option('chowforce_s' . $c .'_at'));
     	}
