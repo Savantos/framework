@@ -16,6 +16,7 @@ require_once( TF_PATH . '/core_options/tf.options-social-gowalla.php' );
 require_once( TF_PATH . '/core_options/tf.options-social-yelp.php' );
 require_once( TF_PATH . '/core_options/tf.options-social-qype.php' );
 require_once( TF_PATH . '/core_options/tf.options-social-foursquare.php' );
+require_once( TF_PATH . '/core_options/tf.options-mailchimp.php' );
 
 // Register Pages
 // -----------------------------------------
@@ -25,6 +26,7 @@ function themeforce_business_options() {
     add_submenu_page('themeforce_business_options', 'Business Details', 'Business Details', 'edit_posts', 'themeforce_business', 'themeforce_business_page');
     add_submenu_page('themeforce_business_options', 'Logo', 'Logo', 'edit_posts', 'themeforce_logo', 'themeforce_logo_page');   
     add_submenu_page('themeforce_business_options', 'Your Location', 'Location', 'edit_posts', 'themeforce_location', 'themeforce_location_page');
+	add_submenu_page('themeforce_business_options', 'Newsletter', 'Newsletter', 'edit_posts', 'themeforce_mailchimp', 'themeforce_mailchimp_page');
 }
 add_action('admin_menu','themeforce_business_options');
 
