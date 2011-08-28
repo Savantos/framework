@@ -50,8 +50,11 @@ function tf_events_full ( $atts ) {
 	// - hide events that are older than 6am today (because some parties go past your bedtime) -
 	
 	$today6am = strtotime('today 6:00') + ( get_option( 'gmt_offset' ) * 3600 );
-	
-	// - query -
+	$name = stripslashes(get_option('tf_business_name'));
+        $address = stripslashes(get_option('tf_business_address'));
+        $location = $name . ', ' . $address;
+        
+       	// - query -
 	global $wpdb;
 	$querystr = "
 	    SELECT *
@@ -124,7 +127,7 @@ function tf_events_full ( $atts ) {
 				<!-- duration --> <meta itemprop="duration" content="PT<?php echo $schema_duration; ?>M" />
 				<!-- category --> <meta itemprop="eventType" content="<?php tf_list_cats(); ?>" />
 	            <!-- url & name --> <div class="eventtext"><a itemprop="url" href="<?php the_permalink(); ?>"><div itemprop="name"><?php the_title(); ?></div></a></div>
-				<!-- location --> <meta itemprop="location" content="<?php echo get_option('tf_business_name') . ', ' . get_option('tf_business_address');?>" />
+				<!-- location --> <meta itemprop="location" content="<?php echo $location;?>" />
 	        </div>
 	    </div>
 	    <!-- description --><div class="desc" itemprop="description"><?php the_content() ?></div>
