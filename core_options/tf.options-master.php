@@ -8,9 +8,15 @@
 // Register Menu Pages
 
 require_once( TF_PATH . '/core_options/tf.options-of-uploader.php' );
+
 require_once( TF_PATH . '/core_options/tf.options-business-general.php' );
 require_once( TF_PATH . '/core_options/tf.options-business-location.php' );
 require_once( TF_PATH . '/core_options/tf.options-business-logo.php' );
+
+require_once( TF_PATH . '/core_options/tf.options-social-media.php' );
+require_once( TF_PATH . '/core_options/tf.options-social-facebook.php' );
+require_once( TF_PATH . '/core_options/tf.options-social-twitter.php' );
+
 require_once( TF_PATH . '/core_options/tf.options-social-overview.php' );
 require_once( TF_PATH . '/core_options/tf.options-social-gowalla.php' );
 require_once( TF_PATH . '/core_options/tf.options-social-yelp.php' );
@@ -29,6 +35,13 @@ function themeforce_business_options() {
 	add_submenu_page('themeforce_business_options', 'Newsletter', 'Newsletter', 'edit_posts', 'themeforce_mailchimp', 'themeforce_mailchimp_page');
 }
 add_action('admin_menu','themeforce_business_options');
+
+function themeforce_socialmedia_options() {
+    add_menu_page( 'Social Media Overview', 'Social Media', 'manage_options', 'themeforce_socialmedia_options','themeforce_social_media_overview_page', TF_URL . '/assets/images/socialmedia_16.png', 30); // $function, $icon_url, $position 
+    add_submenu_page('themeforce_socialmedia_options', 'Facebook', 'Facebook', 'manage_options', 'themeforce_facebook', 'themeforce_social_facebook_page');
+    add_submenu_page('themeforce_socialmedia_options', 'Twitter', 'Twitter', 'manage_options', 'themeforce_twitter', 'themeforce_social_twitter_page');
+}
+add_action('admin_menu','themeforce_socialmedia_options');
 
 function themeforce_social_options() {
     add_menu_page( 'Social Proof Overview', 'Social Proof', 'manage_options', 'themeforce_social_options','themeforce_social_overview_page', TF_URL . '/assets/images/social_16.png', 35); // $function, $icon_url, $position 
