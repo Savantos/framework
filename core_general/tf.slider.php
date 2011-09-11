@@ -340,6 +340,8 @@ function themeforce_slider_display() {
         $my_query = null;
         $my_query = new WP_query($args);
 
+        $c = 1;
+        
         while ($my_query->have_posts()) : $my_query->the_post();
         
             // - variables -
@@ -355,6 +357,11 @@ function themeforce_slider_display() {
        
             // output
             // todo if-else on TF_SLIDERTYPE
+            
+            /*
+            if ($c == 1) {update_option('tf_mobilebg', wpthumb( $image, 'width=480&height=250&crop=1', false));}
+            $c++;
+            */
             
             if( TF_THEME == 'baseforce' )
                 {
@@ -392,6 +399,24 @@ function themeforce_slider_display() {
                     }
                 }
                 
+              if( TF_THEME == 'pubforce' )
+                {
+                if ($type == 'content') 
+                    {
+                    $c_s_image = wpthumb( $image, 'width=540&height=300&crop=1', false);
+                    echo '<li><div class="slidetext">';
+                    if ( $title ) {echo '<h3>' . $title . '</h3>';}
+                    echo '<p>' . $content . '</p>';
+                    if ( $link ) {echo '<a href="' . $link . '"><div class="slidebutton">' . $button . '</div></a>';}
+                    echo '</div>';
+                    echo '<div class="slideimage" style="background:url(' . $c_s_image . ') no-repeat;" alt="' . __('Slide', 'themeforce') . '"></div></li>';
+                } else {
+                    $c_l_image = wpthumb( $image, 'width=540&height=300&crop=1', false);
+                    echo '<li><div class="slideimage" style="background:url(' . $c_l_image . ') no-repeat;" alt="' . __('Slide', 'themeforce') . '"></div></a></li>';
+                    }
+                }   
+                
+             /*   
              if( TF_THEME == 'pubforce' )
                 {
                 $p_image = wpthumb( $image, 'width=520&height=303&crop=1', false);
@@ -402,6 +427,8 @@ function themeforce_slider_display() {
                 if($link) { echo '</a>'; }
                 }
                 
+              * 
+              */
              if( TF_THEME == 'fineforce' )
                 {
                 $p_image = wpthumb( $image, 'width=1000&height=250&crop=1', false);

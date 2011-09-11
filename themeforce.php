@@ -40,6 +40,7 @@ if( current_theme_supports( 'tf_settings_api' ) )
 // Common Assets
     require_once( TF_PATH . '/core_general/tf.assets.php' );
     require_once( TF_PATH . '/core_general/tf.slider.php' );
+    require_once( TF_PATH . '/core_general/tf.mobile.php' );
     
     if ( get_option('tf_sliderconversion') != 'true' ) {
 		require_once( TF_PATH . '/core_general/tf.slider.update.php' );
