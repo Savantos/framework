@@ -358,10 +358,10 @@ function themeforce_slider_display() {
             // output
             // todo if-else on TF_SLIDERTYPE
             
-            /*
+            
             if ($c == 1) {update_option('tf_mobilebg', wpthumb( $image, 'width=480&height=250&crop=1', false));}
             $c++;
-            */
+            
             
             if( TF_THEME == 'baseforce' )
                 {
