@@ -359,7 +359,7 @@ function themeforce_slider_display() {
             // todo if-else on TF_SLIDERTYPE
             
             
-            if ($c == 1) {update_option('tf_mobilebg', wpthumb( $image, 'width=480&height=250&crop=1', false));}
+            if ($c == 1 && get_option('tf_mobilebg') == '') {update_option('tf_mobilebg', $image);}
             $c++;
             
             
