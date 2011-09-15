@@ -49,7 +49,7 @@ class TF_Widget_MailChimp extends WP_Widget {
 	
 	public function add_scripts () {
 		
-		wp_enqueue_script('tf-mc-widget', get_bloginfo('wpurl') . '/wp-content/plugins/mailchimp-widget/js/mailchimp-widget-min.js', array('jquery'), false);
+		wp_enqueue_script('tf-mc-widget', TF_URL . '/assets/js/mailchimp-widget-min.js', array('jquery'), false);
 		
 	}
 	
