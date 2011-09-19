@@ -106,6 +106,7 @@ function themeforce_slider_page() {
             $type = $custom["_tfslider_type"][0];
                 if ($type=='image') {$imageselect = ' selected="selected"';} else {$imageselect = '';}
                 if ($type=='content') {$contentselect = ' selected="selected"';} else {$contentselect = '';}
+            $title = $custom["tfslider_title"][0];
             $link = $custom["tfslider_link"][0];
             $button = $custom["tfslider_button"][0];
             $image = $custom["tfslider_image"][0];
@@ -132,7 +133,7 @@ function themeforce_slider_page() {
              echo '<option value="image"'. $imageselect .'>Image Alone</option> ';
              echo '<option value="content"'. $contentselect .'>Image & Text</option>';
              echo '</select>';
-             echo '<h3><span>' . get_the_title($id) . '</span><input placeholder=" Title (Optional)" style="display:none;" type="text" name="' . 'slider[title][' . $id . ']" size="45" id="input-title" value="' . get_the_title($id)  . '" /></h3>';
+             echo '<h3><span>' . $title . '</span><input placeholder=" Title (Optional)" style="display:none;" type="text" name="' . 'slider[title][' . $id . ']" size="45" id="input-title" value="' . $title . '" /></h3>';
              echo '<p><span>' . get_the_content($id) . '</span><textarea placeholder=" Content (Optional)" style="display:none;" rows="5" cols="40" name="' . 'slider[content][' . $id . ']">' . get_the_content($id)  . '</textarea></p>';
              echo '<p><span>' . $link . '</span><input style="display:none;" placeholder=" Link (Optional)" type="text" name="' . 'slider[link][' . $id . ']" size="45" id="input-title" value="' . $link  . '" /></p>';
              echo '<p><span>' . $button . '</span><input style="display:none;" placeholder=" Button Text (Optional)"type="text" name="' . 'slider[button][' . $id . ']" size="45" id="input-title" value="' . $button  . '" /></p>';
@@ -191,7 +192,7 @@ function themeforce_slider_page() {
             <?php if( TF_THEME != 'fineforce' ) { ?>
             <tr>
                 <th><label>Slider Header / Title</label></th>
-                    <td><input  placeholder="Header" type="text" name="post_title" size="45" id="input-title"/></td>
+                    <td><input  placeholder="Header" type="text" name="tfslider_title" size="45" id="input-title"/></td>
             </tr>
             <?php ;} ?>
             <tr>
@@ -238,8 +239,8 @@ function themeforce_slider_page() {
 function themeforce_slider_catch_submit() {
         // Grab POST Data
         if(isset($_POST['new_post']) == '1') {
-        $post_title = $_POST['post_title'];
-        if (!$post_title) {$post_title = 'Image Slide (No Title)';}
+        $post_title = 'Slide'; // New - Static as one field is always required between post title & content. This field will always be hidden now.
+        $slide_title = $_POST['tfslider_title']; // New
         $post_content = $_POST['post_content'];
         $slidertype = $_POST['_tfslider_type'];
         $imageurl = $_POST['tfslider_image'];
@@ -260,7 +261,9 @@ function themeforce_slider_catch_submit() {
         
         // Update Meta Data
         $order_id = intval($post_id)*100;
+        
         update_post_meta( $post_id,'_tfslider_type', $slidertype);
+        update_post_meta( $post_id,'tfslider_title', $slide_title); // New
         update_post_meta( $post_id,'_tfslider_order', $order_id);
         update_post_meta( $post_id,'tfslider_image', $imageurl);
         if ($link) {update_post_meta( $post_id,'tfslider_link', $link);}
@@ -285,7 +288,7 @@ function themeforce_slider_catch_update() {
         // Grab General Data
         $my_post = array();
         $my_post['ID'] = $_POST['slider']['id'][$key];
-        $my_post['post_title'] = $_POST['slider']['title'][$key];
+        // New - not necessary - $my_post['post_title'] = $_POST['slider']['title'][$key];
         $my_post['post_content'] = $_POST['slider']['content'][$key];
         
         // Grab Delete Setting
@@ -304,10 +307,12 @@ function themeforce_slider_catch_update() {
             
             // Update Meta
             $type = $_POST['slider']['type'][$key];
+            $title = $_POST['slider']['title'][$key]; // new
             $button = $_POST['slider']['button'][$key];
             $link = $_POST['slider']['link'][$key];
             $slider_order = intval($_POST['slider']['order'][$key]);
             update_post_meta($key, '_tfslider_type', $type);
+            update_post_meta($key, 'tfslider_title', $title); // new
             if ($button) {update_post_meta($key, 'tfslider_button', $button);}
             if ($link) {update_post_meta($key, 'tfslider_link', $link);}
             update_post_meta($key, '_tfslider_order', $slider_order);
@@ -347,7 +352,7 @@ function themeforce_slider_display() {
             // - variables -
             $custom = get_post_custom(get_the_ID());
             $id = ($my_query->post->ID);
-            $title = get_the_title($id);
+            $title = $custom["tfslider_title"][0];
             $content = get_the_content($id);
             $order = $custom["_tfslider_order"][0];
             $type = $custom["_tfslider_type"][0];
@@ -358,7 +363,7 @@ function themeforce_slider_display() {
             // output
             // todo if-else on TF_SLIDERTYPE
             
-            
+            // update mobile bg if not set yet
             if ($c == 1 && get_option('tf_mobilebg') == '') {update_option('tf_mobilebg', $image);}
             $c++;
             
