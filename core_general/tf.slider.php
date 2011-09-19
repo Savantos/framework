@@ -192,13 +192,13 @@ function themeforce_slider_page() {
             <?php if( TF_THEME != 'fineforce' ) { ?>
             <tr>
                 <th><label>Slider Header / Title</label></th>
-                    <td><input  placeholder="Header" type="text" name="tfslider_title" size="45" id="input-title"/></td>
+                    <td><input  placeholder="Header (Optional)" type="text" name="tfslider_title" size="45" id="input-title"/></td>
             </tr>
             <?php ;} ?>
             <tr>
                 <th><label>Slide Link</label></th>
                 <td>
-                    <input type="text"  placeholder="http://" name="tfslider_link" size="45" id="input-title"/><br />
+                    <input type="text"  placeholder="http:// (Optional)" name="tfslider_link" size="45" id="input-title"/><br />
                     <span class="desc">If you'd like your slide to link to a page, enter the URL here.</span>
                 </td>
             </tr> 
@@ -208,14 +208,14 @@ function themeforce_slider_page() {
             <tr class="extra-options">
 
                 <th><label>Slide Description</label></th>
-                <td><textarea rows="5"  placeholder="Content" name="post_content" cols="66" id="text-desc"></textarea></td>
+                <td><textarea rows="5"  placeholder="Content (Optional)" name="post_content" cols="66" id="text-desc"></textarea></td>
             </tr>
 
             
             <tr class="extra-options">
 
                 <th><label>Button Text</label></th>
-                <td><input type="text"  placeholder="Button Text" name="tfslider_button" size="45" id="input-title"/>
+                <td><input type="text"  placeholder="Button Text (Optional)" name="tfslider_button" size="45" id="input-title"/>
                 <span class="desc">If you've chosen a link above, it'll turn into a button for content slides.</span></td>
                 
             </tr>
