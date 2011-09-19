@@ -37,6 +37,12 @@ function tf_menu_full ( $atts ) {
         // - full-width check -
         if( $align ) { echo '<div style="clear:' . $align . '"></div><div class="' . $align . ' half-col">';}
 
+        // - full-width fallback -
+        if ( is_page_template('page-full.php') || is_page_template('onecolumn-page.php') ) {
+           if( $align == '' ) {echo '<div class="left half-col">';}
+           $align = 'left'; // just so that the closing tag is fired
+        }
+        
         // - currency -
         $fx = null;
         if ($currency=='true') {
@@ -56,8 +62,7 @@ function tf_menu_full ( $atts ) {
         $orderby = 'title';
         if ($sortfield=='true') { 
         	$orderby = 'menu_order';
-        }
-        
+        }        
 		if ($posttype=='p') { 
 			$metakey = 'null'; 
 			$orderby = 'title';
@@ -134,6 +139,7 @@ function tf_menu_full ( $atts ) {
         <?php
         endwhile;
         if( $align ) { echo '</div>';}
+        
 		wp_reset_query();
 
     // ===== RETURN: FULL MENU SECTION =====
