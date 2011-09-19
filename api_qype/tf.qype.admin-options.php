@@ -25,7 +25,7 @@ function tf_qype_admin_options( $options ) {
 	
 	$options[] = array( 
 		"name" => "API Key",
-		"desc" => "Required for Qype Button  <a target='_blank' href='http://www.qype.com/developers/getting_started/api_overview'>Get it from here (qype API)</a>",
+		"desc" => "Required for Qype Button  <a target='_blank' href='http://www.qype.co.uk/developers/api'>Get it from here (qype API)</a>",
 		"id" => "tf_qype_api_key",
 		"std" => "",
 		"type" => "text"
