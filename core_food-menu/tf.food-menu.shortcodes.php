@@ -38,11 +38,7 @@ function tf_menu_full ( $atts ) {
         if( $align ) { echo '<div style="clear:' . $align . '"></div><div class="' . $align . ' half-col">';}
 
         // - full-width fallback -
-        if ( is_page_template('page-full.php') || is_page_template('onecolumn-page.php') ) {
-           if( $align == '' ) {echo '<div class="left half-col">';
-           $align = 'left'; // just so that the closing tag is fired
-           }
-        }
+        // is page template doesn't work within shortcode, will need to force an align on "visual shortcodes".
         
         // - currency -
         $fx = null;
