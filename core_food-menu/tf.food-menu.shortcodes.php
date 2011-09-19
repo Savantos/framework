@@ -39,8 +39,9 @@ function tf_menu_full ( $atts ) {
 
         // - full-width fallback -
         if ( is_page_template('page-full.php') || is_page_template('onecolumn-page.php') ) {
-           if( $align == '' ) {echo '<div class="left half-col">';}
+           if( $align == '' ) {echo '<div class="left half-col">';
            $align = 'left'; // just so that the closing tag is fired
+           }
         }
         
         // - currency -
