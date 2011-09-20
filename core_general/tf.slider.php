@@ -367,6 +367,7 @@ function themeforce_slider_display() {
             if ($c == 1 && get_option('tf_mobilebg') == '') {update_option('tf_mobilebg', $image);}
             $c++;
             
+            // **** Theme Specific
             
             if( TF_THEME == 'baseforce' )
                 {
@@ -391,62 +392,58 @@ function themeforce_slider_display() {
                 {
                 if ($type == 'content') 
                     {
-                    $c_s_image = wpthumb( $image, 'width=540&height=300&crop=1', false);
+                    $resized_image_small = wpthumb( $image, 'width=540&height=300&crop=1', false);
                     echo '<li><div class="slidetext">';
                     if ( $title ) {echo '<h3>' . $title . '</h3>';}
                     echo '<p>' . $content . '</p>';
                     if ( $link ) {echo '<a href="' . $link . '"><div class="slidebutton">' . $button . '</div></a>';}
                     echo '</div>';
-                    echo '<div class="slideimage"><img src="' . $c_s_image . '" alt="' . __('Slide', 'themeforce') . '"></div></li>';
+                    echo '<div class="slideimage" style="background:url(' . $resized_image_small . ') no-repeat;" alt="' . __('Slide', 'themeforce') . '"></div></li>';
                 } else {
-                    $c_l_image = wpthumb( $image, 'width=960&height=300&crop=1', false);
-                    echo '<li><div class="slideimage-full"><a href="' . $slink . '"><img src="' . $c_l_image . '" alt="' . __('Slide', 'themeforce') . ' ' . $c . '"></a></div></li>';
+                    echo '<li>';
+                        if ( $link ) {echo '<a href="' . $link . '">';}
+                            $resized_image = wpthumb( $image, 'width=960&height=300&crop=1', false);
+                            echo '<div class="slideimage" style="background:url(' . $resized_image . ') no-repeat;" alt="' . __('Slide', 'themeforce') . '"></div>';
+                        if ( $link ) {echo '</a>';}
+                    echo '</li>';
                     }
                 }
                 
               if( TF_THEME == 'pubforce' )
                 {
-                if ($type == 'content') 
-                    {
-                    $c_s_image = wpthumb( $image, 'width=540&height=300&crop=1', false);
-                    echo '<li><div class="slidetext">';
-                    if ( $title ) {echo '<h3>' . $title . '</h3>';}
-                    echo '<p>' . $content . '</p>';
-                    if ( $link ) {echo '<a href="' . $link . '"><div class="slidebutton">' . $button . '</div></a>';}
-                    echo '</div>';
-                    echo '<div class="slideimage" style="background:url(' . $c_s_image . ') no-repeat;" alt="' . __('Slide', 'themeforce') . '"></div></li>';
-                } else {
-                    $c_l_image = wpthumb( $image, 'width=540&height=300&crop=1', false);
-                    echo '<li><div class="slideimage" style="background:url(' . $c_l_image . ') no-repeat;" alt="' . __('Slide', 'themeforce') . '"></div></li>';
-                    }
+                    echo '<li>';
+                        if ( $link ) {echo '<a href="' . $link . '">';}
+                            $resized_image = wpthumb( $image, 'width=540&height=300&crop=1', false);
+                            echo '<div class="slideimage" style="background:url(' . $resized_image . ') no-repeat;" alt="' . __('Slide', 'themeforce') . '"></div>';
+                        if ( $link ) {echo '</a>';}
+                    echo '</li>';
                 }   
                 
               if( TF_THEME == 'fineforce' )
                 {
                     echo '<li>';
                         if ( $link ) {echo '<a href="' . $link . '">';}
-                            $c_l_image = wpthumb( $image, 'width=1000&height=250&crop=1', false);
-                            echo '<div class="slideimage" style="background:url(' . $c_l_image . ') no-repeat;" alt="' . __('Slide', 'themeforce') . '"></div>';
+                            $resized_image = wpthumb( $image, 'width=1000&height=250&crop=1', false);
+                            echo '<div class="slideimage" style="background:url(' . $resized_image . ') no-repeat;" alt="' . __('Slide', 'themeforce') . '"></div>';
                         if ( $link ) {echo '</a>';}
                     echo '</li>';
-                    
                 }   
-             
                 
              // fallback check   
              $emptycheck[] = $image;   
                     
         endwhile;
         
+        // **** Theme Specific
         // fallback functions when no slides exist
         
         if ( $emptycheck == '' ) {
             
             if( TF_THEME == 'chowforce' ) {
-                echo '<li><div class="slideimage" style="background:url(' . get_bloginfo('template_url') . '/images/defaults/slide1.jpg) no-repeat;" alt="Slide"></li>';
-                echo '<li><div class="slideimage" style="background:url(' . get_bloginfo('template_url') . '/images/defaults/slide2.jpg) no-repeat;" alt="Slide"></li>';
-                echo '<li><div class="slideimage" style="background:url(' . get_bloginfo('template_url') . '/images/defaults/slide3.jpg) no-repeat;" alt="Slide"></li>';
-                echo '<li><div class="slideimage" style="background:url(' . get_bloginfo('template_url') . '/images/defaults/slide4.jpg) no-repeat;" alt="Slide"></li>';
+                echo '<li><div class="slideimage-full" style="background:url(' . get_bloginfo('template_url') . '/images/defaults/slide1.jpg) no-repeat;" alt="Slide"></li>';
+                echo '<li><div class="slidetext"><h3>Yelp Integration</h3><p>Want to show off your Yelp rating? That\'s no problem. If you\'re not in a Yelp country, but use Qype instead, that works too! Just add your API and you\'ll be all set.</p></div><div class="slideimage" style="background:url(' . get_bloginfo('template_url') . '/images/defaults/slide2.jpg) no-repeat;" alt="Slide"></li>';
+                echo '<li><div class="slidetext"><h3>No more PDF Menus</h3><p>With our designs, search engines will recognize your food menus and visitors won\'t have to download any PDF\'s or otherwise.</p></div><div class="slideimage" style="background:url(' . get_bloginfo('template_url') . '/images/defaults/slide3.jpg) no-repeat;" alt="Slide"></li>';
+                echo '<li><div class="slidetext"><h3>Foursquare Integration</h3><p>Display your Foursquare Photos & Tips without any problem. You can do similar things with Gowalla. All you need to do is sign-up for an API Key & enter it (everyone gets one and it takes 2 minutes).</p></div><div class="slideimage" style="background:url(' . get_bloginfo('template_url') . '/images/defaults/slide4.jpg) no-repeat;" alt="Slide"></li>';
             }           
             
             if( TF_THEME == 'pubforce' ) {
