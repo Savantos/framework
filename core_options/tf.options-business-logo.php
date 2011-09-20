@@ -38,7 +38,7 @@ function themeforce_logo_page() {
 	// new 3.2.2					
 	 array( "name" => "Logo",
                 "desc" => "Your business logo (choose from an array of formats .JPG, .GIF, .PNG)",
-                "id" => $shortname."_mobilebg",
+                "id" => $shortname."_logo",
                 "std" => "",
                 "type" => "image"),
 		
