@@ -266,9 +266,11 @@ if ( ! function_exists( 'tf_optionsframework_mlu_js_popup' ) ) {
 		// Change the text of the "Insert into Post" buttons to read "Use this File".
 		$( '.savesend input.button[value*="Insert into Post"], .media-item #go_button' ).attr( 'value', 'Use this File' );
 		
-		// Select the FUll Size option in Size Options (as it's hidden)
-		$( '.image-size input[value="full"]' ).attr('checked', true);
-		
+		setInterval( function() {		
+			// Select the FUll Size option in Size Options (as it's hidden)
+			$( '.image-size input[value="full"]' ).attr('checked', true);
+		}, 500 );
+
 		// Hide the "Insert Gallery" settings box on the "Gallery" tab.
 		$( 'div#gallery-settings' ).hide();
 		
