@@ -438,7 +438,7 @@ function themeforce_slider_display() {
                     
         endwhile;
         
-        // fallback functions
+        // fallback functions when no slides exist
         
         if ( $emptycheck == '' ) {
             
