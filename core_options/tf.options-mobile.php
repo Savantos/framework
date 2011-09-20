@@ -70,8 +70,8 @@ function themeforce_mobile_page() {
          <div style="clear:both;"></div>
     </form>
         <div id="tf-tip">
-            <h3>Why is a MailChimp Newsletter important?</h3>
-            <p>A newsletter allows you to <strong>automatically</strong> keep in touch with your customer base, updating them on the latest news & events. You can set your newsletter to automatically send off your events on a weekly or monthly basis.</p>
+            <h3>Why is Mobile important?</h3>
+            <p>We've specifically tailored our mobile site to not only load faster, but also be easier to use on smaller screens, increasing the chance of engaging a user positively. Just whip out your mobile and give it a try!</p>
         </div>    
     </div>
     <?php

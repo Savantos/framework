@@ -417,33 +417,44 @@ function themeforce_slider_display() {
                     echo '<div class="slideimage" style="background:url(' . $c_s_image . ') no-repeat;" alt="' . __('Slide', 'themeforce') . '"></div></li>';
                 } else {
                     $c_l_image = wpthumb( $image, 'width=540&height=300&crop=1', false);
-                    echo '<li><div class="slideimage" style="background:url(' . $c_l_image . ') no-repeat;" alt="' . __('Slide', 'themeforce') . '"></div></a></li>';
+                    echo '<li><div class="slideimage" style="background:url(' . $c_l_image . ') no-repeat;" alt="' . __('Slide', 'themeforce') . '"></div></li>';
                     }
                 }   
                 
-             /*   
-             if( TF_THEME == 'pubforce' )
+              if( TF_THEME == 'fineforce' )
                 {
-                $p_image = wpthumb( $image, 'width=520&height=303&crop=1', false);
-                if($link) { echo '<a href="' . $link . '">'; }
-                echo '<img src="' . $p_image . '" alt="' . __('Slide', 'themeforce') . '"';
-                if($title) { echo ' title="'. $title . '"'; }
-                echo ' />';
-                if($link) { echo '</a>'; }
-                }
+                    echo '<li>';
+                        if ( $link ) {echo '<a href="' . $link . '">';}
+                            $c_l_image = wpthumb( $image, 'width=1000&height=250&crop=1', false);
+                            echo '<div class="slideimage" style="background:url(' . $c_l_image . ') no-repeat;" alt="' . __('Slide', 'themeforce') . '"></div>';
+                        if ( $link ) {echo '</a>';}
+                    echo '</li>';
+                    
+                }   
+             
                 
-              * 
-              */
-             if( TF_THEME == 'fineforce' )
-                {
-                $p_image = wpthumb( $image, 'width=1000&height=250&crop=1', false);
-                if($link) { echo '<a href="' . $link . '">'; }
-                echo '<img src="' . $p_image . '" alt="' . __('Slide', 'themeforce') . '"';
-                echo ' />';
-                if($link) { echo '</a>'; }
-                }     
-                
+             // fallback check   
+             $emptycheck[] = $image;   
+                    
         endwhile;
+        
+        // fallback functions when no slides exist
+        
+        if ( $emptycheck == '' ) {
+            
+            if( TF_THEME == 'pubforce' ) {
+                echo '<li><div class="slideimage" style="background:url(' . get_bloginfo('template_url') . '/images/defaults/slide1.jpg) no-repeat;" alt="Slide"></li>';
+                echo '<li><div class="slideimage" style="background:url(' . get_bloginfo('template_url') . '/images/defaults/slide2.jpg) no-repeat;" alt="Slide"></li>';
+                echo '<li><div class="slideimage" style="background:url(' . get_bloginfo('template_url') . '/images/defaults/slide3.jpg) no-repeat;" alt="Slide"></li>';
+            }
+            
+            if( TF_THEME == 'fineforce' ) {
+                echo '<li><div class="slideimage" style="background:url(' . get_bloginfo('template_url') . '/images/default_food_1.jpg) no-repeat;" alt="Slide"></li>';
+                echo '<li><div class="slideimage" style="background:url(' . get_bloginfo('template_url') . '/images/default_food_2.jpg) no-repeat;" alt="Slide"></li>';
+                echo '<li><div class="slideimage" style="background:url(' . get_bloginfo('template_url') . '/images/default_food_3.jpg) no-repeat;" alt="Slide"></li>';
+            }
+            
+            }
 
         }
 ?>

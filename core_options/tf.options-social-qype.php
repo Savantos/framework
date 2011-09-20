@@ -42,7 +42,7 @@ function themeforce_social_qype_page() {
 	
 	array( 
 		"name" => "API Key",
-		"desc" => "Required for Qype Button  <a target='_blank' href='http://www.qype.com/developers/getting_started/api_overview'>Get it from here (qype API)</a>",
+		"desc" => "Required for Qype Button  <a target='_blank' href='http://www.qype.co.uk/api_consumers'>Get it from here (qype API)</a>",
 		"id" => "tf_qype_api_key",
 		"std" => "",
 		"type" => "text"
