@@ -442,6 +442,12 @@ function themeforce_slider_display() {
         
         if ( $emptycheck == '' ) {
             
+            if( TF_THEME == 'pubforce' ) {
+                echo '<li><div class="slideimage" style="background:url(' . get_bloginfo('template_url') . '/images/defaults/slide1.jpg) no-repeat;" alt="Slide"></li>';
+                echo '<li><div class="slideimage" style="background:url(' . get_bloginfo('template_url') . '/images/defaults/slide2.jpg) no-repeat;" alt="Slide"></li>';
+                echo '<li><div class="slideimage" style="background:url(' . get_bloginfo('template_url') . '/images/defaults/slide3.jpg) no-repeat;" alt="Slide"></li>';
+            }
+            
             if( TF_THEME == 'fineforce' ) {
                 echo '<li><div class="slideimage" style="background:url(' . get_bloginfo('template_url') . '/images/default_food_1.jpg) no-repeat;" alt="Slide"></li>';
                 echo '<li><div class="slideimage" style="background:url(' . get_bloginfo('template_url') . '/images/default_food_2.jpg) no-repeat;" alt="Slide"></li>';
