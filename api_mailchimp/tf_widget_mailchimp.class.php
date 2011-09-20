@@ -30,7 +30,7 @@ class TF_Widget_MailChimp extends WP_Widget {
 		
 		$widget_options = array('classname' => 'widget_tf_mailchimp', 'description' => __( "Displays a sign-up form for a MailChimp mailing list.", 'themeforce'));
 		
-		$this->WP_Widget('tf_widget_mailchimp', __('MailChimp List Signup', 'themeforce'), $widget_options);
+		$this->WP_Widget('tf_widget_mailchimp', __('Newsletter (MailChimp)', 'themeforce'), $widget_options);
 		
 		$this->tf_mc_plugin = TF_MC_Plugin::get_instance();
 		
@@ -61,11 +61,11 @@ class TF_Widget_MailChimp extends WP_Widget {
 	public function form ($instance) {
 		
 		$mcapi = $this->tf_mc_plugin->get_mcapi();
-		
+                
 		if (false != $mcapi) {
 			
-			$this->lists = $mcapi->lists();
-			
+			$this->lists = $mcapi->lists();                       
+                        
 			$defaults = array(
 
 				'failure_message' => $this->default_failure_message,
