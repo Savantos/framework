@@ -47,7 +47,7 @@ function themeforce_social_overview_page() {
             <li>59% of users search for a local business at least once a week</li>
             <li>86% of users check-in at least once a day.</li>
         </ul>
-        <div class="social-box tf-settings-wrap"><span>Use Foursquare to <strong>display your Guest Photos & Tips</strong> </span><a href="<?php echo get_admin_url() . 'admin.php?page=themeforce_qype'; ?>"><div class="tf-button">Go to your Foursquare Settings</div></a></div>
+        <div class="social-box tf-settings-wrap"><span>Use Foursquare to <strong>display your Guest Photos & Tips</strong> </span><a href="<?php echo get_admin_url() . 'admin.php?page=themeforce_foursquare'; ?>"><div class="tf-button">Go to your Foursquare Settings</div></a></div>
         <div class="clearfix"></div>
         <!-- GOWALLA -->
         <img src="<?php echo get_bloginfo('template_url').'/themeforce/assets/images/social_gowalla.jpg'; ?>" />
