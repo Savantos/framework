@@ -403,7 +403,7 @@ function themeforce_slider_display() {
                     echo '<li>';
                         if ( $link ) {echo '<a href="' . $link . '">';}
                             $resized_image = wpthumb( $image, 'width=960&height=300&crop=1', false);
-                            echo '<div class="slideimage" style="background:url(' . $resized_image . ') no-repeat;" alt="' . __('Slide', 'themeforce') . '"></div>';
+                            echo '<div class="slideimage-full" style="background:url(' . $resized_image . ') no-repeat;" alt="' . __('Slide', 'themeforce') . '"></div>';
                         if ( $link ) {echo '</a>';}
                     echo '</li>';
                     }
