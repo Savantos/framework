@@ -393,23 +393,11 @@ function tf_food_menu_register_tinymce_buttons() {
 		( isset( $_GET['post_type'] ) && !in_array( $_GET['post_type'], array( 'post', 'page' ) ) ) )
 		return;
 	
-	add_filter( 'mce_buttons', 'tf_food_menu_add_tinymce_buttons' );
 	add_filter( 'mce_external_plugins', 'tf_food_menu_add_tinymce_plugins' );
 }
 add_action( 'load-post.php', 'tf_food_menu_register_tinymce_buttons' );
 add_action( 'load-post-new.php', 'tf_food_menu_register_tinymce_buttons' );
 
-/**
- * Adds the Food Menu tinyMCE button.
- * 
- * @param array $buttons
- * @return array
- */
-function tf_food_menu_add_tinymce_buttons( $buttons ) {
-	array_push( $buttons, '', "tf_food_menu_shortcode_plugin" );
-
-	return $buttons;
-}
 
 /**
  * Adds the Insert Shortcode tinyMCE plugin for the food menu.
@@ -422,3 +410,31 @@ function tf_food_menu_add_tinymce_plugins( $plugin_array ) {
 	
 	return $plugin_array;
 }
+
+
+function tf_food_menu_add_insert_bar_to_edit_page() {
+	?>
+	
+	<div id="tf-above-editor-insert-area">
+		
+		<style type="text/css">
+			#tf-above-editor-insert-area { padding:2px 10px; border: 1px solid #e3e3e3; background: #f3f3f3; border-radius:5px; line-height: 32px; font-size: 11.5px; min-height:32px; clear:both; margin-bottom: 15px;  }
+			#tf-above-editor-insert-area a { color: #666; text-decoration: none; margin-left: 15px; }
+			#tf-above-editor-insert-area a.button { border-radius: 3px; padding-left: 4px; }
+			#tf-above-editor-insert-area img { vertical-align: middle; margin-right: 5px; }
+		</style>
+	
+		<strong>Insert:</strong>
+		
+		<a class="button" href="javascript:tinyMCE.activeEditor.execCommand('mceExecTFFoodMenuInsertShortcode'); return false;"><img src="<?php echo TF_URL . '/core_food-menu/tinymce_plugins/food_20.png' ?>"/>Food Menu</a>
+		
+		<script type="text/javascript">
+			jQuery( document ).ready( function() {
+				jQuery( '#tf-above-editor-insert-area' ).insertBefore( '#postdivrich' );
+			} );  
+		</script>
+	</div>
+	
+	<?php
+}
+add_action( 'edit_page_form', 'tf_food_menu_add_insert_bar_to_edit_page' );

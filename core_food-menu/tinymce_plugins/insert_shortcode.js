@@ -169,7 +169,7 @@
 
 				if ( el.nodeName == 'INPUT' && ed.dom.hasClass(el, 'tfFoodMenuShortcode') ) {
 					ed.dom.remove(el);
-					DOM.hide('tf_foodmenu_btns');
+					tinymce.DOM.hide('tf_foodmenu_btns');
 					ed.execCommand('mceRepaint');
 					return false;
 				}
@@ -194,7 +194,7 @@
 				return '';
 			};
 			
-			args.id = getAttr( shortcode, 'id' );
+			args.id = getAttr( shortcode, 'id' ) ? getAttr( shortcode, 'id' ) : 'All';
 			args.align = getAttr( shortcode, 'align' ) ? getAttr( shortcode, 'align' ) : 'none';
 			args.type = new RegExp('\\[tf-menu-([^ ]+)', 'g').exec(shortcode);
 			
