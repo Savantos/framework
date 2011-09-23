@@ -84,8 +84,8 @@ add_action( 'init', 'create_foodmenucategory_taxonomy', 0 );
 
 // 3. Show Columns
 
-add_filter ("manage_edit-tf_foodmenu_columns", "tf_foodmenu_edit_columns");
-add_action ("manage_posts_custom_column", "tf_foodmenu_custom_columns");
+add_filter( "manage_edit-tf_foodmenu_columns", "tf_foodmenu_edit_columns" );
+add_action( "manage_posts_custom_column", "tf_foodmenu_custom_columns" );
 
 function tf_foodmenu_edit_columns($columns) {
 
@@ -103,8 +103,7 @@ function tf_foodmenu_edit_columns($columns) {
  	return $columns;
 }
 
-function tf_foodmenu_custom_columns($column)
-{
+function tf_foodmenu_custom_columns($column) {
 	global $post;
 	$custom = get_post_custom();
 	switch ($column) {

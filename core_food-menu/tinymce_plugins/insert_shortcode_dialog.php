@@ -173,6 +173,10 @@ wp_admin_css( 'colors-fresh', true );
 				tinyMCE.execInstanceCommand("content","mceInsertContent",false,shortcode);
 			}
 			
+			function getWin() {
+				return window.dialogArguments || opener || parent || top;
+			}
+			
 			jQuery( document ).ready( function() {
 				jQuery( "#tf_menu_shortcode_form" ).submit( function() {
 					sendShortcodeToEditor();
@@ -186,9 +190,9 @@ wp_admin_css( 'colors-fresh', true );
 			<p class="split-column">
 				<label>Menu Type</label><br />
 				<select name="tf_food_menu_type">
-					<option value="full">Full</option>
-					<option value="list">List</option>
-					<option value="short">Short</option>
+					<option <?php selected( isset( $_GET['type'] ) && $_GET['type'] == 'full' ) ?> value="full">Full</option>
+					<option <?php selected( isset( $_GET['type'] ) && $_GET['type'] == 'list' ) ?> value="list">List</option>
+					<option <?php selected( isset( $_GET['type'] ) && $_GET['type'] == 'short' ) ?> value="short">Short</option>
 				</select>
 			</p>
 			<p class="split-column">
@@ -196,7 +200,7 @@ wp_admin_css( 'colors-fresh', true );
 				<select name="tf_foodmenucat">
 					<option value="">All</option>
 					<?php foreach( get_terms( 'tf_foodmenucat' ) as $term ) : ?>
-						<option value="<?php echo $term->slug ?>"><?php echo $term->name ?></option>
+						<option <?php selected( isset( $_GET['id'] ) && ( $_GET['id'] == $term->slug || $_GET['id'] == $term->name ) ) ?>  value="<?php echo $term->name ?>"><?php echo $term->name ?></option>
 					<?php endforeach; ?>
 				</select>
 			</p>
@@ -206,8 +210,8 @@ wp_admin_css( 'colors-fresh', true );
 				<label>Align (Only for Full Width)</label><br />
 				<select name="tf_food_menu_align">
 					<option value="">None</option>
-					<option value="left">Left</option>
-					<option value="right">Right</option>
+					<option <?php selected( isset( $_GET['align'] ) && $_GET['align'] == 'left' ) ?> value="left">Left</option>
+					<option <?php selected( isset( $_GET['align'] ) && $_GET['align'] == 'right' ) ?> value="right">Right</option>
 				</select>
 			</p>
 			<?php } ?>
