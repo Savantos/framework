@@ -6,7 +6,7 @@ header('Content-Type: text/html; charset=' . get_bloginfo( 'charset') );
 <html xmlns="http://www.w3.org/1999/xhtml" <?php language_attributes(); ?>>
 <head>
 <meta http-equiv="Content-Type" content="<?php bloginfo( 'html_type' ); ?>; charset=<?php echo get_option( 'blog_charset' ); ?>" />
-<title><?php _e('Insert Food Menu') ?></title>
+<title><?php _e('Insert Events') ?></title>
 <script type="text/javascript" src="<?php bloginfo( 'url' )?>/wp-includes/js/tinymce/tiny_mce_popup.js?ver=342"></script>
 <script type="text/javascript" src="<?php bloginfo( 'url' )?>/wp-includes/js/jquery/jquery.js"></script>
 <?php
@@ -153,23 +153,23 @@ wp_admin_css( 'colors-fresh', true );
 		
 		<script type="text/javascript">
 			function sendShortcodeToEditor() {
-				var shortcode = "[tf-menu-";
+				var shortcode = "[tf-events-";
 				
 				//shortcode type				
-				shortcode += jQuery( '#tf_menu_shortcode_form select[name="tf_food_menu_type"]' ).val();
+				shortcode += jQuery( '#tf_events_shortcode_form select[name="tf_events_type"]' ).val();
 				
-				if( jQuery( '#tf_menu_shortcode_form select[name="tf_foodmenucat"]' ).val() > '') {
-					shortcode += " id='" + jQuery( '#tf_menu_shortcode_form select[name="tf_foodmenucat"]' ).val() + "'"
+				if( jQuery( '#tf_events_shortcode_form select[name="tf_eventscat"]' ).val() > '') {
+					shortcode += " group='" + jQuery( '#tf_events_shortcode_form select[name="tf_eventscat"]' ).val() + "'"
 				}
 				
-				if( jQuery( '#tf_menu_shortcode_form select[name="tf_food_menu_align"]' ).val() > '' ) {
-					shortcode += " align='" + jQuery('#tf_menu_shortcode_form select[name="tf_food_menu_align"]' ).val() + "'";
+				if( jQuery( '#tf_events_shortcode_form select[name="tf_events_limit"]' ).val() > '') {
+					shortcode += " limit='" + jQuery( '#tf_events_shortcode_form select[name="tf_events_limit"]' ).val() + "'"
 				}
 				
-				shortcode += jQuery( '#tf_menu_shortcode_form input[name="tf_food_menu_show_titles"]' ).is( ":checked" ) ? " header='yes'" : " header='no'";
+				shortcode += jQuery( '#tf_events_shortcode_form input[name="tf_events_show_titles"]' ).is( ":checked" ) ? " header='yes'" : " header='no'";
 				
 				shortcode += "]";
-				
+
 				tinyMCE.execInstanceCommand( "content", "mceInsertContent", false, shortcode );
 			}
 			
@@ -178,46 +178,43 @@ wp_admin_css( 'colors-fresh', true );
 			}
 			
 			jQuery( document ).ready( function() {
-				jQuery( "#tf_menu_shortcode_form" ).submit( function() {
+				jQuery( "#tf_events_shortcode_form" ).submit( function() {
 					sendShortcodeToEditor();
 					
 					tinyMCEPopup.close();
 				} );
-				
 			} );
 		</script>
-		<form id="tf_menu_shortcode_form">
+		<form id="tf_events_shortcode_form">
 			<p class="split-column">
 				<label>Menu Type</label><br />
-				<select name="tf_food_menu_type">
+				<select name="tf_events_type">
 					<option <?php selected( isset( $_GET['type'] ) && $_GET['type'] == 'full' ) ?> value="full">Full</option>
-					<option <?php selected( isset( $_GET['type'] ) && $_GET['type'] == 'list' ) ?> value="list">List</option>
-					<option <?php selected( isset( $_GET['type'] ) && $_GET['type'] == 'short' ) ?> value="short">Short</option>
+					<option <?php selected( isset( $_GET['type'] ) && $_GET['type'] == 'feat' ) ?> value="feat">Featured</option>
 				</select>
 			</p>
 			<p class="split-column">
-				<label>Food Menu Category</label><br />
-				<select name="tf_foodmenucat">
+				<label>Events Category</label><br />
+				<select name="tf_eventscat">
 					<option value="">All</option>
-					<?php foreach( get_terms( 'tf_foodmenucat' ) as $term ) : ?>
-						<option <?php selected( isset( $_GET['id'] ) && ( $_GET['id'] == $term->slug || $_GET['id'] == $term->name ) ) ?>  value="<?php echo $term->name ?>"><?php echo $term->name ?></option>
+					<?php foreach( get_terms( 'tf_eventcategory' ) as $term ) : ?>
+						<option <?php selected( isset( $_GET['group'] ) && ( $_GET['group'] == $term->slug || $_GET['group'] == $term->name ) ) ?>  value="<?php echo $term->name ?>"><?php echo $term->name ?></option>
 					<?php endforeach; ?>
 				</select>
 			</p>
 			
-			<?php if( get_current_theme() != 'Pubforce' ) { ?>
 			<p class="split-column">
-				<label>Align (Only for Full Width)</label><br />
-				<select name="tf_food_menu_align">
-					<option value="">None</option>
-					<option <?php selected( isset( $_GET['align'] ) && $_GET['align'] == 'left' ) ?> value="left">Left</option>
-					<option <?php selected( isset( $_GET['align'] ) && $_GET['align'] == 'right' ) ?> value="right">Right</option>
+				<label>Limit</label><br />
+				<select name="tf_events_limit">
+					<option value="">No Limit</option>
+					<?php while( $i < 20 ) : $i++; ?>
+						<option <?php selected( isset( $_GET['limit'] ) && ( $_GET['limit'] == $i ) ) ?>  value="<?php echo $i ?>"><?php echo $i ?></option>
+					<?php  endwhile; ?>
 				</select>
 			</p>
-			<?php } ?>
 			
 			<p class="clear">
-				<label><input type="checkbox" name="tf_food_menu_show_titles" <?php checked( 'yes', isset( $_GET['showHeader'] ) ? $_GET['showHeader'] : 'yes' ) ?> /> Show Category Headers</label>
+				<label><input type="checkbox" name="tf_events_show_titles" <?php checked( 'yes', isset( $_GET['showHeader'] ) ? $_GET['showHeader'] : 'yes' ) ?> /> Show Category Headers</label>
 			</p>
 			
 			<p class="submitbox" style="margin-top:15px;">

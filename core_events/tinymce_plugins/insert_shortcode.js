@@ -3,7 +3,7 @@
 	
 	var t = this;
 	
-	tinymce.create('tinymce.plugins.tf_food_menu_shortcode_plugin', {
+	tinymce.create('tinymce.plugins.tf_events_shortcode_plugin', {
 		/**
 		 * Initializes the plugin, this will be executed after the plugin has been created.
 		 * This call is done before the editor instance has finished it's initialization so use the onInit event
@@ -21,7 +21,7 @@
 			t._createButtons();
 			
 			// Register the command so that it can be invoked by using tinyMCE.activeEditor.execCommand('mceExample');
-			ed.addCommand('mceExecTFFoodMenuInsertShortcode', function() {
+			ed.addCommand('mceExecTFEventsInsertShortcode', function() {
 				
 				if( typeof( t.activeShortcode ) !== 'undefined' && t.activeShortcode > '' )
 					var args = t._parseShortcode( t.activeShortcode );
@@ -42,35 +42,27 @@
 				});
 			});
 			
-			// Register example button
-			ed.addButton('tf_food_menu_shortcode_plugin', {
-				title : 'Insert Food Menu',
-				cmd : 'mceExecTFFoodMenuInsertShortcode',
-				image : url + '/food_20.png'
-			});
-
-			
 			ed.onMouseDown.add(function(ed, e) {
 			
-				if ( e.target.nodeName == 'INPUT' && ed.dom.hasClass(e.target, 'tfFoodMenuShortcode') ) {
-					ed.plugins.wordpress._showButtons(e.target, 'tf_foodmenu_btns');
+				if ( e.target.nodeName == 'INPUT' && ed.dom.hasClass(e.target, 'tfEventsShortcode') ) {
+					ed.plugins.wordpress._showButtons(e.target, 'tf_events_btns');
 					
 					ed.selection.select(e.target);
 					
 				} else {
-					tinymce.DOM.hide('tf_foodmenu_btns');
+					tinymce.DOM.hide('tf_events_btns');
 				}
 								
 								
 			});
 			
 			ed.onBeforeSetContent.add(function(ed, o) {
-				o.content = t._do_foodmenu_shortcode_image_replace(o.content);
+				o.content = t._do_events_shortcode_image_replace(o.content);
 			});
 			
 			ed.onPostProcess.add(function(ed, o) {
 				if (o.get)
-					o.content = t._do_foodmenu_shortcode_from_content(o.content);
+					o.content = t._do_events_shortcode_from_content(o.content);
 			});
 			
 			ed.onExecCommand.add(function(ed, cmd, ui, val) {
@@ -81,19 +73,19 @@
 			} );
 			
 			ed.onChange.add(function(ed, l) {
-				tinymce.DOM.hide('tf_foodmenu_btns');
+				tinymce.DOM.hide('tf_events_btns');
 			} );
 			
 		},
 		
-		_do_foodmenu_shortcode_from_content : function(co) {
+		_do_events_shortcode_from_content : function(co) {
 			
 			function getAttr(s, n) {
 				n = new RegExp(n + '=\"([^\"]+)\"', 'g').exec(s);
 				return n ? tinymce.DOM.decode(n[1]) : '';
 			};
 			
-			return co.replace(/<input class="tfFoodMenuShortcode([^\/]*?)\/>/g, function(a,b){
+			return co.replace(/<input class="tfEventsShortcode([^\/]*?)\/>/g, function(a,b){
 				var shortcode = getAttr( a, 'data-shortcode' ).replace( /&quot;/g, '"' );
 				shortcode = shortcode.replace( '_tf_', 'tf-' );
 				return shortcode;
@@ -101,9 +93,9 @@
 			
 		},
 		
-		_do_foodmenu_shortcode_image_replace : function(co) {
+		_do_events_shortcode_image_replace : function(co) {
 		
-			return co.replace(/(\[tf-menu-([^\]]*)\])/g, function(a,b) {
+			return co.replace(/(\[tf-events-([^\]]*)\])/g, function(a,b) {
 				
 				var args = t._parseShortcode( b );
 				var style = '';
@@ -118,7 +110,7 @@
 				else
 					style = 'clear:both; width:100%;'
 
-				return '<input type="button" class="tfFoodMenuShortcode" data-shortcode="'+encodedShortode+'" style="' + style + '" value="Food Menu '+ args.type + ': ' + args.id + '" />';
+				return '<input type="button" class="tfEventsShortcode" data-shortcode="'+encodedShortode+'" style="' + style + '" value="Events '+ args.type + ': ' + args.group + '" />';
 			});
 		
 		},
@@ -129,19 +121,19 @@
 
 			//DOM.remove('wp_gallerybtns');
 			DOM.remove('wp_editbtns');
-			DOM.remove('tf_foodmenu_btns');
+			DOM.remove('tf_events_btns');
 			
 			DOM.add(document.body, 'div', {
-				id : 'tf_foodmenu_btns',
+				id : 'tf_events_btns',
 				style : 'display:none;position:absolute;'
 			});
 
-			editButton = DOM.add('tf_foodmenu_btns', 'img', {
-				src : t.url+'/food_20.png',
-				id : 'tf_foodmenu_btn_edit',
+			editButton = DOM.add('tf_events_btns', 'img', {
+				src : t.url+'/event_16.png',
+				id : 'tf_events_btn_edit',
 				width : '20',
 				height : '20',
-				title : "Edit Food Menu",
+				title : "Edit Events",
 				style: 'background: #fff; padding: 2px; border-radius:3px; border: 1px solid #999; margin-right: 5px;'
 			});
 
@@ -151,15 +143,15 @@
 				
 				t.activeShortcode = tinyMCE.activeEditor.selection.getContent()
 								
-				ed.execCommand("mceExecTFFoodMenuInsertShortcode");
+				ed.execCommand("mceExecTFEventsInsertShortcode");
 			});
 
-			dellButton = DOM.add('tf_foodmenu_btns', 'img', {
+			dellButton = DOM.add('tf_events_btns', 'img', {
 				src : t.url+'/img/delete.png',
-				id : 'tf_foodmenu_btn_del',
+				id : 'tf_events_btn_del',
 				width : '20',
 				height : '20',
-				title : ed.getLang('wordpress.delgallery'),
+				title : 'Delete Event Shortcode',
 				style: 'background: #fff; padding: 2px; border-radius:3px; border: 1px solid #999;'
 
 			});
@@ -167,9 +159,9 @@
 			tinymce.dom.Event.add(dellButton, 'mousedown', function(e) {
 				var ed = tinyMCE.activeEditor, el = ed.selection.getNode();
 
-				if ( el.nodeName == 'INPUT' && ed.dom.hasClass(el, 'tfFoodMenuShortcode') ) {
+				if ( el.nodeName == 'INPUT' && ed.dom.hasClass(el, 'tfEventsShortcode') ) {
 					ed.dom.remove(el);
-					tinymce.DOM.hide('tf_foodmenu_btns');
+					tinymce.DOM.hide('tf_events_btns');
 					ed.execCommand('mceRepaint');
 					return false;
 				}
@@ -194,11 +186,11 @@
 				return '';
 			};
 			
-			args.id = getAttr( shortcode, 'id' ) ? getAttr( shortcode, 'id' ) : 'All';
-			args.align = getAttr( shortcode, 'align' ) ? getAttr( shortcode, 'align' ) : 'none';
-			args.type = new RegExp('\\[tf-menu-([^ ]+)', 'g').exec(shortcode);
+			args.group = getAttr( shortcode, 'group' ) ? getAttr( shortcode, 'group' ) : 'All';
+			args.limit = getAttr( shortcode, 'limit' ) ? getAttr( shortcode, 'limit' ) : 'No Limit';
+			args.type = new RegExp('\\[tf-events-([^ ]+)', 'g').exec(shortcode);
 			args.showHeader = getAttr( shortcode, 'header' ) ? getAttr( shortcode, 'header' ) : 'no';
-
+			
 			if( !args.type )
 				args.type = 'full';
 			else
@@ -215,7 +207,7 @@
 		 */
 		getInfo : function() {
 			return {
-			        longname : 'ThemeForce Food Menu Shortcode',
+			        longname : 'ThemeForce Events Shortcode',
 			        author : 'ThemeForce',
 			        authorurl : 'http://theme-force.com',
 			        infourl : 'http://wiki.moxiecode.com/index.php/TinyMCE:Plugins/example',
@@ -225,6 +217,6 @@
 	});
 	
 	// Register plugin
-	tinymce.PluginManager.add('tf_food_menu_shortcode_plugin', tinymce.plugins.tf_food_menu_shortcode_plugin);
+	tinymce.PluginManager.add('tf_events_shortcode_plugin', tinymce.plugins.tf_events_shortcode_plugin);
 
 })();

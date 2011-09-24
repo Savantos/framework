@@ -272,4 +272,38 @@ function tf_events_feat ( $atts ) {
 
 add_shortcode('tf-events-feat', 'tf_events_feat');
 
-?>
+/**
+ * Registers the Insert Shortcode tinymce plugin for Food menu.
+ * 
+ */
+function tf_events_register_tinymce_buttons() {
+	
+	if ( !current_user_can( 'edit_posts' ) || 
+		( isset( $_GET['post'] ) && !in_array( get_post_type( $_GET['post'] ), array( 'post', 'page' ) ) ) || 
+		( isset( $_GET['post_type'] ) && !in_array( $_GET['post_type'], array( 'post', 'page' ) ) ) )
+		return;
+	
+	add_filter( 'mce_external_plugins', 'tf_events_add_tinymce_plugins' );
+}
+add_action( 'load-post.php', 'tf_events_register_tinymce_buttons' );
+add_action( 'load-post-new.php', 'tf_events_register_tinymce_buttons' );
+
+
+/**
+ * Adds the Insert Shortcode tinyMCE plugin for the food menu.
+ * 
+ * @param array $plugin_array
+ * @return array
+ */
+function tf_events_add_tinymce_plugins( $plugin_array ) {
+	$plugin_array['tf_events_shortcode_plugin'] = TF_URL . '/core_events/tinymce_plugins/insert_shortcode.js';
+	
+	return $plugin_array;
+}
+
+function tf_events_add_insert_events_above_editor() {
+	?>
+	<a class="button" href="javascript:tinyMCE.activeEditor.execCommand( 'mceExecTFEventsInsertShortcode' ); return false;"><img src="<?php echo TF_URL . '/core_events/tinymce_plugins/event_16.png' ?>"/>Events</a>
+	<?php
+}
+add_action( 'tf_above_editor_insert_items', 'tf_events_add_insert_events_above_editor' );
