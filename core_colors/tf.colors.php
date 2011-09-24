@@ -22,11 +22,11 @@ require_once( TF_PATH . '/core_colors/colors.inc.php' );
 
 function themeforce_update_logo_colors() {
     
-    if(isset($_POST['grab_logo_colors']) == '1') {
+    if ( isset($_POST['grab_logo_colors'] ) == '1') {
 
-        $logo = get_option('tf_logo');
-        tf_logocolors($logo);
-        wp_redirect(wp_get_referer());
+        $logo = get_option( 'tf_logo' );
+        tf_logocolors( $logo );
+        wp_redirect( wp_get_referer() );
         exit;
         
     }    
@@ -37,11 +37,11 @@ add_action('admin_init', 'themeforce_update_logo_colors');
 
 
 /*
- * tf_logocolors (above) is stored within the individual theme (uses theme options) but calls on tf_dynamiccolors (below)
+ * tf_logocolors ( above ) is stored within the individual theme (uses theme options) but calls on tf_dynamiccolors ( below )
  */
 
 
-function tf_dynamiccolors($colorimage) {
+function tf_dynamiccolors( $colorimage ) {
     
     // Extract Colors
     
@@ -72,8 +72,8 @@ function tf_dynamiccolors($colorimage) {
         // standard
     */
         // echo $colors[0];
-        $s1 = tf_colorpalette($colors[0],'primary');
-        /* $s2 = tf_colorpalette($colors[1],'secondary');
+        $s1 = tf_colorpalette( $colors[0], 'primary' );
+        /* $s2 = tf_colorpalette( $colors[1], 'secondary' );
         $standard = array_merge($s1, $s2); */
         $standard = $s1;
         return $standard;
@@ -92,8 +92,8 @@ function tf_colorpalette($hex, $type) {
 
     // Conversion from Hex to RGB to HSL
 
-    $rgb = _color_unpack($hex,true);
-    $hsl = _color_rgb2hsl($rgb);
+    $rgb = _color_unpack( $hex, true );
+    $hsl = _color_rgb2hsl( $rgb );
     
     // Extract HSL values
     
@@ -106,12 +106,12 @@ function tf_colorpalette($hex, $type) {
     // Create Final Products
     /*
     if ( $type == 'primary' ) {
-        $primary = array('0.3','0.5','0.7');
+        $primary = array( '0.3', '0.5', '0.7' );
         $saturation = '0.4';
         foreach ($primary as $value) {
             $hsl = array ($h, $saturation, $value);
-            $rgb = _color_hsl2rgb($hsl);
-            $color = _color_pack($rgb,true);
+            $rgb = _color_hsl2rgb( $hsl );
+            $color = _color_pack( $rgb, true );
             $colors[] = $color;
             
         }
@@ -120,28 +120,28 @@ function tf_colorpalette($hex, $type) {
     if ( $type == 'primary' ) {
         // Dark    
         $hsl = array ($h, 0.4, 0.2);
-        $rgb = _color_hsl2rgb($hsl);
-        $color = _color_pack($rgb,true);
+        $rgb = _color_hsl2rgb( $hsl );
+        $color = _color_pack( $rgb, true );
         $colors[] = $color;
         // Light
         $hsl = array ($h, 0.4, 0.6);
-        $rgb = _color_hsl2rgb($hsl);
-        $color = _color_pack($rgb,true);
+        $rgb = _color_hsl2rgb( $hsl );
+        $color = _color_pack( $rgb, true );
         $colors[] = $color; 
         // Active
         $hsl = array ($h, 0.6, 0.4);
-        $rgb = _color_hsl2rgb($hsl);
-        $color = _color_pack($rgb,true);
+        $rgb = _color_hsl2rgb( $hsl );
+        $color = _color_pack( $rgb, true );
         $colors[] = $color;
         }
     
     if ( $type == 'secondary' ) {
-        $secondary = array('0.3','0.7');
+        $secondary = array( '0.3', '0.7' );
         $saturation = '1.0';
         foreach ($secondary as $value) {
             $hsl = array ($h, $saturation, $value);
-            $rgb = _color_hsl2rgb($hsl);
-            $color = _color_pack($rgb,true);
+            $rgb = _color_hsl2rgb( $hsl );
+            $color = _color_pack( $rgb, true );
             $colors[] = $color;
         }
     }
@@ -154,47 +154,47 @@ function tf_colorpalette($hex, $type) {
  */ 
 
 function _color_unpack($hex, $normalize = false) { 
-  if (strlen($hex) == 4) { 
+  if ( strlen($hex ) == 4) { 
     $hex = $hex[1] . $hex[1] . $hex[2] . $hex[2] . $hex[3] . $hex[3]; 
   } 
-  $c = hexdec($hex); 
+  $c = hexdec( $hex ); 
   for ($i = 16; $i >= 0; $i -= 8) { 
-    $out[] = number_format((($c >> $i) & 0xFF) / ($normalize ? 255 : 1),'100'); 
+    $out[] = number_format( (($c >> $i) & 0xFF) / ($normalize ? 255 : 1), '100'); 
   } 
   return $out; 
 } 
 
-function _color_rgb2hsl($rgb) { 
+function _color_rgb2hsl( $rgb ) { 
   $r = $rgb[0]; 
   $g = $rgb[1]; 
   $b = $rgb[2]; 
   $min = min($r, min($g, $b)); 
   $max = max($r, max($g, $b)); 
-  $delta = number_format($max - $min,'100'); 
-  $l = number_format((($min + $max) / 2),'100'); 
+  $delta = number_format($max - $min, '100'); 
+  $l = number_format( (($min + $max) / 2), '100'); 
   $s = 0; 
   if ($l > 0 && $l < 1) { 
-    $s = number_format(($delta / ($l < 0.5 ? (2 * $l) : (2 - 2 * $l))),'100'); 
+    $s = number_format( ($delta / ($l < 0.5 ? (2 * $l) : (2 - 2 * $l))), '100'); 
   } 
   $h = 0; 
   if ($delta > 0) { 
-    if ($max == $r && $max != $g) $h += number_format((($g - $b) / $delta),'100'); 
-    if ($max == $g && $max != $b) $h += number_format((2 + ($b - $r) / $delta),'100'); 
-    if ($max == $b && $max != $r) $h += number_format((4 + ($r - $g) / $delta),'100'); 
-    $h = number_format($h/6,'100'); 
+    if ($max == $r && $max != $g) $h += number_format( (($g - $b) / $delta), '100'); 
+    if ($max == $g && $max != $b) $h += number_format( (2 + ($b - $r) / $delta), '100'); 
+    if ($max == $b && $max != $r) $h += number_format( (4 + ($r - $g) / $delta), '100'); 
+    $h = number_format( $h/6, '100' ); 
   } 
   return array($h, $s, $l); 
 } 
 
-function _color_hsl2rgb($hsl) { 
+function _color_hsl2rgb( $hsl ) { 
   $h = $hsl[0]; 
   $s = $hsl[1]; 
   $l = $hsl[2]; 
-  $m2 = number_format(($l <= 0.5) ? $l * ($s + 1) : $l + $s - $l*$s,'100'); 
-  $m1 = number_format($l * 2 - $m2,'100'); 
-  return array(_color_hue2rgb($m1, $m2, $h + (1/3)), 
+  $m2 = number_format( ($l <= 0.5) ? $l * ($s + 1) : $l + $s - $l*$s, '100'); 
+  $m1 = number_format($l * 2 - $m2, '100'); 
+  return array(_color_hue2rgb($m1, $m2, $h + ( 1/3) ), 
                _color_hue2rgb($m1, $m2, $h), 
-               _color_hue2rgb($m1, $m2, $h - (1/3))); 
+               _color_hue2rgb($m1, $m2, $h - ( 1/3)) ); 
 }
 
 /** 
@@ -202,10 +202,10 @@ function _color_hsl2rgb($hsl) {
  */ 
 
 function _color_hue2rgb($m1, $m2, $h) { 
-  $h = number_format(($h < 0) ? $h + 1 : (($h > 1) ? $h - 1 : $h),'100'); 
+  $h = number_format( ($h < 0) ? $h + 1 : ( ($h > 1) ? $h - 1 : $h), '100'); 
   if ($h * 6 < 1) return $m1 + ($m2 - $m1) * $h * 6; 
   if ($h * 2 < 1) return $m2; 
-  if ($h * 3 < 2) return $m1 + ($m2 - $m1) * ((2/3) - $h) * 6; 
+  if ($h * 3 < 2) return $m1 + ($m2 - $m1) * ( (2/3 ) - $h) * 6; 
   return $m1; 
 } 
 
@@ -215,30 +215,30 @@ function _color_hue2rgb($m1, $m2, $h) {
 
 function _color_pack($rgb, $normalize = false) { 
   foreach ($rgb as $k => $v) { 
-    $out |= (($v * ($normalize ? 255 : 1)) << (16 - $k * 8)); 
+    $out |= ( ($v * ($normalize ? 255 : 1)) << (16 - $k * 8)); 
   } 
-  return str_pad(dechex($out), 6, 0, STR_PAD_LEFT); 
+  return str_pad( dechex($out ), 6, 0, STR_PAD_LEFT); 
 } 
 
-/* $testrgb = array(0.2,0.75,0.4); //RGB to start with 
-print_r($testrgb); */ 
+/* $testrgb = array( 0.2, 0.75, 0.4 ); //RGB to start with 
+print_r( $testrgb ); */ 
 
 /*
   print "Hex: "; 
   $testhex = "#C5003E"; 
   print $testhex; 
-  $testhex2rgb = _color_unpack($testhex,true);  
+  $testhex2rgb = _color_unpack( $testhex, true );  
   print "<br />RGB: "; 
-  var_dump($testhex2rgb); 
+  var_dump( $testhex2rgb ); 
   print "<br />HSL color module: "; 
-  $testrgb2hsl = _color_rgb2hsl($testhex2rgb); //Converteren naar HSL 
-  var_dump($testrgb2hsl); 
+  $testrgb2hsl = _color_rgb2hsl( $testhex2rgb ); //Converteren naar HSL 
+  var_dump( $testrgb2hsl ); 
   print "<br />RGB: "; 
-  $testhsl2rgb = _color_hsl2rgb($testrgb2hsl); // En weer terug naar RGB 
-  var_dump($testhsl2rgb); 
+  $testhsl2rgb = _color_hsl2rgb( $testrgb2hsl ); // En weer terug naar RGB 
+  var_dump( $testhsl2rgb ); 
   print "<br />Hex: "; 
-  $testrgb2hex = _color_pack($testhsl2rgb,true); 
-  var_dump($testrgb2hex); 
+  $testrgb2hex = _color_pack( $testhsl2rgb, true ); 
+  var_dump( $testrgb2hex ); 
 */
 
     

@@ -7,7 +7,7 @@
 
 // PUBFORCE
 
-if ( get_option('pubforce_slider_1') != '' ) {
+if ( get_option( 'pubforce_slider_1' ) != '' ) {
 
     $c = 1;
     
@@ -35,21 +35,21 @@ if ( get_option('pubforce_slider_1') != '' ) {
             );
     
         // Create New Slide
-        $post_id = wp_insert_post($new_post);
+        $post_id = wp_insert_post( $new_post );
     
         // Update Meta Data
-        $order_id = intval($post_id)*100;
-        update_post_meta( $post_id,'_tfslider_type', $slidertype);
-        update_post_meta( $post_id,'_tfslider_order', $order_id);
-        update_post_meta( $post_id,'tfslider_image', $imageurl);
+        $order_id = intval( $post_id )*100;
+        update_post_meta( $post_id, '_tfslider_type', $slidertype);
+        update_post_meta( $post_id, '_tfslider_order', $order_id);
+        update_post_meta( $post_id, 'tfslider_image', $imageurl);
         }
     $c++;
     endwhile;
-    update_option('tf_sliderconversion','true');
+    update_option( 'tf_sliderconversion', 'true' );
 }
             
 // CHOWFORCE
-$chowforce = get_option('chowforce_s1_img');        
+$chowforce = get_option( 'chowforce_s1_img' );        
 if ( $chowforce ) {
 
     $c = 1;
@@ -91,24 +91,24 @@ if ( $chowforce ) {
     	        );
     	
     	    // Create New Slide
-    	    $post_id = wp_insert_post($new_post);
+    	    $post_id = wp_insert_post( $new_post );
     	
     	    // Update Meta Data
-    	    $order_id = intval($post_id)*100;
-    	    update_post_meta( $post_id,'_tfslider_type', $slidertype);
-    	    update_post_meta( $post_id,'_tfslider_order', $order_id);
-    	    update_post_meta( $post_id,'tfslider_image', $imageurl);
-    	    if ($link) {update_post_meta( $post_id,'tfslider_link', $link);}
-    	    if ($button) {update_post_meta( $post_id,'tfslider_button', $button);}
+    	    $order_id = intval( $post_id )*100;
+    	    update_post_meta( $post_id, '_tfslider_type', $slidertype);
+    	    update_post_meta( $post_id, '_tfslider_order', $order_id);
+    	    update_post_meta( $post_id, 'tfslider_image', $imageurl);
+    	    if ( $link ) {update_post_meta( $post_id, 'tfslider_link', $link);}
+    	    if ( $button ) {update_post_meta( $post_id, 'tfslider_button', $button);}
     	    }
     	$c++;
     endwhile;
-    update_option('tf_sliderconversion','true');
+    update_option( 'tf_sliderconversion', 'true' );
 }                
 
 // FINEFORCE
 
-if ( get_option('fineforce_slider_1') != '') {
+if ( get_option( 'fineforce_slider_1' ) != '') {
 
     $c = 1;
     
@@ -136,15 +136,15 @@ if ( get_option('fineforce_slider_1') != '') {
     	        );
     	
     	    // Create New Slide
-    	    $post_id = wp_insert_post($new_post);
+    	    $post_id = wp_insert_post( $new_post );
     	
     	    // Update Meta Data
-    	    $order_id = intval($post_id)*100;
-    	    update_post_meta( $post_id,'_tfslider_type', $slidertype);
-    	    update_post_meta( $post_id,'_tfslider_order', $order_id);
-    	    update_post_meta( $post_id,'tfslider_image', $imageurl);
+    	    $order_id = intval( $post_id )*100;
+    	    update_post_meta( $post_id, '_tfslider_type', $slidertype);
+    	    update_post_meta( $post_id, '_tfslider_order', $order_id);
+    	    update_post_meta( $post_id, 'tfslider_image', $imageurl);
     	    }
     	$c++;
     endwhile;
-	update_option('tf_sliderconversion','true');
+	update_option( 'tf_sliderconversion', 'true' );
 }

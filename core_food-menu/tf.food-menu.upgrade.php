@@ -4,7 +4,7 @@ function tf_food_menu_migrate_menu_order_upgrade( $scripts ) {
 	
 	global $wpdb;
 	
-	if( $wpdb->get_var( "SELECT post_id FROM $wpdb->postmeta WHERE meta_key = 'tf_menu_order'" ) )
+	if ( $wpdb->get_var( "SELECT post_id FROM $wpdb->postmeta WHERE meta_key = 'tf_menu_order'" ) )
 		$scripts[] = 'tf_food_menu_migrate_menu_order';
 		
 	return $scripts;

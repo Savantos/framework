@@ -14,11 +14,11 @@
 
 function tf_list_cats() {
 	$terms = get_the_terms($post->id, 'tf_eventcategory');
-	if (!$terms) {return;}
+	if ( !$terms ) {return;}
 	$counter = 0;
 	foreach ($terms as $term) {
 	// Doesn't show featured items by default
-		if($term->name != __('Featured','themeforce')) {
+		if ($term->name != __( 'Featured', 'themeforce') ) {
 		  if ( $counter > 0 ) { $output .= ', ';}
 		  $output .= $term->name;
 		  $counter++;
@@ -45,13 +45,13 @@ function tf_events_full ( $atts ) {
 	
 	// - make sure it's a number for our query -
 	
-	$limit = intval($limit);
+	$limit = intval( $limit );
 	
 	// - hide events that are older than 6am today (because some parties go past your bedtime) -
 	
 	$today6am = strtotime('today 6:00') + ( get_option( 'gmt_offset' ) * 3600 );
-	$name = stripslashes(get_option('tf_business_name'));
-        $address = stripslashes(get_option('tf_business_address'));
+	$name = stripslashes( get_option('tf_business_name') );
+        $address = stripslashes( get_option('tf_business_address') );
         $location = $name . ', ' . $address;
         
        	// - query -
@@ -71,25 +71,25 @@ function tf_events_full ( $atts ) {
 	
 	// - declare fresh day -
 	$daycheck = null;
-	$date_format = get_option('date_format');
+	$date_format = get_option( 'date_format' );
 	
 	echo '<!-- www.schema.org -->';
 	
 	// - loop -
-	if ($events):
+	if ( $events ):
 	global $post;
 	foreach ($events as $post):
 	
-	setup_postdata($post);
+	setup_postdata( $post );
 	
 	// - custom variables -
-	$custom = get_post_custom(get_the_ID());
+	$custom = get_post_custom( get_the_ID() );
 	$sd = $custom["tf_events_startdate"][0];
 	$ed = $custom["tf_events_enddate"][0];
-		$post_image_id = get_post_thumbnail_id(get_the_ID());
-	        if ($post_image_id) {
-		             if( $thumbnail = wp_get_attachment_image_src( $post_image_id, 'width=130&height=130&crop=1', false) ) 
-                    	(string) $thumbnail = $thumbnail[0];
+		$post_image_id = get_post_thumbnail_id( get_the_ID() );
+	        if ( $post_image_id ) {
+		             if ( $thumbnail = wp_get_attachment_image_src( $post_image_id, 'width=130&height=130&crop=1', false) ) 
+                    	( string ) $thumbnail = $thumbnail[0];
 	        }
 			
 	// - determine if it's a new day -
@@ -102,14 +102,14 @@ function tf_events_full ( $atts ) {
 	$sqldate = date('Y-m-d H:i:s', $sd);
 	$schema_startdate = date('Y-m-d\TH:i', $sd); // <- Date for Google Rich Snippets
 	$schema_enddate = date('Y-m-d\TH:i', $ed); // <- Date for Google Rich Snippets
-	$date_format = get_option('date_format');
+	$date_format = get_option( 'date_format' );
 	$local_startdate = mysql2date($date_format, $sqldate); // <- Date for Display
 	
 	// - determine duration -
-	$schema_duration = ($ed-$sd)/60; // Duration for Google Rich Snippets
+	$schema_duration = ( $ed-$sd )/60; // Duration for Google Rich Snippets
 
 	// - local time format -
-	$time_format = get_option('time_format');
+	$time_format = get_option( 'time_format' );
 	$stime = date($time_format, $sd); // <- Start Time
 	$etime = date($time_format, $ed); // <- End Time
 	
@@ -120,7 +120,7 @@ function tf_events_full ( $atts ) {
 	<div class="full-events">
 	    <div class="text">
 	        <div class="title">
-				<?php if($thumbnail != '') {?>
+				<?php if ($thumbnail != '') {?>
 				<!-- img -->  <meta itemprop="photo" content="<?php echo $thumbnail; ?>" />
 				<?php } ?>
 	            <!-- date --> <div class="time"><span itemprop="startDate" content="<?php echo $schema_startdate; ?>"><?php echo $stime . ' - ' . $etime; ?></span></div>
@@ -181,7 +181,7 @@ function tf_events_feat ( $atts ) {
 	// ===== OPTIONS =====
 	
 	    // - header text -
-	    if ($header=="yes") {
+	    if ( $header=="yes" ) {
 	         echo '<h2 class="full-events">'. $text .'</h2>';}
 	
 	// ===== LOOP: FEATURED EVENT SECTION =====
@@ -212,24 +212,24 @@ function tf_events_feat ( $atts ) {
 	
 	// - declare fresh day -
 	$daycheck = null;
-	$date_format = get_option('date_format');
+	$date_format = get_option( 'date_format' );
 	
 	// - loop -
-	if ($events):
+	if ( $events ):
 	global $post;
 	foreach ($events as $post):
-	setup_postdata($post);
+	setup_postdata( $post );
 	
 	// - custom variables -
-	$custom = get_post_custom(get_the_ID());
+	$custom = get_post_custom( get_the_ID() );
 	$sd = $custom["tf_events_startdate"][0];
 	$ed = $custom["tf_events_enddate"][0];
-	$post_image_id = get_post_thumbnail_id(get_the_ID());
-	        if ($post_image_id) {
-		             if( $thumbnail = wp_get_attachment_image_src( $post_image_id, 'width=130&height=130&crop=1', false) ) 
-                    	(string) $thumbnail = $thumbnail[0];
-                     if( $large = wp_get_attachment_image_src( $post_image_id, 'large' ) ) 
-                    	(string) $large = $large[0];
+	$post_image_id = get_post_thumbnail_id( get_the_ID() );
+	        if ( $post_image_id ) {
+		             if ( $thumbnail = wp_get_attachment_image_src( $post_image_id, 'width=130&height=130&crop=1', false) ) 
+                    	( string ) $thumbnail = $thumbnail[0];
+                     if ( $large = wp_get_attachment_image_src( $post_image_id, 'large' ) ) 
+                    	( string ) $large = $large[0];
                     }
 	
 	// - determine if it's a new day -
@@ -237,13 +237,13 @@ function tf_events_feat ( $atts ) {
 	$longdate = mysql2date($date_format, $sqldate);
 	
 	// - local time format -
-	$time_format = get_option('time_format');
+	$time_format = get_option( 'time_format' );
 	$stime = date($time_format, $sd);
 	$etime = date($time_format, $ed);
 	
 	// - output - ?>
 	    <div class="feat-events">
-	        <?php if( has_post_thumbnail() ) { ?>
+	        <?php if ( has_post_thumbnail() ) { ?>
 	            <a class="thumb" href="<?php echo $large; ?>"><img src="<?php echo $thumbnail; ?>" alt="<?php the_title(); ?>" /></a>
 	            <div class="thumb-text">
 	        <?php } else { ?>

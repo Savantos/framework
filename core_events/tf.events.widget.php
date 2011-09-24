@@ -30,7 +30,7 @@ class Example_Widget extends WP_Widget {
 
 		$title = apply_filters('widget_title', $instance['title'] );
 		$limit = $instance['limit'];
-                $limit = intval($limit);
+                $limit = intval( $limit );
 
                 echo $before_widget;
                 if ( $title ) echo $before_title . $title . $after_title;
@@ -58,22 +58,22 @@ class Example_Widget extends WP_Widget {
                 $daycheck = null;
 
                 // - loop -
-                if ($events):
+                if ( $events ):
                 global $post;
                 foreach ($events as $post):
-                setup_postdata($post);
+                setup_postdata( $post );
 
                 // - date option -
-                $date_format = get_option('date_format');
+                $date_format = get_option( 'date_format' );
 
                 // - custom variables -
-                $custom = get_post_custom(get_the_ID());
+                $custom = get_post_custom( get_the_ID() );
                 $sd = $custom["tf_events_startdate"][0];
                 $ed = $custom["tf_events_enddate"][0];
-                $post_image_id = get_post_thumbnail_id(get_the_ID());
-                        if ($post_image_id) {
+                $post_image_id = get_post_thumbnail_id( get_the_ID() );
+                        if ( $post_image_id ) {
                                 $thumbnail = wp_get_attachment_image_src( $post_image_id, 'post-thumbnail', false);
-                                if ($thumbnail) (string)$thumbnail = $thumbnail[0];
+                                if ( $thumbnail ) ( string )$thumbnail = $thumbnail[0];
                         }
 
                 // - determine if it's a new day -
@@ -85,7 +85,7 @@ class Example_Widget extends WP_Widget {
                 if ($daycheck != $longdate && $daycheck != null) { echo '<div class="longdate">' . $longdate . '</div>'; }
 
                 // - local time format -
-                $time_format = get_option('time_format');
+                $time_format = get_option( 'time_format' );
                 $stime = date($time_format, $sd);
                 $etime = date($time_format, $ed);
 

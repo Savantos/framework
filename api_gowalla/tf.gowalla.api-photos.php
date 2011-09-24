@@ -9,8 +9,8 @@ function tf_gowalla_api_photos() {
 
 	// - setup -
 	
-	$spotid = get_option('tf_gowalla_spot_id');
-	$apikey	= get_option('tf_gowalla_api_key');
+	$spotid = get_option( 'tf_gowalla_spot_id' );
+	$apikey	= get_option( 'tf_gowalla_api_key' );
 	$apiserver = 'http://api.gowalla.com/'; 
 	
 	// - response -
@@ -19,19 +19,20 @@ function tf_gowalla_api_photos() {
 
 	$args = array(
 		'headers' => array(
-		'X-Gowalla-API-Key' => $apikey,
-		'Content-type' => 'application/json',
-		'Accept' => 'application/json'
+			'X-Gowalla-API-Key' => $apikey,
+			'Content-type' => 'application/json',
+			'Accept' => 'application/json'
 		)
 	);
+	
 	$api_response = wp_remote_request( $url, $args );
 	
-	if( is_wp_error( $api_response ) )
+	if ( is_wp_error( $api_response ) )
 		return $api_response;
 	
-    $json = wp_remote_retrieve_body($api_response);
+    $json = wp_remote_retrieve_body( $api_response );
     
-    $response = json_decode($json);
+    $response = json_decode( $json );
 	
 	return $response;
 
@@ -61,14 +62,14 @@ function tf_gowalla_api_photos() {
 function tf_gowalla_photos_transient() {
 
     // - get transient -
-    $json = get_transient('tf_gowalla_photos_json');
+    $json = get_transient( 'tf_gowalla_photos_json' );
 
     // - refresh transient - 
     if ( !$json ) {
         $json = tf_gowalla_api_photos();
 		
-		if( !empty( $json ) && !is_wp_error( $json ) )
-			set_transient('tf_gowalla_photos_json', $json, 180);
+		if ( !empty( $json ) && !is_wp_error( $json ) )
+			set_transient( 'tf_gowalla_photos_json', $json, 180 );
     }
     return $json;
 }

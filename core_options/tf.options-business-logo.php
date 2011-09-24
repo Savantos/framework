@@ -22,7 +22,7 @@ function themeforce_logo_page() {
     // List of Options used within Dropdowns, etc.
     
     $shortname = "tf";
-    $options_yesno = array ('yes','no');
+    $options_yesno = array ( 'yes', 'no' );
     
     // Options
     
@@ -47,13 +47,13 @@ function themeforce_logo_page() {
                 "desc" => "Your Favicon, make sure it is 16px by 16px (you can <a href='http://www.favicon.cc/' target='_blank'>generate one here</a>)",
                 "id" => $shortname."_favicon",
                 "std" => "",
-                "type" => "image"),					
+                "type" => "image"), 					
       
 	array( "type" => "close"), 
  
 );
 
-    tf_display_settings($options);
+    tf_display_settings( $options );
     ?> 
 	 <input type="submit" id="tf-submit" name="options_submit" value=" <?php _e( 'Save Changes' )  ?>" />
          <div style="clear:both;"></div>

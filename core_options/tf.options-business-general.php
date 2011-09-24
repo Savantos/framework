@@ -22,9 +22,9 @@ function themeforce_business_page() {
     // List of Options used within Dropdowns, etc.
     
     $shortname = "tf";
-    $options_cuisine = array('Afghan', 'African', 'American (New)', 'American (Traditional)', 'Argentine', 'Asian Fusion', 'Barbeque', 'Basque', 'Belgian', 'Brasseries', 'Brazilian', 'Breakfast & Brunch', 'British', 'Buffets', 'Burgers', 'Burmese', 'Cafes', 'Cajun/Creole', 'Cambodian', 'Caribbean', 'Cheesesteaks', 'Chicken Wings', 'Chinese', 'Creperies', 'Cuban', 'Delis', 'Diners', 'Ethiopian', 'Fast Food', 'Filipino', 'Fish & Chips', 'Fondue', 'Food Stands', 'French', 'Gastropubs', 'German', 'Gluten-Free', 'Greek', 'Halal', 'Hawaiian', 'Himalayan/Nepalese', 'Hot Dogs', 'Hungarian', 'Indian', 'Indonesian', 'Irish', 'Italian', 'Japanese', 'Korean', 'Kosher', 'Latin American', 'Live/Raw Food', 'Malaysian', 'Mediterranean', 'Mexican', 'Middle Eastern', 'Modern European', 'Mongolian', 'Moroccan', 'Pakistani', 'Persian/Iranian', 'Peruvian', 'Pizza', 'Polish', 'Portuguese', 'Russian', 'Sandwiches', 'Scandinavian', 'Seafood', 'Singaporean', 'Soul Food', 'Soup', 'Southern', 'Spanish', 'Steakhouses', 'Sushi Bars', 'Taiwanese', 'Tapas Bars', 'Tapas/Small Plates', 'Tex-Mex', 'Thai', 'Turkish', 'Ukrainian', 'Vegan', 'Vegetarian', 'Vietnamese');
-    $options_pricerange = array ('$','$$','$$$','$$$$');
-    $options_yesno = array ('yes','no');
+    $options_cuisine = array('Afghan', 'African', 'American ( New )', 'American ( Traditional )', 'Argentine', 'Asian Fusion', 'Barbeque', 'Basque', 'Belgian', 'Brasseries', 'Brazilian', 'Breakfast & Brunch', 'British', 'Buffets', 'Burgers', 'Burmese', 'Cafes', 'Cajun/Creole', 'Cambodian', 'Caribbean', 'Cheesesteaks', 'Chicken Wings', 'Chinese', 'Creperies', 'Cuban', 'Delis', 'Diners', 'Ethiopian', 'Fast Food', 'Filipino', 'Fish & Chips', 'Fondue', 'Food Stands', 'French', 'Gastropubs', 'German', 'Gluten-Free', 'Greek', 'Halal', 'Hawaiian', 'Himalayan/Nepalese', 'Hot Dogs', 'Hungarian', 'Indian', 'Indonesian', 'Irish', 'Italian', 'Japanese', 'Korean', 'Kosher', 'Latin American', 'Live/Raw Food', 'Malaysian', 'Mediterranean', 'Mexican', 'Middle Eastern', 'Modern European', 'Mongolian', 'Moroccan', 'Pakistani', 'Persian/Iranian', 'Peruvian', 'Pizza', 'Polish', 'Portuguese', 'Russian', 'Sandwiches', 'Scandinavian', 'Seafood', 'Singaporean', 'Soul Food', 'Soup', 'Southern', 'Spanish', 'Steakhouses', 'Sushi Bars', 'Taiwanese', 'Tapas Bars', 'Tapas/Small Plates', 'Tex-Mex', 'Thai', 'Turkish', 'Ukrainian', 'Vegan', 'Vegetarian', 'Vietnamese');
+    $options_pricerange = array ( '$', '$$', '$$$', '$$$$' );
+    $options_yesno = array ( 'yes', 'no' );
 	
     // Options
     
@@ -72,7 +72,7 @@ function themeforce_business_page() {
                 "desc" => "List the types of payments you accept, separate by comma.",
                 "id" => "tf_schema_paymentaccepted",
                 "std" => "Cash, Credit Cards",
-                "type" => "text"),	
+                "type" => "text"), 	
 						
 	array( 
                 "name" => "Accept Reservations",
@@ -81,7 +81,7 @@ function themeforce_business_page() {
                 "std" => "",
                 "type" => "select",
                 "class" => "small", //mini, tiny, small
-                "options" => $options_yesno),					
+                "options" => $options_yesno), 					
 	
 	array( "name" => "Menu Currency",
                 "desc" => "Please enter your currency symbol or 3-letter code, whichever looks better to you. Is used for the menu.",
@@ -99,7 +99,7 @@ function themeforce_business_page() {
                 "desc" => "If you don't use the advanced sort, menu items will be sorted alphabetically. ", //See <a href='http://'>this tutorial</a>for more information
                 "id" => "tf_menu_sort_key",
                 "std" => "true",
-                "type" => "checkbox"),	
+                "type" => "checkbox"), 	
  
 );
 
@@ -114,7 +114,7 @@ if ( TF_THEME == 'chowforce' ) {
 	
 $options[] = array( "type" => "close");
 
-    tf_display_settings($options);
+    tf_display_settings( $options );
     ?> 
 	 <input type="submit" id="tf-submit" name="options_submit" value=" <?php _e( 'Save Changes' )  ?>" />
          <div style="clear:both;"></div>

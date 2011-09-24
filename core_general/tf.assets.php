@@ -39,12 +39,12 @@
  */
 
 function tf_nivoslider_js() {
-	wp_enqueue_script('nivoslider', TF_URL . '/assets/js/jquery.nivo.slider.js', array('jquery'));
-	}
+	wp_enqueue_script('nivoslider', TF_URL . '/assets/js/jquery.nivo.slider.js', array( 'jquery') );
+}
 	
 function tf_nivoslider_css() {
 	wp_enqueue_style('nivoslider', TF_URL . '/assets/css/nivo-slider.css');
-	}
+}
 	
 /* 
  FancyBox
@@ -59,14 +59,15 @@ function tf_nivoslider_css() {
  */
 
 function tf_fancybox_js() {
-	wp_enqueue_script('fancybox', TF_URL . '/assets/js/jquery.fancybox-1.3.4.pack.js', array('jquery'));
-        // adds pop-up to .thumb classes
-        wp_enqueue_script('fancybox-settings', TF_URL . '/assets/js/jquery.fancybox-settings.js', array('jquery'));
-	}
+	wp_enqueue_script('fancybox', TF_URL . '/assets/js/jquery.fancybox-1.3.4.pack.js', array( 'jquery') );
+    
+    // adds pop-up to .thumb classes
+    wp_enqueue_script('fancybox-settings', TF_URL . '/assets/js/jquery.fancybox-settings.js', array( 'jquery') );
+}
 	
 function tf_fancybox_css() {
 	wp_enqueue_style('fancybox', TF_URL . '/assets/css/jquery.fancybox-1.3.4.css');
-	}	
+}	
 
 /* 
  bxSlider
@@ -80,8 +81,8 @@ function tf_fancybox_css() {
  http://www.opensource.org/licenses/mit-license.php
  */	
  
- function tf_bxslider_js() {
-	wp_enqueue_script('bxslider', TF_URL . '/assets/js/jquery.bxSlider.min.js', array('jquery'));
-	}
+function tf_bxslider_js() {
+	wp_enqueue_script('bxslider', TF_URL . '/assets/js/jquery.bxSlider.min.js', array( 'jquery') );
+}
 	
 ?>

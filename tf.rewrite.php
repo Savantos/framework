@@ -22,7 +22,7 @@ function tf_tj_add_rewrite_rule( $rule, $query, $template = null, $args = array(
 function tf_tj_remove_rewrite_rule( $rule ) {
 	global $tf_tj_rewrite_rules;
 	
-	if( isset( $tf_tj_rewrite_rules[$rule] ) )
+	if ( isset( $tf_tj_rewrite_rules[$rule] ) )
 		unset( $tf_tj_rewrite_rules[$rule] );
 }
 
@@ -47,7 +47,7 @@ function tf_tj_add_custom_page_variables( $public_query_vars ) {
 
 	global $tf_tj_rewrite_rules;
 	
-	if( !isset( $tf_tj_rewrite_rules ) )
+	if ( !isset( $tf_tj_rewrite_rules ) )
 		return $public_query_vars;
 	
 	//make any query vars public
@@ -55,7 +55,7 @@ function tf_tj_add_custom_page_variables( $public_query_vars ) {
 		$args = wp_parse_args( $rule[1] );
 
 		foreach( $args as $arg => $val ) {
-			if( !in_array( $arg, $public_query_vars ) )
+			if ( !in_array( $arg, $public_query_vars ) )
 				$public_query_vars[] = $arg;
 		}
 	}
@@ -69,7 +69,7 @@ function tf_tj_set_custom_rewrite_rule_current_page( $request ) {
 
 	global $tf_tj_rewrite_rules, $tf_tj_current_rewrite_rule, $wp_rewrite;
 	
-	if( isset( $tf_tj_rewrite_rules ) && array_key_exists( $request->matched_rule, (array) $tf_tj_rewrite_rules ) ) {
+	if ( isset( $tf_tj_rewrite_rules ) && array_key_exists( $request->matched_rule, (array) $tf_tj_rewrite_rules ) ) {
 		$tf_tj_current_rewrite_rule = $tf_tj_rewrite_rules[$request->matched_rule];
 
 		do_action_ref_array('tf_tj_parse_request_' . $request->matched_rule, array(&$request));
@@ -77,11 +77,11 @@ function tf_tj_set_custom_rewrite_rule_current_page( $request ) {
 		$tf_tj_current_rewrite_rule[4] = $request->query_vars;
 	}
 
-	if( isset( $tf_tj_current_rewrite_rule[4] ) && $tf_tj_current_rewrite_rule[4] === $request ) {
+	if ( isset( $tf_tj_current_rewrite_rule[4] ) && $tf_tj_current_rewrite_rule[4] === $request ) {
 		
 		$tf_tj_current_rewrite_rule[3]['parse_query_properties'] = wp_parse_args( ( isset( $tf_tj_current_rewrite_rule[3]['parse_query_properties'] ) ? $tf_tj_current_rewrite_rule[3]['parse_query_properties'] : '' ), array( 'is_home' => false ) );
 		//apply some post query stuff to wp_query
-		if( isset( $tf_tj_current_rewrite_rule[3]['parse_query_properties'] ) ) {
+		if ( isset( $tf_tj_current_rewrite_rule[3]['parse_query_properties'] ) ) {
 			
 			//$post_query
 			foreach( wp_parse_args( $tf_tj_current_rewrite_rule[3]['parse_query_properties'] ) as $property => $value ) {
@@ -101,12 +101,12 @@ function tf_tj_modify_parse_query( $wp_query ) {
 
 	global $tf_tj_rewrite_rules, $tf_tj_current_rewrite_rule;
 
-	if( isset( $tf_tj_current_rewrite_rule ) && $tf_tj_current_rewrite_rule[4] === $wp_query->query ) {
+	if ( isset( $tf_tj_current_rewrite_rule ) && $tf_tj_current_rewrite_rule[4] === $wp_query->query ) {
 		
 		
 		$tf_tj_current_rewrite_rule[3]['parse_query_properties'] = wp_parse_args( ( isset( $tf_tj_current_rewrite_rule[3]['parse_query_properties'] ) ? $tf_tj_current_rewrite_rule[3]['parse_query_properties'] : '' ), array( 'is_home' => false ) );
 		//apply some post query stuff to wp_query
-		if( isset( $tf_tj_current_rewrite_rule[3]['parse_query_properties'] ) ) {
+		if ( isset( $tf_tj_current_rewrite_rule[3]['parse_query_properties'] ) ) {
 			
 			//$post_query
 			foreach( wp_parse_args( $tf_tj_current_rewrite_rule[3]['parse_query_properties'] ) as $property => $value ) {
@@ -123,14 +123,14 @@ function tf_tj_load_custom_templates( $template ) {
 	global $wp_query, $tf_tj_rewrite_rules, $tf_tj_current_rewrite_rule;
 
 	//Skip 404 temaplte includes
-	if( is_404() && !isset( $tf_tj_current_rewrite_rule[3]['post_query_properties']['is_404'] ) )
+	if ( is_404() && !isset( $tf_tj_current_rewrite_rule[3]['post_query_properties']['is_404'] ) )
 		return;
 
 	//show the correct template for the query
-	if( isset( $tf_tj_current_rewrite_rule ) && $tf_tj_current_rewrite_rule[4] === $wp_query->query ) {
+	if ( isset( $tf_tj_current_rewrite_rule ) && $tf_tj_current_rewrite_rule[4] === $wp_query->query ) {
 		
 		//apply some post query stuff to wp_query
-		if( isset( $tf_tj_current_rewrite_rule[3]['post_query_properties'] ) ) {
+		if ( isset( $tf_tj_current_rewrite_rule[3]['post_query_properties'] ) ) {
 			
 			//$post_query
 			foreach( wp_parse_args( $tf_tj_current_rewrite_rule[3]['post_query_properties'] ) as $property => $value ) {
@@ -139,9 +139,9 @@ function tf_tj_load_custom_templates( $template ) {
 			}
 		}
 
-		if( !empty( $tf_tj_current_rewrite_rule[2] ) ) {
+		if ( !empty( $tf_tj_current_rewrite_rule[2] ) ) {
 			//fire canonical if it is allowed
-			if( empty( $tf_tj_current_rewrite_rule[3]['disable_canonical'] ) )
+			if ( empty( $tf_tj_current_rewrite_rule[3]['disable_canonical'] ) )
 				redirect_canonical();
 			else
 				remove_action( 'template_redirect', 'redirect_canonical' );
@@ -149,7 +149,7 @@ function tf_tj_load_custom_templates( $template ) {
 			do_action( 'tf_tj_load_custom_template', $tf_tj_current_rewrite_rule[2], $tf_tj_current_rewrite_rule );
 			include( $tf_tj_current_rewrite_rule[2] );
 			exit;
-		} else if( !empty( $tf_tj_current_rewrite_rule[3]['disable_canonical'] ) ) {
+		} else if ( !empty( $tf_tj_current_rewrite_rule[3]['disable_canonical'] ) ) {
 			remove_action( 'template_redirect', 'redirect_canonical', 10 );
 		}
 		

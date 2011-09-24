@@ -17,10 +17,10 @@ function themeforce_social_overview_page() {
         <div class="tf-text">
         <h3>What is Social Proof, and why you need it?</h3>
         <p>Social proof is a psychological mechanism whereby we look to others to help guide our daily decisions, i.e. music trends, clothes, etc. We've integrated with the following tools (which are all free for you to use by the way) to provide you with a way to come across as more credible to your online visitors.</p>
-        <!-- <img src="<?php echo get_bloginfo('template_url').'/themeforce/assets/images/sp-example.jpg'; ?>"> -->
+        <!-- <img src="<?php echo get_bloginfo( 'template_url' ).'/themeforce/assets/images/sp-example.jpg'; ?>"> -->
         <h3 style="margin-top:40px">About the different Social Proof Mechanisms</h3>
         <!-- YELP -->
-        <img src="<?php echo get_bloginfo('template_url').'/themeforce/assets/images/social_yelp.jpg'; ?>" />
+        <img src="<?php echo get_bloginfo( 'template_url' ).'/themeforce/assets/images/social_yelp.jpg'; ?>" />
         <p><a href="http://www.yelp.com" target="_blank">Yelp</a> is a company that operates a social networking, user review, and local search web site. Yelp.com has more than 39 million monthly unique visitors as of late 2010. In May 2011, they recorded the following numbers:</p>
         <ul>
             <li><strong>27% of all Yelp searches</strong> come from the iPhone application.</li>
@@ -30,7 +30,7 @@ function themeforce_social_overview_page() {
         <div class="social-box tf-settings-wrap"><span>Use Yelp to <strong>display your Rating</strong> </span><a href="<?php echo get_admin_url() . 'admin.php?page=themeforce_yelp'; ?>"><div class="tf-button">Go to your Yelp Settings</div></a></div>
         <div class="clearfix"></div>
         <!-- QYPE -->
-        <img src="<?php echo get_bloginfo('template_url').'/themeforce/assets/images/social_qype.jpg'; ?>" />
+        <img src="<?php echo get_bloginfo( 'template_url' ).'/themeforce/assets/images/social_qype.jpg'; ?>" />
         <p><a href="http://www.qype.co.uk" target="_blank">Qype</a>, is a company centered around social networking and local reviews. They currently operate websites in Germany, the United Kingdom, France, Switzerland, Austria, Ireland, Poland, Brazil, Spain and Italy and have approximately 22 million monthly unique European visitors.</p>
         <ul>
             <li>Qype receives <strong>22 million</strong>unique visitors per month across Europe.</li>
@@ -40,7 +40,7 @@ function themeforce_social_overview_page() {
         <div class="social-box tf-settings-wrap"><span>Use Qype to <strong>display your Rating</strong> </span><a href="<?php echo get_admin_url() . 'admin.php?page=themeforce_qype'; ?>"><div class="tf-button">Go to your Qype Settings</div></a></div>
         <div class="clearfix"></div>
         <!-- FOURSQUARE -->
-        <img src="<?php echo get_bloginfo('template_url').'/themeforce/assets/images/social_foursquare.jpg'; ?>" />
+        <img src="<?php echo get_bloginfo( 'template_url' ).'/themeforce/assets/images/social_foursquare.jpg'; ?>" />
         <p><a href="http://www.foursquare.com" target="_blank">Foursquare</a> is a location-based social networking website based on hardware for mobile devices. The service is available to users with GPS-enabled mobile devices such as smartphones. Users "check-in" at venues using a mobile website, text messaging or a device-specific application by running the application and selecting from a list of venues that the application locates nearby. Each check-in awards the user points and sometimes "badges".</p>
         <ul>
             <li><strong>2.6 million check-ins per day</strong>.</li>
@@ -50,7 +50,7 @@ function themeforce_social_overview_page() {
         <div class="social-box tf-settings-wrap"><span>Use Foursquare to <strong>display your Guest Photos & Tips</strong> </span><a href="<?php echo get_admin_url() . 'admin.php?page=themeforce_foursquare'; ?>"><div class="tf-button">Go to your Foursquare Settings</div></a></div>
         <div class="clearfix"></div>
         <!-- GOWALLA -->
-        <img src="<?php echo get_bloginfo('template_url').'/themeforce/assets/images/social_gowalla.jpg'; ?>" />
+        <img src="<?php echo get_bloginfo( 'template_url' ).'/themeforce/assets/images/social_gowalla.jpg'; ?>" />
         <p><a href="http://www.gowalla.com" target="_blank">Gowalla</a> is a primarily mobile web application that allows users to check in to locations that they visit using their mobile device. This is achieved either through the use of dedicated applications available on Google Android, iPhone, Palm WebOS and BlackBerry, or via m.gowalla.com. There is currently no way of checking in through the standard website. Check-ins can be pushed via Notifications to iPhones, and by linking accounts, to Twitter and Facebook.</p>
         <div class="social-box tf-settings-wrap"><span>Use Gowalla to <strong>display your Check-ins & Guest Photos</strong> </span><a href="<?php echo get_admin_url() . 'admin.php?page=themeforce_gowalla'; ?>"><div class="tf-button">Go to your Gowalla Settings</div></a></div>
         <div class="clearfix"></div>

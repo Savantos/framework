@@ -10,10 +10,10 @@
 // Register Page
 
 function themeforce_mobile_addpage() {
-    add_submenu_page('themes.php','Mobile', 'Mobile', 'manage_options', 'themeforce_mobile', 'themeforce_mobile_page');
+    add_submenu_page('themes.php', 'Mobile', 'Mobile', 'manage_options', 'themeforce_mobile', 'themeforce_mobile_page');
 }
 
-add_action('admin_menu','themeforce_mobile_addpage');
+add_action( 'admin_menu', 'themeforce_mobile_addpage' );
 
 
 // Create Page
@@ -36,7 +36,7 @@ function themeforce_mobile_page() {
         $options_menus[] = $_nav_menu->name;
     endforeach;
     
-    $phone = get_option('tf_business_phone');
+    $phone = get_option( 'tf_business_phone' );
     
     // Options
 
@@ -64,7 +64,7 @@ function themeforce_mobile_page() {
  
 );
 
-    tf_display_settings($options);
+    tf_display_settings( $options );
     ?> 
 	 <input type="submit" id="tf-submit" name="options_submit" value=" <?php _e( 'Save Changes' )  ?>" />
          <div style="clear:both;"></div>

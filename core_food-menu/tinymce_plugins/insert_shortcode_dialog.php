@@ -1,11 +1,11 @@
 <?php require_once( '../../../../../../wp-load.php' );
 
-header('Content-Type: text/html; charset=' . get_bloginfo('charset'));
+header('Content-Type: text/html; charset=' . get_bloginfo( 'charset') );
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" <?php language_attributes(); ?>>
 <head>
-<meta http-equiv="Content-Type" content="<?php bloginfo('html_type'); ?>; charset=<?php echo get_option('blog_charset'); ?>" />
+<meta http-equiv="Content-Type" content="<?php bloginfo( 'html_type' ); ?>; charset=<?php echo get_option( 'blog_charset' ); ?>" />
 <title><?php _e('Insert Food Menu') ?></title>
 <script type="text/javascript" src="<?php bloginfo( 'url' )?>/wp-includes/js/tinymce/tiny_mce_popup.js?ver=342"></script>
 <script type="text/javascript" src="<?php bloginfo( 'url' )?>/wp-includes/js/jquery/jquery.js"></script>
@@ -166,11 +166,11 @@ wp_admin_css( 'colors-fresh', true );
 					shortcode += " align='" + jQuery('#tf_menu_shortcode_form select[name="tf_food_menu_align"]' ).val() + "'";
 				}
 				
-				shortcode += jQuery( '#tf_menu_shortcode_form input[name="tf_food_menu_show_titles"]' ).is(":checked") ? " header='yes'" : " header='no'";
+				shortcode += jQuery( '#tf_menu_shortcode_form input[name="tf_food_menu_show_titles"]' ).is( ":checked" ) ? " header='yes'" : " header='no'";
 				
 				shortcode += "]";
 				
-				tinyMCE.execInstanceCommand("content","mceInsertContent",false,shortcode);
+				tinyMCE.execInstanceCommand( "content", "mceInsertContent", false, shortcode );
 			}
 			
 			function getWin() {

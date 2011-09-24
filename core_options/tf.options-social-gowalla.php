@@ -22,7 +22,7 @@ function themeforce_social_gowalla_page() {
     // List of Options used within Dropdowns, etc.
     
     $shortname = "tf";
-    $options_yesno = array ('yes','no');
+    $options_yesno = array ( 'yes', 'no' );
     
     // Options
     
@@ -51,7 +51,7 @@ function themeforce_social_gowalla_page() {
  
 );
 
-    tf_display_settings($options);
+    tf_display_settings( $options );
     ?> 
 	 <input type="submit" id="tf-submit" name="options_submit" value=" <?php _e( 'Save Changes' )  ?>" />
          <div style="clear:both;"></div>

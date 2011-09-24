@@ -6,18 +6,18 @@ require_once( dirname( __FILE__ ) . '/tf.qype.admin-options.php' );
 
 function tf_get_qype_api_xml() {
 
-    $api_key = get_option('tf_qype_api_key');
-    $api_place = get_option('tf_qype_place');
+    $api_key = get_option( 'tf_qype_api_key' );
+    $api_place = get_option( 'tf_qype_place' );
 	// Consider adding language option for reviews
 
-    $api_response = wp_remote_get("http://api.qype.com/v1/places/{$api_place}?consumer_key={$api_key}");
-    $qype_response = wp_remote_retrieve_body($api_response);
+    $api_response = wp_remote_get( "http://api.qype.com/v1/places/{$api_place}?consumer_key={$api_key}" );
+    $qype_response = wp_remote_retrieve_body( $api_response );
 	
 	$xml_object = new SimpleXMLElement( $qype_response );
 	
 	//error checking
-	if( isset( $xml_object->status->code ) )
-		return new WP_Error( (int) $xml_object->status->code, (string) $xml_object->status->error );
+	if ( isset( $xml_object->status->code ) )
+		return new WP_Error( ( int ) $xml_object->status->code, ( string ) $xml_object->status->error );
 	
     return $qype_response;
 }
@@ -25,7 +25,7 @@ function tf_get_qype_api_xml() {
 function tf_qype_transient() {
 
     // - get transient -
-    $wp_xml = get_transient('tf_qype_xml');
+    $wp_xml = get_transient( 'tf_qype_xml' );
 	
 	
     // - refresh transient -
@@ -35,10 +35,10 @@ function tf_qype_transient() {
 	}
 	
     // - data -
-    if( is_wp_error( $wp_xml ) )
+    if ( is_wp_error( $wp_xml ) )
     	$xml = $wp_xml;
-    else if( $wp_xml )
-		$xml = new SimpleXMLElement($wp_xml);
+    else if ( $wp_xml )
+		$xml = new SimpleXMLElement( $wp_xml );
 	else
 		$xml = new WP_Error( 'no-xml-present', 'No XML was returned from the API' );
 		
@@ -69,10 +69,10 @@ function tf_qype_bar() {
     
     echo '<!-- qype bar -->';
     
-    if (get_option('tf_qype_enabled') == 'true') {
+    if ( get_option('tf_qype_enabled' ) == 'true') {
 
         $qype = tf_qype_transient();
-        if( !$qype )
+        if ( !$qype )
             {
             return;
             } else {

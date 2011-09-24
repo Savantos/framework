@@ -27,27 +27,27 @@ define( 'TF_URL', get_bloginfo( 'template_directory' ) . '/' . TF_DIR_SLUG );
 =========================================*/
 
 // Template Hooks
-    require_once( TF_PATH . '/core_general/tf.template-hooks.php' );
-    require_once( TF_PATH . '/core_general/tf.business-general.php' );
+require_once( TF_PATH . '/core_general/tf.template-hooks.php' );
+require_once( TF_PATH . '/core_general/tf.business-general.php' );
         
 // Business Options
 if( current_theme_supports( 'tf_settings_api' ) )     
     require_once( TF_PATH . '/core_options/tf.options-master.php' );
 
 // Shortcodes - Business
-    require_once( TF_PATH . '/core_general/tf.business-shortcodes.php' );        
+require_once( TF_PATH . '/core_general/tf.business-shortcodes.php' );        
 	
 // Common Assets
-    require_once( TF_PATH . '/core_general/tf.assets.php' );
-    require_once( TF_PATH . '/core_general/tf.slider.php' );
-    require_once( TF_PATH . '/core_general/tf.mobile.php' );
+require_once( TF_PATH . '/core_general/tf.assets.php' );
+require_once( TF_PATH . '/core_general/tf.slider.php' );
+require_once( TF_PATH . '/core_general/tf.mobile.php' );
     
-    if ( get_option('tf_sliderconversion') != 'true' ) {
-		require_once( TF_PATH . '/core_general/tf.slider.update.php' );
-	}
+if ( get_option('tf_sliderconversion') != 'true' ) {
+	require_once( TF_PATH . '/core_general/tf.slider.update.php' );
+}
         
 // Colors      
-    require_once( TF_PATH . '/core_colors/tf.colors.php' );
+require_once( TF_PATH . '/core_colors/tf.colors.php' );
         
 
 // Food Menu
@@ -59,13 +59,13 @@ if( current_theme_supports( 'tf_events' ) )
 	require_once( TF_PATH . '/core_events/tf.events.php' );
 	
 // Google Maps
-	require_once( TF_PATH . '/api_google/tf.googlemaps.shortcodes.php' );
+require_once( TF_PATH . '/api_google/tf.googlemaps.shortcodes.php' );
 
 // Schema Functions
-	require_once( TF_PATH . '/core_seo/tf.schema.php' );
+require_once( TF_PATH . '/core_seo/tf.schema.php' );
 	
 // Widgets
-	require_once( TF_PATH . '/core_widgets/newsletter-widget.php' );
+require_once( TF_PATH . '/core_widgets/newsletter-widget.php' );
 
 if( current_theme_supports( 'tf_widget_opening_times' ) )
 	require_once( TF_PATH . '/core_widgets/widget-openingtimes.php' );
@@ -82,14 +82,14 @@ if( current_theme_supports( 'tf_widget_payments' ) )
 =========================================*/
 
 // WP Thumb
-	require_once( TF_PATH . '/wpthumb/wpthumb.php' ); 
-	require_once( TF_PATH . '/tf.rewrite.php' );
+require_once( TF_PATH . '/wpthumb/wpthumb.php' ); 
+require_once( TF_PATH . '/tf.rewrite.php' );
 
 /* SEO & Semantic Connections
 =========================================*/	
 	
 // Facebook Open Graph Protocol
-	require_once( TF_PATH . '/core_seo/tf.open_graph_protocol.php' );
+require_once( TF_PATH . '/core_seo/tf.open_graph_protocol.php' );
 
 
 /* API Connections
@@ -191,8 +191,7 @@ add_action( 'wp_ajax_tf_sort_admin_rows', 'tf_sortable_admin_row_request' );
    You won't require this for a fresh install
 */	
 
-//upgrader from 2.x - 3.0 -> 3.2
-	require_once( TF_PATH . '/tf.upgrade.php' );
+require_once( TF_PATH . '/tf.upgrade.php' );
 
 
 /* Remaining Functions
@@ -262,7 +261,7 @@ function tf_modify_admin_menu() {
 	global $menu, $submenu;
 	
 	if( !empty( $submenu['themeforce_business_options'] ) )
-        	array_shift( $submenu['themeforce_business_options'] );
+		array_shift( $submenu['themeforce_business_options'] );
 
 }
 add_action( 'admin_menu', 'tf_modify_admin_menu', 11 );
@@ -271,9 +270,12 @@ add_action( 'admin_menu', 'tf_modify_admin_menu', 11 );
  * Update Logo
  */
 
-if (get_option('tf_logo_update') != 'true')
-    {
+if ( get_option('tf_logo_update') != 'true') {
     $logo = get_option(TF_THEME . '_logo');
-    if( $logo != '' ){update_option('tf_logo',$logo);}
-    update_option('tf_logo_update','true');
+    
+    if( $logo != '' ) {
+    	update_option('tf_logo', $logo);
     }
+	
+	update_option('tf_logo_update', 'true');
+}

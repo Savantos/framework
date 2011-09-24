@@ -44,10 +44,10 @@ class tf_gowalla_photos_widget extends WP_Widget {
                 $spot = tf_gowalla_photos_transient();
 				 
 				/*	
-				if( is_wp_error( $spot ) || !$spot ) {
+				if ( is_wp_error( $spot ) || !$spot ) {
                 	echo 'Please configure Gowalla in the Theme Options';
 					
-					if( is_wp_error( $spot ) )
+					if ( is_wp_error( $spot ) )
 						echo '<!-- gowalla returned error: ' . $spot->get_error_message() . '-->';
                 } else {
 				 */   

@@ -10,7 +10,7 @@ require_once( TF_PATH . '/core_events/tf.events.ical.php' );
  * EVENTS FUNCTION (CUSTOM POST TYPE)
  */
 
-// 1. Custom Post Type Registration (Events)
+// 1. Custom Post Type Registration ( Events )
 
 function create_event_postype() {
 
@@ -29,14 +29,14 @@ function create_event_postype() {
 	);
 	
 	$args = array(
-	    'label' => __('Events'),
+	    'label' => __( 'Events' ),
 	    'labels' => $labels,
 	    'public' => true,
 	    'can_export' => true,
 	    'show_ui' => true,
 	    '_builtin' => false,
 	    'capability_type' => 'post',
-	    'menu_icon' => get_bloginfo('template_url').'/themeforce/assets/images/event_16.png',
+	    'menu_icon' => get_bloginfo( 'template_url' ).'/themeforce/assets/images/event_16.png',
 	    'hierarchical' => false,
 	    'rewrite' => array( "slug" => "events" ),
 	    'supports'=> array('title', 'thumbnail', 'excerpt', 'editor') ,
@@ -71,7 +71,7 @@ function create_eventcategory_taxonomy() {
         'choose_from_most_used' => __( 'Choose from the most used categories' ),
     );
 
-    register_taxonomy('tf_eventcategory','tf_events', array(
+    register_taxonomy('tf_eventcategory', 'tf_events', array(
         'label' => __('Event Category'),
         'labels' => $labels,
         'hierarchical' => true,
@@ -89,34 +89,34 @@ add_action( 'init', 'create_eventcategory_taxonomy', 0 );
 add_filter ("manage_edit-tf_events_columns", "tf_events_edit_columns");
 add_action ("manage_posts_custom_column", "tf_events_custom_columns");
 
-function tf_events_edit_columns($columns) {
+function tf_events_edit_columns( $columns ) {
 
     $columns = array(
         "cb" => "<input type=\"checkbox\" />",
-        "tf_col_ev_cat" => __('Category'),
-        "tf_col_ev_date" => __('Dates'),
-        "tf_col_ev_times" => __('Times'),
-        "tf_col_ev_thumb" => __('Thumbnail'),
-        "title" => __('Event'),
-        "tf_col_ev_desc" => __('Description'),
+        "tf_col_ev_cat" => __( 'Category' ),
+        "tf_col_ev_date" => __( 'Dates' ),
+        "tf_col_ev_times" => __( 'Times' ),
+        "tf_col_ev_thumb" => __( 'Thumbnail' ),
+        "title" => __( 'Event' ),
+        "tf_col_ev_desc" => __( 'Description' ),
         );
 
     return $columns;
 
 }
 
-function tf_events_custom_columns($column) {
+function tf_events_custom_columns( $column ) {
 
     global $post;
     $custom = get_post_custom();
-    switch ($column)
+    switch ( $column )
 
         {
             case "tf_col_ev_cat":
                 // - show taxonomy terms -
                 $eventcats = get_the_terms($post->ID, "tf_eventcategory");
                 $eventcats_html = array();
-                if ($eventcats) {
+                if ( $eventcats ) {
                     foreach ($eventcats as $eventcat)
                     array_push($eventcats_html, $eventcat->name);
                     echo implode($eventcats_html, ", ");
@@ -136,7 +136,7 @@ function tf_events_custom_columns($column) {
                 // - show times -
                 $startt = $custom["tf_events_startdate"][0];
                 $endt = $custom["tf_events_enddate"][0];
-                $time_format = get_option('time_format');
+                $time_format = get_option( 'time_format' );
                 $starttime = date($time_format, $startt);
                 $endtime = date($time_format, $endt);
                 echo $starttime . ' - ' .$endtime;
@@ -157,7 +157,7 @@ function tf_events_custom_columns($column) {
 add_action( 'admin_init', 'tf_events_create' );
 
 function tf_events_create() {
-    add_meta_box('tf_events_meta', __('Events','themeforce'), 'tf_events_meta', 'tf_events');
+    add_meta_box('tf_events_meta', __( 'Events', 'themeforce' ), 'tf_events_meta', 'tf_events');
 }
 
 function tf_events_meta () {
@@ -165,7 +165,7 @@ function tf_events_meta () {
     // - grab data -
 
     global $post;
-    $custom = get_post_custom($post->ID);
+    $custom = get_post_custom( $post->ID );
     $meta_sd = $custom["tf_events_startdate"][0];
     $meta_ed = $custom["tf_events_enddate"][0];
     $meta_st = $meta_sd;
@@ -173,8 +173,8 @@ function tf_events_meta () {
 
     // - grab wp time format -
 
-    $date_format = get_option('date_format'); // Not required in my code
-    $time_format = get_option('time_format');
+    $date_format = get_option( 'date_format' ); // Not required in my code
+    $time_format = get_option( 'time_format' );
 
     // - populate today if empty, 00:00 for time -
 
@@ -225,13 +225,13 @@ function save_tf_events(){
 
     // - convert back to unix & update post
 
-    if(!isset($_POST["tf_events_startdate"])):
+    if ( !isset($_POST["tf_events_startdate"]) ):
         return $post;
         endif;
         $updatestartd = strtotime ( $_POST["tf_events_startdate"] . $_POST["tf_events_starttime"] );
         update_post_meta($post->ID, "tf_events_startdate", $updatestartd );
 
-    if(!isset($_POST["tf_events_enddate"])):
+    if ( !isset($_POST["tf_events_enddate"]) ):
         return $post;
         endif;
         $updateendd = strtotime ( $_POST["tf_events_enddate"] . $_POST["tf_events_endtime"]);
@@ -249,19 +249,19 @@ function events_updated_messages( $messages ) {
 
   $messages['tf_events'] = array(
     0 => '', // Unused. Messages start at index 1.
-    1 => sprintf( __('Event updated. <a href="%s">View item</a>'), esc_url( get_permalink($post_ID) ) ),
+    1 => sprintf( __('Event updated. <a href="%s">View item</a>'), esc_url( get_permalink( $post_ID ) ) ),
     2 => __('Custom field updated.'),
     3 => __('Custom field deleted.'),
     4 => __('Event updated.'),
     /* translators: %s: date and time of the revision */
-    5 => isset($_GET['revision']) ? sprintf( __('Event restored to revision from %s'), wp_post_revision_title( (int) $_GET['revision'], false ) ) : false,
-    6 => sprintf( __('Event published. <a href="%s">View event</a>'), esc_url( get_permalink($post_ID) ) ),
+    5 => isset( $_GET['revision'] ) ? sprintf( __('Event restored to revision from %s'), wp_post_revision_title( ( int ) $_GET['revision'], false ) ) : false,
+    6 => sprintf( __('Event published. <a href="%s">View event</a>'), esc_url( get_permalink( $post_ID ) ) ),
     7 => __('Event saved.'),
-    8 => sprintf( __('Event submitted. <a target="_blank" href="%s">Preview event</a>'), esc_url( add_query_arg( 'preview', 'true', get_permalink($post_ID) ) ) ),
+    8 => sprintf( __('Event submitted. <a target="_blank" href="%s">Preview event</a>'), esc_url( add_query_arg( 'preview', 'true', get_permalink( $post_ID ) ) ) ),
     9 => sprintf( __('Event scheduled for: <strong>%1$s</strong>. <a target="_blank" href="%2$s">Preview event</a>'),
       // translators: Publish box date format, see http://php.net/date
-      date_i18n( __( 'M j, Y @ G:i' ), strtotime( $post->post_date ) ), esc_url( get_permalink($post_ID) ) ),
-    10 => sprintf( __('Event draft updated. <a target="_blank" href="%s">Preview event</a>'), esc_url( add_query_arg( 'preview', 'true', get_permalink($post_ID) ) ) ),
+      date_i18n( __( 'M j, Y @ G:i' ), strtotime( $post->post_date ) ), esc_url( get_permalink( $post_ID ) ) ),
+    10 => sprintf( __('Event draft updated. <a target="_blank" href="%s">Preview event</a>'), esc_url( add_query_arg( 'preview', 'true', get_permalink( $post_ID ) ) ) ),
   );
 
   return $messages;
@@ -271,19 +271,19 @@ function events_updated_messages( $messages ) {
 
 function events_styles() {
     global $post_type;
-    if( 'tf_events' != $post_type )
+    if ( 'tf_events' != $post_type )
         return;
     wp_enqueue_style('ui-datepicker', TF_URL . '/assets/css/jquery-ui-1.8.9.custom.css');
 }
 
 function events_scripts() {
     global $post_type;
-    if( 'tf_events' != $post_type )
+    if ( 'tf_events' != $post_type )
     return;
-    // wp_deregister_script('jquery-ui-core'); TODO removed deregister, seems to have no conflicting issues.
-    wp_enqueue_script('jquery-ui', TF_URL . '/assets/js/jquery-ui-1.8.9.custom.min.js', array('jquery'));
+    // wp_deregister_script( 'jquery-ui-core' ); TODO removed deregister, seems to have no conflicting issues.
+    wp_enqueue_script('jquery-ui', TF_URL . '/assets/js/jquery-ui-1.8.9.custom.min.js', array( 'jquery') );
     wp_enqueue_script('ui-datepicker', TF_URL . '/assets/js/jquery.ui.datepicker.js');
-    wp_enqueue_script('ui-datepicker-settings', TF_URL . '/assets/js/themeforce-admin.js', array('jquery'));
+    wp_enqueue_script('ui-datepicker-settings', TF_URL . '/assets/js/themeforce-admin.js', array( 'jquery') );
     // - pass local img path to js -
     $datepicker_img = TF_URL . '/assets/images/ui/icon-datepicker.png';
 
@@ -304,7 +304,7 @@ add_action( 'init', 'create_events_tax', 10 );
 
 function create_events_tax() {
 
-    if (get_option('tf_added_default_events_terms') != 'updated') {
+    if ( get_option('tf_added_default_events_terms' ) != 'updated') {
         // Create the terms
         if (term_exists('Featured', 'tf_eventcategory') == false ) {
             wp_insert_term(
@@ -325,7 +325,7 @@ function create_events_tax() {
               );
          }
          // Register update so that it's not repeated
-         update_option('tf_added_default_events_terms','updated');
+         update_option( 'tf_added_default_events_terms', 'updated' );
     }
 }
 
@@ -338,20 +338,20 @@ function create_events_tax() {
  */
 function tf_event_permalink( $permalink, $post, $leavename ) {
 	
-	if( $post->post_type !== 'tf_events' || strpos( $permalink, '?' ) )
+	if ( $post->post_type !== 'tf_events' || strpos( $permalink, '?' ) )
 		return $permalink;
 	
 	$terms = wp_get_object_terms( $post->ID, 'tf_eventcategory' );
 	$term_slug = null;
 	
 	foreach( $terms as $t ) {
-		if( $t->slug != 'featured' ) {
+		if ( $t->slug != 'featured' ) {
 			$term_slug = $t->slug;
 			break;
 		}
 	}
 	
-	if( $term_slug === null )		
+	if ( $term_slug === null )		
 		$term_slug = 'uncategorized';
 	
 	return trailingslashit( get_bloginfo( 'url' ) ) . 'events/' . $term_slug . '/'. ( $leavename ? '%postname%' : $post->post_name  ) . '/';

@@ -42,10 +42,10 @@ class tf_fs_herenow_widget extends WP_Widget {
                 echo '<div class="fs-herenow">';
 			    
 		        $venue = tf_foursquare_transient();
-		        if( is_wp_error( $venue ) || !$venue ) {
+		        if ( is_wp_error( $venue ) || !$venue ) {
                 	echo 'Please configure foursquare in the Theme Options';
 					
-					if( is_wp_error( $venue ) )
+					if ( is_wp_error( $venue ) )
 						echo '<!-- FourSquare returned error: ' . $venue->get_error_message() . '-->';
                 } else {
 				

@@ -1,15 +1,15 @@
 <?php
 
 // Output Business Address (in Schema)
-// Use in templates: do_shortcode('[tf-address]');
+// Use in templates: do_shortcode( '[tf-address]' );
 
 function tf_shortcode_address()
 {
-	$streetaddress = get_option('tf_address_street');
-	$locality = get_option('tf_address_locality');
-	$region = get_option('tf_address_region');
-	$postalcode = get_option('tf_address_postalcode');
-	$country = get_option('tf_address_country');
+	$streetaddress = get_option( 'tf_address_street' );
+	$locality = get_option( 'tf_address_locality' );
+	$region = get_option( 'tf_address_region' );
+	$postalcode = get_option( 'tf_address_postalcode' );
+	$country = get_option( 'tf_address_country');
 		
 	ob_start(); 
 	if ($streetaddress != '')
@@ -23,7 +23,7 @@ function tf_shortcode_address()
             echo '</div>';
         } else {
             // Fallback - Pre 3.2.2
-            echo get_option('tf_business_address');
+            echo get_option( 'tf_business_address' );
         }
                
         $output = ob_get_contents();
@@ -34,11 +34,11 @@ function tf_shortcode_address()
 add_shortcode( 'tf-address', 'tf_shortcode_address' );
 
 // Output Phone Number (in Schema)
-// Use in templates: do_shortcode('[tf-phone]');
+// Use in templates: do_shortcode( '[tf-phone]' );
 
 function tf_shortcode_phone()
 {
-	$phone = get_option('tf_business_phone');
+	$phone = get_option( 'tf_business_phone' );
 	$output = '<span itemprop="telephone">' . $phone . '</span>';
 	return $output;
 }

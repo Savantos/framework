@@ -31,12 +31,12 @@ class tf_payments_widget extends WP_Widget {
 		$title = apply_filters('widget_title', $instance['payment-title'] );
                 $headdesc = $instance['payment-headdesc'];
                 $footdesc = $instance['payment-footdesc'];
-                $visa = isset($instance['payment-visa']) ? $instance['payment-visa'] : true;
-                $mast = isset($instance['payment-mast']) ? $instance['payment-mast'] : true;
-                $amex = isset($instance['payment-amex']) ? $instance['payment-amex'] : true;
-                $disc = isset($instance['payment-disc']) ? $instance['payment-disc'] : true;
-                $cirr = isset($instance['payment-cirr']) ? $instance['payment-cirr'] : true;
-                $maes = isset($instance['payment-maes']) ? $instance['payment-maes'] : true;
+                $visa = isset( $instance['payment-visa'] ) ? $instance['payment-visa'] : true;
+                $mast = isset( $instance['payment-mast'] ) ? $instance['payment-mast'] : true;
+                $amex = isset( $instance['payment-amex'] ) ? $instance['payment-amex'] : true;
+                $disc = isset( $instance['payment-disc'] ) ? $instance['payment-disc'] : true;
+                $cirr = isset( $instance['payment-cirr'] ) ? $instance['payment-cirr'] : true;
+                $maes = isset( $instance['payment-maes'] ) ? $instance['payment-maes'] : true;
 
                 // widget display
 
@@ -45,12 +45,12 @@ class tf_payments_widget extends WP_Widget {
                 if ( $title ) {echo $before_title . $title . $after_title;}
                 if ( $headdesc ) {echo '<p>' . $headdesc . '</p>';}
                 echo '<ul class="tf-payments">';
-                if ( $visa == true ) { echo '<li class="payment-type"><img src="' . get_bloginfo('template_url') . '/themeforce/assets/images/payment-visa.png" alt="' . __('Visa Accepted', 'themeforce') . '" /></li>'; }
-                if ( $mast == true ) { echo '<li class="payment-type"><img src="' . get_bloginfo('template_url') . '/themeforce/assets/images/payment-mast.png" alt="' . __('Mastercard Accepted', 'themeforce') . '" /></li>'; }
-                if ( $amex == true ) { echo '<li class="payment-type"><img src="' . get_bloginfo('template_url') . '/themeforce/assets/images/payment-amex.png" alt="' . __('American Express Accepted', 'themeforce') . '" /></li>'; }
-                if ( $disc == true ) { echo '<li class="payment-type"><img src="' . get_bloginfo('template_url') . '/themeforce/assets/images/payment-disc.png" alt="' . __('Discover Card Accepted', 'themeforce') . '" /></li>'; }
-                if ( $cirr == true ) { echo '<li class="payment-type"><img src="' . get_bloginfo('template_url') . '/themeforce/assets/images/payment-cirr.png" alt="' . __('Cirrus Card Accepted', 'themeforce') . '" /></li>'; }
-                if ( $maes == true ) { echo '<li class="payment-type"><img src="' . get_bloginfo('template_url') . '/themeforce/assets/images/payment-maes.png" alt="' . __('Maestro Card Accepted', 'themeforce') . '" /></li>'; }
+                if ( $visa == true ) { echo '<li class="payment-type"><img src="' . get_bloginfo( 'template_url' ) . '/themeforce/assets/images/payment-visa.png" alt="' . __('Visa Accepted', 'themeforce') . '" /></li>'; }
+                if ( $mast == true ) { echo '<li class="payment-type"><img src="' . get_bloginfo( 'template_url' ) . '/themeforce/assets/images/payment-mast.png" alt="' . __('Mastercard Accepted', 'themeforce') . '" /></li>'; }
+                if ( $amex == true ) { echo '<li class="payment-type"><img src="' . get_bloginfo( 'template_url' ) . '/themeforce/assets/images/payment-amex.png" alt="' . __('American Express Accepted', 'themeforce') . '" /></li>'; }
+                if ( $disc == true ) { echo '<li class="payment-type"><img src="' . get_bloginfo( 'template_url' ) . '/themeforce/assets/images/payment-disc.png" alt="' . __('Discover Card Accepted', 'themeforce') . '" /></li>'; }
+                if ( $cirr == true ) { echo '<li class="payment-type"><img src="' . get_bloginfo( 'template_url' ) . '/themeforce/assets/images/payment-cirr.png" alt="' . __('Cirrus Card Accepted', 'themeforce') . '" /></li>'; }
+                if ( $maes == true ) { echo '<li class="payment-type"><img src="' . get_bloginfo( 'template_url' ) . '/themeforce/assets/images/payment-maes.png" alt="' . __('Maestro Card Accepted', 'themeforce') . '" /></li>'; }
                 echo '</ul>';
                 if ( $footdesc ) {echo '<p>' . $footdesc . '</p>';}
 
@@ -65,7 +65,7 @@ class tf_payments_widget extends WP_Widget {
 
 			  $instance = array( 'payment-visa' => 0, 'payment-mast' => 0, 'payment-amex' => 0, 'payment-disc' => 0, 'payment-cirr' => 0, 'payment-maes' => 0);
 				  	foreach ( $instance as $field => $val ) {
-				   if ( isset($new_instance[$field]) )
+				   if ( isset( $new_instance[$field] ) )
 				    $instance[$field] = 1;
 			  }
 			  $instance['payment-title'] = strip_tags( $new_instance['payment-title'] );

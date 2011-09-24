@@ -38,7 +38,7 @@ function create_foodmenu_postype() {
         '_builtin' => false,
         '_edit_link' => 'post.php?post=%d',
         'capability_type' => 'post',
-        'menu_icon' => get_bloginfo('template_url').'/themeforce/assets/images/food_16.png',
+        'menu_icon' => get_bloginfo( 'template_url' ).'/themeforce/assets/images/food_16.png',
         'hierarchical' => false,
         'rewrite' => array( "slug" => "food-menu" ),
         'supports'=> array('title', 'thumbnail', 'editor') ,
@@ -87,26 +87,26 @@ add_action( 'init', 'create_foodmenucategory_taxonomy', 0 );
 add_filter( "manage_edit-tf_foodmenu_columns", "tf_foodmenu_edit_columns" );
 add_action( "manage_posts_custom_column", "tf_foodmenu_custom_columns" );
 
-function tf_foodmenu_edit_columns($columns) {
+function tf_foodmenu_edit_columns( $columns ) {
 
  	$columns = array(
  		"cb" => "<input type=\"checkbox\" />",
  		"tf_col_menu_thumb" => '',
- 		//"tf_col_menu_id" => __('ID'),
- 		"title" => __('Item'),
- 		"tf_col_menu_cat" => __('Section'),
- 		"tf_col_menu_desc" => __('Description'),
- 		"tf_col_menu_size" => __('Size(s)'),
- 		"tf_col_menu_price" => __('Price(s)'),
+ 		//"tf_col_menu_id" => __( 'ID' ),
+ 		"title" => __( 'Item' ),
+ 		"tf_col_menu_cat" => __( 'Section' ),
+ 		"tf_col_menu_desc" => __( 'Description' ),
+ 		"tf_col_menu_size" => __( 'Size(s)' ),
+ 		"tf_col_menu_price" => __( 'Price(s)' ),
  	);
  	
  	return $columns;
 }
 
-function tf_foodmenu_custom_columns($column) {
+function tf_foodmenu_custom_columns( $column ) {
 	global $post;
 	$custom = get_post_custom();
-	switch ($column) {
+	switch ( $column ) {
 		case "tf_col_menu_id":
 				echo $post->ID;
 				break;
@@ -114,7 +114,7 @@ function tf_foodmenu_custom_columns($column) {
 		case "tf_col_menu_cat":
 				$menucats = get_the_terms($post->ID, "tf_foodmenucat");
 				$menucats_html = array();
-				if ($menucats) {
+				if ( $menucats ) {
 				foreach ($menucats as $menucat)
 				        array_push($menucats_html, $menucat->name);
 				
@@ -147,9 +147,9 @@ function tf_foodmenu_custom_columns($column) {
 				$price3 = $custom["tf_menu_price3"][0];
 				
 				$output = '';
-				if ($price1 != '') { echo get_option('tf_currency_symbol').''.$price1; }
-				if ($price2 != '') { echo '<br />'; echo get_option('tf_currency_symbol').''.$price2; }
-				if ($price3 != '') { echo '<br />'; echo get_option('tf_currency_symbol').''.$price3; }
+				if ($price1 != '') { echo get_option( 'tf_currency_symbol' ).''.$price1; }
+				if ($price2 != '') { echo '<br />'; echo get_option( 'tf_currency_symbol' ).''.$price2; }
+				if ($price3 != '') { echo '<br />'; echo get_option( 'tf_currency_symbol' ).''.$price3; }
 				break;
 	}
 }
@@ -164,7 +164,7 @@ function tf_foodmenu_create() {
 
 function tf_foodmenu_meta () {
     global $post;
-    $custom = get_post_custom($post->ID);
+    $custom = get_post_custom( $post->ID );
     $metasize1 = $custom["tf_menu_size1"][0];
     $metasize2 = $custom["tf_menu_size2"][0];
     $metasize3 = $custom["tf_menu_size3"][0];
@@ -213,32 +213,32 @@ function save_tf_menuitem(){
         return $post->ID;
 
     // - update post
-    if(!isset($_POST["tf_menu_size1"])):
+    if( !isset($_POST["tf_menu_size1"]) ):
     return $post;
     endif;
     update_post_meta($post->ID, "tf_menu_size1", $_POST["tf_menu_size1"]);
 
-    if(!isset($_POST["tf_menu_size2"])):
+    if( !isset($_POST["tf_menu_size2"]) ):
     return $post;
     endif;
     update_post_meta($post->ID, "tf_menu_size2", $_POST["tf_menu_size2"]);
 
-    if(!isset($_POST["tf_menu_size1"])):
+    if( !isset($_POST["tf_menu_size1"]) ):
     return $post;
     endif;
     update_post_meta($post->ID, "tf_menu_size3", $_POST["tf_menu_size3"]);
 
-    if(!isset($_POST["tf_menu_price1"])):
+    if( !isset($_POST["tf_menu_price1"]) ):
     return $post;
     endif;
     update_post_meta($post->ID, "tf_menu_price1", $_POST["tf_menu_price1"]);
 
-    if(!isset($_POST["tf_menu_price2"])):
+    if( !isset($_POST["tf_menu_price2"]) ):
     return $post;
     endif;
     update_post_meta($post->ID, "tf_menu_price2", $_POST["tf_menu_price2"]);
 
-    if(!isset($_POST["tf_menu_price1"])):
+    if( !isset($_POST["tf_menu_price1"]) ):
     return $post;
     endif;
     update_post_meta($post->ID, "tf_menu_price3", $_POST["tf_menu_price3"]);
@@ -253,19 +253,19 @@ function menu_updated_messages( $messages ) {
 
   $messages['tf_foodmenu'] = array(
     0 => '', // Unused. Messages start at index 1.
-    1 => sprintf( __('Menu item updated. <a href="%s">View item</a>'), esc_url( get_permalink($post_ID) ) ),
+    1 => sprintf( __('Menu item updated. <a href="%s">View item</a>'), esc_url( get_permalink( $post_ID ) ) ),
     2 => __('Custom field updated.'),
     3 => __('Custom field deleted.'),
     4 => __('Menu item updated.'),
     /* translators: %s: date and time of the revision */
-    5 => isset($_GET['revision']) ? sprintf( __('Menu item restored to revision from %s'), wp_post_revision_title( (int) $_GET['revision'], false ) ) : false,
-    6 => sprintf( __('Menu item published. <a href="%s">View menu item</a>'), esc_url( get_permalink($post_ID) ) ),
+    5 => isset( $_GET['revision'] ) ? sprintf( __('Menu item restored to revision from %s'), wp_post_revision_title( ( int ) $_GET['revision'], false ) ) : false,
+    6 => sprintf( __('Menu item published. <a href="%s">View menu item</a>'), esc_url( get_permalink( $post_ID ) ) ),
     7 => __('Menu saved.'),
-    8 => sprintf( __('Menu item submitted. <a target="_blank" href="%s">Preview menu item</a>'), esc_url( add_query_arg( 'preview', 'true', get_permalink($post_ID) ) ) ),
+    8 => sprintf( __('Menu item submitted. <a target="_blank" href="%s">Preview menu item</a>'), esc_url( add_query_arg( 'preview', 'true', get_permalink( $post_ID ) ) ) ),
     9 => sprintf( __('Menu item scheduled for: <strong>%1$s</strong>. <a target="_blank" href="%2$s">Preview menu item</a>'),
       // translators: Publish box date format, see http://php.net/date
-      date_i18n( __( 'M j, Y @ G:i' ), strtotime( $post->post_date ) ), esc_url( get_permalink($post_ID) ) ),
-    10 => sprintf( __('Menu item draft updated. <a target="_blank" href="%s">Preview menu item</a>'), esc_url( add_query_arg( 'preview', 'true', get_permalink($post_ID) ) ) ),
+      date_i18n( __( 'M j, Y @ G:i' ), strtotime( $post->post_date ) ), esc_url( get_permalink( $post_ID ) ) ),
+    10 => sprintf( __('Menu item draft updated. <a target="_blank" href="%s">Preview menu item</a>'), esc_url( add_query_arg( 'preview', 'true', get_permalink( $post_ID ) ) ) ),
   );
 
   return $messages;
@@ -277,7 +277,7 @@ add_action( 'init', 'create_foodmenu_tax', 10 );
 
 function create_foodmenu_tax() {
 
-    if (get_option('tf_added_default_food_terms') != 'updated') {
+    if ( get_option('tf_added_default_food_terms' ) != 'updated') {
         // Create the terms
         if (term_exists('Appetizers', 'tf_foodmenucat') == false ) {
             wp_insert_term(
@@ -298,7 +298,7 @@ function create_foodmenu_tax() {
               );
          }
          // Register update so that it's not repeated
-         update_option('tf_added_default_food_terms','updated');
+         update_option( 'tf_added_default_food_terms','updated' );
     }
 }
 
@@ -332,7 +332,7 @@ add_action( 'restrict_manage_posts', 'tf_food_menu_restrict_manage_posts' );
  */
 function tf_food_menu_get_food_varients( $post_id ) {
 
-	$custom = get_post_custom($post_id);
+	$custom = get_post_custom( $post_id );
 
     $metasize1 = $custom["tf_menu_size1"][0];
     $metasize2 = $custom["tf_menu_size2"][0];

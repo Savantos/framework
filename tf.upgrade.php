@@ -2,7 +2,7 @@
 
 function tf_upgrade_scripts() {
 
-	if( apply_filters( 'tf_upgrade_scripts', null ) )
+	if ( apply_filters( 'tf_upgrade_scripts', null ) )
 		add_action( 'admin_notices', 'tf_upgrade_admin_notice' );
 }
 add_action( 'admin_init', 'tf_upgrade_scripts' );
@@ -21,7 +21,7 @@ function tf_upgrade_admin_notice() {
  */
 function tf_upgrade_scripts_action() {
 
-	if( empty( $_GET['tf_action'] ) || $_GET['tf_action'] !== 'update_legacy_options' || !wp_verify_nonce( $_GET['_wpnonce'], 'update_legacy_options' ) )
+	if ( empty( $_GET['tf_action'] ) || $_GET['tf_action'] !== 'update_legacy_options' || !wp_verify_nonce( $_GET['_wpnonce'], 'update_legacy_options' ) )
 		return;
 	
 	tf_run_upgrade_scripts();

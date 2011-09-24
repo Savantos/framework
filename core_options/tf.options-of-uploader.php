@@ -1,7 +1,7 @@
 <?php
 
 /**
- * WooThemes Media Library-driven AJAX File Uploader Module (2010-11-05)
+ * WooThemes Media Library-driven AJAX File Uploader Module ( 2010-11-05 )
  *
  * Slightly modified for use in the Options Framework.
  */
@@ -63,7 +63,7 @@ if ( ! function_exists( 'tf_optionsframework_mlu_css' ) ) {
 }
 
 /**
- * Registers and enqueues (loads) the necessary JavaScript file for working with the
+ * Registers and enqueues ( loads ) the necessary JavaScript file for working with the
  * Media Library-driven AJAX File Uploader Module.
  */
 
@@ -97,7 +97,7 @@ if ( ! function_exists( 'tf_optionsframework_medialibrary_uploader' ) ) {
 
 	function tf_optionsframework_medialibrary_uploader( $_id, $_value, $_mode = 'full', $_desc = '', $_postid = 0, $_name = '', $size='400') {
 	
-		$tf_optionsframework_settings = get_option('optionsframework');
+		$tf_optionsframework_settings = get_option( 'optionsframework' );
 		
 		// Gets the unique option id
 		$option_name = $tf_optionsframework_settings['id'];
@@ -136,12 +136,12 @@ if ( ! function_exists( 'tf_optionsframework_medialibrary_uploader' ) ) {
 		$output .= '<div class="screenshot" id="' . $id . '_image">' . "\n";
 		
 		if ( $value != '' ) { 
-			$remove = '<div class="clear:both;"></div><a href="javascript:(void);" class="mlu_remove tf-button">Remove</a>';
-			$image = preg_match( '/(^.*\.jpg|jpeg|png|gif|ico*)/i', $value );
+			$remove = '<div class="clear:both;"></div><a href="javascript:( void );" class="mlu_remove tf-button">Remove</a>';
+			$image = preg_match( '/( ^.*\.jpg|jpeg|png|gif|ico* )/i', $value );
              
             // TODO Not sure why this isn't playing along, just outputs the full image, ideas?
             //var_dump( $value );
-            //$wpthumb = wpthumb($value,'width=400&height=200&crop=1', false);
+            //$wpthumb = wpthumb($value, 'width=400&height=200&crop=1', false);
             $wpthumb = $value;
             
 			if ( $image ) {
@@ -251,7 +251,7 @@ if ( ! function_exists( 'tf_optionsframework_mlu_js_popup' ) ) {
 ?>
 	<script type="text/javascript">
 	<!--
-	jQuery(function($) {
+	jQuery( function($ ) {
 		
 		jQuery.noConflict();
 		
@@ -305,7 +305,7 @@ if ( ! function_exists( 'tf_optionsframework_mlu_modify_tabs' ) ) {
 	function tf_optionsframework_mlu_modify_tabs ( $tabs ) {
 		$tabs['gallery'] = str_replace( __( 'Gallery', 'optionsframework' ), __( 'Previously Uploaded', 'optionsframework' ), $tabs['gallery'] );
 
-		unset($tabs['library']);
+		unset( $tabs['library'] );
 		return $tabs;
 	}
 }

@@ -48,15 +48,15 @@ class GetMostCommonColors
 				$half_delta = 0;
 			}
 			// WE HAVE TO RESIZE THE IMAGE, BECAUSE WE ONLY NEED THE MOST SIGNIFICANT COLORS.
-			$size = GetImageSize($img);
+			$size = GetImageSize( $img );
  			$scale = 1;
-			if ($size[0]>0)
+			if ( $size[0]>0 )
 			$scale = min($this->PREVIEW_WIDTH/$size[0], $this->PREVIEW_HEIGHT/$size[1]);
 
 			if ($scale < 1)
 			{
-				$width = floor($scale*$size[0]);
-				$height = floor($scale*$size[1]);
+				$width = floor( $scale*$size[0] );
+				$height = floor( $scale*$size[1] );
 			}
 			else
 			{
@@ -65,16 +65,16 @@ class GetMostCommonColors
 			}
 			$image_resized = imagecreatetruecolor($width, $height);
 			if ($size[2] == 1)
-			$image_orig = imagecreatefromgif($img);
+			$image_orig = imagecreatefromgif ( $img );
 			if ($size[2] == 2)
-			$image_orig = imagecreatefromjpeg($img);
+			$image_orig = imagecreatefromjpeg( $img );
 			if ($size[2] == 3)
-			$image_orig = imagecreatefrompng($img);
+			$image_orig = imagecreatefrompng( $img );
 			// WE NEED NEAREST NEIGHBOR RESIZING, BECAUSE IT DOESN'T ALTER THE COLORS
 			imagecopyresampled($image_resized, $image_orig, 0, 0, 0, 0, $width, $height, $size[0], $size[1]);
 			$im = $image_resized;
-			$imgWidth = imagesx($im);
-			$imgHeight = imagesy($im);
+			$imgWidth = imagesx( $im );
+			$imgHeight = imagesy( $im );
 			$total_pixel_count = 0;
  
 			for ($y=0; $y < $imgHeight; $y++)
@@ -82,14 +82,14 @@ class GetMostCommonColors
 				for ($x=0; $x < $imgWidth; $x++)
 				{
 					$total_pixel_count++;
-					$index = imagecolorat($im,$x,$y);
-					$colors = imagecolorsforindex($im,$index);
+					$index = imagecolorat( $im, $x, $y );
+					$colors = imagecolorsforindex( $im, $index );
 					// ROUND THE COLORS, TO REDUCE THE NUMBER OF DUPLICATE COLORS
 					if ( $delta > 1 )
 					{
-						$colors['red'] = intval((($colors['red'])+$half_delta)/$delta)*$delta;
-						$colors['green'] = intval((($colors['green'])+$half_delta)/$delta)*$delta;
-						$colors['blue'] = intval((($colors['blue'])+$half_delta)/$delta)*$delta;
+						$colors['red'] = intval( ( ($colors['red'])+$half_delta)/$delta )*$delta;
+						$colors['green'] = intval( ( ($colors['green'])+$half_delta)/$delta )*$delta;
+						$colors['blue'] = intval( ( ($colors['blue'])+$half_delta)/$delta )*$delta;
 						if ($colors['red'] >= 256)
 						{
 							$colors['red'] = 255;
@@ -105,8 +105,8 @@ class GetMostCommonColors
 
 					}
                                                 // TF - Exclude Black/White/Shades of Gray 
-						$max = max($colors['red'],$colors['green'],$colors['blue']);
-						$min = min($colors['red'],$colors['green'],$colors['blue']);
+						$max = max( $colors['red'], $colors['green'], $colors['blue'] );
+						$min = min( $colors['red'], $colors['green'], $colors['blue'] );
                                                 
                                                 // TF - Exclude Very Bright or Very Dark Areas
                                                 $total = $colors['red'] + $colors['green'] + $colors['blue'];
@@ -122,7 +122,7 @@ class GetMostCommonColors
 
                                                 // TF - Conditional Statement based on Test Results  
 						if ( $max != $min && $tenpercent != true  ) {
-                                                        $hex = substr("0".dechex($colors['red']),-2).substr("0".dechex($colors['green']),-2).substr("0".dechex($colors['blue']),-2);
+                                                        $hex = substr( "0".dechex($colors['red']), -2).substr("0".dechex($colors['green']), -2).substr("0".dechex($colors['blue']), -2 );
                                                 }
        
 			
@@ -149,7 +149,7 @@ class GetMostCommonColors
 				$gradients = array();
 				foreach ($hexarray as $hex => $num)
 				{
-					if ( ! isset($gradients[$hex]) )
+					if ( ! isset( $gradients[$hex] ) )
 					{
 						$new_hex = $this->_find_adjacent( $hex, $gradients, $delta );
 						$gradients[$hex] = $new_hex;
@@ -177,7 +177,7 @@ class GetMostCommonColors
 				$brightness = array();
 				foreach ($hexarray as $hex => $num)
 				{
-					if ( ! isset($brightness[$hex]) )
+					if ( ! isset( $brightness[$hex] ) )
 					{
 						$new_hex = $this->_normalize( $hex, $brightness, $delta );
 						$brightness[$hex] = $new_hex;
@@ -200,7 +200,7 @@ class GetMostCommonColors
 			// convert counts to percentages
 			foreach ($hexarray as $key => $value)
 			{
-				$hexarray[$key] = (float)$value / $total_pixel_count;
+				$hexarray[$key] = ( float )$value / $total_pixel_count;
 			}
                         global $globalhex;
                         $globalhex = $hexarray;
@@ -287,7 +287,7 @@ class GetMostCommonColors
 
 		for (; $highest < 256; $lowest += $delta, $highest += $delta)
 		{
-			$new_hex = substr("0".dechex($colors['red'] - $lowest),-2).substr("0".dechex($colors['green'] - $lowest),-2).substr("0".dechex($colors['blue'] - $lowest),-2);
+			$new_hex = substr("0".dechex($colors['red'] - $lowest), -2).substr("0".dechex($colors['green'] - $lowest), -2).substr("0".dechex($colors['blue'] - $lowest), -2);
 
 			if ( isset( $hexarray[$new_hex] ) )
 			{
@@ -307,24 +307,24 @@ class GetMostCommonColors
 
 		if ($red > $delta)
 		{
-			$new_hex = substr("0".dechex($red - $delta),-2).substr("0".dechex($green),-2).substr("0".dechex($blue),-2);
-			if ( isset($gradients[$new_hex]) )
+			$new_hex = substr("0".dechex($red - $delta), -2).substr( "0".dechex($green), -2).substr("0".dechex($blue), -2 );
+			if ( isset( $gradients[$new_hex] ) )
 			{
 				return $gradients[$new_hex];
 			}
 		}
 		if ($green > $delta)
 		{
-			$new_hex = substr("0".dechex($red),-2).substr("0".dechex($green - $delta),-2).substr("0".dechex($blue),-2);
-			if ( isset($gradients[$new_hex]) )
+			$new_hex = substr( "0".dechex($red), -2 ).substr("0".dechex($green - $delta), -2).substr( "0".dechex($blue), -2 );
+			if ( isset( $gradients[$new_hex] ) )
 			{
 				return $gradients[$new_hex];
 			}
 		}
 		if ($blue > $delta)
 		{
-			$new_hex = substr("0".dechex($red),-2).substr("0".dechex($green),-2).substr("0".dechex($blue - $delta),-2);
-			if ( isset($gradients[$new_hex]) )
+			$new_hex = substr( "0".dechex($red), -2).substr("0".dechex($green), -2 ).substr("0".dechex($blue - $delta), -2);
+			if ( isset( $gradients[$new_hex] ) )
 			{
 				return $gradients[$new_hex];
 			}
@@ -332,24 +332,24 @@ class GetMostCommonColors
 
 		if ($red < (255 - $delta))
 		{
-			$new_hex = substr("0".dechex($red + $delta),-2).substr("0".dechex($green),-2).substr("0".dechex($blue),-2);
-			if ( isset($gradients[$new_hex]) )
+			$new_hex = substr("0".dechex($red + $delta), -2).substr( "0".dechex($green), -2).substr("0".dechex($blue), -2 );
+			if ( isset( $gradients[$new_hex] ) )
 			{
 				return $gradients[$new_hex];
 			}
 		}
 		if ($green < (255 - $delta))
 		{
-			$new_hex = substr("0".dechex($red),-2).substr("0".dechex($green + $delta),-2).substr("0".dechex($blue),-2);
-			if ( isset($gradients[$new_hex]) )
+			$new_hex = substr( "0".dechex($red), -2 ).substr("0".dechex($green + $delta), -2).substr( "0".dechex($blue), -2 );
+			if ( isset( $gradients[$new_hex] ) )
 			{
 				return $gradients[$new_hex];
 			}
 		}
 		if ($blue < (255 - $delta))
 		{
-			$new_hex = substr("0".dechex($red),-2).substr("0".dechex($green),-2).substr("0".dechex($blue + $delta),-2);
-			if ( isset($gradients[$new_hex]) )
+			$new_hex = substr( "0".dechex($red), -2).substr("0".dechex($green), -2 ).substr("0".dechex($blue + $delta), -2);
+			if ( isset( $gradients[$new_hex] ) )
 			{
 				return $gradients[$new_hex];
 			}

@@ -41,7 +41,7 @@ function themeforce_social_twitter_page() {
  
 );
 
-    tf_display_settings($options);
+    tf_display_settings( $options );
     ?> 
 	 <input type="submit" id="tf-submit" name="options_submit" value=" <?php _e( 'Save Changes' )  ?>" />
          <div style="clear:both;"></div>

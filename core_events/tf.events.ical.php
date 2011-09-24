@@ -22,7 +22,7 @@ CALSCALE:GREGORIAN
 
 // - grab date barrier -
 $today6am = strtotime('today 6:00') + ( get_option( 'gmt_offset' ) * 3600 );
-$limit = get_option('tf_rss_limit');
+$limit = get_option( 'tf_rss_limit' );
 
 // - query -
 // TODO - Replace with WP_Query
@@ -41,25 +41,25 @@ $querystr = "
 $events = $wpdb->get_results($querystr, OBJECT);
 
 // - loop -
-if ($events):
+if ( $events ):
 global $post;
 foreach ($events as $post):
-setup_postdata($post);
+setup_postdata( $post );
 
 // - custom variables -
-$custom = get_post_custom(get_the_ID());
+$custom = get_post_custom( get_the_ID() );
 $sd = $custom["tf_events_startdate"][0];
 $ed = $custom["tf_events_enddate"][0];
 
 // - grab gmt for start -
 $gmts = date('Y-m-d H:i:s', $sd);
-$gmts = get_gmt_from_date($gmts); // this function requires Y-m-d H:i:s, hence the back & forth.
-$gmts = strtotime($gmts);
+$gmts = get_gmt_from_date( $gmts ); // this function requires Y-m-d H:i:s, hence the back & forth.
+$gmts = strtotime( $gmts );
 
 // - grab gmt for end -
 $gmte = date('Y-m-d H:i:s', $ed);
-$gmte = get_gmt_from_date($gmte); // this function requires Y-m-d H:i:s, hence the back & forth.
-$gmte = strtotime($gmte);
+$gmte = get_gmt_from_date( $gmte ); // this function requires Y-m-d H:i:s, hence the back & forth.
+$gmte = strtotime( $gmte );
 
 // - Set to UTC ICAL FORMAT -
 $stime = date('Ymd\THis\Z', $gmts);
@@ -81,8 +81,8 @@ endif;
 END:VCALENDAR
 <?php
 // - full output -
-$tfeventsical = ob_get_contents();
-ob_end_clean();
+$tfeventsical = ob_get_contents( );
+ob_end_clean( );
 echo $tfeventsical;
 }
 
@@ -91,5 +91,5 @@ function add_tf_events_ical_feed () {
     add_feed('tf-events-ical', 'tf_events_ical');
 }
 
-add_action('init','add_tf_events_ical_feed');
+add_action( 'init','add_tf_events_ical_feed' );
 ?>

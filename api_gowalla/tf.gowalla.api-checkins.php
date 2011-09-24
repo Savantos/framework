@@ -9,8 +9,8 @@ function tf_gowalla_api_checkins() {
 
 	// - setup -
 	
-	$spotid = get_option('tf_gowalla_spot_id');
-	$apikey	= get_option('tf_gowalla_api_key');
+	$spotid = get_option( 'tf_gowalla_spot_id' );
+	$apikey	= get_option( 'tf_gowalla_api_key' );
 	$apiserver = 'http://api.gowalla.com/'; 
 	
 	// - response -
@@ -26,12 +26,12 @@ function tf_gowalla_api_checkins() {
 	);
 	$api_response = wp_remote_request( $url, $args );
 	
-	if( is_wp_error( $api_response ) )
+	if ( is_wp_error( $api_response ) )
 		return $api_response;
 	
-    $json = wp_remote_retrieve_body($api_response);
+    $json = wp_remote_retrieve_body( $api_response );
     
-    $response = json_decode($json);
+    $response = json_decode( $json );
 	
 	return $response;
 
@@ -61,13 +61,13 @@ function tf_gowalla_api_checkins() {
 function tf_gowalla_checkins_transient() {
 
     // - get transient -
-    $json = get_transient('tf_gowalla_checkins_json');
+    $json = get_transient( 'tf_gowalla_checkins_json' );
 
     // - refresh transient - 
     if ( !$json ) {
         $json = tf_gowalla_api_checkins();
 		
-		if( !empty( $json ) && !is_wp_error( $json ) )
+		if ( !empty( $json ) && !is_wp_error( $json ) )
 			set_transient('tf_gowalla_checkins_json', $json, 180);
     }
     return $json;

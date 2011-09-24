@@ -11,19 +11,19 @@ echo '<?xml version="1.0"?>';
 <rss version="2.0">
 <channel>
     
-  <title><?php bloginfo('blognname'); _e(' - Events','themeforce'); ?></title>
+  <title><?php bloginfo( 'blognname' ); _e(' - Events', 'themeforce'); ?></title>
   <link><?php echo the_permalink(); ?></link>
-  <description><?php bloginfo('blognname'); ?></description>
-  <language><?php bloginfo('language') ?></language>
+  <description><?php bloginfo( 'blognname' ); ?></description>
+  <language><?php bloginfo( 'language' ) ?></language>
   <pubDate><?php echo date(DATE_RSS, time()); ?></pubDate>
   <lastBuildDate><?php echo date(DATE_RSS, time()); ?></lastBuildDate>
-  <managingEditor><?php bloginfo('admin_email'); ?></managingEditor>
+  <managingEditor><?php bloginfo( 'admin_email' ); ?></managingEditor>
 
 <?php
 
 // - grab date barrier -
 $today6am = strtotime('today 6:00') + ( get_option( 'gmt_offset' ) * 3600 );
-$limit = get_option('tf_rss_limit');
+$limit = get_option( 'tf_rss_limit' );
 
 // - query -
 global $wpdb;
@@ -42,23 +42,23 @@ $events = $wpdb->get_results($querystr, OBJECT);
 /*$counter = 0;*/
 
 // - loop -
-if ($events):
+if ( $events ):
 global $post;
 foreach ($events as $post):
-setup_postdata($post);
+setup_postdata( $post );
 
 // - custom variables -
-$custom = get_post_custom(get_the_ID());
+$custom = get_post_custom( get_the_ID() );
 $sd = $custom["tf_events_startdate"][0];
 $ed = $custom["tf_events_enddate"][0];
 
 // - grab GMT adjusted 'publish' date -
 $gmt = date('Y-m-d H:i:s', $sd);
-$gmt = get_gmt_from_date($gmt); // this function requires Y-m-d H:i:s, hence the back & forth.
-$gmt = strtotime($gmt);
+$gmt = get_gmt_from_date( $gmt ); // this function requires Y-m-d H:i:s, hence the back & forth.
+$gmt = strtotime( $gmt );
 
 // - local time format -
-$time_format = get_option('time_format');
+$time_format = get_option( 'time_format' );
 $stime = date($time_format, $sd);
 $etime = date($time_format, $ed);
 /* $counter++;
@@ -93,5 +93,5 @@ function add_tf_events_feed () {
     add_feed('tf-events', 'tf_events_rss');
 }
 
-add_action('init','add_tf_events_feed');
+add_action( 'init', 'add_tf_events_feed' );
 ?>

@@ -23,7 +23,7 @@ function themeforce_location_page() {
     // List of Options used within Dropdowns, etc.
     
     $shortname = "tf";
-    $options_yesno = array ('yes','no');
+    $options_yesno = array ( 'yes', 'no' );
     
     // Options
     
@@ -48,40 +48,40 @@ function themeforce_location_page() {
                 "desc" => "The locality. For example, Mountain View, Miami, Sydney, etc.",
                 "id" => $shortname."_address_locality",
                 "std" => "",
-                "type" => "text"),					
+                "type" => "text"), 					
 	
 	// new 3.2.2		
 	array( "name" => "State or Region",
                 "desc" => "The region. For example, CA.",
                 "id" => $shortname."_address_region",
                 "std" => "",
-                "type" => "text"),		
+                "type" => "text"), 		
 
 	// new 3.2.2		
 	array( "name" => "Country",
                 "desc" => "Select your country",
                 "id" => $shortname."_address_country",
                 "std" => "",
-                "type" => "text"),	
+                "type" => "text"), 	
 						
 	array( "name" => "Phone Number",
                 "desc" => "Your business phone number.",
                 "id" => $shortname."_business_phone",
-                "std" => "(123) 456 789",
+                "std" => "( 123 ) 456 789",
                 "type" => "text"),
 							
 
 	array( "name" => "Short Contact Info",
                 "desc" => "Visible contact information in the top-right corner (you can also leave blank)",
                 "id" => "chowforce_biz_contactinfo",
-                "std" => "Call us at +01 (02) 123 57 89",
-                "type" => "text"),				
+                "std" => "Call us at +01 ( 02 ) 123 57 89",
+                "type" => "text"), 				
 
 	array( "type" => "close"), 
  
 );
 
-    tf_display_settings($options);
+    tf_display_settings( $options );
     ?> 
 	 <input type="submit" id="tf-submit" name="options_submit" value=" <?php _e( 'Save Changes' )  ?>" />
          <div style="clear:both;"></div>
