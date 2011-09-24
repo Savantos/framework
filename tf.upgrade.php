@@ -43,3 +43,19 @@ function tf_run_upgrade_scripts() {
 	}
 	
 }
+
+// Misc
+
+/*
+ * Update Logo
+ */
+
+if ( get_option('tf_logo_update') != 'true') {
+    $logo = get_option(TF_THEME . '_logo');
+    
+    if( $logo != '' ) {
+    	update_option('tf_logo', $logo);
+    }
+	
+	update_option('tf_logo_update', 'true');
+}
