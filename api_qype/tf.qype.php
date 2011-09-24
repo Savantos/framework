@@ -96,5 +96,5 @@ function tf_qype_bar() {
     echo $output;
 };
 
-add_action('tf_body_top','tf_qype_bar', 12);
+add_action('tf_body_top', 'tf_qype_bar', 12);
 ?>

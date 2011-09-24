@@ -267,7 +267,7 @@ class TF_Widget_MailChimp extends WP_Widget {
 		
 		extract( $args );
 		
-		if ((isset($_COOKIE[$this->id_base . '-' . $this->number]) && $this->hash_mailing_list_id( $this->number ) == $_COOKIE[$this->id_base . '-' . $this->number]) || false == $this->tf_mc_plugin->get_mcapi()) {
+		if ( (isset($_COOKIE[$this->id_base . '-' . $this->number]) && $this->hash_mailing_list_id( $this->number ) == $_COOKIE[$this->id_base . '-' . $this->number]) || false == $this->tf_mc_plugin->get_mcapi()) {
 			
 			return 0;
 			

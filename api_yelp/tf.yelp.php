@@ -104,4 +104,4 @@ function tf_yelp_bar() {
     echo $output;
 };
 
-add_action('tf_body_top','tf_yelp_bar', 12);
+add_action('tf_body_top', 'tf_yelp_bar', 12);

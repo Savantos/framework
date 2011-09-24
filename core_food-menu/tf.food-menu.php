@@ -70,7 +70,7 @@ function create_foodmenucategory_taxonomy() {
         'new_item_name' => __( 'New Food Menu Category Name' ),
     );
 
-    register_taxonomy('tf_foodmenucat','tf_foodmenu', array(
+    register_taxonomy('tf_foodmenucat', 'tf_foodmenu', array(
         'label' => __('Menu Category'),
         'labels' => $labels,
         'hierarchical' => true,
@@ -159,7 +159,7 @@ function tf_foodmenu_custom_columns( $column ) {
 add_action( 'admin_init', 'tf_foodmenu_create' );
 
 function tf_foodmenu_create() {
-    add_meta_box('tf_foodmenu_meta', __('Food Menu','themeforce'), 'tf_foodmenu_meta', 'tf_foodmenu');
+    add_meta_box('tf_foodmenu_meta', __('Food Menu', 'themeforce'), 'tf_foodmenu_meta', 'tf_foodmenu');
 }
 
 function tf_foodmenu_meta () {
@@ -298,7 +298,7 @@ function create_foodmenu_tax() {
               );
          }
          // Register update so that it's not repeated
-         update_option( 'tf_added_default_food_terms','updated' );
+         update_option( 'tf_added_default_food_terms', 'updated' );
     }
 }
 
