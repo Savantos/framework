@@ -266,16 +266,43 @@ function tf_modify_admin_menu() {
 }
 add_action( 'admin_menu', 'tf_modify_admin_menu', 11 );
 
-/*
- * Update Logo
+/**
+ * Adds the editor styles used for Food Menus setc in the TinyMCE
+ * 
+ * @access private
  */
-
-if ( get_option('tf_logo_update') != 'true') {
-    $logo = get_option(TF_THEME . '_logo');
-    
-    if( $logo != '' ) {
-    	update_option('tf_logo', $logo);
-    }
-	
-	update_option('tf_logo_update', 'true');
+function tf_add_editor_styles() {
+	add_editor_style( 'themeforce/assets/css/editor-styles.css' );
 }
+add_action( 'admin_init', 'tf_add_editor_styles' );
+
+/**
+ * Enqueues the quick-add JS on manage post type pages that support 'tf_quick_add'.
+ * 
+ * @access private
+ */
+function tf_add_quick_add_js_to_supported_post_types() {
+
+	global $current_screen;
+
+	if( post_type_supports( $current_screen->post_type, 'tf_quick_add' ) )
+		wp_enqueue_script( 'tf-quick-add', TF_URL . '/assets/js/themeforce-quick-add.js', array( 'jquery' ) );
+	
+}
+add_action( 'load-edit.php', 'tf_add_quick_add_js_to_supported_post_types' );
+
+function tf_admin_ajax_get_new_post_row() {
+	
+	require_once( ABSPATH . 'wp-admin/includes/class-wp-posts-list-table.php' );
+
+	set_current_screen( 'edit-' . $_GET['post_type'] );
+	$list_table = new WP_Posts_List_Table();
+
+	$post_type = $_GET['post_type'];
+	$post = get_default_post_to_edit( $post_type, true );
+	
+	$list_table->single_row( $post );
+	
+	exit;
+}
+add_action( 'wp_ajax_tf_get_new_post_row', 'tf_admin_ajax_get_new_post_row' );
