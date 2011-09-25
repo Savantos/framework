@@ -288,7 +288,7 @@ function tf_create_foodmenu_tax() {
 		update_option( 'tf_added_default_food_terms', 'updated' );
     }
 }
-add_action( 'init', 'tfcreate_foodmenu_tax', 10 );
+add_action( 'init', 'tf_create_foodmenu_tax', 10 );
 
 function tf_food_menu_restrict_manage_posts() {
 	
