@@ -29,7 +29,7 @@ define( 'TF_URL', get_bloginfo( 'template_directory' ) . '/' . TF_DIR_SLUG );
 // Template Hooks
 require_once( TF_PATH . '/core_general/tf.template-hooks.php' );
 require_once( TF_PATH . '/core_general/tf.business-general.php' );
-        
+                
 // Business Options
 if( current_theme_supports( 'tf_settings_api' ) )     
     require_once( TF_PATH . '/core_options/tf.options-master.php' );
@@ -109,9 +109,11 @@ if( current_theme_supports( 'tf_yelp' ) ) {
 }
 
 // Qype
+/*
 if( current_theme_supports( 'tf_qype' ) ) {
 	require_once( TF_PATH . '/api_qype/tf.qype.php' );
 }
+*/
 
 // Gowalla
 if( current_theme_supports( 'tf_gowalla' ) ) {

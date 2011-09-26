@@ -30,6 +30,7 @@ function themeforce_social_overview_page() {
         <div class="social-box tf-settings-wrap"><span>Use Yelp to <strong>display your Rating</strong> </span><a href="<?php echo get_admin_url() . 'admin.php?page=themeforce_yelp'; ?>"><div class="tf-button">Go to your Yelp Settings</div></a></div>
         <div class="clearfix"></div>
         <!-- QYPE -->
+        <!--
         <img src="<?php echo get_bloginfo( 'template_url' ).'/themeforce/assets/images/social_qype.jpg'; ?>" />
         <p><a href="http://www.qype.co.uk" target="_blank">Qype</a>, is a company centered around social networking and local reviews. They currently operate websites in Germany, the United Kingdom, France, Switzerland, Austria, Ireland, Poland, Brazil, Spain and Italy and have approximately 22 million monthly unique European visitors.</p>
         <ul>
@@ -39,6 +40,7 @@ function themeforce_social_overview_page() {
         </ul>
         <div class="social-box tf-settings-wrap"><span>Use Qype to <strong>display your Rating</strong> </span><a href="<?php echo get_admin_url() . 'admin.php?page=themeforce_qype'; ?>"><div class="tf-button">Go to your Qype Settings</div></a></div>
         <div class="clearfix"></div>
+        -->
         <!-- FOURSQUARE -->
         <img src="<?php echo get_bloginfo( 'template_url' ).'/themeforce/assets/images/social_foursquare.jpg'; ?>" />
         <p><a href="http://www.foursquare.com" target="_blank">Foursquare</a> is a location-based social networking website based on hardware for mobile devices. The service is available to users with GPS-enabled mobile devices such as smartphones. Users "check-in" at venues using a mobile website, text messaging or a device-specific application by running the application and selecting from a list of venues that the application locates nearby. Each check-in awards the user points and sometimes "badges".</p>
