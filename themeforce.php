@@ -90,7 +90,8 @@ require_once( TF_PATH . '/tf.rewrite.php' );
 	
 // Facebook Open Graph Protocol
 require_once( TF_PATH . '/core_seo/tf.open_graph_protocol.php' );
-
+require_once( TF_PATH . '/core_widgets/widget-facebook-likebox.php' );
+require_once( TF_PATH . '/core_widgets/widget-facebook-facepile.php' );
 
 /* API Connections
 =========================================*/	
