@@ -62,5 +62,23 @@ function themeforce_social_facebook_page() {
     </div>
     <?php
         
-}	
-?>
+}
+
+/*
+ * Hooks into update_option to sanitize the facebook url
+ * 
+ * @param string value of option
+ * @return string - modified value
+ */
+function tf_escape_site_to_facebook ( $newvalue ){
+	
+	if (!$newvalue)
+		return;
+
+	if( strpos ( $newvalue, 'facebook.'  ) !== false ) {
+		$newvalue = esc_url( $newvalue );
+	}
+		
+	return $newvalue;		
+}
+add_filter ( 'pre_update_option_tf_facebook', 'tf_escape_site_to_facebook', 1 );
