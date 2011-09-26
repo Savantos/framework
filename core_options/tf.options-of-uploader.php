@@ -72,7 +72,7 @@ if ( ! function_exists( 'tf_optionsframework_mlu_js' ) ) {
 	function tf_optionsframework_mlu_js () {
 	
 		// Registers custom scripts for the Media Library AJAX uploader.
-		wp_register_script( 'of-medialibrary-uploader', TF_OPTIONS_FRAMEWORK_URL .'js/of-medialibrary-uploader.js', array( 'jquery', 'thickbox' ) );
+		wp_register_script( 'of-medialibrary-uploader', TF_OPTIONS_FRAMEWORK_URL .'js/of-medialibrary-uploader.js', array( 'jquery', 'thickbox' ), TF_VERSION );
 		wp_enqueue_script( 'of-medialibrary-uploader' );
 		wp_enqueue_script( 'media-upload' );
 	}

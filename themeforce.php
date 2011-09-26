@@ -22,7 +22,7 @@ Discussion & News: 	http://www.facebook.com/themeforce
 define( 'TF_DIR_SLUG', end( explode( DIRECTORY_SEPARATOR, dirname( __FILE__ ) ) ) );
 define( 'TF_PATH', dirname( __FILE__ ) );
 define( 'TF_URL', get_bloginfo( 'template_directory' ) . '/' . TF_DIR_SLUG );
-
+define ('TF_VERSION', '3.2.3');
 /* Theme Force Core Tools
 =========================================*/
 
@@ -131,7 +131,7 @@ if( current_theme_supports( 'tf_mailchimp' ) )
 // Datepicker JS
 
 function tf_sortable_admin_rows_scripts() {
-	wp_enqueue_script('ui-datepicker-settings', TF_URL . '/assets/js/themeforce-admin.js', array('jquery'));
+	wp_enqueue_script('ui-datepicker-settings', TF_URL . '/assets/js/themeforce-admin.js', array('jquery'), TF_VERSION );
 
 }
 add_action( 'admin_print_scripts-edit.php', 'tf_sortable_admin_rows_scripts' );
@@ -202,7 +202,7 @@ require_once( TF_PATH . '/tf.upgrade.php' );
 // Enqueue Admin Styles
  
 function tf_enqueue_admin_css() {
-	wp_enqueue_style('tf-functions-css', TF_URL . '/assets/css/admin.css');
+	wp_enqueue_style('tf-functions-css', TF_URL . '/assets/css/admin.css', array(), TF_VERSION );
 }
 add_action('admin_init', 'tf_enqueue_admin_css');
 
@@ -288,7 +288,7 @@ function tf_add_quick_add_js_to_supported_post_types() {
 	global $current_screen;
 
 	if( post_type_supports( $current_screen->post_type, 'tf_quick_add' ) )
-		wp_enqueue_script( 'tf-quick-add', TF_URL . '/assets/js/themeforce-quick-add.js', array( 'jquery' ) );
+		wp_enqueue_script( 'tf-quick-add', TF_URL . '/assets/js/themeforce-quick-add.js', array( 'jquery' ), TF_VERSION  );
 	
 }
 add_action( 'load-edit.php', 'tf_add_quick_add_js_to_supported_post_types' );
