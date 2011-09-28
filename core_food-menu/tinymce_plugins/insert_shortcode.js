@@ -118,11 +118,22 @@
 				else
 					style = 'clear:both; width:100%;'
 				
-					var after = '&nbsp;';
-
-//					var after = '';
+				var after = '&nbsp;';
 				
-				return '<input type="button" class="tfFoodMenuShortcode ' + args.align + '" data-shortcode="'+encodedShortode+'" style="' + style + '" value="Food Menu '+ args.type + ': ' + args.id + '" />' + after;
+				var note = '';
+				
+				// Not full width
+				if( jQuery( '#page_template' ).val() != 'page-full.php' && jQuery( '#page_template' ).val() != 'onecolumn-page.php' ) {
+					if( args.align == 'left' || args.align == 'right' )
+						note = 'Align is only supported on Full Width template.';
+					
+				} else {
+					
+					if( args.type == 'short' )
+						note = 'Short is not supported on Full Width template.';
+				}
+				
+				return '<input type="button" class="tfFoodMenuShortcode ' + args.align + '" data-shortcode="'+encodedShortode+'" style="' + style + '" value="Food Menu '+ args.type + ': ' + args.id + (note?"\n"+'[Note: '+note+']':'') + '" />' + after;
 			});
 		
 		},
