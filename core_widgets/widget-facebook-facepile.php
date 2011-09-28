@@ -26,36 +26,28 @@ class tf_fb_facepile_widget extends WP_Widget {
 	function widget( $args, $instance ) {
 		extract( $args );
 
-                // - our variables from the widget settings -
-
+        // - our variables from the widget settings -
 		$title = apply_filters('widget_title', $instance['fb-fp-title'] );
-                $fb_rows = $instance['fb-fp-rows'];
-                $fb_url = get_option('tf_facebook');
-                $fb_width = '300';              
-                
-                // widget display
-
-                echo $before_widget;
-
-                if ( $title ) {echo $before_title . $title . $after_title;}
-                                
-                echo '<div id="fb-root"></div>';
-                echo '<script>(function(d, s, id) {';
-                  echo 'var js, fjs = d.getElementsByTagName(s)[0];';
-                  echo 'if (d.getElementById(id)) {return;}';
-                  echo 'js = d.createElement(s); js.id = id;';
-                  echo 'js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";';
-                  echo 'fjs.parentNode.insertBefore(js, fjs);';
-                echo '}(document, \'script\', \'facebook-jssdk\'));</script>';
-
-                echo '<div class="fb-facepile" data-href="'. $fb_url .'" data-width="'. $fb_width .'" data-max-rows="'. $fb_rows .'"></div>';
-                
-                echo '<style type="text/css">';
-                echo '.fb-facepile .fb_ltr {background-color:transparent !important}';
-                echo '</style>';
-                
-                echo $after_widget;
-                }
+        $fb_rows = $instance['fb-fp-rows'];
+        $fb_url = get_option('tf_facebook');
+        $fb_width = '300';              
+        
+        // widget display
+		
+        echo $before_widget;
+		
+        if ( $title ) {echo $before_title . $title . $after_title;}
+                        			
+        echo '<div class="fb-facepile" data-href="'. $fb_url .'" data-width="'. $fb_width .'" data-max-rows="'. $fb_rows .'"></div>';
+        
+        echo '<style type="text/css">';
+        echo '.fb-facepile .fb_ltr {background-color:transparent !important}';
+        echo '</style>';
+        
+        echo $after_widget;
+        
+		add_action( 'wp_footer', 'tf_enqueue_fb_code_in_footer' );
+	}
 
 	/**
 	 * Update the widget settings.
@@ -65,7 +57,8 @@ class tf_fb_facepile_widget extends WP_Widget {
 
 		/* Strip tags for title and name to remove HTML (important for text inputs). */
 		$instance['fb-fp-title'] = strip_tags( $new_instance['fb-fp-title'] );
-                $instance['fb-fp-rows'] = strip_tags( $new_instance['fb-fp-rows'] );
+		$instance['fb-fp-rows'] = strip_tags( $new_instance['fb-fp-rows'] );
+		
 		return $instance;
 	}
 
@@ -84,16 +77,16 @@ class tf_fb_facepile_widget extends WP_Widget {
 
 		<!-- Widget Title: Text Input -->
 
-                <p><label for="<?php echo $this->get_field_id( 'fb-fp-title' ); ?>"><?php _e('Title:', 'themeforce'); ?></label>
-                <input class="widefat" id="<?php echo $this->get_field_id( 'fb-fp-title' ); ?>" name="<?php echo $this->get_field_name( 'fb-fp-title' ); ?>" value="<?php echo $instance['fb-fp-title']; ?>" /></p>
-                <label><?php _e('Number of Rows:', 'themeforce'); ?></label>
-                <select id="<?php echo $this->get_field_id( 'fb-fp-rows' ); ?>" name="<?php echo $this->get_field_name( 'fb-fp-rows' ); ?>">
-                    <option value='1' <?php selected( $rows, 1); ?>>1</option>
-                    <option value='2' <?php selected( $rows, 2); ?>>2</option>
-                    <option value='3' <?php selected( $rows, 3); ?>>3</option>
-                    <option value='4' <?php selected( $rows, 4); ?>>4</option>
-                    <option value='5' <?php selected( $rows, 5); ?>>5</option>
-                </select>
+        <p><label for="<?php echo $this->get_field_id( 'fb-fp-title' ); ?>"><?php _e('Title:', 'themeforce'); ?></label>
+        <input class="widefat" id="<?php echo $this->get_field_id( 'fb-fp-title' ); ?>" name="<?php echo $this->get_field_name( 'fb-fp-title' ); ?>" value="<?php echo $instance['fb-fp-title']; ?>" /></p>
+        <label><?php _e('Number of Rows:', 'themeforce'); ?></label>
+        <select id="<?php echo $this->get_field_id( 'fb-fp-rows' ); ?>" name="<?php echo $this->get_field_name( 'fb-fp-rows' ); ?>">
+            <option value='1' <?php selected( $rows, 1); ?>>1</option>
+            <option value='2' <?php selected( $rows, 2); ?>>2</option>
+            <option value='3' <?php selected( $rows, 3); ?>>3</option>
+            <option value='4' <?php selected( $rows, 4); ?>>4</option>
+            <option value='5' <?php selected( $rows, 5); ?>>5</option>
+        </select>
 	<?php
 	}
 }
