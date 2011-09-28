@@ -118,8 +118,8 @@
 				else
 					style = 'clear:both; width:100%;'
 				
-				var after = '&nbsp;';
-				
+					var after = '&nbsp;';
+
 				var note = '';
 				
 				// Not full width
@@ -217,7 +217,7 @@
 			if( !args.type )
 				args.type = 'full';
 			else
-				args.type = args.type[1];
+				args.type = args.type[1].charAt(0).toUpperCase() + args.type[1].slice(1);
 				
 			return args;
 		},
