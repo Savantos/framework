@@ -22,16 +22,16 @@ Discussion & News: 	http://www.facebook.com/themeforce
 define( 'TF_DIR_SLUG', end( explode( DIRECTORY_SEPARATOR, dirname( __FILE__ ) ) ) );
 define( 'TF_PATH', dirname( __FILE__ ) );
 define( 'TF_URL', get_bloginfo( 'template_directory' ) . '/' . TF_DIR_SLUG );
-
+define ('TF_VERSION', '3.2.3');
 /* Theme Force Core Tools
 =========================================*/
 
 // Template Hooks
 require_once( TF_PATH . '/core_general/tf.template-hooks.php' );
 require_once( TF_PATH . '/core_general/tf.business-general.php' );
-        
+                
 // Business Options
-if ( current_theme_supports( 'tf_settings_api' ) )     
+if( current_theme_supports( 'tf_settings_api' ) )     
     require_once( TF_PATH . '/core_options/tf.options-master.php' );
 
 // Shortcodes - Business
@@ -51,11 +51,11 @@ require_once( TF_PATH . '/core_colors/tf.colors.php' );
         
 
 // Food Menu
-if ( current_theme_supports( 'tf_food_menu' ) )
+if( current_theme_supports( 'tf_food_menu' ) )
 	require_once( TF_PATH . '/core_food-menu/tf.food-menu.php' );
 
 // Events
-if ( current_theme_supports( 'tf_events' ) )
+if( current_theme_supports( 'tf_events' ) )
 	require_once( TF_PATH . '/core_events/tf.events.php' );
 	
 // Google Maps
@@ -67,13 +67,13 @@ require_once( TF_PATH . '/core_seo/tf.schema.php' );
 // Widgets
 require_once( TF_PATH . '/core_widgets/newsletter-widget.php' );
 
-if ( current_theme_supports( 'tf_widget_opening_times' ) )
+if( current_theme_supports( 'tf_widget_opening_times' ) )
 	require_once( TF_PATH . '/core_widgets/widget-openingtimes.php' );
 
-if ( current_theme_supports( 'tf_widget_google_maps' ) )
+if( current_theme_supports( 'tf_widget_google_maps' ) )
 	require_once( TF_PATH . '/core_widgets/widget-googlemaps.php' );
 	
-if ( current_theme_supports( 'tf_widget_payments' ) )
+if( current_theme_supports( 'tf_widget_payments' ) )
 	require_once( TF_PATH . '/core_widgets/widget-payments.php' );
 
 
@@ -90,13 +90,14 @@ require_once( TF_PATH . '/tf.rewrite.php' );
 	
 // Facebook Open Graph Protocol
 require_once( TF_PATH . '/core_seo/tf.open_graph_protocol.php' );
-
+require_once( TF_PATH . '/core_widgets/widget-facebook-likebox.php' );
+require_once( TF_PATH . '/core_widgets/widget-facebook-facepile.php' );
 
 /* API Connections
 =========================================*/	
 
 // Foursquare
-if ( current_theme_supports( 'tf_foursquare' ) ) {
+if( current_theme_supports( 'tf_foursquare' ) ) {
 	require_once( TF_PATH . '/api_foursquare/tf.foursquare.php' ); 
 	require_once( TF_PATH . '/core_widgets/widget-foursquare-photos.php' );
 	require_once( TF_PATH . '/core_widgets/widget-foursquare-tips.php' );
@@ -104,17 +105,19 @@ if ( current_theme_supports( 'tf_foursquare' ) ) {
 }
 
 // Yelp
-if ( current_theme_supports( 'tf_yelp' ) ) {
+if( current_theme_supports( 'tf_yelp' ) ) {
 	require_once( TF_PATH . '/api_yelp/tf.yelp.php' );
 }
 
 // Qype
-if ( current_theme_supports( 'tf_qype' ) ) {
+/*
+if( current_theme_supports( 'tf_qype' ) ) {
 	require_once( TF_PATH . '/api_qype/tf.qype.php' );
 }
+*/
 
 // Gowalla
-if ( current_theme_supports( 'tf_gowalla' ) ) {
+if( current_theme_supports( 'tf_gowalla' ) ) {
 	// photos
 	require_once( TF_PATH . '/api_gowalla/tf.gowalla.api-photos.php' );
 	require_once( TF_PATH . '/core_widgets/widget-gowalla-photos.php' );
@@ -123,13 +126,13 @@ if ( current_theme_supports( 'tf_gowalla' ) ) {
 	require_once( TF_PATH . '/core_widgets/widget-gowalla-checkins.php' );
 }
 // MailChimp
-if ( current_theme_supports( 'tf_mailchimp' ) )
+if( current_theme_supports( 'tf_mailchimp' ) )
 	require_once( TF_PATH . '/api_mailchimp/mailchimp-widget.php' );
 
 // Datepicker JS
 
 function tf_sortable_admin_rows_scripts() {
-	wp_enqueue_script('ui-datepicker-settings', TF_URL . '/assets/js/themeforce-admin.js', array('jquery'));
+	wp_enqueue_script('ui-datepicker-settings', TF_URL . '/assets/js/themeforce-admin.js', array('jquery'), TF_VERSION );
 
 }
 add_action( 'admin_print_scripts-edit.php', 'tf_sortable_admin_rows_scripts' );
@@ -139,7 +142,7 @@ add_action( 'admin_print_scripts-edit.php', 'tf_sortable_admin_rows_scripts' );
 =========================================*/	
 
 function tf_sortable_admin_rows_order_table_rows_hook() {
-	if ( !empty( $_GET['post_type'] ) && $_GET['post_type'] == 'tf_foodmenu' && !empty( $_GET['term'] ) )
+	if( !empty( $_GET['post_type'] ) && $_GET['post_type'] == 'tf_foodmenu' && !empty( $_GET['term'] ) )
 		add_action( 'parse_query', 'tf_sortable_admin_rows_order_table_rows' );
 }
 add_action( 'load-edit.php', 'tf_sortable_admin_rows_order_table_rows_hook' );
@@ -152,7 +155,7 @@ function tf_sortable_admin_rows_order_table_rows( $wp_query ) {
 
 function tf_sortable_admin_rows_column( $columns ) {
 
-	if ( !isset( $columns['tf_col_menu_cat'] ) || empty( $_GET['term'] ) )
+	if( !isset( $columns['tf_col_menu_cat'] ) || empty( $_GET['term'] ) )
 		return $columns;
 	
 	$columns['tf_sortable_column'] = '';
@@ -163,7 +166,7 @@ add_action( 'manage_edit-tf_foodmenu_columns', 'tf_sortable_admin_rows_column', 
 
 function tf_sortable_admin_row_cell( $column ) {
 	
-	if ( $column != 'tf_sortable_column' )
+	if( $column != 'tf_sortable_column' )
 		return $column;
 	?>
 	
@@ -200,7 +203,7 @@ require_once( TF_PATH . '/tf.upgrade.php' );
 // Enqueue Admin Styles
  
 function tf_enqueue_admin_css() {
-	wp_enqueue_style('tf-functions-css', TF_URL . '/assets/css/admin.css');
+	wp_enqueue_style('tf-functions-css', TF_URL . '/assets/css/admin.css', array(), TF_VERSION );
 }
 add_action('admin_init', 'tf_enqueue_admin_css');
 
@@ -212,27 +215,27 @@ function tf_add_tf_icon_classes_to_widgets() {
      	jQuery( document ).ready( function() {
     		
      		jQuery( '.widget' ).filter( function( i, object ) {
-     			if ( jQuery( this ).attr('id').indexOf( '_tf' ) > 1 )
+     			if( jQuery( this ).attr('id').indexOf( '_tf' ) > 1 )
 					jQuery( object ).addClass('tf-admin-widget');
      		} );
 			
 			jQuery( '.widget' ).filter( function( i, object ) {
-     			if ( jQuery( this ).attr('id').indexOf( '-gowalla-' ) > 1 )
+     			if( jQuery( this ).attr('id').indexOf( '-gowalla-' ) > 1 )
 					jQuery( object ).addClass('tf-gowalla-widget');
      		} );
 			
 			jQuery( '.widget' ).filter( function( i, object ) {
-     			if ( jQuery( this ).attr('id').indexOf( '-fs-' ) > 1 )
+     			if( jQuery( this ).attr('id').indexOf( '-fs-' ) > 1 )
 					jQuery( object ).addClass('tf-fs-widget');
      		} );
 			
 			jQuery( '.widget' ).filter( function( i, object ) {
-     			if ( jQuery( this ).attr('id').indexOf( '_mailchimp-' ) > 1 )
+     			if( jQuery( this ).attr('id').indexOf( '_mailchimp-' ) > 1 )
 					jQuery( object ).addClass('tf-mailchimp-widget');
      		} );
 			
 			jQuery( '.widget' ).filter( function( i, object ) {
-     			if ( jQuery( this ).attr('id').indexOf( 'googlemaps' ) > 1 )
+     			if( jQuery( this ).attr('id').indexOf( 'googlemaps' ) > 1 )
 					jQuery( object ).addClass('tf-google-widget');
      		} );
      		
@@ -260,7 +263,7 @@ function tf_modify_admin_menu() {
 
 	global $menu, $submenu;
 	
-	if ( !empty( $submenu['themeforce_business_options'] ) )
+	if( !empty( $submenu['themeforce_business_options'] ) )
 		array_shift( $submenu['themeforce_business_options'] );
 
 }
@@ -285,8 +288,8 @@ function tf_add_quick_add_js_to_supported_post_types() {
 
 	global $current_screen;
 
-	if ( post_type_supports( $current_screen->post_type, 'tf_quick_add' ) )
-		wp_enqueue_script( 'tf-quick-add', TF_URL . '/assets/js/themeforce-quick-add.js', array( 'jquery' ) );
+	if( post_type_supports( $current_screen->post_type, 'tf_quick_add' ) )
+		wp_enqueue_script( 'tf-quick-add', TF_URL . '/assets/js/themeforce-quick-add.js', array( 'jquery' ), TF_VERSION  );
 	
 }
 add_action( 'load-edit.php', 'tf_add_quick_add_js_to_supported_post_types' );

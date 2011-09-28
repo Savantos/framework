@@ -61,5 +61,29 @@ function themeforce_social_twitter_page() {
     </div>
     <?php
         
-}	
-?>
+}
+
+
+
+/*
+ * Hooks into update_option to sanitize the twiiter url
+ * 
+ * @param string value of option
+ * @return string - modified value
+ */
+function tf_escape_site_to_twitter ( $newvalue ){
+	
+	if (!$newvalue)
+		return;
+
+	if( strpos ( $newvalue, 'twitter.'  ) !== false ) {
+		$newvalue = esc_url( $newvalue );
+
+	} else {
+		$newvalue = ltrim( $newvalue, '@');
+		$newvalue = 'http://twitter.com/' . $newvalue;
+	}
+		
+	return $newvalue;		
+}
+add_filter ( 'pre_update_option_tf_twitter', 'tf_escape_site_to_twitter', 1 );

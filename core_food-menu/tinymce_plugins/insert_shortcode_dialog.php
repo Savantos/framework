@@ -188,9 +188,9 @@ wp_admin_css( 'colors-fresh', true );
 		</script>
 		<form id="tf_menu_shortcode_form">
 			<p class="split-column">
-				<label>Menu Type</label><br />
+				<label>Display Style</label><br />
 				<select name="tf_food_menu_type">
-					<option <?php selected( isset( $_GET['type'] ) && $_GET['type'] == 'full' ) ?> value="full">Full</option>
+					<option <?php selected( isset( $_GET['type'] ) && $_GET['type'] == 'full' ) ?> value="full">Full (w/images)</option>
 					<option <?php selected( isset( $_GET['type'] ) && $_GET['type'] == 'list' ) ?> value="list">List</option>
 					<option <?php selected( isset( $_GET['type'] ) && $_GET['type'] == 'short' ) ?> value="short">Short</option>
 				</select>
@@ -207,7 +207,7 @@ wp_admin_css( 'colors-fresh', true );
 			
 			<?php if( get_current_theme() != 'Pubforce' ) { ?>
 			<p class="split-column">
-				<label>Align (Only for Full Width)</label><br />
+				<label>Align Side (Only for Full Width)</label><br />
 				<select name="tf_food_menu_align">
 					<option value="">None</option>
 					<option <?php selected( isset( $_GET['align'] ) && $_GET['align'] == 'left' ) ?> value="left">Left</option>

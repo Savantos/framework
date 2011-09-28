@@ -1,23 +1,23 @@
 <?php
 /* ------------------- THEME FORCE ----------------------*/
 
-// WIDGET: GOOGLE MAPS
+// WIDGET: FACEBOOK LIKEBOX
 //***********************************************
 
-class tf_googlemaps_widget extends WP_Widget {
+class tf_fb_likebox_widget extends WP_Widget {
 
 	/**
 	 * Widget setup.
 	 */
-	function tf_googlemaps_widget() {
+	function tf_fb_likebox_widget() {
 		/* Widget settings. */
-		$widget_ops = array( 'classname' => 'tf-googlemaps', 'description' => __('This widget is used to show a Google Map of your business (based on your address in the options)', 'themeforce') );
+		$widget_ops = array( 'classname' => 'tf-fb_likebox', 'description' => __('This widget is used to show a Facebook Like Box (based on your Facebook address)', 'themeforce') );
 
 		/* Widget control settings. */
-		$control_ops = array( 'width' => 200, 'height' => 350, 'id_base' => 'tf-googlemaps-widget' );
+		$control_ops = array( 'width' => 200, 'height' => 350, 'id_base' => 'tf-fb_likebox-widget' );
 
 		/* Create the widget. */
-		$this->WP_Widget( 'tf-googlemaps-widget', __('Google Maps', 'example'), $widget_ops, $control_ops );
+		$this->WP_Widget( 'tf-fb_likebox-widget', __('Facebook - Like Box', 'example'), $widget_ops, $control_ops );
 	}
 
 	/**
@@ -28,38 +28,33 @@ class tf_googlemaps_widget extends WP_Widget {
 
                 // - our variables from the widget settings -
 
-		$title = apply_filters('widget_title', $instance['gmaps-title'] );
-                $headdesc = $instance['gmaps-headdesc'];
-                $height = $instance['gmaps-height'];
-                $zoom = $instance['gmaps-zoom'];
-                $footdesc = $instance['gmaps-footdesc'];
+		$title = apply_filters('widget_title', $instance['fb-lb-title'] );
 
+                $fb_url = get_option('tf_facebook');
+                $fb_width = '300';
+                $fb_faces = 'true';
+                
                 // widget display
 
                 echo $before_widget;
 
                 if ( $title ) {echo $before_title . $title . $after_title;}
-                if ( $headdesc ) {echo '<p>' . $headdesc . '</p>';}
+                
+                echo '<div id="fb-root"></div>';
+                echo '<script>(function(d, s, id) {';
+                  echo 'var js, fjs = d.getElementsByTagName(s)[0];';
+                  echo 'if (d.getElementById(id)) {return;}';
+                  echo 'js = d.createElement(s); js.id = id;';
+                  echo 'js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";';
+                  echo 'fjs.parentNode.insertBefore(js, fjs);';
+                echo '}(document, \'script\', \'facebook-jssdk\'));</script>';
 
-                // Grab Addresss Data
-
-                $new_address = get_option( 'tf_address_street' ) . ', ' . get_option( 'tf_address_locality' ) . ', ' . get_option( 'tf_address_postalcode' ) . ' ' . get_option( 'tf_address_region' ) . ' ' . get_option( 'tf_address_country' );
-
-                // Choose
-
-                if ( get_option('tf_address_street' ) . get_option( 'tf_address_country' ) !== '')
-                {
-                    $valid_address = $new_address;    
-                } else {
-                    $valid_address = get_option( 'tf_business_address' );
-                }
-
-                $address_url = preg_replace( '![^a-z0-9]+!i', '+', $valid_address );
-
-                echo '<span itemprop="maps"><a href="http://maps.google.com/maps?q=' . $address_url . '" target="_blank"><img class="tf-googlemaps-front" src="http://maps.google.com/maps/api/staticmap?center=' . $address_url . '?>&zoom=' . $zoom . '&size=300x' . $height . '&markers=color:white|' . $address_url . '&sensor=false" /></a></span>';
-
-                if ( $footdesc ) {echo '<p>' . $footdesc . '</p>';}
-
+                echo '<div class="fb-like-box" data-href="'. $fb_url .'" data-width="'. $fb_width .'" data-show-faces="'. $fb_faces .'" data-stream="false" data-header="false"></div>';
+                
+                echo '<style type="text/css">';
+                echo '.fb-like-box .fb_ltr {background:white !important}';
+                echo '</style>';
+                
                 echo $after_widget;
                 }
 
@@ -70,12 +65,13 @@ class tf_googlemaps_widget extends WP_Widget {
 		$instance = $old_instance;
 
 		/* Strip tags for title and name to remove HTML (important for text inputs). */
-		$instance['gmaps-title'] = strip_tags( $new_instance['gmaps-title'] );
+		$instance['fb-lb-title'] = strip_tags( $new_instance['fb-lb-title'] );
+                /*
                 $instance['gmaps-headdesc'] = strip_tags( $new_instance['gmaps-headdesc'] );
                 $instance['gmaps-height'] = strip_tags( $new_instance['gmaps-height'] );
                 $instance['gmaps-zoom'] = strip_tags( $new_instance['gmaps-zoom'] );
                 $instance['gmaps-footdesc'] = strip_tags( $new_instance['gmaps-footdesc'] );
-
+                */
 		return $instance;
 	}
 
@@ -87,15 +83,16 @@ class tf_googlemaps_widget extends WP_Widget {
 	function form( $instance ) {
 
 		/* Set up some default widget settings. */
-		$defaults = array( 'gmaps-title' => __('Our Location', 'themeforce'), 'gmaps-height' => '200', 'gmaps-zoom' => '14');
+		$defaults = array( 'fb-lb-title' => __('Like us on Facebook', 'themeforce'));
 		$instance = wp_parse_args( (array) $instance, $defaults );
-                $zoom = $instance['gmaps-zoom'];
+                /* $zoom = $instance['gmaps-zoom']; */
                 ?>
 
 		<!-- Widget Title: Text Input -->
 
-                <p><label for="<?php echo $this->get_field_id( 'gmaps-title' ); ?>"><?php _e('Title:', 'themeforce'); ?></label>
-                <input class="widefat" id="<?php echo $this->get_field_id( 'gmaps-title' ); ?>" name="<?php echo $this->get_field_name( 'gmaps-title' ); ?>" value="<?php echo $instance['gmaps-title']; ?>" /></p>
+                <p><label for="<?php echo $this->get_field_id( 'fb-lb-title' ); ?>"><?php _e('Title:', 'themeforce'); ?></label>
+                <input class="widefat" id="<?php echo $this->get_field_id( 'fb-lb-title' ); ?>" name="<?php echo $this->get_field_name( 'fb-lb-title' ); ?>" value="<?php echo $instance['fb-lb-title']; ?>" /></p>
+                <!--
                 <p><textarea class="widefat" rows="5" cols="20" id="<?php echo $this->get_field_id( 'gmaps-headdesc' ); ?>" name="<?php echo $this->get_field_name( 'gmaps-headdesc' ); ?>"><?php echo $instance['gmaps-headdesc']; ?></textarea></p>
                 <p><label for="<?php echo $this->get_field_id( 'gmaps-height' ); ?>"><?php _e('Height (in pixels):', 'themeforce'); ?></label>
                 <input class="widefat" id="<?php echo $this->get_field_id( 'gmaps-height' ); ?>" name="<?php echo $this->get_field_name( 'gmaps-height' ); ?>" value="<?php echo $instance['gmaps-height']; ?>" /></p>
@@ -124,6 +121,7 @@ class tf_googlemaps_widget extends WP_Widget {
                     <option value='21' <?php selected( $zoom, 20); ?>>21</option>
                 </select>
                 <p><textarea class="widefat" rows="5" cols="20" id="<?php echo $this->get_field_id( 'gmaps-footdesc' ); ?>" name="<?php echo $this->get_field_name( 'gmaps-footdesc' ); ?>"><?php echo $instance['gmaps-footdesc']; ?></textarea></p>
+                -->
 	<?php
 	}
 }
@@ -131,7 +129,7 @@ class tf_googlemaps_widget extends WP_Widget {
  * Add function to widgets_init that'll load our widget.
  * @since 0.1
  */
-add_action( 'widgets_init', 'tf_googlemaps_load_widgets' );
+add_action( 'widgets_init', 'tf_fb_likebox_load_widgets' );
 
 /**
  * Register our widget.
@@ -139,8 +137,8 @@ add_action( 'widgets_init', 'tf_googlemaps_load_widgets' );
  *
  * @since 0.1
  */
-function tf_googlemaps_load_widgets() {
-	register_widget( 'tf_googlemaps_widget' );
+function tf_fb_likebox_load_widgets() {
+	register_widget( 'tf_fb_likebox_widget' );
 }
 
 ?>

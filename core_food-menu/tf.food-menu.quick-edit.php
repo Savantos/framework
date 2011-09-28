@@ -11,7 +11,7 @@ function tf_food_menu_enqueue_scripts() {
 		
 	add_thickbox();
 	
-	wp_enqueue_script( 'media-uploader-extensions', TF_URL . '/assets/js/media-uploader.extensions.js' );
+	wp_enqueue_script( 'media-uploader-extensions', TF_URL . '/assets/js/media-uploader.extensions.js', array(), TF_VERSION  );
 	wp_enqueue_script( 'jquery-ui-sortable' );
 	
 	_tf_tj_register_custom_media_button( '_tf_food_menu_image', 'Add Image' );

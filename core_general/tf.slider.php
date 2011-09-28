@@ -51,18 +51,18 @@ function themeforce_slider_scripts() {
     wp_enqueue_script( 'jquery-ui-draggable' );
     wp_enqueue_script( 'thickbox' );
     // other
-    wp_enqueue_script( 'jalerts', TF_URL . '/assets/js/jquery.alerts.js' );
+    wp_enqueue_script( 'jalerts', TF_URL . '/assets/js/jquery.alerts.js', array(), TF_VERSION  );
     // wp_enqueue_script( 'media-uploader-extensions', TF_URL . '/assets/js/media-uploader.extensions.js' );
     // option page settings
-    wp_enqueue_script( 'tfslider', TF_URL . '/assets/js/themeforce-slider.js', array( 'jquery') );
+    wp_enqueue_script( 'tfslider', TF_URL . '/assets/js/themeforce-slider.js', array( 'jquery'), TF_VERSION  );
 }
 
 add_action( 'admin_print_scripts-appearance_page_themeforce_slider', 'themeforce_slider_scripts' );
 
 // css
 function themeforce_slider_styles() {
-    wp_enqueue_style( 'jalerts', TF_URL . '/assets/css/jquery.alerts.css');
-    wp_enqueue_style( 'tfslider', TF_URL . '/assets/css/themeforce-slider.css');
+    wp_enqueue_style( 'jalerts', TF_URL . '/assets/css/jquery.alerts.css', array(), TF_VERSION );
+    wp_enqueue_style( 'tfslider', TF_URL . '/assets/css/themeforce-slider.css', array(), TF_VERSION );
 }
 
 add_action( 'admin_print_styles', 'themeforce_slider_styles' );

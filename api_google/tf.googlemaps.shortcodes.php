@@ -25,7 +25,7 @@ function tf_googlemaps ( $atts ) {
         $valid_address = get_option( 'tf_business_address' );
     }
     
-    $address_url = preg_replace( '/[^a-zA-Z0-9_ -]/s', '+', $valid_address );
+    $address_url = preg_replace( '![^a-z0-9]+!i', '+', $valid_address );
 
     // Display ?>
 
