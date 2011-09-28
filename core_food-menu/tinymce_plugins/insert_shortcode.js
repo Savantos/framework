@@ -133,7 +133,7 @@
 						note = 'Short is not supported on Full Width template.';
 				}
 				
-				return '<input type="button" class="tfFoodMenuShortcode ' + args.align + '" data-shortcode="'+encodedShortode+'" style="' + style + '" value="Food Menu '+ args.type + ': ' + args.id + (note?"\n"+'[Note: '+note+']':'') + '" />' + after;
+				return '<input type="button" class="tfFoodMenuShortcode ' + args.align + '" data-shortcode="'+encodedShortode+'" style="' + style + '" value="FOOD MENU  -  Category: '+ args.id + '  -  Style: ' + args.type + (note?"\n"+'[Note: '+note+']':'') + '" />' + after;
 			});
 		
 		},

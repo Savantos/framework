@@ -108,9 +108,12 @@
 				else if( args.align == 'right' )
 					style = 'float:right; width: 49%;';
 				else
-					style = 'clear:both; width:100%;'
+					style = 'clear:both; width: 100%;'
 
 				return '<input type="button" class="tfEventsShortcode" data-shortcode="'+encodedShortode+'" style="' + style + '" value="EVENTS  -  Category: '+ args.group + '  -  Style: ' + args.type + '" />';
+				
+				$('.tfEventsShortcode').replaceWith('<h2>New heading</h2>');
+				
 			});
 		
 		},
