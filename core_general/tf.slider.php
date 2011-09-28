@@ -392,7 +392,7 @@ function themeforce_slider_display() {
                 {
                 if ($type == 'content') 
                     {
-                    $resized_image_small = wpthumb( $image, 'width=540&height=300&crop=1', false);
+                    $resized_image_small = wpthumb( $image, 'width=540&height=250&crop=1', false);
                     echo '<li><div class="slidetext">';
                     if ( $title ) {echo '<h3>' . $title . '</h3>';}
                     echo '<p>' . $content . '</p>';
@@ -402,7 +402,7 @@ function themeforce_slider_display() {
                 } else {
                     echo '<li>';
                         if ( $link ) {echo '<a href="' . $link . '">';}
-                            $resized_image = wpthumb( $image, 'width=960&height=300&crop=1', false);
+                            $resized_image = wpthumb( $image, 'width=960&height=250&crop=1', false);
                             echo '<div class="slideimage-full" style="background:url(' . $resized_image . ') no-repeat;" alt="' . __('Slide', 'themeforce') . '"></div>';
                         if ( $link ) {echo '</a>';}
                     echo '</li>';
