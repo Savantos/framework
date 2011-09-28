@@ -112,13 +112,17 @@
 				encodedShortode = encodedShortode.replace( 'tf-', '_tf_' );
 				
 				if( args.align == 'left' )
-					style = 'float:left; width: 49%;';
+					style = 'width: 49%;';
 				else if( args.align == 'right' )
-					style = 'float:right; width: 49%;';
+					style = 'width: 49%;';
 				else
 					style = 'clear:both; width:100%;'
+				
+					var after = '&nbsp;';
 
-				return '<input type="button" class="tfFoodMenuShortcode" data-shortcode="'+encodedShortode+'" style="' + style + '" value="Food Menu '+ args.type + ': ' + args.id + '" />';
+//					var after = '';
+				
+				return '<input type="button" class="tfFoodMenuShortcode ' + args.align + '" data-shortcode="'+encodedShortode+'" style="' + style + '" value="Food Menu '+ args.type + ': ' + args.id + '" />' + after;
 			});
 		
 		},
