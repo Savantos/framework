@@ -108,9 +108,12 @@
 				else if( args.align == 'right' )
 					style = 'float:right; width: 49%;';
 				else
-					style = 'clear:both; width:100%;'
+					style = 'clear:both; width: 100%;'
 
-				return '<input type="button" class="tfEventsShortcode" data-shortcode="'+encodedShortode+'" style="' + style + '" value="Events '+ args.type + ': ' + args.group + '" />';
+				return '<input type="button" class="tfEventsShortcode" data-shortcode="'+encodedShortode+'" style="' + style + '" value="EVENTS  -  Category: '+ args.group + '  -  Style: ' + args.type + '" />';
+				
+				$('.tfEventsShortcode').replaceWith('<h2>New heading</h2>');
+				
 			});
 		
 		},
@@ -194,7 +197,7 @@
 			if( !args.type )
 				args.type = 'full';
 			else
-				args.type = args.type[1];
+				args.type = args.type[1].charAt(0).toUpperCase() + args.type[1].slice(1);
 				
 			return args;
 		},

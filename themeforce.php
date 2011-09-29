@@ -29,7 +29,7 @@ define ('TF_VERSION', '3.2.3');
 // Template Hooks
 require_once( TF_PATH . '/core_general/tf.template-hooks.php' );
 require_once( TF_PATH . '/core_general/tf.business-general.php' );
-        
+                
 // Business Options
 if( current_theme_supports( 'tf_settings_api' ) )     
     require_once( TF_PATH . '/core_options/tf.options-master.php' );
@@ -90,7 +90,8 @@ require_once( TF_PATH . '/tf.rewrite.php' );
 	
 // Facebook Open Graph Protocol
 require_once( TF_PATH . '/core_seo/tf.open_graph_protocol.php' );
-
+require_once( TF_PATH . '/core_widgets/widget-facebook-likebox.php' );
+require_once( TF_PATH . '/core_widgets/widget-facebook-facepile.php' );
 
 /* API Connections
 =========================================*/	
@@ -109,9 +110,11 @@ if( current_theme_supports( 'tf_yelp' ) ) {
 }
 
 // Qype
+/*
 if( current_theme_supports( 'tf_qype' ) ) {
 	require_once( TF_PATH . '/api_qype/tf.qype.php' );
 }
+*/
 
 // Gowalla
 if( current_theme_supports( 'tf_gowalla' ) ) {

@@ -112,13 +112,28 @@
 				encodedShortode = encodedShortode.replace( 'tf-', '_tf_' );
 				
 				if( args.align == 'left' )
-					style = 'float:left; width: 49%;';
+					style = 'width: 49%;';
 				else if( args.align == 'right' )
-					style = 'float:right; width: 49%;';
+					style = 'width: 49%;';
 				else
 					style = 'clear:both; width:100%;'
+				
+					var after = '&nbsp;';
 
-				return '<input type="button" class="tfFoodMenuShortcode" data-shortcode="'+encodedShortode+'" style="' + style + '" value="Food Menu '+ args.type + ': ' + args.id + '" />';
+				var note = '';
+				
+				// Not full width
+				if( jQuery( '#page_template' ).val() != 'page-full.php' && jQuery( '#page_template' ).val() != 'onecolumn-page.php' ) {
+					if( args.align == 'left' || args.align == 'right' )
+						note = 'Align is only supported on Full Width template.';
+					
+				} else {
+					
+					if( args.type == 'short' )
+						note = 'Short is not supported on Full Width template.';
+				}
+				
+				return '<input type="button" class="tfFoodMenuShortcode ' + args.align + '" data-shortcode="'+encodedShortode+'" style="' + style + '" value="FOOD MENU  -  Category: '+ args.id + '  -  Style: ' + args.type + (note?"\n"+'[Note: '+note+']':'') + '" />' + after;
 			});
 		
 		},
@@ -202,7 +217,7 @@
 			if( !args.type )
 				args.type = 'full';
 			else
-				args.type = args.type[1];
+				args.type = args.type[1].charAt(0).toUpperCase() + args.type[1].slice(1);
 				
 			return args;
 		},

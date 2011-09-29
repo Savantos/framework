@@ -182,15 +182,21 @@ wp_admin_css( 'colors-fresh', true );
 					sendShortcodeToEditor();
 					
 					tinyMCEPopup.close();
+					
 				} );
+				
+				if( window.parent.jQuery( '#page_template' ).val() != 'page-full.php' && window.parent.jQuery( '#page_template' ).val() != 'onecolumn-page.php' )
+					jQuery( 'p._align' ).val('').hide();
+				else
+					jQuery( 'p._type option[value="short"]' ).remove();
 				
 			} );
 		</script>
 		<form id="tf_menu_shortcode_form">
-			<p class="split-column">
-				<label>Menu Type</label><br />
+			<p class="split-column _type">
+				<label>Display Style</label><br />
 				<select name="tf_food_menu_type">
-					<option <?php selected( isset( $_GET['type'] ) && $_GET['type'] == 'full' ) ?> value="full">Full</option>
+					<option <?php selected( isset( $_GET['type'] ) && $_GET['type'] == 'full' ) ?> value="full">Full (w/images)</option>
 					<option <?php selected( isset( $_GET['type'] ) && $_GET['type'] == 'list' ) ?> value="list">List</option>
 					<option <?php selected( isset( $_GET['type'] ) && $_GET['type'] == 'short' ) ?> value="short">Short</option>
 				</select>
@@ -199,22 +205,22 @@ wp_admin_css( 'colors-fresh', true );
 				<label>Food Menu Category</label><br />
 				<select name="tf_foodmenucat">
 					<option value="">All</option>
-					<?php foreach( get_terms( 'tf_foodmenucat' ) as $term ) : ?>
+					<?php foreach ( get_terms( 'tf_foodmenucat' ) as $term ) : ?>
 						<option <?php selected( isset( $_GET['id'] ) && ( $_GET['id'] == $term->slug || $_GET['id'] == $term->name ) ) ?>  value="<?php echo $term->name ?>"><?php echo $term->name ?></option>
 					<?php endforeach; ?>
 				</select>
 			</p>
 			
-			<?php if( get_current_theme() != 'Pubforce' ) { ?>
-			<p class="split-column">
-				<label>Align (Only for Full Width)</label><br />
-				<select name="tf_food_menu_align">
-					<option value="">None</option>
-					<option <?php selected( isset( $_GET['align'] ) && $_GET['align'] == 'left' ) ?> value="left">Left</option>
-					<option <?php selected( isset( $_GET['align'] ) && $_GET['align'] == 'right' ) ?> value="right">Right</option>
-				</select>
-			</p>
-			<?php } ?>
+			<?php if ( get_current_theme() != 'Pubforce' ) : ?>
+				<p class="split-column _align">
+					<label>Align Side (Only for Full Width)</label><br />
+					<select name="tf_food_menu_align">
+						<option value="">None</option>
+						<option <?php selected( isset( $_GET['align'] ) && $_GET['align'] == 'left' ) ?> value="left">Left</option>
+						<option <?php selected( isset( $_GET['align'] ) && $_GET['align'] == 'right' ) ?> value="right">Right</option>
+					</select>
+				</p>
+			<?php endif; ?>
 			
 			<p class="clear">
 				<label><input type="checkbox" name="tf_food_menu_show_titles" <?php checked( 'yes', isset( $_GET['showHeader'] ) ? $_GET['showHeader'] : 'yes' ) ?> /> Show Category Headers</label>

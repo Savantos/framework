@@ -149,7 +149,7 @@ wp_admin_css( 'colors-fresh', true );
 </head>
 <body>
 	<div class="wrap">
-		<h2>Insert Food Menu</h2>
+		<h2>Insert Events</h2>
 		
 		<script type="text/javascript">
 			function sendShortcodeToEditor() {
@@ -187,10 +187,10 @@ wp_admin_css( 'colors-fresh', true );
 		</script>
 		<form id="tf_events_shortcode_form">
 			<p class="split-column">
-				<label>Menu Type</label><br />
+				<label>Display Style</label><br />
 				<select name="tf_events_type">
-					<option <?php selected( isset( $_GET['type'] ) && $_GET['type'] == 'full' ) ?> value="full">Full</option>
-					<option <?php selected( isset( $_GET['type'] ) && $_GET['type'] == 'feat' ) ?> value="feat">Featured</option>
+					<option <?php selected( isset( $_GET['type'] ) && $_GET['type'] == 'full' ) ?> value="full">All Events</option>
+					<option <?php selected( isset( $_GET['type'] ) && $_GET['type'] == 'feat' ) ?> value="feat">Featured Events Only</option>
 				</select>
 			</p>
 			<p class="split-column">
@@ -204,7 +204,7 @@ wp_admin_css( 'colors-fresh', true );
 			</p>
 			
 			<p class="split-column">
-				<label>Limit</label><br />
+				<label>Event Limit</label><br />
 				<select name="tf_events_limit">
 					<option value="">No Limit</option>
 					<?php while( $i < 20 ) : $i++; ?>
