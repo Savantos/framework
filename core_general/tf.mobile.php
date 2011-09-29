@@ -27,4 +27,74 @@ HTML;
   }
   return implode( "\n", $selector );
 }        
+
+
+//Add Mobile Nav Menu CSS classes must be included seperately
+function tf_add_mobile_nav_menu ( $args = array() ){
 ?>
+	<!-- mobile nav menu -->
+	<div class="mobile-nav-container" style="display: none;">
+		<a href="#" class="show-nav">Site Navigation</a>
+		 
+		 <?php $default_args = array(
+	     	'theme_location'  => 'primary',
+	     	'container'       => 'div',
+	     	'container_class' => 'nav-mobile',
+	     	'menu_class'      => '',
+	     	'before'          => '<div class="nav-link-mobile">',
+	     	'after'           => '</div>',
+	     	'menu_id' 		  => '',
+	     	'depth' 		  => 2,
+	     	'fallback_cb'     => 'tf_nomenu');
+	     
+	     $menuargs = wp_parse_args ( $args, $default_args);
+	     
+	     wp_nav_menu($menuargs); ?>
+	</div>
+	
+	<script>
+		jQuery( document ).ready( function() {
+		
+			jQuery( '.mobile-nav-container .show-nav' ).click( function(e) {
+				e.preventDefault();
+				
+				jQuery( this ).parent().find('.nav-mobile').slideToggle();
+			} );
+			
+			jQuery( '.nav-mobile li' ).click( function(e) {
+				e.preventDefault();
+				jQuery( this ).find( 'ul' ).slideToggle();
+
+			} );
+			
+			jQuery( '.nav-mobile li a' ).click( function(e) {
+				e.stopPropagation();
+			} );
+		
+		} );
+	</script>
+	
+<?php
+}
+
+
+
+/**
+ * Add a submenu class to parent menus
+ *
+ * @access public
+ * @param array $classes
+ * @param object $item
+ * @return null
+ */
+function tf_submenu_class( $classes, $item ) {
+	
+	global $wpdb;
+	
+	if ( $wpdb->get_var( "SELECT post_id FROM $wpdb->postmeta WHERE meta_key = '_menu_item_menu_item_parent' AND meta_value = '$item->ID'" ) )
+	        $classes[] = 'menu_parent';
+
+    return $classes;
+}
+
+add_filter( 'nav_menu_css_class', 'tf_submenu_class', 10, 2);
