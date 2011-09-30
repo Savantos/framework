@@ -77,7 +77,8 @@ if( current_theme_supports( 'tf_widget_google_maps' ) )
 if( current_theme_supports( 'tf_widget_payments' ) )
 	require_once( TF_PATH . '/core_widgets/widget-payments.php' );
 
-
+//Enqueue common.js script
+wp_enqueue_script('common-js', TF_URL . '/assets/js/common.js', array('jquery'), TF_VERSION );
 	
 /* 3rd Party Tools
 =========================================*/
