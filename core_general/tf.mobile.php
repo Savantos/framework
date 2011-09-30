@@ -29,7 +29,10 @@ HTML;
 }        
 
 
-//Add Mobile Nav Menu CSS classes must be included seperately
+/* Add Mobile Nav Menu
+*  @param array/string $args
+*  Requires toggle js (themeforce-options.js)
+*/
 function tf_add_mobile_nav_menu ( $args = array() ){
 ?>
 	<!-- mobile nav menu -->
@@ -44,35 +47,13 @@ function tf_add_mobile_nav_menu ( $args = array() ){
 	     	'before'          => '<div class="nav-link-mobile">',
 	     	'after'           => '</div>',
 	     	'menu_id' 		  => '',
-	     	'depth' 		  => 2,
+	     	'depth' 		  => 3,
 	     	'fallback_cb'     => 'tf_nomenu');
 	     
 	     $menuargs = wp_parse_args ( $args, $default_args);
 	     
 	     wp_nav_menu($menuargs); ?>
 	</div>
-	
-	<script>
-		jQuery( document ).ready( function() {
-		
-			jQuery( '.mobile-nav-container .show-nav' ).click( function(e) {
-				e.preventDefault();
-				
-				jQuery( this ).parent().find('.nav-mobile').slideToggle();
-			} );
-			
-			jQuery( '.nav-mobile li' ).click( function(e) {
-				e.preventDefault();
-				jQuery( this ).find( 'ul' ).slideToggle();
-
-			} );
-			
-			jQuery( '.nav-mobile li a' ).click( function(e) {
-				e.stopPropagation();
-			} );
-		
-		} );
-	</script>
 	
 <?php
 }
