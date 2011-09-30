@@ -114,6 +114,8 @@ if ( TF_THEME == 'chowforce' ) {
 	
 $options[] = array( "type" => "close");
 
+    $options = apply_filters( 'tf_options_general', $options );
+
     tf_display_settings( $options );
     ?> 
 	 <input type="submit" id="tf-submit" name="options_submit" value=" <?php _e( 'Save Changes' )  ?>" />
