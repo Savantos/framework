@@ -103,6 +103,8 @@ function themeforce_business_page() {
  
 );
 
+$options = apply_filters( 'tf_options_general', $options );
+
 if ( TF_THEME == 'chowforce' ) {
 				$options[]= array( "name" => "Tagline",
                 "desc" => "This will appear in the top right of every page. ",
@@ -111,7 +113,6 @@ if ( TF_THEME == 'chowforce' ) {
                 "type" => "text");
 				}
 			
-	
 $options[] = array( "type" => "close");
 
     tf_display_settings( $options );

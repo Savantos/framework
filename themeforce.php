@@ -29,6 +29,7 @@ define ('TF_VERSION', '3.2.3');
 // Template Hooks
 require_once( TF_PATH . '/core_general/tf.template-hooks.php' );
 require_once( TF_PATH . '/core_general/tf.business-general.php' );
+require_once( TF_PATH . '/core_general/tf.facebook.php' );
                 
 // Business Options
 if( current_theme_supports( 'tf_settings_api' ) )     
