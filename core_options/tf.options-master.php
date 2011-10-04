@@ -26,8 +26,6 @@ require_once( TF_PATH . '/core_options/tf.options-mailchimp.php' );
 
 require_once( TF_PATH . '/core_options/tf.options-mobile.php' );
 
-require_once( TF_PATH . '/core_options/tf.options-timezone-set.php' );
-
 // Register Pages
 // -----------------------------------------
 
