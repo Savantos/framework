@@ -23,7 +23,7 @@ class TF_Text_Widget_On_Page extends WP_Widget {
 		extract( $args );
 	
 		//if the current page isnt the same as the one selected for the widget, and the widget isnt set to display on all pages
-		if ( get_queried_object()->post_title != $instance['selected_page'] && $instance['selected_page'] != "all"  )
+		if ( get_queried_object()->ID != $instance['selected_page'] && $instance['selected_page'] != "all"  )
 			return;	
 
 		echo $before_widget;
@@ -72,7 +72,7 @@ class TF_Text_Widget_On_Page extends WP_Widget {
 					<!--Add an option to the select for each published page on the site-->
 					<?php while ( $pages->have_posts() ): $pages->the_post(); ?>
 			
-						<option value="<?php the_title(); ?>" <?php if( get_the_title() == $selected_page ):?> selected <?php endif; ?>><?php the_title(); ?></option>
+						<option value="<?php echo get_the_ID(); ?>" <?php if( get_the_ID() == $selected_page ):?> selected <?php endif; ?>><?php the_title(); ?></option>
 				
 					<?php endwhile; ?>
 					
