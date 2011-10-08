@@ -111,7 +111,17 @@ function themeforce_slider_page() {
             $button = $custom["tfslider_button"][0];
             $image = $custom["tfslider_image"][0];
             $thumbnail = wpthumb( $image, 'width=250&height=100&crop=1', false);
-                    
+            
+            // Warning Statement
+            
+            $imagesize = getimagesize($image);
+            if ( $imagesize[0] < TF_SLIDERWIDTH && $imagesize[1] < TF_SLIDERHEIGHT ) {
+                echo 'Oops. The dimensions of the image below don\'t quite cut it. Please ensure the image is at least <strong>' . TF_SLIDERWIDTH . 'px wide by ' . TF_SLIDERHEIGHT . 'px high</strong>';
+            } else {     
+                if ($imagesize[0] < TF_SLIDERWIDTH ) {echo 'Oops, the width of the image below is too short. Please ensure the image is at least <strong>' . TF_SLIDERWIDTH . 'px wide.</strong>';}
+                if ($imagesize[1] < TF_SLIDERHEIGHT ) {echo 'Oops, the height of the image below is too short. Please ensure the image is at least <strong>' . TF_SLIDERHEIGHT . 'px high.</strong>';}
+                }
+            
              echo '<li id="listItem_' . $id . '" class="menu-item-handle slider-item">';
              echo '<div class="slider-controls">';
                  echo '<div class="handle"></div>';
@@ -371,7 +381,7 @@ function themeforce_slider_display() {
             
             if ( TF_THEME == 'baseforce' )
                 {
-                $b_image = wpthumb( $image, 'width=960&height=300&crop=1', false);
+                $b_image = wpthumb( $image, 'width=960&height=250&crop=1', false);
                 echo '<li>';
                 if ($link && $type == 'image') {echo '<a href="' . $link . '">';}
                 echo '<div style="width:960px;height:300px;background: url(' . $b_image . ')">';
