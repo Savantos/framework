@@ -26,7 +26,7 @@ function tf_googlemaps ( $atts ) {
     }
     
     $address_url = preg_replace( '![^a-z0-9]+!i', '+', $valid_address );
-
+    
     // Display ?>
 
     <span itemprop="maps"><a href="<?php echo 'http://maps.google.com/maps?q=' . $address_url; ?>" target="_blank"><img class="align<?php echo $align; ?> tf-googlemaps" src="http://maps.google.com/maps/api/staticmap?center=<?php echo $address_url; ?>&zoom=<?php echo $zoom; ?>&size=<?php echo $width; ?>x<?php echo $height; ?>&markers=color:<?php echo $color; ?>|<?php echo $address_url; ?>&sensor=false"></a></span>
