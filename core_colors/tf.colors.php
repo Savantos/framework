@@ -46,10 +46,10 @@ function tf_dynamiccolors( $colorimage ) {
     // Extract Colors
     
     // Defaults
-    $delta = 4;
+    $delta = 24;
     $reduce_brightness = true;
     $reduce_gradients = true;
-    $num_results = 2;
+    $num_results = 10;
 
     // Grab Image Colors
     $extractcolors = new GetMostCommonColors();
@@ -59,20 +59,20 @@ function tf_dynamiccolors( $colorimage ) {
          $colors[] = $hex;
     }
     
-    /*
     
+    /*
     // Echo Colors Extracted
     echo '<h3>Colors Extracted</h3>';
     echo '<div style="outline:1px gray solid;float:left;width:60px;height:60px;font-size:12px;font-family: Lucida Console;background-color:#'.$colors[0].'">'.$colors[0].'</div>';
     echo '<div style="outline:1px gray solid;float:left;width:60px;height:60px;font-size:12px;font-family: Lucida Console;background-color:#'.$colors[1].'">'.$colors[1].'</div><div class="clearfix"></div>';
     echo '<br /><h3>Various Arrays</h3>';
-    
+    */
     // Create Awesome Palette
     
         // standard
-    */
+    
         // echo $colors[0];
-        $s1 = tf_colorpalette( $colors[0], 'primary' );
+        $s1 = tf_colorpalette( $colors[1], 'primary' );
         /* $s2 = tf_colorpalette( $colors[1], 'secondary' );
         $standard = array_merge($s1, $s2); */
         $standard = $s1;
@@ -119,12 +119,12 @@ function tf_colorpalette($hex, $type) {
     */
     if ( $type == 'primary' ) {
         // Dark    
-        $hsl = array ($h, 0.4, 0.2);
+        $hsl = array ($h, 0.3, 0.2);
         $rgb = _color_hsl2rgb( $hsl );
         $color = _color_pack( $rgb, true );
         $colors[] = $color;
         // Light
-        $hsl = array ($h, 0.4, 0.6);
+        $hsl = array ($h, 0.3, 0.6);
         $rgb = _color_hsl2rgb( $hsl );
         $color = _color_pack( $rgb, true );
         $colors[] = $color; 

@@ -114,8 +114,7 @@ function tf_menu_full( $atts ) {
 	    // - output -
 	    ?>
 	    <div itemscope itemtype="http://schema.org/Restaurant">
-	    <span itemprop="menu">
-	        <div class="full-menu">
+	        <div class="full-menu" itemprop="menu">
 	        	<?php if ( has_post_thumbnail() ) { ?>
 	        	<a class="thumb" href="<?php echo $large; ?>"><img src="<?php echo $thumbnail; ?>" alt="<?php the_title(); ?>" /></a>
 	        	<div class="thumb-text">
@@ -133,7 +132,6 @@ function tf_menu_full( $atts ) {
 	        		<div class="extrasizes"><?php echo $size2 ?> <strong> <?php echo $fx; echo $price2 ?></strong>
 	        		<?php if ( $size3 == "" ) {?></div></div><?php ;} else { ?> , <?php echo $size3 ?><strong> <?php echo $fx; echo $price3 ?></strong></div></div><?php ;}} ?>
 	        </div>
-	    </span>
 	    </div>
 	    <div class="clearfix"></div>
 	    
@@ -247,7 +245,7 @@ function tf_menu_list ( $atts ) {
 		// - output -
 		?>
 		
-		<div class="mid-menu">
+		<div class="mid-menu" itemprop="menu">
 		<div class="leftbox">
 		    <div class="title"><div class="left"><?php the_title(); ?></div></div>
 		    <div class="desc"><?php the_content_rss(); ?></div>
@@ -363,7 +361,7 @@ function tf_menu_short ( $atts ) {
 
     // - output -
     ?>
-    <div class="small-menu <?php if ( !$odd_even_checker ) { ?>right<?php } else { ?>left<?php } ?>">
+    <div class="small-menu <?php if ( !$odd_even_checker ) { ?>right<?php } else { ?>left<?php } ?>"  itemprop="menu">
     <div class="leftbox">
         <div class="title"><div class="lefttext"><?php the_title(); ?></div></div>
         <div class="desc"><?php the_content_rss(); ?></div>
