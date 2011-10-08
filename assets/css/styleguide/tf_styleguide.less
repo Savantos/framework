@@ -1,0 +1,127 @@
+  /* Standards
+  * ----------------------------------------------------------------- */
+  
+  @import "tf_mixins.less";
+ 
+ /* Standards
+  * ----------------------------------------------------------------- */
+  
+ @tf-primary: #268EB1;
+ @tf-primary-highlight: @tf-primary + #555;
+ 
+ @tf-neutral: #ddd;
+ @tf-neutral-highlight: @tf-neutral + #555;
+ 
+ @tf-notice: #f9da7d;
+ 
+ @white: #ffffff;
+ 
+  /* Elements - Buttons
+  * ----------------------------------------------------------------- */
+ 
+ .tf-button {
+	font-size: 14px;
+	font-weight: 700;
+	display:inline-block;
+	line-height:0;
+	text-shadow: 0 -1px 0 rgba(0,0,0,.25);
+	text-align:center;
+	padding:17px;
+	.border-radius(5px);
+	.box-shadow (0 1px 3px rgba(0,0,0,.40));
+	cursor: hand
+ }
+ 
+ .tf-major {
+	color: @white;
+	#gradient > .vertical(@tf-primary-highlight, @tf-primary);
+	text-shadow: 0 -1px 0 rgba(0,0,0,.30);
+ }
+ 
+ .tf-major:hover {
+	#gradient > .vertical((@tf-primary-highlight + #111), (@tf-primary + #111));
+ }
+ 
+ .tf-minor {
+	color: @tf-primary;
+	#gradient > .vertical(@tf-neutral-highlight, @tf-neutral);
+	text-shadow: 0 1px 0 rgba(255,255,255,.40);
+	border:1px solid @tf-neutral;
+ }
+ 
+  .tf-minor:hover {
+	#gradient > .vertical((@tf-neutral-highlight + #111), (@tf-neutral + #111));
+ }
+ 
+ .tf-inline {
+	padding:15px;
+	color: desaturate(@tf-primary, 100%);
+	#gradient > .vertical(@tf-neutral-highlight, @tf-neutral);
+	text-shadow: 0 1px 0 rgba(255,255,255,.40);	
+	border:1px solid @tf-neutral;
+ }
+ 
+ .tf-inline:hover {
+	#gradient > .vertical((@tf-neutral-highlight + #111), (@tf-neutral + #111));
+ }
+ 
+  .tf-tiny {
+	padding:15px 15px;
+	font-size: 12px;
+	color: desaturate(@tf-primary, 100%);
+	#gradient > .vertical(@tf-neutral-highlight, @tf-neutral);
+	text-shadow: 0 1px 0 rgba(255,255,255,.40);	
+	border:1px solid @tf-neutral;
+ }
+ 
+  .tf-tiny:hover {
+	#gradient > .vertical((@tf-neutral-highlight + #111), (@tf-neutral + #111));
+ }
+ 
+ 
+ /* Notices
+ * ----------------------------------------------------------------- */
+ 
+ .tf-notice {
+	 font-size:13px;
+	 font-weight:bold;
+	 padding:20px;
+	 line-height:0;
+	.border-radius(5px);
+	.box-shadow;
+	border:1px solid @tf-notice;
+	#gradient > .vertical((@tf-notice + #555), (@tf-notice));
+	color: (@tf-notice - #777);
+	text-shadow: 0 1px 0 rgba(255,255,255,.30);
+ }
+ 
+ /* Forms - Input (Text)
+ * ----------------------------------------------------------------- */
+ 
+ input[type="text"].tf-input-text, textarea.tf-input-text {
+	width:100%;
+	border: 1px solid #dfdfdf;
+    color: #555;
+    padding: 10px;
+    background: #fff;
+	.border-radius(5px);
+    background-image: -webkit-gradient(
+        linear,
+        left bottom,
+        left top,
+        color-stop(1, rgb(235,235,235)),
+        color-stop(0.7, rgb(255,255,255))
+    );
+
+    background-image: -moz-linear-gradient(
+        center bottom,
+        rgb(235,235,235) 100%,
+        rgb(255,255,255) 70%
+    );
+    -webkit-box-shadow: 1px 1px 1px #fff;
+ }
+ 
+textarea {
+     min-height:100px;
+	 overflow:auto;
+ }
