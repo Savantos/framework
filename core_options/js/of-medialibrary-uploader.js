@@ -38,7 +38,7 @@
     recreateFileField: function () {
     
       $('input.file').each(function(){
-        var uploadbutton = '<input class="upload_file_button" type="button" value="Upload" />';
+        var uploadbutton = '<input class="upload_file_button tf-button tf-inline" type="button" value="Upload" />';
         $(this).wrap('<div class="file_wrap" />');
         $(this).addClass('file').css('opacity', 0); //set to invisible
         $(this).parent().append($('<div class="fake_file" />').append($('<input type="text" class="upload" />').attr('id',$(this).attr('id')+'_file')).val( $(this).val() ).append(uploadbutton));

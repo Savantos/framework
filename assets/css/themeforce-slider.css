@@ -59,6 +59,8 @@
 }
 
 #tf-slider-list .slider-edit {
+    position:relative;
+    left:1px;
     display:block;
     cursor: pointer;
     margin-bottom: 10px;
@@ -68,6 +70,8 @@
 }
 
 #tf-slider-list .slider-delete {
+    position:relative;
+    left:-2px;
     display:block;
     cursor: pointer;
     width:24px;

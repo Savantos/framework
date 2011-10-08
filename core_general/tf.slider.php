@@ -116,11 +116,13 @@ function themeforce_slider_page() {
             
             $imagesize = getimagesize($image);
             if ( $imagesize[0] < TF_SLIDERWIDTH && $imagesize[1] < TF_SLIDERHEIGHT ) {
-                echo 'Oops. The dimensions of the image below don\'t quite cut it. Please ensure the image is at least <strong>' . TF_SLIDERWIDTH . 'px wide by ' . TF_SLIDERHEIGHT . 'px high</strong>';
+                echo '<div class="tf-notice">Oops, the dimensions of the image below aren\'t quite enough. Please ensure the image is at least <strong>' . TF_SLIDERWIDTH . 'px wide by ' . TF_SLIDERHEIGHT . 'px high.</strong></div>';
             } else {     
-                if ($imagesize[0] < TF_SLIDERWIDTH ) {echo 'Oops, the width of the image below is too short. Please ensure the image is at least <strong>' . TF_SLIDERWIDTH . 'px wide.</strong>';}
-                if ($imagesize[1] < TF_SLIDERHEIGHT ) {echo 'Oops, the height of the image below is too short. Please ensure the image is at least <strong>' . TF_SLIDERHEIGHT . 'px high.</strong>';}
+                if ($imagesize[0] < TF_SLIDERWIDTH ) {echo '<div class="tf-notice">Oops, the width of the image below is too short. Please ensure the image is at least <strong>' . TF_SLIDERWIDTH . 'px wide.</strong></div>';}
+                if ($imagesize[1] < TF_SLIDERHEIGHT ) {echo '<div class="tf-notice">Oops, the height of the image below is too short. Please ensure the image is at least <strong>' . TF_SLIDERHEIGHT . 'px high.</strong></div>';}
                 }
+                
+             // Display Slide   
             
              echo '<li id="listItem_' . $id . '" class="menu-item-handle slider-item">';
              echo '<div class="slider-controls">';
@@ -163,7 +165,7 @@ function themeforce_slider_page() {
     
     <input type="hidden" name="update_post" value="1"/> 
     
-    <input style="margin-top:10px" type="submit" name="updatepost" value="Update Slides" id="tf-submit" /> 
+    <input style="margin-top:10px" type="submit" name="updatepost" value="Update Slides" class="tf-button tf-major right" /> 
     </form>
     <div style="clear:both"></div>
 <?php
@@ -192,7 +194,7 @@ function themeforce_slider_page() {
             
             <tr>
                 <?php // TODO Would be nice to have the 250x100 thumbnail replace the upload button once the image is ready ?>
-                <th><label>Pick an Image<span class="required">*</span></label></th><!-- <input id="tfslider_image" type="text" name="_tfslider_image" value="" /><input id="upload_image_button" type="button" value="Upload Image" /> -->
+                <th><label>Pick an Image<span class="required">*</span></label></th>
                 <td><?php
                 if ( get_settings( $value['id'] ) != "") { $val = stripslashes(get_settings( $value['id'])  ); } else { $val =  $value['std']; }
                 ?>
@@ -234,7 +236,7 @@ function themeforce_slider_page() {
         </div>
         <input type="hidden" name="new_post" value="1"/> 
         
-        <input style="margin-top:25px" type="submit" name="submitpost" id="tf-submit" value="Create New Slide"/> 
+        <input style="margin-top:25px" type="submit" name="submitpost" class="tf-button tf-major right" value="Create New Slide"/> 
         
     </form>
     </div>
