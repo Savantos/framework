@@ -22,6 +22,7 @@
 @gowalla: #ff9400;
 @foursquare: #2398c9;
 @mailchimp: #e95c41;
+@opentable: #9a0000;
 
 @white: #ffffff;
 @black: #000000;
@@ -163,7 +164,7 @@ textarea {
 #widget-list,
 .widgets-holder-wrap {
 
-    .tf-facebook-widget, .tf-gowalla-widget, .tf-fs-widget, .tf-mailchimp-widget {border:none !important;}
+    .tf-facebook-widget, .tf-gowalla-widget, .tf-fs-widget, .tf-mailchimp-widget, .tf-opentable-widget {border:none !important;}
 
     /* fb */
   
@@ -222,6 +223,21 @@ textarea {
 
     .tf-mailchimp-widget span.in-widget-title {
         color:(@mailchimp + #777);
+        text-shadow: 0 -1px 0 rgba(0,0,0,.30);
+        }
+
+    /* ot */
+
+    .tf-opentable-widget .widget-top {
+        #gradient > .vertical((@opentable + #555), (@opentable));
+        color:@white;
+        text-shadow: 0 -1px 0 rgba(0,0,0,.30);
+        border: 1px solid @opentable;
+        .box-shadow(0 -1px 0 rgba(255,255,255,0.5))
+    }
+
+    .tf-opentable-widget span.in-widget-title {
+        color:(@opentable + #777);
         text-shadow: 0 -1px 0 rgba(0,0,0,.30);
         }
 

@@ -116,6 +116,7 @@ if( current_theme_supports( 'tf_yelp' ) ) {
 // OpenTable
 
 require_once( TF_PATH . '/api_opentable/tf.opentable.php' );
+require_once( TF_PATH . '/core_widgets/widget-opentable.php' );
 
 // Qype
 /*
@@ -275,6 +276,10 @@ function tf_add_tf_icon_classes_to_widgets() {
                 	jQuery( '.widget' ).filter( function( i, object ) {
      			if( jQuery( this ).attr('id').indexOf( '-fb_' ) > 1 )
 					jQuery( object ).addClass('tf-facebook-widget');
+     		} );
+                        jQuery( '.widget' ).filter( function( i, object ) {
+     			if( jQuery( this ).attr('id').indexOf( '-opentable-' ) > 1 )
+					jQuery( object ).addClass('tf-opentable-widget');
      		} );
      		
      	} );

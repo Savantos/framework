@@ -47,7 +47,7 @@ function themeforce_opentable_page() {
 		"type" => "checkbox"
         ),
               
-		array( "type" => "close"), 
+	array( "type" => "close"), 
  
 	);
 	
