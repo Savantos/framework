@@ -1,11 +1,5 @@
 <?php
 
-// Grab Yelp Options
-
-require_once( dirname( __FILE__ ) . '/tf.yelp.admin-options.php' );
-
-
-
 // Grab API
 
 function tf_yelp_api() {

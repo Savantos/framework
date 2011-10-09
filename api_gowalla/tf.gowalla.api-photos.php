@@ -3,8 +3,6 @@
 // (currently for Spots only)
 //---------------------------------------------
 
-require_once( dirname( __FILE__ ) . '/tf.gowalla.admin-options.php' );
-
 function tf_gowalla_api_photos() {
 
 	// - setup -
