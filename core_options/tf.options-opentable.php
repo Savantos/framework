@@ -9,7 +9,6 @@
 
 // Create Page
 // -----------------------------------------
-// TODO Add functionality to edit existing slides.
 
 function themeforce_opentable_page() {
     ?>
@@ -28,7 +27,7 @@ function themeforce_opentable_page() {
     
     $options = array (
  
-        array( "name" => "opentable Settings", "type" => "title"),
+        array( "name" => "OpenTable Settings", "type" => "title"),
 
         array( "type" => "open"),   
 
@@ -61,11 +60,10 @@ function themeforce_opentable_page() {
     </form>
         <div id="tf-tip">
             <h3>Did you know?</h3>
-            <p>Having a opentable profile can increase your exposure to various plenty of new customers. In May 2011, they recorded the following numbers:</p>
+            <p>OpenTable is a leading provider of free, real-time online restaurant reservations for diners and reservation and guest management solutions for restaurants.</p>
             <ul>
-                <li>A whopping 27% of all opentable searches come from that iPhone application.</li>
-                <li>Over half a million calls were made to local businesses directly from the iPhone App, or one in every five seconds.</li>
-                <li>Nearly a million people generated point-to-point directions to a local business from their opentable iPhone App last month.</li>
+                <li>OpenTable has more than 20,000 restaurant customers, and, since its inception in 1998, has seated more than 200 million diners around the world.</li>
+                <li>The OpenTable service is available throughout the United States, as well as in Canada, Germany, Japan, Mexico, and the United Kingdom.</li>
             </ul>
 
         </div>    
