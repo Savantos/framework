@@ -113,6 +113,10 @@ if( current_theme_supports( 'tf_yelp' ) ) {
 	require_once( TF_PATH . '/api_yelp/tf.yelp.php' );
 }
 
+// OpenTable
+
+require_once( TF_PATH . '/api_opentable/tf.opentable.php' );
+
 // Qype
 /*
 if( current_theme_supports( 'tf_qype' ) ) {

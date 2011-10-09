@@ -12,6 +12,7 @@ require_once( TF_PATH . '/core_options/tf.options-of-uploader.php' );
 require_once( TF_PATH . '/core_options/tf.options-business-general.php' );
 require_once( TF_PATH . '/core_options/tf.options-business-location.php' );
 require_once( TF_PATH . '/core_options/tf.options-business-logo.php' );
+require_once( TF_PATH . '/core_options/tf.options-opentable.php' );
 
 require_once( TF_PATH . '/core_options/tf.options-social-media.php' );
 require_once( TF_PATH . '/core_options/tf.options-social-facebook.php' );
@@ -34,7 +35,8 @@ function themeforce_business_options() {
     add_submenu_page('themeforce_business_options', 'Business Details', 'Business Details', 'edit_posts', 'themeforce_business', 'themeforce_business_page');
     add_submenu_page('themeforce_business_options', 'Logo', 'Logo', 'edit_posts', 'themeforce_logo', 'themeforce_logo_page');   
     add_submenu_page('themeforce_business_options', 'Your Location', 'Location', 'edit_posts', 'themeforce_location', 'themeforce_location_page');
-	add_submenu_page('themeforce_business_options', 'Newsletter', 'Newsletter', 'edit_posts', 'themeforce_mailchimp', 'themeforce_mailchimp_page');
+    add_submenu_page('themeforce_business_options', 'Newsletter', 'Newsletter', 'edit_posts', 'themeforce_mailchimp', 'themeforce_mailchimp_page');
+    add_submenu_page('themeforce_business_options', 'OpenTable', 'OpenTable', 'edit_posts', 'themeforce_opentable', 'themeforce_opentable_page');
 }
 add_action( 'admin_menu', 'themeforce_business_options' );
 
