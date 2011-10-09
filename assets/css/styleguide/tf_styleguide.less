@@ -44,7 +44,6 @@ input[type="submit"].tf-button {
 	font-size: 14px;
 	font-weight: 700;
 	display:inline-block !important;
-	line-height:0;
 	text-shadow: 0 -1px 0 rgba(0,0,0,.25);
 	text-align:center;
 	padding:20px;
@@ -61,6 +60,7 @@ input.tf-button:hover  {
 .tf-major,
 input.tf-major,
 input[type="submit"].tf-major {
+        line-height:14px;
         display:inline-block !important;
 	color: @white !important;
 	#gradient > .vertical(@tf-primary-highlight, @tf-primary);
@@ -73,6 +73,7 @@ input.tf-major:hover {
  }
  
  .tf-minor {
+        line-height:14px;
 	color: @tf-primary;
 	#gradient > .vertical(@tf-neutral-highlight, @tf-neutral);
 	text-shadow: 0 1px 0 rgba(255,255,255,.40);
@@ -86,6 +87,7 @@ input.tf-major:hover {
  .tf-inline,
 input.tf-inline,
 input[type="submit"].tf-inline {
+        line-height:14px;
 	padding:15px;
 	color: desaturate(@tf-primary, 100%);
 	#gradient > .vertical(@tf-neutral-highlight, @tf-neutral);
@@ -98,12 +100,14 @@ input[type="submit"].tf-inline {
  }
  
   .tf-tiny {
-	padding:15px 15px;
+	padding:7px 10px;
 	font-size: 12px;
+        line-height:12px;
 	color: desaturate(@tf-primary, 100%);
 	#gradient > .vertical(@tf-neutral-highlight, @tf-neutral);
 	text-shadow: 0 1px 0 rgba(255,255,255,.40);	
 	border:1px solid @tf-neutral;
+        span {position:relative;top:1px;}
  }
  
   .tf-tiny:hover {

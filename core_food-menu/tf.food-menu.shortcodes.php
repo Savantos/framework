@@ -424,7 +424,7 @@ function tf_food_menu_add_insert_bar_to_edit_page() {
 	<div id="tf-above-editor-insert-area">
 		
 		<style type="text/css">
-			#tf-above-editor-insert-area { padding:2px 10px; border: 1px solid #e3e3e3; background: #f3f3f3; border-radius:5px; line-height: 32px; font-size: 11.5px; min-height:32px; clear:both; margin-bottom: 15px;  }
+			#tf-above-editor-insert-area { padding:10px 10px; border: 1px solid #e3e3e3; background: #f3f3f3; border-radius:5px; line-height: 30px; font-size: 11.5px; min-height:32px; clear:both; margin-bottom: 15px;  }
 			#tf-above-editor-insert-area a { color: #666; text-decoration: none; margin-left: 15px; }
 			#tf-above-editor-insert-area a.button { border-radius: 3px; padding-left: 4px; }
 			#tf-above-editor-insert-area img { vertical-align: middle; margin-right: 5px; }
@@ -432,7 +432,7 @@ function tf_food_menu_add_insert_bar_to_edit_page() {
 	
 		<strong>Insert:</strong>
 		
-		<a class="button" href="javascript:tinyMCE.activeEditor.execCommand( 'mceExecTFFoodMenuInsertShortcode' ); return false;"><img src="<?php echo TF_URL . '/core_food-menu/tinymce_plugins/food_20.png' ?>"/>Food Menu</a>
+		<a class="tf-button tf-tiny" href="javascript:tinyMCE.activeEditor.execCommand( 'mceExecTFFoodMenuInsertShortcode' ); return false;"><img src="<?php echo TF_URL . '/core_food-menu/tinymce_plugins/food_20.png' ?>"/><span>Food Menu</span></a>
 		
 		<?php do_action( 'tf_above_editor_insert_items' ) ?>
 		<script type="text/javascript">
