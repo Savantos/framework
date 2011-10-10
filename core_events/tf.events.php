@@ -5,6 +5,7 @@ require_once( TF_PATH . '/core_events/tf.events.widget.php' );
 require_once( TF_PATH . '/core_events/tf.events.shortcodes.php' );
 require_once( TF_PATH . '/core_events/tf.events.rss.php' );
 require_once( TF_PATH . '/core_events/tf.events.ical.php' );
+require_once( TF_PATH . '/core_events/tf.events.facebook.php' );
 
 /*
  * EVENTS FUNCTION (CUSTOM POST TYPE)

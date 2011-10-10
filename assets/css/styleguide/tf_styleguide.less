@@ -16,6 +16,7 @@
  
 /* TF Yellow */
  @tf-notice: #f9da7d;
+ @tf-success: #7df994;
 
 /* TF Special Colors */
 @facebook: #3b5998;
@@ -24,6 +25,7 @@
 @mailchimp: #e95c41;
 @opentable: #9a0000;
 
+/* Fundamentals */
 @white: #ffffff;
 @black: #000000;
 
@@ -46,7 +48,7 @@ input[type="submit"].tf-button {
 	display:inline-block !important;
 	text-shadow: 0 -1px 0 rgba(0,0,0,.25);
 	text-align:center;
-	padding:20px;
+	padding:15px 20px;
 	.border-radius(10px);
 	.box-shadow (0 1px 3px rgba(0,0,0,.40));
 	cursor: hand;
@@ -128,6 +130,19 @@ input[type="submit"].tf-inline {
 	border:1px solid @tf-notice;
 	#gradient > .vertical((@tf-notice + #555), (@tf-notice));
 	color: (@tf-notice - #777);
+	text-shadow: 0 1px 0 rgba(255,255,255,.30);
+ }
+
+ .tf-success {
+	 font-size:13px;
+	 font-weight:bold;
+	 padding:10px;
+	 line-height:20px;
+	.border-radius(5px);
+	.box-shadow;
+	border:1px solid @tf-success;
+	#gradient > .vertical((@tf-success + #555), (@tf-success));
+	color: (@tf-success - #777);
 	text-shadow: 0 1px 0 rgba(255,255,255,.30);
  }
  
