@@ -25,7 +25,9 @@ require_once( TF_PATH . '/core_options/tf.options-social-yelp.php' );
 require_once( TF_PATH . '/core_options/tf.options-social-foursquare.php' );
 require_once( TF_PATH . '/core_options/tf.options-mailchimp.php' );
 
-require_once( TF_PATH . '/core_options/tf.options-mobile.php' );
+if ( TF_MOBILE == true ) {
+    require_once( TF_PATH . '/core_options/tf.options-mobile.php' );
+}
 
 // Register Pages
 // -----------------------------------------
