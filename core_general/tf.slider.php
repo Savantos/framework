@@ -22,7 +22,6 @@ function create_slider_postype() {
         'show_in_nav_menus' => false,
         '_builtin' => false,
         'capability_type' => 'post',
-        'menu_icon' => get_bloginfo( 'template_url' ).'/themeforce/assets/images/food_16.png',
         'hierarchical' => false,
         'rewrite' => array( "slug" => "food-menu" ),
         'supports'=> array('title', 'thumbnail', 'editor', 'custom-fields') ,

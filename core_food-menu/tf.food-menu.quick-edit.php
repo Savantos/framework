@@ -52,7 +52,7 @@ function tf_food_menu_add_fields_to_quick_edit( $column_name, $post_type ) {
 						</span>
 						<span class="size-row-price" style="width:55%; display:block; float:left;">
 							<em><?php echo get_option( 'tf_currency_symbol', '$' ) ?></em> <input type="text" name="tf_food_varient_price[]" />
-							<a class="size-row-price-remove tf-inline-edit-remove-variant" href="#"><img src="<?php bloginfo( 'template_url' ); ?>/themeforce/assets/images/qe-delete.png" /></a>
+							<a class="size-row-price-remove tf-inline-edit-remove-variant" href="#"><img src="<?php bloginfo( 'template_url' ); ?>/framework/assets/images/qe-delete.png" /></a>
 						</span>
 					</li>
 				</ul>

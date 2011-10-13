@@ -45,12 +45,12 @@ class tf_payments_widget extends WP_Widget {
                 if ( $title ) {echo $before_title . $title . $after_title;}
                 if ( $headdesc ) {echo '<p>' . $headdesc . '</p>';}
                 echo '<ul class="tf-payments">';
-                if ( $visa == true ) { echo '<li class="payment-type"><img src="' . get_bloginfo( 'template_url' ) . '/themeforce/assets/images/payment-visa.png" alt="' . __('Visa Accepted', 'themeforce') . '" /></li>'; }
-                if ( $mast == true ) { echo '<li class="payment-type"><img src="' . get_bloginfo( 'template_url' ) . '/themeforce/assets/images/payment-mast.png" alt="' . __('Mastercard Accepted', 'themeforce') . '" /></li>'; }
-                if ( $amex == true ) { echo '<li class="payment-type"><img src="' . get_bloginfo( 'template_url' ) . '/themeforce/assets/images/payment-amex.png" alt="' . __('American Express Accepted', 'themeforce') . '" /></li>'; }
-                if ( $disc == true ) { echo '<li class="payment-type"><img src="' . get_bloginfo( 'template_url' ) . '/themeforce/assets/images/payment-disc.png" alt="' . __('Discover Card Accepted', 'themeforce') . '" /></li>'; }
-                if ( $cirr == true ) { echo '<li class="payment-type"><img src="' . get_bloginfo( 'template_url' ) . '/themeforce/assets/images/payment-cirr.png" alt="' . __('Cirrus Card Accepted', 'themeforce') . '" /></li>'; }
-                if ( $maes == true ) { echo '<li class="payment-type"><img src="' . get_bloginfo( 'template_url' ) . '/themeforce/assets/images/payment-maes.png" alt="' . __('Maestro Card Accepted', 'themeforce') . '" /></li>'; }
+                if ( $visa == true ) { echo '<li class="payment-type"><img src="' . get_bloginfo( 'template_url' ) . '/framework/assets/images/payment-visa.png" alt="' . __('Visa Accepted', 'themeforce') . '" /></li>'; }
+                if ( $mast == true ) { echo '<li class="payment-type"><img src="' . get_bloginfo( 'template_url' ) . '/framework/assets/images/payment-mast.png" alt="' . __('Mastercard Accepted', 'themeforce') . '" /></li>'; }
+                if ( $amex == true ) { echo '<li class="payment-type"><img src="' . get_bloginfo( 'template_url' ) . '/framework/assets/images/payment-amex.png" alt="' . __('American Express Accepted', 'themeforce') . '" /></li>'; }
+                if ( $disc == true ) { echo '<li class="payment-type"><img src="' . get_bloginfo( 'template_url' ) . '/framework/assets/images/payment-disc.png" alt="' . __('Discover Card Accepted', 'themeforce') . '" /></li>'; }
+                if ( $cirr == true ) { echo '<li class="payment-type"><img src="' . get_bloginfo( 'template_url' ) . '/framework/assets/images/payment-cirr.png" alt="' . __('Cirrus Card Accepted', 'themeforce') . '" /></li>'; }
+                if ( $maes == true ) { echo '<li class="payment-type"><img src="' . get_bloginfo( 'template_url' ) . '/framework/assets/images/payment-maes.png" alt="' . __('Maestro Card Accepted', 'themeforce') . '" /></li>'; }
                 echo '</ul>';
                 if ( $footdesc ) {echo '<p>' . $footdesc . '</p>';}
 
