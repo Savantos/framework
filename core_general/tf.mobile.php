@@ -37,7 +37,7 @@ function tf_add_mobile_nav_menu ( $args = array() ){
 ?>
 	<!-- mobile nav menu -->
 	<div class="mobile-nav-container" style="display: none;">
-		<a href="#" class="show-nav">Site Navigation</a>
+		<a href="#" class="show-nav">Click for Site Navigation</a>
 		 
 		 <?php $default_args = array(
 	     	'theme_location'  => 'primary',
@@ -46,8 +46,8 @@ function tf_add_mobile_nav_menu ( $args = array() ){
 	     	'menu_class'      => '',
 	     	'before'          => '<div class="nav-link-mobile">',
 	     	'after'           => '</div>',
-	     	'menu_id' 		  => '',
-	     	'depth' 		  => 3,
+	     	'menu_id'         => '',
+	     	'depth' 	  => 2,
 	     	'fallback_cb'     => 'tf_nomenu');
 	     
 	     $menuargs = wp_parse_args ( $args, $default_args);
