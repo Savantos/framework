@@ -27,17 +27,17 @@ function themeforce_social_twitter_page() {
     
     $options = array (
  
-        array( "name" => "Twitter Settings", "type" => "title"),
+        array( 'name' => 'Twitter Settings', 'type' => 'title'),
 
-        array( "type" => "open"),   
+        array( 'type' => 'open'),   
 
-	array( "name" => "Twitter Link",
-                "desc" => "The link to your Twitter profile/username.",
-                "id" => $shortname."_twitter",
-                "std" => "",
-                "type" => "text"),     
+	array( 'name' => 'Twitter Link',
+                'desc' => 'The link to your Twitter profile/username.',
+                'id' => $shortname.'_twitter',
+                'std' => '',
+                'type' => 'text'),     
       
-	array( "type" => "close"), 
+	array( 'type' => 'close'), 
  
 );
 

@@ -28,35 +28,35 @@ function themeforce_social_qype_page() {
     
     $options = array (
  
-        array( "name" => "Qype Settings", "type" => "title"),
+        array( 'name' => 'Qype Settings', 'type' => 'title'),
 
-        array( "type" => "open"),   
+        array( 'type' => 'open'),   
 
 	array( 
-		"name" => "Enable Qype Bar?",
-		"desc" => "This will show the qype bar above in line with qype display requirements. The fields below need to be completed in order for this to work.",
-		"id" => "tf_qype_enabled",
-		"std" => "false",
-		"type" => "checkbox"
+		'name' => 'Enable Qype Bar?',
+		'desc' => 'This will show the qype bar above in line with qype display requirements. The fields below need to be completed in order for this to work.',
+		'id' => 'tf_qype_enabled',
+		'std' => 'false',
+		'type' => 'checkbox'
 	),
 	
 	array( 
-		"name" => "API Key",
-		"desc" => "Required for Qype Button  <a target='_blank' href='http://www.qype.co.uk/api_consumers'>Get it from here (qype API)</a>",
-		"id" => "tf_qype_api_key",
-		"std" => "",
-		"type" => "text"
+		'name' => 'API Key',
+		'desc' => 'Required for Qype Button  <a target=\'_blank\' href=\'http://www.qype.co.uk/api_consumers\'>Get it from here (qype API)</a>',
+		'id' => 'tf_qype_api_key',
+		'std' => '',
+		'type' => 'text'
 	),
 	
 	 array( 
-		"name" => "Qype Place ID",
-		"desc" => "Used by the API to identify your business, they are the x's in your link http://www.qype.co.uk/place/<strong>xxxxx</strong>-name-of-your-business",
-		"id" => "tf_qype_place",
-		"std" => "",
-		"type" => "text"
+		'name' => 'Qype Place ID',
+		'desc' => 'Used by the API to identify your business, they are the x\'s in your link http://www.qype.co.uk/place/<strong>xxxxx</strong>-name-of-your-business',
+		'id' => 'tf_qype_place',
+		'std' => '',
+		'type' => 'text'
 	),
        
-	array( "type" => "close"), 
+	array( 'type' => 'close'), 
  
 );
 

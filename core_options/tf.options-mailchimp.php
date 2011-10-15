@@ -28,19 +28,19 @@ function themeforce_mailchimp_page() {
     
     $options = array (
  
-        array( "name" => "MailChimp Settings", "type" => "title"),
+        array( 'name' => 'MailChimp Settings', 'type' => 'title'),
 
-        array( "type" => "open"),   
+        array( 'type' => 'open'),   
 
         array( 
-		"name" => "API Key",
-		"desc" => "If you're unsure where to find your API key, please <a href='http://kb.mailchimp.com/article/where-can-i-find-my-api-key/' target='_blank'>click here</a>.",
-		"id" => "tf_mailchimp_api_key",
-		"std" => "",
-		"type" => "text"
+		'name' => 'API Key',
+		'desc' => 'If you\'re unsure where to find your API key, please <a href=\'http://kb.mailchimp.com/article/where-can-i-find-my-api-key/\' target=\'_blank\'>click here</a>.',
+		'id' => 'tf_mailchimp_api_key',
+		'std' => '',
+		'type' => 'text'
 	),
       
-	array( "type" => "close"), 
+	array( 'type' => 'close'), 
  
 );
 

@@ -27,27 +27,27 @@ function themeforce_opentable_page() {
     
     $options = array (
  
-        array( "name" => "OpenTable Settings", "type" => "title"),
+        array( 'name' => 'OpenTable Settings', 'type' => 'title'),
 
-        array( "type" => "open"),   
+        array( 'type' => 'open'),   
 
         array( 
-		"name" => "Restaurant ID",
-		"desc" => "This is the numeric ID of your restaurant, usually a few numbers, i.e. '12345'",
-		"id" => "tf_opentable_id",
-		"std" => "",
-		"type" => "text"
+		'name' => 'Restaurant ID',
+		'desc' => 'This is the numeric ID of your restaurant, usually a few numbers, i.e. \'12345\'',
+		'id' => 'tf_opentable_id',
+		'std' => '',
+		'type' => 'text'
         ),
 
         array( 
-		"name" => "Enable OpenTable Reservation Bar?",
-		"desc" => "This will show the OpenTable bar at the top of your website on every page",
-		"id" => "tf_opentable_bar_enabled",
-		"std" => "false",
-		"type" => "checkbox"
+		'name' => 'Enable OpenTable Reservation Bar?',
+		'desc' => 'This will show the OpenTable bar at the top of your website on every page',
+		'id' => 'tf_opentable_bar_enabled',
+		'std' => 'false',
+		'type' => 'checkbox'
         ),
               
-	array( "type" => "close"), 
+	array( 'type' => 'close'), 
  
 	);
 	
