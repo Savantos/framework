@@ -137,7 +137,7 @@ if ( ! function_exists( 'tf_optionsframework_medialibrary_uploader' ) ) {
 		
 		if ( $value != '' ) { 
 			$remove = '<div class="clear:both;"></div><a href="javascript:( void );" class="mlu_remove tf-button">Remove</a>';
-			$image = preg_match( '/( ^.*\.jpg|jpeg|png|gif|ico* )/i', $value );
+			$image = in_array( strtolower( end( $_p = explode( '.', $value ) ) ), array( 'png', 'gif', 'jpg', 'jpeg', 'ico' ) );
              
             // TODO Not sure why this isn't playing along, just outputs the full image, ideas?
             //var_dump( $value );
