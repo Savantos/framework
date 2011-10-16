@@ -107,7 +107,7 @@
 
 				encodedShortode = encodedShortode.replace( 'tf-', '_tf_' );
 				
-				return '<img class="TFGoogleMapsShortcode align' + args.align + '" data-shortcode="'+encodedShortode+'" src="' + src + '" />';
+				return '<img class="TFGoogleMapsShortcode align' + args.align + '" width="' + args.width + '" height="' + args.height + '" data-shortcode="'+encodedShortode+'" src="' + src + '" />';
 			});
 		
 		},
