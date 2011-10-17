@@ -319,7 +319,7 @@ function _tf_tj_add_extra_media_buttons( $form_fields, $media ) {
 		$button_id = $_GET['button'];
 
 	else :
-		preg_match( '/button=( [A-z0-9_][^&]* )/', $_SERVER['HTTP_REFERER'], $matches );
+		preg_match( '/button=([^&]*)/', $_SERVER['HTTP_REFERER'], $matches );
 		if ( isset( $matches[1] ) )
 			$button_id = $matches[1];
 
