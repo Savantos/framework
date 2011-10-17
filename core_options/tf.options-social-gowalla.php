@@ -28,26 +28,26 @@ function themeforce_social_gowalla_page() {
     
     $options = array (
  
-        array( "name" => "Gowalla Settings", "type" => "title"),
+        array( 'name' => 'Gowalla Settings', 'type' => 'title'),
 
-        array( "type" => "open"),   
+        array( 'type' => 'open'),   
 
         array( 
-		"name" => "Spot ID",
-		"desc" => "If your profile URL is http://gowalla.com/spots/12345, then your Spots ID is 12345",
-		"id" => "tf_gowalla_spot_id",
-		"std" => "",
-		"type" => "text"
+		'name' => 'Spot ID',
+		'desc' => 'If your profile URL is http://gowalla.com/spots/12345, then your Spots ID is 12345',
+		'id' => 'tf_gowalla_spot_id',
+		'std' => '',
+		'type' => 'text'
 	),
 	
-	array( "name" => "API Key",
-		"desc" => "Request API access here, register <a href='http://gowalla.com/api/keys' target='_blank'>here</a>. Callback URL does not matter for the API we'll be using.",
-		"id" => "tf_gowalla_api_key",
-		"std" => "",
-		"type" => "text"
+	array( 'name' => 'API Key',
+		'desc' => 'Request API access here, register <a href=\'http://gowalla.com/api/keys\' target=\'_blank\'>here</a>. Callback URL does not matter for the API we\'ll be using.',
+		'id' => 'tf_gowalla_api_key',
+		'std' => '',
+		'type' => 'text'
 	),
       
-	array( "type" => "close"), 
+	array( 'type' => 'close'), 
  
 );
 

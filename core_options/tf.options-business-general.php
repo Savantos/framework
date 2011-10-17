@@ -30,90 +30,90 @@ function themeforce_business_page() {
     
     $options = array (
  
-        array( "name" => "Business Options", "type" => "title"),
+        array( 'name' => 'Business Options', 'type' => 'title'),
 
-        array( "type" => "open"),   
+        array( 'type' => 'open'),   
 	
 	// BUSINESS
 	// -----------------------------------------------------------------
 	
-	array( "name" => "Business Name",
-                "desc" => "This is used within the Address HTML tags too, so make sure it's correct",
-                "id" => $shortname."_business_name",
-                "std" => "Your Business Name",
-                "type" => "text"),
+	array( 'name' => 'Business Name',
+                'desc' => 'This is used within the Address HTML tags too, so make sure it\'s correct',
+                'id' => $shortname.'_business_name',
+                'std' => 'Your Business Name',
+                'type' => 'text'),
 
-	array( "name" => "Description",
-                "desc" => "A short description of the location.",
-                "id" => $shortname."_business_description",
-                "std" => "",
-                "type" => "textarea"),
+	array( 'name' => 'Description',
+                'desc' => 'A short description of the location.',
+                'id' => $shortname.'_business_description',
+                'std' => '',
+                'type' => 'textarea'),
 						
 	array( 
-                "name" => "Cuisine",
-                "desc" => "The cuisine of the restaurant. Uses the Yelp cuisine categorization.",
-                "id" => "tf_schema_cuisine",
-                "std" => "",
-                "type" => "multiple-select",
-                "class" => "small", //mini, tiny, small
-                "options" => $options_cuisine),
+                'name' => 'Cuisine',
+                'desc' => 'The cuisine of the restaurant. Uses the Yelp cuisine categorization.',
+                'id' => 'tf_schema_cuisine',
+                'std' => '',
+                'type' => 'multiple-select',
+                'class' => 'small', //mini, tiny, small
+                'options' => $options_cuisine),
 
 	array( 
-                "name" => "Price Range",
-                "desc" => "US Example: Price range is the approximate cost per person for a meal including one drink, tax, and tip. We're going for averages here, folks. $ = Cheap, Under $10 * $$ = Moderate, $11 - $30 * $$$ = Spendy, $31 - $60 * $$$$ = Splurge, Above $61",
-                "id" => "tf_schema_pricerange",
-                "std" => "",
-                "type" => "select",
-                "class" => "small", //mini, tiny, small
-                "options" => $options_pricerange),
+                'name' => 'Price Range',
+                'desc' => 'US Example: Price range is the approximate cost per person for a meal including one drink, tax, and tip. We\'re going for averages here, folks. $ = Cheap, Under $10 * $$ = Moderate, $11 - $30 * $$$ = Spendy, $31 - $60 * $$$$ = Splurge, Above $61',
+                'id' => 'tf_schema_pricerange',
+                'std' => '',
+                'type' => 'select',
+                'class' => 'small', //mini, tiny, small
+                'options' => $options_pricerange),
 
 	array( 
-                "name" => "Payment Accepted",
-                "desc" => "List the types of payments you accept, separate by comma.",
-                "id" => "tf_schema_paymentaccepted",
-                "std" => "Cash, Credit Cards",
-                "type" => "text"), 	
+                'name' => 'Payment Accepted',
+                'desc' => 'List the types of payments you accept, separate by comma.',
+                'id' => 'tf_schema_paymentaccepted',
+                'std' => 'Cash, Credit Cards',
+                'type' => 'text'), 	
 						
 	array( 
-                "name" => "Accept Reservations",
-                "desc" => "Do you accept reservations at all?",
-                "id" => "tf_schema_reservations",
-                "std" => "",
-                "type" => "select",
-                "class" => "small", //mini, tiny, small
-                "options" => $options_yesno), 					
+                'name' => 'Accept Reservations',
+                'desc' => 'Do you accept reservations at all?',
+                'id' => 'tf_schema_reservations',
+                'std' => '',
+                'type' => 'select',
+                'class' => 'small', //mini, tiny, small
+                'options' => $options_yesno), 					
 	
-	array( "name" => "Menu Currency",
-                "desc" => "Please enter your currency symbol or 3-letter code, whichever looks better to you. Is used for the menu.",
-                "id" => "tf_currency_symbol",
-                "std" => "$",
-                "type" => "text"),
+	array( 'name' => 'Menu Currency',
+                'desc' => 'Please enter your currency symbol or 3-letter code, whichever looks better to you. Is used for the menu.',
+                'id' => 'tf_currency_symbol',
+                'std' => '$',
+                'type' => 'text'),
 	
-	array( "name" => "Show currency for menu prices by default?",
-                "desc" => "Otherwise you will need to set it manually by using the shortcode variable",
-                "id" => "tf_menu_currency_symbol",
-                "std" => "false",
-                "type" => "checkbox"),
+	array( 'name' => 'Show currency for menu prices by default?',
+                'desc' => 'Otherwise you will need to set it manually by using the shortcode variable',
+                'id' => 'tf_menu_currency_symbol',
+                'std' => 'false',
+                'type' => 'checkbox'),
 	
-	array( "name" => "Use advanced sort functionality for Menu?",
-                "desc" => "If you don't use the advanced sort, menu items will be sorted alphabetically. ", //See <a href='http://'>this tutorial</a>for more information
-                "id" => "tf_menu_sort_key",
-                "std" => "true",
-                "type" => "checkbox"), 	
+	array( 'name' => 'Use advanced sort functionality for Menu?',
+                'desc' => 'If you don\'t use the advanced sort, menu items will be sorted alphabetically. ', //See <a href='http://'>this tutorial</a>for more information
+                'id' => 'tf_menu_sort_key',
+                'std' => 'true',
+                'type' => 'checkbox'), 	
  
 );
 
 $options = apply_filters( 'tf_options_general', $options );
 
 if ( TF_THEME == 'chowforce' ) {
-				$options[]= array( "name" => "Tagline",
-                "desc" => "This will appear in the top right of every page. ",
-                "id" => "chowforce_biz_contactinfo",
-                "std" => "Enter your tagline here.",
-                "type" => "text");
+				$options[]= array( 'name' => 'Tagline',
+                'desc' => 'This will appear in the top right of every page. ',
+                'id' => 'chowforce_biz_contactinfo',
+                'std' => 'Enter your tagline here.',
+                'type' => 'text');
 				}
 			
-$options[] = array( "type" => "close");
+$options[] = array( 'type' => 'close');
 
     tf_display_settings( $options );
     ?> 

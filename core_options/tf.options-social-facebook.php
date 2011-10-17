@@ -27,25 +27,26 @@ function themeforce_social_facebook_page() {
     
     $options = array (
  
-        array( "name" => "Facebook Settings", "type" => "title"),
+        array( 'name' => 'Facebook Settings', 'type' => 'title'),
 
-        array( "type" => "open"),   
+        array( 'type' => 'open'),   
 
-	array( "name" => "Facebook Link",
-                "desc" => "The link to your Facebook fan page/profile.",
-                "id" => $shortname."_facebook",
-                "std" => "",
-                "type" => "text"),     
+	array( 'name' => 'Facebook Link',
+                'desc' => 'The link to your Facebook fan page/profile.',
+                'id' => $shortname.'_facebook',
+                'std' => '',
+                'type' => 'text'),     
       
-	array( "type" => "close"), 
+	array( 'type' => 'close'), 
  
 );
 
     tf_display_settings( $options );
     ?> 
         
-	 <input type="submit" id="tf-submit" name="options_submit" value=" <?php _e( 'Save Changes' )  ?>" />
-         <div style="clear:both;"></div>
+    <input type="submit" id="tf-submit" name="options_submit" value=" <?php _e( 'Save Changes' )  ?>" />
+    <div style="clear:both;"></div>
+    
     </form>
         <!--
         <div id="tf-tip">

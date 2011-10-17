@@ -29,55 +29,55 @@ function themeforce_location_page() {
     
     $options = array (
  
-        array( "name" => "Location Details", "type" => "title"),
+        array( 'name' => 'Location Details', 'type' => 'title'),
 
-        array( "type" => "open"),   
+        array( 'type' => 'open'),   
 	
         // LOCATION
 	// -----------------------------------------------------------------
 
 	// new 3.2.2					
-	 array( "name" => "Street Name",
-                "desc" => "The street address. For exampl: 1600 Amphitheatre Pkwy",
-                "id" => $shortname."_address_street",
-                "std" => "",
-                "type" => "text"),
+	 array( 'name' => 'Street Name',
+                'desc' => 'The street address. For exampl: 1600 Amphitheatre Pkwy',
+                'id' => $shortname.'_address_street',
+                'std' => '',
+                'type' => 'text'),
 		
 	// new 3.2.2		
-	array( "name" => "Town or Locality",
-                "desc" => "The locality. For example, Mountain View, Miami, Sydney, etc.",
-                "id" => $shortname."_address_locality",
-                "std" => "",
-                "type" => "text"), 					
+	array( 'name' => 'Town or Locality',
+                'desc' => 'The locality. For example, Mountain View, Miami, Sydney, etc.',
+                'id' => $shortname.'_address_locality',
+                'std' => '',
+                'type' => 'text'), 					
 	
 	// new 3.2.2		
-	array( "name" => "State or Region",
-                "desc" => "The region. For example, CA.",
-                "id" => $shortname."_address_region",
-                "std" => "",
-                "type" => "text"), 		
+	array( 'name' => 'State or Region',
+                'desc' => 'The region. For example, CA.',
+                'id' => $shortname.'_address_region',
+                'std' => '',
+                'type' => 'text'), 		
 
 	// new 3.2.2		
-	array( "name" => "Country",
-                "desc" => "Select your country",
-                "id" => $shortname."_address_country",
-                "std" => "",
-                "type" => "text"), 	
+	array( 'name' => 'Country',
+                'desc' => 'Select your country',
+                'id' => $shortname.'_address_country',
+                'std' => '',
+                'type' => 'text'), 	
 						
-	array( "name" => "Phone Number",
-                "desc" => "Your business phone number.",
-                "id" => $shortname."_business_phone",
-                "std" => "( 123 ) 456 789",
-                "type" => "text"),
+	array( 'name' => 'Phone Number',
+                'desc' => 'Your business phone number.',
+                'id' => $shortname.'_business_phone',
+                'std' => '( 123 ) 456 789',
+                'type' => 'text'),
 							
 
-	array( "name" => "Short Contact Info",
-                "desc" => "Visible contact information in the top-right corner (you can also leave blank)",
-                "id" => "chowforce_biz_contactinfo",
-                "std" => "Call us at +01 ( 02 ) 123 57 89",
-                "type" => "text"), 				
+	array( 'name' => 'Short Contact Info',
+                'desc' => 'Visible contact information in the top-right corner (you can also leave blank)',
+                'id' => 'chowforce_biz_contactinfo',
+                'std' => 'Call us at +01 ( 02 ) 123 57 89',
+                'type' => 'text'), 				
 
-	array( "type" => "close"), 
+	array( 'type' => 'close'), 
  
 );
 

@@ -22,7 +22,6 @@ function create_slider_postype() {
         'show_in_nav_menus' => false,
         '_builtin' => false,
         'capability_type' => 'post',
-        'menu_icon' => get_bloginfo( 'template_url' ).'/themeforce/assets/images/food_16.png',
         'hierarchical' => false,
         'rewrite' => array( "slug" => "food-menu" ),
         'supports'=> array('title', 'thumbnail', 'editor', 'custom-fields') ,
@@ -111,7 +110,19 @@ function themeforce_slider_page() {
             $button = $custom["tfslider_button"][0];
             $image = $custom["tfslider_image"][0];
             $thumbnail = wpthumb( $image, 'width=250&height=100&crop=1', false);
-                    
+            
+            // Warning Statement
+            
+            $imagesize = getimagesize($image);
+            if ( $imagesize[0] < TF_SLIDERWIDTH && $imagesize[1] < TF_SLIDERHEIGHT ) {
+                echo '<div class="tf-notice">Oops, the dimensions of the image below aren\'t quite enough. Please ensure the image is at least <strong>' . TF_SLIDERWIDTH . 'px wide by ' . TF_SLIDERHEIGHT . 'px high.</strong></div>';
+            } else {     
+                if ($imagesize[0] < TF_SLIDERWIDTH ) {echo '<div class="tf-notice">Oops, the width of the image below is too short. Please ensure the image is at least <strong>' . TF_SLIDERWIDTH . 'px wide.</strong></div>';}
+                if ($imagesize[1] < TF_SLIDERHEIGHT ) {echo '<div class="tf-notice">Oops, the height of the image below is too short. Please ensure the image is at least <strong>' . TF_SLIDERHEIGHT . 'px high.</strong></div>';}
+                }
+                
+             // Display Slide   
+            
              echo '<li id="listItem_' . $id . '" class="menu-item-handle slider-item">';
              echo '<div class="slider-controls">';
                  echo '<div class="handle"></div>';
@@ -153,7 +164,7 @@ function themeforce_slider_page() {
     
     <input type="hidden" name="update_post" value="1"/> 
     
-    <input style="margin-top:10px" type="submit" name="updatepost" value="Update Slides" id="tf-submit" /> 
+    <input style="margin-top:10px" type="submit" name="updatepost" value="Update Slides" class="tf-button tf-major right" /> 
     </form>
     <div style="clear:both"></div>
 <?php
@@ -182,7 +193,7 @@ function themeforce_slider_page() {
             
             <tr>
                 <?php // TODO Would be nice to have the 250x100 thumbnail replace the upload button once the image is ready ?>
-                <th><label>Pick an Image<span class="required">*</span></label></th><!-- <input id="tfslider_image" type="text" name="_tfslider_image" value="" /><input id="upload_image_button" type="button" value="Upload Image" /> -->
+                <th><label>Pick an Image<span class="required">*</span></label></th>
                 <td><?php
                 if ( get_settings( $value['id'] ) != "") { $val = stripslashes(get_settings( $value['id'])  ); } else { $val =  $value['std']; }
                 ?>
@@ -224,7 +235,7 @@ function themeforce_slider_page() {
         </div>
         <input type="hidden" name="new_post" value="1"/> 
         
-        <input style="margin-top:25px" type="submit" name="submitpost" id="tf-submit" value="Create New Slide"/> 
+        <input style="margin-top:25px" type="submit" name="submitpost" class="tf-button tf-major right" value="Create New Slide"/> 
         
     </form>
     </div>
@@ -371,7 +382,7 @@ function themeforce_slider_display() {
             
             if ( TF_THEME == 'baseforce' )
                 {
-                $b_image = wpthumb( $image, 'width=960&height=300&crop=1', false);
+                $b_image = wpthumb( $image, 'width=960&height=250&crop=1', false);
                 echo '<li>';
                 if ($link && $type == 'image') {echo '<a href="' . $link . '">';}
                 echo '<div style="width:960px;height:300px;background: url(' . $b_image . ')">';

@@ -28,28 +28,25 @@ function themeforce_logo_page() {
     
     $options = array (
  
-        array( "name" => "Logo", "type" => "title"),
+        array( 'name' => 'Logo', 'type' => 'title'),
 
-        array( "type" => "open"),   
+        array( 'type' => 'open'),   
 	
-        // LOCATION
-	// -----------------------------------------------------------------
-
 	// new 3.2.2					
-	 array( "name" => "Logo",
-                "desc" => "Your business logo (choose from an array of formats .JPG, .GIF, .PNG)",
-                "id" => $shortname."_logo",
-                "std" => "",
-                "type" => "image"),
+	 array( 'name' => 'Logo',
+                'desc' => 'Your business logo (choose from an array of formats .JPG, .GIF, .PNG)',
+                'id' => $shortname.'_logo',
+                'std' => '',
+                'type' => 'image'),
 		
 	// new 3.2.2		
-	array( "name" => "Favicon",
-                "desc" => "Your Favicon, make sure it is 16px by 16px (you can <a href='http://www.favicon.cc/' target='_blank'>generate one here</a>)",
-                "id" => $shortname."_favicon",
-                "std" => "",
-                "type" => "image"), 					
+	array( 'name' => 'Favicon',
+                'desc' => 'Your Favicon, make sure it is 16px by 16px (you can <a href=\'http://www.favicon.cc/\' target=\'_blank\'>generate one here</a>)',
+                'id' => $shortname.'_favicon',
+                'std' => '',
+                'type' => 'image'), 					
       
-	array( "type" => "close"), 
+	array( 'type' => 'close'), 
  
 );
 

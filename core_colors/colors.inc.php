@@ -35,7 +35,7 @@ class GetMostCommonColors
 	 *
 	 * @return array
 	 */
-	function Get_Color( $img, $count=20, $reduce_brightness=true, $reduce_gradients=true, $delta=16 )
+	function Get_Color( $img, $count=20, $reduce_brightness=true, $reduce_gradients=true, $delta=10 )
 	{
 		if ($img )
 		{

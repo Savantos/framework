@@ -23,6 +23,7 @@ define( 'TF_DIR_SLUG', end( explode( DIRECTORY_SEPARATOR, dirname( __FILE__ ) ) 
 define( 'TF_PATH', dirname( __FILE__ ) );
 define( 'TF_URL', get_bloginfo( 'template_directory' ) . '/' . TF_DIR_SLUG );
 define ('TF_VERSION', '3.2.3');
+
 /* Theme Force Core Tools
 =========================================*/
 
@@ -42,15 +43,12 @@ require_once( TF_PATH . '/core_general/tf.business-shortcodes.php' );
 require_once( TF_PATH . '/core_general/tf.assets.php' );
 require_once( TF_PATH . '/core_general/tf.slider.php' );
 require_once( TF_PATH . '/core_general/tf.mobile.php' );
+require_once( TF_PATH . '/core_colors/tf.colors.php' );
     
 if ( get_option('tf_sliderconversion') != 'true' ) {
 	require_once( TF_PATH . '/core_general/tf.slider.update.php' );
 }
         
-// Colors      
-require_once( TF_PATH . '/core_colors/tf.colors.php' );
-        
-
 // Food Menu
 if( current_theme_supports( 'tf_food_menu' ) )
 	require_once( TF_PATH . '/core_food-menu/tf.food-menu.php' );
@@ -66,9 +64,7 @@ require_once( TF_PATH . '/api_google/tf.googlemaps.shortcodes.php' );
 require_once( TF_PATH . '/core_seo/tf.schema.php' );
 	
 // Widgets
-require_once( TF_PATH . '/core_widgets/newsletter-widget.php' );
-require_once( TF_PATH . '/core_widgets/widget-text-widget-on-page.php' )
-require_once( TF_PATH . 'core_widgets/control-widgets.php' );
+require_once( TF_PATH . '/core_widgets/widget-text-widget-on-page.php' );
 
 if( current_theme_supports( 'tf_widget_opening_times' ) )
 	require_once( TF_PATH . '/core_widgets/widget-openingtimes.php' );
@@ -79,10 +75,9 @@ if( current_theme_supports( 'tf_widget_google_maps' ) )
 if( current_theme_supports( 'tf_widget_payments' ) )
 	require_once( TF_PATH . '/core_widgets/widget-payments.php' );
 
-
-
 //Enqueue common.js script
 wp_enqueue_script('common-js', TF_URL . '/assets/js/common.js', array('jquery'), TF_VERSION );
+
 	
 /* 3rd Party Tools
 =========================================*/
@@ -115,12 +110,10 @@ if( current_theme_supports( 'tf_yelp' ) ) {
 	require_once( TF_PATH . '/api_yelp/tf.yelp.php' );
 }
 
-// Qype
-/*
-if( current_theme_supports( 'tf_qype' ) ) {
-	require_once( TF_PATH . '/api_qype/tf.qype.php' );
-}
-*/
+// OpenTable
+
+require_once( TF_PATH . '/api_opentable/tf.opentable.php' );
+require_once( TF_PATH . '/core_widgets/widget-opentable.php' );
 
 // Gowalla
 if( current_theme_supports( 'tf_gowalla' ) ) {
@@ -143,6 +136,32 @@ function tf_sortable_admin_rows_scripts() {
 }
 add_action( 'admin_print_scripts-edit.php', 'tf_sortable_admin_rows_scripts' );
 
+/* Admin Global JS & Stylesheets
+=========================================*/
+
+function tf_less_js() {
+        wp_enqueue_script('less-js', TF_URL . '/assets/js/less-1.1.3.min.js' );
+        wp_enqueue_style('less-css', TF_URL . '/assets/css/styleguide/tf_styleguide.less' );
+}
+add_action('admin_enqueue_scripts','tf_less_js');
+
+
+
+function enqueue_less_styles($tag, $handle) {
+    global $wp_styles;
+    $match_pattern = '/\.less$/U';
+    if ( preg_match( $match_pattern, $wp_styles->registered[$handle]->src ) ) {
+        $handle = $wp_styles->registered[$handle]->handle;
+        $media = $wp_styles->registered[$handle]->args;
+        $href = $wp_styles->registered[$handle]->src . '?ver=' . $wp_styles->registered[$handle]->ver;
+        $rel = isset($wp_styles->registered[$handle]->extra['alt']) && $wp_styles->registered[$handle]->extra['alt'] ? 'alternate stylesheet' : 'stylesheet';
+        $title = isset($wp_styles->registered[$handle]->extra['title']) ? "title='" . esc_attr( $wp_styles->registered[$handle]->extra['title'] ) . "'" : '';
+
+        $tag = "<link rel='stylesheet' id='$handle' $title href='$href' type='text/less' media='$media' />";
+    }
+    return $tag;
+}
+add_filter( 'style_loader_tag', 'enqueue_less_styles', 5, 2);
 
 /* Food Menu Sorting
 =========================================*/	
@@ -206,13 +225,6 @@ require_once( TF_PATH . '/tf.upgrade.php' );
 /* Remaining Functions
 =========================================*/	
 
-// Enqueue Admin Styles
- 
-function tf_enqueue_admin_css() {
-	wp_enqueue_style('tf-functions-css', TF_URL . '/assets/css/admin.css', array(), TF_VERSION );
-}
-add_action('admin_init', 'tf_enqueue_admin_css');
-
 // Add Widget Styling within Widget Admin Area
  
 function tf_add_tf_icon_classes_to_widgets() {
@@ -244,18 +256,18 @@ function tf_add_tf_icon_classes_to_widgets() {
      			if( jQuery( this ).attr('id').indexOf( 'googlemaps' ) > 1 )
 					jQuery( object ).addClass('tf-google-widget');
      		} );
+                	jQuery( '.widget' ).filter( function( i, object ) {
+     			if( jQuery( this ).attr('id').indexOf( '-fb_' ) > 1 )
+					jQuery( object ).addClass('tf-facebook-widget');
+     		} );
+                        jQuery( '.widget' ).filter( function( i, object ) {
+     			if( jQuery( this ).attr('id').indexOf( '-opentable-' ) > 1 )
+					jQuery( object ).addClass('tf-opentable-widget');
+     		} );
      		
      	} );
      </script>
      
-     <style text="text/css">
-     	/* ThemeForce Icon */
-		/* .tf-admin-widget .widget-top { background-image: url(<?php echo TF_URL ?>/assets/images/ui/icon-themeforce-18.png); background-repeat: no-repeat; background-position: 213px center; } */
-		.tf-gowalla-widget.ui-draggable .widget-top { background-image: url(<?php echo TF_URL ?>/assets/images/ui/icon-gowalla-20.png) ; background-repeat: no-repeat; background-position: 175px center; }
-		.tf-fs-widget.ui-draggable .widget-top { background-image: url(<?php echo TF_URL ?>/assets/images/ui/icon-fs-20.png) ; background-repeat: no-repeat; background-position: 175px center; }
-		.tf-mailchimp-widget.ui-draggable .widget-top { background-image: url(<?php echo TF_URL ?>/assets/images/ui/icon-mailchimp-20.png) ; background-repeat: no-repeat; background-position: 175px center; }
-		.tf-google-widget.ui-draggable .widget-top { background-image: url(<?php echo TF_URL ?>/assets/images/ui/icon-googlemaps-20.png) ; background-repeat: no-repeat; background-position: 145px center; }
-     </style>
 	<?php
 }
 add_action( 'in_admin_footer', 'tf_add_tf_icon_classes_to_widgets' );
@@ -281,7 +293,7 @@ add_action( 'admin_menu', 'tf_modify_admin_menu', 11 );
  * @access private
  */
 function tf_add_editor_styles() {
-	add_editor_style( 'themeforce/assets/css/editor-styles.css' );
+	add_editor_style( 'framework/assets/css/editor-styles.css' );
 }
 add_action( 'admin_init', 'tf_add_editor_styles' );
 

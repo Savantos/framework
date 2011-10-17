@@ -42,25 +42,25 @@ function themeforce_mobile_page() {
 
     $options = array (
  
-        array( "name" => "Mobile Settings", "type" => "title"),
+        array( 'name' => 'Mobile Settings', 'type' => 'title'),
 
-        array( "type" => "open"),  
+        array( 'type' => 'open'),  
         
-        array( "name" => "Backgroung Image",
-                "desc" => "We by default take your first Slider Image, but you may wish",
-                "id" => $shortname."_mobilebg",
-                "std" => "",
-                "type" => "image"),
+        array( 'name' => 'Backgroung Image',
+                'desc' => 'We by default take your first Slider Image, but you may wish',
+                'id' => $shortname.'_mobilebg',
+                'std' => '',
+                'type' => 'image'),
         
          array( 
-		"name" => "Navigation Menu",
-		"desc" => "If you'd like to display a shorter or different Navigation Menu, select it here.",
-		"id" => "tf_mobilemenu",
-		"type" => "select",
-		"class" => "mini", //mini, tiny, small
-		"options" => $options_menus), 
+		'name' => 'Navigation Menu',
+		'desc' => 'If you\'d like to display a shorter or different Navigation Menu, select it here.',
+		'id' => 'tf_mobilemenu',
+		'type' => 'select',
+		'class' => 'mini', //mini, tiny, small
+		'options' => $options_menus), 
       
-	array( "type" => "close"), 
+	array( 'type' => 'close'), 
  
 );
 

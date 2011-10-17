@@ -2,8 +2,6 @@
 // - FOURSQUARE TRANSIENTS -
 //---------------------------------------------
 
-require_once( dirname( __FILE__ ) . '/tf.foursquare.admin-options.php' );
-
 /**
  * Retrieves the foursquare response.
  *

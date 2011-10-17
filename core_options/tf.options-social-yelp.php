@@ -29,45 +29,45 @@ function themeforce_social_yelp_page() {
     
     $options = array (
  
-        array( "name" => "Yelp Settings", "type" => "title"),
+        array( 'name' => 'Yelp Settings', 'type' => 'title'),
 
-        array( "type" => "open"),   
+        array( 'type' => 'open'),   
 
         array( 
-			"name" => "Enable Yelp Bar?",
-			"desc" => "This will show the Yelp bar above in line with Yelp display requirements. The fields below need to be completed in order for this to work.",
-			"id" => "tf_yelp_enabled",
-            "std" => "false",
-            "type" => "checkbox",
-            "class" => "small", //mini, tiny, small
+			'name' => 'Enable Yelp Bar?',
+			'desc' => 'This will show the Yelp bar above in line with Yelp display requirements. The fields below need to be completed in order for this to work.',
+			'id' => 'tf_yelp_enabled',
+            'std' => 'false',
+            'type' => 'checkbox',
+            'class' => 'small', //mini, tiny, small
         ),
 
         array( 
-        	"name" => "API Key",
-			"desc" => "Required for Yelp Button  <a target='_blank' href='http://www.yelp.com/developers/getting_started/api_overview'>Get it from here (Yelp API)</a>",
-			"id" => "tf_yelp_api_key",
-			"std" => "",
-            "type" => "text"
+        	'name' => 'API Key',
+			'desc' => 'Required for Yelp Button  <a target=\'_blank\' href=\'http://www.yelp.com/developers/getting_started/api_overview\'>Get it from here (Yelp API)</a>',
+			'id' => 'tf_yelp_api_key',
+			'std' => '',
+            'type' => 'text'
         ),
         
         array( 
-			"name" => "Country",
-			"desc" => "Required so that your Phone Number below can be correctly identified",
-			"id" => "tf_yelp_country_code",
-			"type" => "select",
-			"class" => "mini", //mini, tiny, small
-			"options" => $options_yelp
+			'name' => 'Country',
+			'desc' => 'Required so that your Phone Number below can be correctly identified',
+			'id' => 'tf_yelp_country_code',
+			'type' => 'select',
+			'class' => 'mini', //mini, tiny, small
+			'options' => $options_yelp
 		),
         
         array( 
-			"name" => "Phone number registered with Yelp",
-			"desc" => "Required for Yelp Button (Used by the API to identify your business). Do not use special characters, only numbers.",
-			"id" => "tf_yelp_phone",
-            "std" => "",
-            "type" => "text"
+			'name' => 'Phone number registered with Yelp',
+			'desc' => 'Required for Yelp Button (Used by the API to identify your business). Do not use special characters, only numbers.',
+			'id' => 'tf_yelp_phone',
+            'std' => '',
+            'type' => 'text'
 		), 
       
-		array( "type" => "close"), 
+		array( 'type' => 'close'), 
  
 	);
 	

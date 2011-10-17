@@ -2,8 +2,6 @@
 
 // Grab qype API Data
 
-require_once( dirname( __FILE__ ) . '/tf.qype.admin-options.php' );
-
 function tf_get_qype_api_xml() {
 
     $api_key = get_option( 'tf_qype_api_key' );
