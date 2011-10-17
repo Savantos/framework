@@ -96,7 +96,7 @@ function themeforce_slider_page() {
 			
 
             while ( $my_query->have_posts() ) : $my_query->the_post();
-
+            
             // - variables -
 			
             $custom = get_post_custom( get_the_ID() );
@@ -250,7 +250,14 @@ function themeforce_slider_page() {
 // Save New Slide
 
 function themeforce_slider_catch_submit() {
+        
+        // Establish Defaults
+    
+        $link = null;
+        $button = null;
+    
         // Grab POST Data
+    
         if ( isset($_POST['new_post'] ) == '1') {
         $post_title = 'Slide'; // New - Static as one field is always required between post title & content. This field will always be hidden now.
         $slide_title = $_POST['tfslider_title']; // New
@@ -318,6 +325,10 @@ function themeforce_slider_catch_update() {
             // Update Regular Post
             wp_update_post( $my_post );
             
+            // Establish Defaults
+            $link = null;
+            $button = null;
+            
             // Update Meta
             $type = $_POST['slider']['type'][$key];
             $title = $_POST['slider']['title'][$key]; // new
@@ -361,7 +372,7 @@ function themeforce_slider_display() {
         $c = 1;
         
         while ( $my_query->have_posts() ) : $my_query->the_post();
-        
+                
             // - variables -
             $custom = get_post_custom( get_the_ID() );
             $id = ( $my_query->post->ID );
