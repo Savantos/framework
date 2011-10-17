@@ -33,6 +33,8 @@ add_action('tf_body_bottom', 'tf_close_schema_restaurant', 8);
 
 function tf_schema_meta() {
     
+        $cuisine_all = null;
+    
         $cuisines = get_option( 'tf_schema_cuisine' );
         foreach($cuisines as $cuisine){
             $cuisine_all .= $cuisine . ', ';

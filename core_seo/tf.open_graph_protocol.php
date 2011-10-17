@@ -13,10 +13,7 @@ function tf_add_og_meta_tags() {
 	
 	$meta = array();
 	
-	if ( get_current_theme() == 'Chowforce' ) 
-		$image = array( 'property' => 'og:image', 'content' => get_option( 'chowforce_logo' ) );
-	elseif ( get_current_theme() == 'Pubforce' ) 
-		$image = array( 'property' => 'og:image', 'content' => get_option( 'pubforce_logo' ) );
+        $image = array( 'property' => 'og:image', 'content' => get_option( 'tf_logo' ) );
 	
 	//Site name
 	$meta[] = array( 'property' => 'og:site_name', 'content' => get_bloginfo() );
@@ -89,7 +86,7 @@ function tf_add_og_meta_tags() {
 			$meta[] = array( 'property' => 'og:phone_number', 'content' => $phone_number );
 		}
 		
-		$meta[] = $image;
+		if ( $image ) { $meta[] = $image; }
 		
 	} elseif ( !is_front_page() && is_home() ) {
 		$meta[] = array( 'property' => 'og:type', 'content' => 'blog' );
