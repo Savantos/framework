@@ -193,6 +193,10 @@ Theme Force Stylesheet - Options & Settings
    -----------------------
 */
 
+.tf-farbtastic {
+    min-height:350px;
+}
+
 #tf-options-page .tf-settings-wrap.tf-farbtastic input[type=text] {
     width:100px;
 }

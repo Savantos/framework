@@ -100,6 +100,12 @@ function themeforce_business_page() {
                 'id' => 'tf_menu_sort_key',
                 'std' => 'true',
                 'type' => 'checkbox'), 	
+        
+        array( 'name' => 'Notice in Footer',
+                'desc' => 'A short text snippet to indicate any copyright or otherwise (you may also leave it blank)',
+                'id' => 'tf_terminalnotice',
+                'std' => '',
+                'type' => 'text'),
  
 );
 
