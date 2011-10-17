@@ -67,7 +67,8 @@ require_once( TF_PATH . '/core_seo/tf.schema.php' );
 	
 // Widgets
 require_once( TF_PATH . '/core_widgets/newsletter-widget.php' );
-require_once( TF_PATH . '/core_widgets/widget-text-widget-on-page.php' );
+require_once( TF_PATH . '/core_widgets/widget-text-widget-on-page.php' )
+require_once( TF_PATH . 'core_widgets/control-widgets.php' );
 
 if( current_theme_supports( 'tf_widget_opening_times' ) )
 	require_once( TF_PATH . '/core_widgets/widget-openingtimes.php' );
