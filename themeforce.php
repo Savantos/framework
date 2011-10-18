@@ -56,6 +56,9 @@ if( current_theme_supports( 'tf_food_menu' ) )
 // Events
 if( current_theme_supports( 'tf_events' ) )
 	require_once( TF_PATH . '/core_events/tf.events.php' );
+
+if( current_theme_supports( 'tf_fullbackground' ) )
+	require_once( TF_PATH . '/core_options/tf.options-full-background.php' );
 	
 // Google Maps
 require_once( TF_PATH . '/api_google/tf.googlemaps.shortcodes.php' );
