@@ -126,8 +126,8 @@ if ( ! function_exists( 'tf_optionsframework_medialibrary_uploader' ) ) {
 		}
 		
 		if ( $value ) { $class = ' has-file'; }
-		$output .= '<input id="' . $id . '" class="upload' . $class . ' tf-button" type="hidden" name="'.$name.'" value="' . $value . '" />' . "\n";
-		$output .= '<input id="upload_' . $id . '" class="upload_button tf-button" type="button" value="' . __( 'Upload' ) . '" rel="' . $int . '" />' . "\n";
+		$output .= '<input id="' . $id . '" class="upload' . $class . ' tf-button tf-inline" type="hidden" name="'.$name.'" value="' . $value . '" />' . "\n";
+		$output .= '<input id="upload_' . $id . '" class="upload_button tf-button tf-inline" type="button" value="' . __( 'Upload' ) . '" rel="' . $int . '" />' . "\n";
 		
 		if ( $_desc != '' ) {
 			$output .= '<span class="of_metabox_desc">' . $_desc . '</span>' . "\n";
@@ -136,7 +136,7 @@ if ( ! function_exists( 'tf_optionsframework_medialibrary_uploader' ) ) {
 		$output .= '<div class="screenshot" id="' . $id . '_image">' . "\n";
 		
 		if ( $value != '' ) { 
-			$remove = '<div class="clear:both;"></div><a href="javascript:( void );" class="mlu_remove tf-button">Remove</a>';
+			$remove = '<div class="clear:both;"></div><a href="javascript:( void );" class="mlu_remove tf-button tf-inline">Remove</a>';
 			$image = in_array( strtolower( end( $_p = explode( '.', $value ) ) ), array( 'png', 'gif', 'jpg', 'jpeg', 'ico' ) );
              
             // TODO Not sure why this isn't playing along, just outputs the full image, ideas?
