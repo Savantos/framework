@@ -88,7 +88,7 @@ function tf_events_facebook ( $atts ) {
                                         <!-- location --> <meta itemprop="location" content="<?php echo $location;?>" />
                                 </div>
                             </div>
-                            <!-- description --><div class="desc" itemprop="description"><?php the_content() ?></div>
+                
                         </div>
                         </div>
 	
@@ -109,4 +109,39 @@ function tf_events_facebook ( $atts ) {
 
 add_shortcode('tf-events-facebook', 'tf_events_facebook');
 
+
+/**
+ * Registers the Insert Shortcode tinymce plugin for Food menu.
+ * 
+ */
+function tf_fb_events_register_tinymce_buttons() {
+	
+	if ( !current_user_can( 'edit_posts' ) || 
+		( isset( $_GET['post'] ) && !in_array( get_post_type( $_GET['post'] ), array( 'post', 'page' ) ) ) || 
+		( isset( $_GET['post_type'] ) && !in_array( $_GET['post_type'], array( 'post', 'page' ) ) ) )
+		return;
+	
+	add_filter( 'mce_external_plugins', 'tf_fb_events_add_tinymce_plugins' );
+}
+add_action( 'load-post.php', 'tf_fb_events_register_tinymce_buttons' );
+add_action( 'load-post-new.php', 'tf_fb_events_register_tinymce_buttons' );
+
+/**
+ * Adds the Insert Shortcode tinyMCE plugin for the food menu.
+ * 
+ * @param array $plugin_array
+ * @return array
+ */
+function tf_fb_events_add_tinymce_plugins( $plugin_array ) {
+	$plugin_array['tf_fb_events_shortcode_plugin'] = TF_URL . '/core_events/tinymce_plugins/insert_fb_events_shortcode.js';
+	
+	return $plugin_array;
+}
+
+function tf_fb_events_add_insert_events_above_editor() {
+	?>
+	<a class="tf-button tf-tiny" href="javascript:tinyMCE.activeEditor.execCommand( 'mceExecTFEventsInsertShortcode' ); return false;"><img src="<?php echo TF_URL . '/core_events/tinymce_plugins/event_16.png' ?>"/><span>Facebook Events</span></a>
+	<?php
+}
+add_action( 'tf_above_editor_insert_items', 'tf_fb_events_add_insert_events_above_editor' );
 ?>
