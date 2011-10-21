@@ -103,14 +103,7 @@
 				
 				encodedShortode = encodedShortode.replace( 'tf-', '_tf_' );
 				
-				if( args.align == 'left' )
-					style = 'float:left; width: 49%;';
-				else if( args.align == 'right' )
-					style = 'float:right; width: 49%;';
-				else
-					style = 'clear:both; width: 100%;'
-
-				return '<input type="button" class="tfFBEventsShortcode" data-shortcode="'+encodedShortode+'" style="' + style + '" value="EVENTS  -  Category: '+ args.group + '  -  Style: ' + args.type + '" />';
+				return '<input type="button" class="tfFBEventsShortcode" data-shortcode="'+encodedShortode+'" style="' + style + '" value="EVENTS  -  Style: ' + args.type + '" />';
 				
 				$('.tfFBEventsShortcode').replaceWith('<h2>New heading</h2>');
 				

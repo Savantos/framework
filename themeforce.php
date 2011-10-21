@@ -216,6 +216,14 @@ function tf_sortable_admin_row_request() {
 }
 add_action( 'wp_ajax_tf_sort_admin_rows', 'tf_sortable_admin_row_request' );
 
+// Enqueue Admin Styles
+ 
+function tf_enqueue_admin_css() {
+    wp_enqueue_style('tf-functions-css', TF_URL . '/assets/css/admin.css', array(), TF_VERSION );
+}
+add_action('admin_init', 'tf_enqueue_admin_css');
+
+
 
 /* Theme Force Upgrade Tools
 =========================================
@@ -314,6 +322,19 @@ function tf_add_quick_add_js_to_supported_post_types() {
 	
 }
 add_action( 'load-edit.php', 'tf_add_quick_add_js_to_supported_post_types' );
+
+function tf_modify_add_new_meni_item_for_quick_add() {
+
+	global $menu, $submenu;
+	
+	foreach( $submenu as $handle => &$item ) {
+		if( preg_match( '/post_type=([^&]+)/', $handle, $matches ) && post_type_supports( $matches[1], 'tf_quick_add' ) && $key = array_search( 'post-new.php?post_type=' . $matches[1], $item[10] ) )
+			$item[10][$key] = $item[5][2] . '#quick-add-new';
+	}
+	
+
+}
+add_action( 'admin_menu', 'tf_modify_add_new_meni_item_for_quick_add', 1 );
 
 function tf_admin_ajax_get_new_post_row() {
 	

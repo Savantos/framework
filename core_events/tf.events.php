@@ -6,7 +6,7 @@ require_once( TF_PATH . '/core_events/tf.events.shortcodes.php' );
 require_once( TF_PATH . '/core_events/tf.events.rss.php' );
 require_once( TF_PATH . '/core_events/tf.events.ical.php' );
 require_once( TF_PATH . '/core_events/tf.events.facebook.php' );
-
+require_once( TF_PATH . '/core_events/tf.events.quick-edit.php' );
 /*
  * EVENTS FUNCTION (CUSTOM POST TYPE)
  */
@@ -30,19 +30,19 @@ function create_event_postype() {
 	);
 	
 	$args = array(
-	    'label' => __( 'Events' ),
-	    'labels' => $labels,
-	    'public' => true,
-	    'can_export' => true,
-	    'show_ui' => true,
-	    '_builtin' => false,
+	    'label' 		=> __( 'Events' ),
+	    'labels' 		=> $labels,
+	    'public' 		=> true,
+	    'can_export' 	=> true,
+	    'show_ui' 		=> true,
+	    '_builtin' 		=> false,
 	    'capability_type' => 'post',
-	    'menu_icon' => get_bloginfo( 'template_url' ).'/framework/assets/images/event_16.png',
-	    'hierarchical' => false,
-	    'rewrite' => array( "slug" => "events" ),
-	    'supports'=> array('title', 'thumbnail', 'excerpt', 'editor') ,
+	    'menu_icon' 	=> get_bloginfo( 'template_url' ).'/framework/assets/images/event_16.png',
+	    'hierarchical' 	=> false,
+	    'rewrite' 		=> array( 'slug' => 'events' ),
+	    'supports'		=> array( 'title', 'thumbnail', 'excerpt', 'editor', 'tf_quick_add' ) ,
 	    'show_in_nav_menus' => true,
-	    'taxonomies' => array( 'tf_eventcategory')
+	    'taxonomies' 	=> array( 'tf_eventcategory')
 	);
 	
 	register_post_type( 'tf_events', $args);
@@ -94,12 +94,12 @@ function tf_events_edit_columns( $columns ) {
 
     $columns = array(
         "cb" => "<input type=\"checkbox\" />",
+        "tf_col_ev_thumb" => __( '' ),
+        "title" => __( 'Event' ),
         "tf_col_ev_cat" => __( 'Category' ),
+        "tf_col_ev_desc" => __( 'Description' ),
         "tf_col_ev_date" => __( 'Dates' ),
         "tf_col_ev_times" => __( 'Times' ),
-        "tf_col_ev_thumb" => __( 'Thumbnail' ),
-        "title" => __( 'Event' ),
-        "tf_col_ev_desc" => __( 'Description' ),
         );
 
     return $columns;
@@ -144,10 +144,11 @@ function tf_events_custom_columns( $column ) {
             break;
             case "tf_col_ev_thumb":
                 // - show thumb -
-				the_post_thumbnail( 'width=60&height=60&crop=1' );
+				the_post_thumbnail( 'width=50&height=50&crop=1' );
             break;
             case "tf_col_ev_desc";
                 the_excerpt();
+		       	tf_events_inline_data( $post->ID );
             break;
 
         }
@@ -358,3 +359,56 @@ function tf_event_permalink( $permalink, $post, $leavename ) {
 	return trailingslashit( get_bloginfo( 'url' ) ) . 'events/' . $term_slug . '/'. ( $leavename ? '%postname%' : $post->post_name  ) . '/';
 }
 add_filter( 'post_type_link', 'tf_event_permalink', 10, 3 );
+
+class TFDateSelector {
+
+	private $date;
+	private $id;
+	
+	public function __construct( $id ) {
+		$this->id = $id;
+	}
+	
+	public function setDate( $date ) {
+		
+		if( $date )
+			$this->date = (int) $date;
+		else
+			$this->date = time();
+	}
+	
+	public function getDateFromPostData() { return $this->getDateFromData( $_POST ); }
+	
+	public function getDateFromData( $data ) {
+		
+		$y = $data[ $this->id . '_aa' ];
+		$m = $data[ $this->id . '_mm' ];
+		$d = $data[ $this->id . '_jj' ];
+		$h = $data[ $this->id . '_hh' ];
+		$mn = $data[ $this->id . '_mn' ];
+		$ss = $data[ $this->id . '_ss' ];
+		
+		$date = strtotime( "$y-$m-$d $h:$mn:$ss" );
+		
+		return $date;
+	}
+	
+	public function getHTML() {
+		
+		global $post;
+		$_post = $post;
+		$post = (object) array( 'post_date_gmt' => date( 'Y-m-d H:i:s', $this->date ), 'post_date' =>  date( 'Y-m-d H:i:s', $this->date ), 'post_status' => 'publish' );
+		
+		ob_start();
+		touch_time( 1, 1, 0, 1 );
+		$data = ob_get_contents();
+		ob_end_clean();
+		
+		$data = preg_replace( '/name="([^"]+)"/', 'name="' . $this->id . '_$1"', $data );
+		
+		$post = $_post;
+		
+		return $data;
+	}
+
+}

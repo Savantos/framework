@@ -219,7 +219,7 @@ wp_admin_css( 'colors-fresh', true );
 			
 			<p class="submitbox" style="margin-top:15px;">
 				<a href="#" onclick="tinyMCEPopup.close();" class="submitdelete deletion" style="float:left">Cancel</a>
-				<input type="submit" class="right button-primary" style="float:right" value="Insert Menu" />
+				<input type="submit" class="right button-primary" style="float:right" value="Insert Events" />
 			</p>
 		</form>
 	</div>

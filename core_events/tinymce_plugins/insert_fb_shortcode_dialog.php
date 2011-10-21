@@ -177,7 +177,7 @@ wp_admin_css( 'colors-fresh', true );
 			} );
 		</script>
 		<form id="tf_events_shortcode_form">
-			<p class="split-column">
+			<p class=" clear">
 				<label>Event Limit</label><br />
 				<select name="tf_events_limit">
 					<option value="">No Limit</option>
@@ -186,14 +186,10 @@ wp_admin_css( 'colors-fresh', true );
 					<?php  endwhile; ?>
 				</select>
 			</p>
-			
-			<p class="clear">
-				<label><input type="checkbox" name="tf_events_show_titles" <?php checked( 'yes', isset( $_GET['showHeader'] ) ? $_GET['showHeader'] : 'yes' ) ?> /> Show Category Headers</label>
-			</p>
-			
+
 			<p class="submitbox" style="margin-top:15px;">
 				<a href="#" onclick="tinyMCEPopup.close();" class="submitdelete deletion" style="float:left">Cancel</a>
-				<input type="submit" class="right button-primary" style="float:right" value="Insert Menu" />
+				<input type="submit" class="right button-primary" style="float:right" value="Insert Events" />
 			</p>
 		</form>
 	</div>
