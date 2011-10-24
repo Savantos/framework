@@ -6,7 +6,7 @@ header('Content-Type: text/html; charset=' . get_bloginfo( 'charset') );
 <html xmlns="http://www.w3.org/1999/xhtml" <?php language_attributes(); ?>>
 <head>
 <meta http-equiv="Content-Type" content="<?php bloginfo( 'html_type' ); ?>; charset=<?php echo get_option( 'blog_charset' ); ?>" />
-<title><?php _e('Insert Events') ?></title>
+<title><?php _e('Insert Facebook Events') ?></title>
 <script type="text/javascript" src="<?php bloginfo( 'url' )?>/wp-includes/js/tinymce/tiny_mce_popup.js?ver=342"></script>
 <script type="text/javascript" src="<?php bloginfo( 'url' )?>/wp-includes/js/jquery/jquery.js"></script>
 <?php
@@ -149,25 +149,16 @@ wp_admin_css( 'colors-fresh', true );
 </head>
 <body>
 	<div class="wrap">
-		<h2>Insert Events</h2>
+		<h2>Insert Facebook Events</h2>
 		
 		<script type="text/javascript">
 			function sendShortcodeToEditor() {
-				var shortcode = "[tf-events-";
-				
-				//shortcode type				
-				shortcode += jQuery( '#tf_events_shortcode_form select[name="tf_events_type"]' ).val();
-				
-				if( jQuery( '#tf_events_shortcode_form select[name="tf_eventscat"]' ).val() > '') {
-					shortcode += " group='" + jQuery( '#tf_events_shortcode_form select[name="tf_eventscat"]' ).val() + "'"
-				}
-				
+				var shortcode = "[tf-events-facebook";
+
 				if( jQuery( '#tf_events_shortcode_form select[name="tf_events_limit"]' ).val() > '') {
 					shortcode += " limit='" + jQuery( '#tf_events_shortcode_form select[name="tf_events_limit"]' ).val() + "'"
 				}
-				
-				shortcode += jQuery( '#tf_events_shortcode_form input[name="tf_events_show_titles"]' ).is( ":checked" ) ? " header='yes'" : " header='no'";
-				
+								
 				shortcode += "]";
 
 				tinyMCE.execInstanceCommand( "content", "mceInsertContent", false, shortcode );
@@ -186,24 +177,7 @@ wp_admin_css( 'colors-fresh', true );
 			} );
 		</script>
 		<form id="tf_events_shortcode_form">
-			<p class="split-column">
-				<label>Display Style</label><br />
-				<select name="tf_events_type">
-					<option <?php selected( isset( $_GET['type'] ) && $_GET['type'] == 'full' ) ?> value="full">All Events</option>
-					<option <?php selected( isset( $_GET['type'] ) && $_GET['type'] == 'feat' ) ?> value="feat">Featured Events Only</option>
-				</select>
-			</p>
-			<p class="split-column">
-				<label>Events Category</label><br />
-				<select name="tf_eventscat">
-					<option value="">All</option>
-					<?php foreach( get_terms( 'tf_eventcategory' ) as $term ) : ?>
-						<option <?php selected( isset( $_GET['group'] ) && ( $_GET['group'] == $term->slug || $_GET['group'] == $term->name ) ) ?>  value="<?php echo $term->name ?>"><?php echo $term->name ?></option>
-					<?php endforeach; ?>
-				</select>
-			</p>
-			
-			<p class="split-column">
+			<p class=" clear">
 				<label>Event Limit</label><br />
 				<select name="tf_events_limit">
 					<option value="">No Limit</option>
@@ -212,11 +186,7 @@ wp_admin_css( 'colors-fresh', true );
 					<?php  endwhile; ?>
 				</select>
 			</p>
-			
-			<p class="clear">
-				<label><input type="checkbox" name="tf_events_show_titles" <?php checked( 'yes', isset( $_GET['showHeader'] ) ? $_GET['showHeader'] : 'yes' ) ?> /> Show Category Headers</label>
-			</p>
-			
+
 			<p class="submitbox" style="margin-top:15px;">
 				<a href="#" onclick="tinyMCEPopup.close();" class="submitdelete deletion" style="float:left">Cancel</a>
 				<input type="submit" class="right button-primary" style="float:right" value="Insert Events" />
