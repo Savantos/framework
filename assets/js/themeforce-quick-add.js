@@ -15,7 +15,6 @@ var TFQuickAdd = new function TFQuickAdd() {
 		
 	} );
 	
-	
 	this.getNewPostRow = function( callback ) {
 		
 		var params = { action: 'tf_get_new_post_row', post_type:document.location.href.match(/post_type=([^#|&]+)/)[1] }
@@ -30,6 +29,10 @@ var TFQuickAdd = new function TFQuickAdd() {
 		jQuery( 'tbody#the-list' ).find('tr:first').addClass('new-quick-add-item').find( '.editinline' ).click();
 	
 	}
+	
+	// support hash bang
+	if( window.location.hash == '#quick-add-new' )
+		jQuery( '.add-new-h2' ).click();
 
 }
 
