@@ -308,15 +308,6 @@ function tf_add_editor_styles() {
 }
 add_action( 'admin_init', 'tf_add_editor_styles' );
 
-// Enqueue Admin Styles
- 	
-function tf_enqueue_admin_css() {
- 	
-wp_enqueue_style('tf-functions-css', TF_URL . '/assets/css/admin.css', array(), TF_VERSION );
-	 	
-}
-	 	
-add_action('admin_init', 'tf_enqueue_admin_css');
 
 /**
  * Enqueues the quick-add JS on manage post type pages that support 'tf_quick_add'.
