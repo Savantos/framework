@@ -1,14 +1,41 @@
-  /* Mixins
-  * ----------------------------------------------------------------- */
-  
-  @import "tf_mixins.less";
- 
- /* Variables
-  * ----------------------------------------------------------------- */
+/*
+
+Theme Force - Styleguide
+------------------------
+
+- Mixins
+- Variables
+- Basics (non-TF related)
+- Elements - Buttons
+- Notices
+- Forms - Input (Text)
+- Widgets - Coloring for API Widgets
+
+*/  
+
+
+/* Mixins
+* ----------------------------------------------------------------- */
+
+@import "tf_mixins.less";
+/* @import "tf_adminbar.less"; */
+
+/* Variables
+
+Color Scheme: http://colorschemedesigner.com/#3v31TxKN4w0w0
+
+* ----------------------------------------------------------------- */
   
 /* TF Blue */
- @tf-primary: #268EB1;
- @tf-primary-highlight: @tf-primary + #555;
+
+ @tf-primary: #0c87d7;
+ @tf-primary-highlight: @tf-primary + #333;
+ @tf-primary-dark: @tf-primary - #333;
+
+/* TF Orange */
+
+@tf-secondary: #FF4100;
+@tf-secondary-dark: #A62A00;
 
 /* TF Gray */ 
  @tf-neutral: #ddd;
@@ -30,76 +57,43 @@
 @black: #000000;
 
 
-  /* Basics
-  * ----------------------------------------------------------------- */ 
+/* Basics (non-TF related)
+* ----------------------------------------------------------------- */ 
 
 .right {float:right;}
 .left {float:left;}
 
 .tf-primary-gradient {
 	color: @white !important;
-	#gradient > .vertical(@tf-primary-highlight, @tf-primary);
+	#gradient > .vertical(@tf-primary-highlight, @tf-primary-dark);
 	text-shadow: 0 -1px 0 rgba(0,0,0,.30);    
 }
 
-  /* Admin Bar
-  * ----------------------------------------------------------------- */
-
-#wpadminbar .wp-admin-bar-logo > a {
-        background: transparent url('../../images/tf_white_16.png') no-repeat 11px 4px;
+.tf-neutral-gradient {
+        color: desaturate(@tf-primary, 100%);
+	#gradient > .vertical(@tf-neutral-highlight, @tf-neutral);
+	text-shadow: 0 1px 0 rgba(255,255,255,.40);	
 }
 
-#wpadminbar.nojs .wp-admin-bar-logo:hover > a, #wpadminbar .wp-admin-bar-logo.hover > a {
-        background: transparent url('../../images/tf_dark_16.png') no-repeat 11px 4px;
-}
 
-/*
-
-#wpadminbar {
-        color:@white;
-        #gradient > .vertical(@tf-primary, ( @tf-primary - #333 ));
-}
-
-#wpadminbar * {
-        color:@white;
-        text-shadow: 0 -1px 0 rgba(0,0,0,0.2);
-}
-
-#wpadminbar a {
-        color:@white;
-}
-
-#wpadminbar .quicklinks > ul > li > a {
-        border-right: 1px solid (@tf-primary - #333);
-}
-
-wpadminbar .quicklinks > ul > li:hover {
-        background:@white;
-}
-
-#wpadminbar .quicklinks > ul > li {
-        border-right: 1px solid (@tf-primary - #111);
-}
-
-*/
-  /* Elements - Buttons
-  * ----------------------------------------------------------------- */
+/* Elements - Buttons
+* ----------------------------------------------------------------- */
  
 .tf-button,
 input.tf-button,
 input[type="button"].tf-button,
 input[type="submit"].tf-button {
+	cursor: hand;
         border:0px !important;
 	font-size: 14px;
 	font-weight: 700;
-	display:inline-block !important;
-	text-shadow: 0 -1px 0 rgba(0,0,0,.25);
-	text-align:center;
 	padding:15px 20px;
+	text-align:center;
+	display:inline-block !important;
+        text-decoration:none !important;
+	text-shadow: 0 -1px 0 rgba(0,0,0,.25);
 	.border-radius(10px);
 	.box-shadow (0 1px 3px rgba(0,0,0,.40));
-	cursor: hand;
-        text-decoration:none !important;
  }
 
 .tf-button:hover,
@@ -124,7 +118,7 @@ input.tf-major:hover {
 	#gradient > .vertical((@tf-primary-highlight + #111), (@tf-primary + #111));
  }
  
- .tf-minor {
+.tf-minor {
         line-height:14px;
 	color: @tf-primary;
 	#gradient > .vertical(@tf-neutral-highlight, @tf-neutral);
@@ -132,11 +126,11 @@ input.tf-major:hover {
 	border:1px solid @tf-neutral;
  }
  
-  .tf-minor:hover {
+.tf-minor:hover {
 	#gradient > .vertical((@tf-neutral-highlight + #111), (@tf-neutral + #111));
  }
  
- .tf-inline,
+.tf-inline,
 input.tf-inline,
 input[type="button"].tf-inline,
 input[type="submit"].tf-inline {
@@ -148,11 +142,11 @@ input[type="submit"].tf-inline {
 	border:1px solid @tf-neutral;
  }
  
- .tf-inline:hover {
+.tf-inline:hover {
 	#gradient > .vertical((@tf-neutral-highlight + #111), (@tf-neutral + #111));
  }
  
-  .tf-tiny {
+.tf-tiny {
 	padding:7px 10px;
 	font-size: 12px;
         line-height:12px;
@@ -171,7 +165,7 @@ input[type="submit"].tf-inline {
  /* Notices
  * ----------------------------------------------------------------- */
  
- .tf-notice {
+.tf-notice {
 	 font-size:13px;
 	 font-weight:bold;
 	 padding:10px;
@@ -184,7 +178,7 @@ input[type="submit"].tf-inline {
 	text-shadow: 0 1px 0 rgba(255,255,255,.30);
  }
 
- .tf-success {
+.tf-success {
 	 font-size:13px;
 	 font-weight:bold;
 	 padding:10px;
@@ -200,13 +194,14 @@ input[type="submit"].tf-inline {
  /* Forms - Input (Text)
  * ----------------------------------------------------------------- */
  
- input[type="text"].tf-input-text, textarea.tf-input-text {
+input[type="text"].tf-input-text, textarea.tf-input-text {
     width:100%;
     border: 1px solid #dfdfdf;
     color: #555;
     padding: 10px;
     background: #fff;
     .border-radius(5px);
+    /* Can't use mixin here as position of secondary color isn't 0 */
     background-image: -webkit-gradient(
         linear,
         left bottom,
@@ -228,8 +223,8 @@ textarea {
 	 overflow:auto;
  }
 
-  /* Widgets - Coloring for API Widgets
-  * ----------------------------------------------------------------- */
+/* Widgets - Coloring for API Widgets
+* ----------------------------------------------------------------- */
 
 #widget-list,
 .widgets-holder-wrap {
@@ -311,4 +306,364 @@ textarea {
         text-shadow: 0 -1px 0 rgba(0,0,0,.30);
         }
 
+}
+
+.tf-db-block {width:600px; margin:20px 20px 10px 10px;}
+.tf-db-block h2 {
+        font-size:24px;
+        line-height:24px;
+        color:#c2c2c2;
+        font-weight:bold;
+}
+
+ul.tf-db-progress {
+        padding:14px;
+        .border-radius(14px);
+        background: #ddd;
+        .box-shadow(inset 0 2px 2px rgba(0,0,0,0.2))
+}
+
+ul.tf-db-progress li {
+        #gradient > .vertical(@white, @tf-neutral);
+	text-shadow: 0 1px 0 rgba(255,255,255,.40);
+        padding:10px;
+        margin-bottom:14px;
+        height:22px;
+        border:1px @tf-neutral solid;
+        .border-radius(10px);
+        .box-shadow;
+}
+
+ul.tf-db-progress li:hover {
+        background:@white;
+}
+
+ul.tf-db-progress li span {
+        position:relative;
+        top:4px;
+}
+
+ul.tf-db-progress li .checkbox {
+        float:left;
+        height:22px;
+        margin:0px;
+        padding: 0px;
+        background: transparent url('../../images/db-checkbox-bg.png') no-repeat;
+        padding-left:36px;
+}
+
+ul.tf-db-progress li .checkbox.done {
+        text-shadow: 0 0 20px rgba( 255, 255, 255, 0.9 );
+        background: transparent url('../../images/db-checkbox-bg-check.png') no-repeat;
+}
+
+ul.tf-db-progress li.last {
+        margin-bottom:0px;
+}
+
+
+a,
+#adminmenu a,
+#the-comment-list p.comment-author strong a,
+#media-upload a.del-link,
+#media-items a.delete,
+.plugins a.delete,
+.ui-tabs-nav a {
+    color: @tf-primary;
+}
+
+a:hover, a:active, a:focus {
+    color: @tf-secondary;  
+}
+
+
+
+/* WP Admin Bar
+* ----------------------------------------------------------------- */
+
+@c-neutral: #ebebeb;
+
+@am-bg: @c-neutral;
+
+@am-border: #cccccc;
+@am-light-6: @c-neutral + #999;
+@am-light-4: @c-neutral + #444;
+@am-light-2: @c-neutral + #222;
+@am-light-1: @c-neutral + #111;
+@am-dark-1: @c-neutral - #111;
+@am-dark-2: @c-neutral - #222;
+@am-dark-3: @c-neutral - #333;
+@am-dark-4: @c-neutral - #444;
+@am-hover: #e4e4e4;
+@am-hover-light:  @tf-primary + #222;
+@am-hover-dark:  @tf-primary - #222;
+@am-white: #ffffff;
+
+#wpadminbar * {
+
+text-shadow: none;
+}
+
+#adminmenu .wp-menu-arrow div {
+    position: absolute;
+    top: 7px;
+    left: -1px;
+    width: 14px;
+    height: 15px;
+
+    -moz-transform:    matrix( -0.6, 1, 0.6, 1, 0, 0 );
+    -webkit-transform: matrix( -0.6, 1, 0.6, 1, 0, 0 );
+    -o-transform:      matrix( -0.6, 1, 0.6, 1, 0, 0 );
+    -ms-transform:     matrix( -0.6, 1, 0.6, 1, 0, 0 );
+    transform:         matrix( -0.6, 1, 0.6, 1, 0, 0 );
+}
+
+#adminmenuback,
+#adminmenuwrap {
+    background: #dddddd !important;
+    border-color: @am-border;
+}
+
+#adminmenu li.wp-menu-separator {
+    background: #dddddd !important;
+    border:none;
+    min-height:10px;
+    .box-shadow(inset 0 2px 2px rgba(0,0,0,0.2))
+}
+
+#adminmenu > li:nth-last-child(2) {
+    .box-shadow(0 2px 2px rgba(0,0,0,0.2));
+    margin-bottom:10px;
+}
+
+#adminmenu div.separator {
+    border-color: transparent ;
+
+}
+
+#adminmenu li.wp-has-current-submenu.wp-menu-open .wp-menu-toggle,
+#adminmenu li.wp-has-current-submenu:hover .wp-menu-toggle {
+    background: transparent url(../images/arrows-dark.png) no-repeat -1px 6px;
+}
+
+#adminmenu .wp-has-submenu:hover .wp-menu-toggle,
+#adminmenu .wp-menu-open .wp-menu-toggle {
+    background: transparent url(../images/arrows.png) no-repeat -2px 6px;
+}
+
+#adminmenu a.menu-top,
+.folded #adminmenu li.menu-top,
+#adminmenu .wp-submenu .wp-submenu-head {
+    border-top-color: @am-light-1;
+    border-bottom-color: @am-dark-1;
+}
+
+#adminmenu li.wp-menu-open {
+    border-color: @am-light-2;
+}
+
+#adminmenu li.menu-top:hover > a {
+    text-shadow: 0 1px 0 rgba( 255, 255, 255, 0.4 );
+    background: rgb(255,255,255);
+background: -moz-linear-gradient(top, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 30%, rgba(234,234,234,1) 70%, rgba(234,234,234,1) 100%);
+background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(255,255,255,1)), color-stop(30%,rgba(255,255,255,1)), color-stop(70%,rgba(234,234,234,1)), color-stop(100%,rgba(234,234,234,1)));
+background: -webkit-linear-gradient(top, rgba(255,255,255,1) 0%,rgba(255,255,255,1) 30%,rgba(234,234,234,1) 70%,rgba(234,234,234,1) 100%);
+background: -o-linear-gradient(top, rgba(255,255,255,1) 0%,rgba(255,255,255,1) 30%,rgba(234,234,234,1) 70%,rgba(234,234,234,1) 100%);
+background: -ms-linear-gradient(top, rgba(255,255,255,1) 0%,rgba(255,255,255,1) 30%,rgba(234,234,234,1) 70%,rgba(234,234,234,1) 100%);
+background: linear-gradient(top, rgba(255,255,255,1) 0%,rgba(255,255,255,1) 30%,rgba(234,234,234,1) 70%,rgba(234,234,234,1) 100%);
+}
+
+#adminmenu li.wp-has-current-submenu a.wp-has-current-submenu,
+#adminmenu li.current a.menu-top,
+.folded #adminmenu li.wp-has-current-submenu,
+.folded #adminmenu li.current.menu-top,
+#adminmenu .wp-menu-arrow,
+#adminmenu .wp-has-current-submenu .wp-submenu .wp-submenu-head {
+    background-color: #777;
+    background-image: -ms-linear-gradient(bottom, @am-hover-dark, @am-hover-light);
+    background-image: -moz-linear-gradient(bottom, @am-hover-dark, @am-hover-light);
+    background-image: -o-linear-gradient(bottom, @am-hover-dark, @am-hover-light);
+    background-image: -webkit-gradient(linear, left bottom, left top, from(@am-hover-dark), to(@am-hover-light));
+    background-image: -webkit-linear-gradient(bottom, @am-hover-dark, @am-hover-light);
+    background-image: linear-gradient(bottom, @am-hover-dark, @am-hover-light);
+}
+
+#adminmenu .wp-menu-arrow div {
+    background-color: #777;
+    background-image: -ms-linear-gradient(right bottom, @am-hover-dark, @am-hover-light);
+    background-image: -moz-linear-gradient(right bottom, @am-hover-dark, @am-hover-light);
+    background-image: -o-linear-gradient(right bottom, @am-hover-dark, @am-hover-light);
+    background-image: -webkit-gradient(linear, right bottom, left top, from(@am-hover-dark), to(@am-hover-light));
+    background-image: -webkit-linear-gradient(right bottom, @am-hover-dark, @am-hover-light);
+    background-image: linear-gradient(right bottom, @am-hover-dark, @am-hover-light);
+}
+
+#adminmenu li.wp-not-current-submenu .wp-menu-arrow {
+    border-top-color: @am-dark-4;
+    border-bottom-color: @am-dark-1;
+    background: @am-dark-2;
+    display:none;
+}
+
+#adminmenu li.wp-not-current-submenu {
+    background: #f2f2f2;
+}
+
+#adminmenu li.wp-not-current-submenu .wp-menu-arrow div {
+    background: @am-dark-2;
+    border-color: @am-dark-2;
+    display:none;
+}
+
+.folded #adminmenu li.menu-top li:hover a {
+    background-image: none;
+}
+
+#adminmenu li.wp-has-current-submenu a.wp-has-current-submenu,
+#adminmenu li.current a.menu-top,
+#adminmenu .wp-has-current-submenu .wp-submenu .wp-submenu-head {
+    text-shadow: 0 -1px 0 rgba(0,0,0,0.5);
+    color: @am-white;
+    border-top-color: @am-hover-light;
+    border-bottom-color: @am-hover-dark;
+}
+
+.folded #adminmenu li.wp-has-current-submenu,
+.folded #adminmenu li.current.menu-top {
+    border-top-color: @am-hover-light;
+    border-bottom-color: @am-hover-dark;
+}
+
+#adminmenu li .wp-submenu {
+    overflow:visible;
+}
+
+#adminmenu .wp-submenu a:hover {
+    background-color: transparent;
+}
+
+#adminmenu .wp-submenu li.current,
+#adminmenu .wp-submenu li.current a,
+#adminmenu .wp-submenu li.current a:hover {
+    color:  @white !important;
+}
+
+#adminmenu .wp-submenu ul a {
+    color:  @white !important;
+    text-shadow:0 -1px 1px rgba(0,0,0,0.5);
+    padding-top:0px;
+    padding-bottom:0px;
+}
+
+#adminmenu .wp-submenu-wrap {
+    border:none !important;
+
+}
+
+#adminmenu .wp-submenu ul {
+background-color: @tf-primary;
+    border:none;
+    padding:1px 0 0 0;
+}
+
+#adminmenu .wp-submenu ul li {
+    position:relative;
+    padding:10px 5px;
+    height:18px;
+    line-height:18px;
+    border-top: 1px solid @tf-primary + #222;
+    border-bottom: 1px solid @tf-primary - #222;
+
+}
+
+#adminmenu .wp-submenu ul li .tf-arrow {
+    background: transparent url(../../images/menu-hover-arrow.png) no-repeat 0 0;
+    width:10px;
+    height:38px;
+    position:absolute;
+    top:0px;
+    left:-10px;
+    z-index:999999;
+
+}
+
+#adminmenu .tf-selected {
+    background: transparent url(../../images/menu-selected-arrow.png) no-repeat 0 0;
+    width:10px;
+    height:38px;
+    position:absolute;
+    top:0px;
+    right:-1px;
+    z-index:9999999;
+
+}
+
+
+#adminmenu .wp-submenu ul li:hover {
+    background-color: @tf-primary + #111;
+}
+
+#adminmenu .wp-submenu-wrap,
+.folded #adminmenu .wp-has-current-submenu .wp-submenu-wrap {
+    -moz-box-shadow: 2px 2px 5px rgba( 0, 0, 0, 0.4 );
+    -webkit-box-shadow: 2px 2px 5px rgba( 0, 0, 0, 0.4 );
+    box-shadow: 2px 2px 5px rgba( 0, 0, 0, 0.4 );
+}
+
+.folded #adminmenu .wp-has-current-submenu .wp-submenu-wrap {
+   
+}
+
+#adminmenu .wp-submenu .wp-submenu-head {
+    border-right-color: @am-light-2;
+    background-color: @am-bg;
+}
+
+#adminmenu div.wp-submenu {
+    background-color: transparent;
+}
+
+
+#adminmenu li.wp-not-current-submenu a.wp-not-current-submenu {
+    color: #7c7c7c !important;
+    text-shadow: 0 1px 1px rgba( 255, 255, 255, 0.9 );
+}
+
+#adminmenu li#collapse-menu {
+    display:none;
+}
+
+#adminmenuback,
+#adminmenuwrap,
+#adminmenu,
+#adminmenu .wp-submenu,
+#adminmenu .wp-submenu-wrap,
+.folded #adminmenu .wp-has-current-submenu .wp-submenu {
+    width: 175px;
+}
+
+.wp-menu-image {
+    margin: 4px 2px 0 2px;
+}
+
+#wpcontent, #footer {
+    margin-left: 195px;
+}
+
+#adminmenu > li:first-child {
+    margin-top:10px;
+}
+
+#adminmenu > li a.menu-top {
+    padding:10px 5px;
+}
+
+#adminmenu .wp-menu-arrow, #adminmenu .wp-menu-arrow div {
+    display:none !important;
+    background: transparent;
+}
+
+#adminmenu li .wp-submenu,
+.folded #adminmenu .wp-has-current-submenu .wp-submenu {
+    left: 176px;
 }

@@ -218,6 +218,7 @@ add_action( 'wp_ajax_tf_sort_admin_rows', 'tf_sortable_admin_row_request' );
 
 // Enqueue Admin Styles
  
+
 function tf_enqueue_admin_css() {
     wp_enqueue_style('tf-functions-css', TF_URL . '/assets/css/admin.css', array(), TF_VERSION );
 }

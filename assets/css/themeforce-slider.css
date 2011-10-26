@@ -54,7 +54,7 @@
     border:none;
 }
 
-#tf-slider-list .slider-content h3, p {
+#tf-slider-list .slider-content h3, #tf-slider-list .slider-content p {
     text-shadow:0 2px #fff;
 }
 
