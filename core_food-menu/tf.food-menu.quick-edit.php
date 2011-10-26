@@ -48,10 +48,10 @@ function tf_food_menu_add_fields_to_quick_edit( $column_name, $post_type ) {
 				<ul>
 					<li class="hidden size-row" style="overflow:hidden;">
 						<span class="size-row-name" style="width:40%; display:block; float:left; margin-right:5%;">
-							<input type="text" name="tf_food_varient_size[]" />
+							<input type="text" name="tf_food_varient_size[]" placeholder="Size"/>
 						</span>
 						<span class="size-row-price" style="width:55%; display:block; float:left;">
-							<em><?php echo get_option( 'tf_currency_symbol', '$' ) ?></em> <input type="text" name="tf_food_varient_price[]" />
+							<em><?php echo get_option( 'tf_currency_symbol', '$' ) ?></em> <input type="text" name="tf_food_varient_price[]" placeholder="Price" />
 							<a class="size-row-price-remove tf-inline-edit-remove-variant" href="#"><img src="<?php bloginfo( 'template_url' ); ?>/framework/assets/images/qe-delete.png" /></a>
 						</span>
 					</li>
@@ -177,6 +177,10 @@ function tf_food_menu_add_inline_js_to_footer() {
 	    		jQuery( "#tf-inline-edit-description textarea" ).html( data.description );
 	    		jQuery( "#tf-inline-edit-description input[type='hidden']" ).val( data.description );
 	    		jQuery( "#tf-inline-edit-image input#_tf_food_menu_image" ).val( data.image_id );
+	    		
+	    		
+	    		if ( data.variants.length == 0  )
+	    			jQuery( "#tf-inline-edit-add-new-size").click();
 	    		
 	    	} );
 	    	
