@@ -150,7 +150,7 @@ text-shadow: none;
 }
 
 #adminmenu .wp-submenu ul {
-background-color: @tf-primary;
+    background-color: @tf-primary;
     border:none;
     padding:1px 0 0 0;
 }
@@ -166,18 +166,17 @@ background-color: @tf-primary;
 }
 
 #adminmenu .wp-submenu ul li .tf-arrow {
-    background: transparent url(../../images/menu-hover-arrow.png) no-repeat 0 0;
+    background: transparent url(../../images/menu-arrows.png) no-repeat 0 0;
     width:10px;
     height:38px;
     position:absolute;
     top:0px;
     left:-10px;
     z-index:1000;
-
 }
 
 #adminmenu .tf-selected {
-    background: transparent url(../../images/menu-selected-arrow.png) no-repeat 0 0;
+    background: transparent url(../../images/menu-arrows.png) no-repeat -20px 0;
     width:10px;
     height:38px;
     position:absolute;
@@ -255,4 +254,8 @@ background-color: @tf-primary;
 #adminmenu li .wp-submenu,
 .folded #adminmenu .wp-has-current-submenu .wp-submenu {
     left: 176px;
+}
+
+#adminmenu .wp-has-current-submenu ul {
+    background-color: @white !important;
 }
