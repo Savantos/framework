@@ -21,10 +21,11 @@ Theme Force - Styleguide
 
 @import "tf_variables.less";
 @import "tf_mixins.less";
+/* @import "tf_blocks.less"; */
 
 /* -- wp specific -- */
 
-@import "tf_wp_admin.less";
+/* @import "tf_wp_admin.less"; */
 
 
 /* Basics (non-TF related)
@@ -203,11 +204,10 @@ textarea {
 
     /* fb */
   
-    .tf-facebook-widget .widget-top {
-        #gradient > .vertical((@facebook + #555), (@facebook));
+    .tf-facebook-widget .widget-top .widget-accent {
+        #gradient > .vertical((@facebook + #777), (@facebook));
         color:@white;
         text-shadow: 0 -1px 0 rgba(0,0,0,.30);
-        border: 1px solid @facebook;
         .box-shadow(0 -1px 0 rgba(255,255,255,0.5))
     }
 
@@ -218,11 +218,10 @@ textarea {
 
     /* gw */
 
-    .tf-gowalla-widget .widget-top {
-        #gradient > .vertical((@gowalla + #555), (@gowalla));
+    .tf-gowalla-widget .widget-top .widget-accent{
+        #gradient > .vertical((@gowalla + #777), (@gowalla));
         color:@white;
         text-shadow: 0 -1px 0 rgba(0,0,0,.30);
-        border: 1px solid @gowalla;
         .box-shadow(0 -1px 0 rgba(255,255,255,0.5))
     }
 
@@ -233,11 +232,10 @@ textarea {
 
     /* fs */    
 
-    .tf-fs-widget .widget-top {
-        #gradient > .vertical((@foursquare + #555), (@foursquare));
+    .tf-fs-widget .widget-top .widget-accent {
+        #gradient > .vertical((@foursquare + #777), (@foursquare));
         color:@white;
         text-shadow: 0 -1px 0 rgba(0,0,0,.30);
-        border: 1px solid @foursquare;
         .box-shadow(0 -1px 0 rgba(255,255,255,0.5))
     }
 
@@ -248,11 +246,10 @@ textarea {
 
     /* mc */
 
-    .tf-mailchimp-widget .widget-top {
-        #gradient > .vertical((@mailchimp + #555), (@mailchimp));
+    .tf-mailchimp-widget .widget-top .widget-accent {
+        #gradient > .vertical((@mailchimp + #777), (@mailchimp));
         color:@white;
         text-shadow: 0 -1px 0 rgba(0,0,0,.30);
-        border: 1px solid @mailchimp;
         .box-shadow(0 -1px 0 rgba(255,255,255,0.5))
     }
 
@@ -263,11 +260,10 @@ textarea {
 
     /* ot */
 
-    .tf-opentable-widget .widget-top {
-        #gradient > .vertical((@opentable + #555), (@opentable));
+    .tf-opentable-widget .widget-top .widget-accent {
+        #gradient > .vertical((@opentable + #777), (@opentable));
         color:@white;
         text-shadow: 0 -1px 0 rgba(0,0,0,.30);
-        border: 1px solid @opentable;
         .box-shadow(0 -1px 0 rgba(255,255,255,0.5))
     }
 
@@ -345,3 +341,724 @@ a,
 a:hover, a:active, a:focus {
     color: @tf-secondary;  
 }
+
+/* WP Admin Bar
+* ----------------------------------------------------------------- */
+
+@c-neutral: #ebebeb;
+
+@am-bg: @c-neutral;
+
+@am-border: #cccccc;
+@am-light-6: @c-neutral + #999;
+@am-light-4: @c-neutral + #444;
+@am-light-2: @c-neutral + #222;
+@am-light-1: @c-neutral + #111;
+@am-dark-1: @c-neutral - #111;
+@am-dark-2: @c-neutral - #222;
+@am-dark-3: @c-neutral - #333;
+@am-dark-4: @c-neutral - #444;
+@am-hover: #e4e4e4;
+@am-hover-light:  @tf-primary + #222;
+@am-hover-dark:  @tf-primary - #222;
+@am-white: #ffffff;
+
+#wpadminbar * {
+
+text-shadow: none;
+}
+
+#adminmenuback,
+#adminmenuwrap {
+    background: #dddddd !important;
+    border-color: @am-border;
+}
+
+#adminmenu li.wp-menu-separator {
+    background: #dddddd !important;
+    border:none;
+    min-height:10px;
+    .box-shadow(inset 0 2px 2px rgba(0,0,0,0.2))
+}
+
+#adminmenu > li:nth-last-child(2) {
+    .box-shadow(0 2px 2px rgba(0,0,0,0.2));
+    margin-bottom:10px;
+}
+
+#adminmenu div.separator {
+    border-color: transparent ;
+
+}
+
+#adminmenu li.wp-has-current-submenu.wp-menu-open .wp-menu-toggle,
+#adminmenu li.wp-has-current-submenu:hover .wp-menu-toggle {
+    background: transparent url(../../images/arrows-dark.png) no-repeat -1px 6px;
+}
+
+#adminmenu .wp-has-submenu:hover .wp-menu-toggle,
+#adminmenu .wp-menu-open .wp-menu-toggle {
+    background: transparent url(../../images/arrows.png) no-repeat -2px 6px;
+}
+
+#adminmenu a.menu-top,
+.folded #adminmenu li.menu-top,
+#adminmenu .wp-submenu .wp-submenu-head {
+    border-top-color: @am-light-1;
+    border-bottom-color: @am-dark-1;
+}
+
+#adminmenu li.wp-menu-open {
+    border-color: transparent;
+}
+
+#adminmenu li.wp-has-current-submenu a.wp-has-current-submenu,
+#adminmenu li.current a.menu-top,
+.folded #adminmenu li.current.menu-top,
+#adminmenu .wp-has-current-submenu .wp-submenu-head {
+    #gradient > .vertical(@am-hover-light, @am-hover-dark);
+    text-shadow: 0 -1px 0 rgba( 0, 0, 0, 0.3 ) !important;
+}
+
+#adminmenu li.wp-not-current-submenu.menu-top:hover > a {
+    text-shadow: 0 1px 0 rgba( 255, 255, 255, 0.4 );
+    /* -- can't be achieved via mixin -- */
+    background: rgb(255,255,255);
+    background: -moz-linear-gradient(top, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 30%, rgba(234,234,234,1) 70%, rgba(234,234,234,1) 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(255,255,255,1)), color-stop(30%,rgba(255,255,255,1)), color-stop(70%,rgba(234,234,234,1)), color-stop(100%,rgba(234,234,234,1)));
+    background: -webkit-linear-gradient(top, rgba(255,255,255,1) 0%,rgba(255,255,255,1) 30%,rgba(234,234,234,1) 70%,rgba(234,234,234,1) 100%);
+    background: -o-linear-gradient(top, rgba(255,255,255,1) 0%,rgba(255,255,255,1) 30%,rgba(234,234,234,1) 70%,rgba(234,234,234,1) 100%);
+    background: -ms-linear-gradient(top, rgba(255,255,255,1) 0%,rgba(255,255,255,1) 30%,rgba(234,234,234,1) 70%,rgba(234,234,234,1) 100%);
+    background: linear-gradient(top, rgba(255,255,255,1) 0%,rgba(255,255,255,1) 30%,rgba(234,234,234,1) 70%,rgba(234,234,234,1) 100%);
+}
+
+
+#adminmenu li.wp-not-current-submenu .wp-menu-arrow {
+    display:none;
+}
+
+#adminmenu li.wp-not-current-submenu {
+    background: #f2f2f2;
+}
+
+#adminmenu li.wp-not-current-submenu .wp-menu-arrow div {
+    background: @am-dark-2;
+    border-color: @am-dark-2;
+    display:none;
+}
+
+.folded #adminmenu li.menu-top li:hover a {
+    background-image: none;
+}
+
+#adminmenu li.wp-has-current-submenu a.wp-has-current-submenu,
+#adminmenu li.current a.menu-top,
+#adminmenu .wp-has-current-submenu .wp-submenu .wp-submenu-head {
+    text-shadow: 0 1px 0 rgba( 255, 255, 255, 0.4 );
+    color: @white !important;
+    border-top-color: @am-hover-light;
+    border-bottom-color: @am-hover-dark;
+}
+
+.folded #adminmenu li.wp-has-current-submenu,
+.folded #adminmenu li.current.menu-top {
+    border-top-color: @am-hover-light;
+    border-bottom-color: @am-hover-dark;
+}
+
+#adminmenu li .wp-submenu {
+    overflow:visible;
+}
+
+#adminmenu .wp-submenu a:hover {
+    background-color: transparent;
+}
+
+#adminmenu .wp-submenu li.current,
+#adminmenu .wp-submenu li.current a,
+#adminmenu .wp-submenu li.current a:hover {
+    color:  @white !important;
+}
+
+#adminmenu .wp-submenu ul a {
+    color:  @white !important;
+    text-shadow:0 -1px 1px rgba(0,0,0,0.5);
+    padding-top:0px;
+    padding-bottom:0px;
+}
+
+#adminmenu .wp-submenu-wrap {
+    border:none !important;
+
+}
+
+#adminmenu .wp-submenu ul {
+    background-color: @tf-primary;
+    border:none;
+    padding:1px 0 0 0;
+}
+
+#adminmenu .wp-submenu ul li {
+    position:relative;
+    padding:10px 5px;
+    height:18px;
+    line-height:18px;
+    border-top: 1px solid @tf-primary + #222;
+    border-bottom: 1px solid @tf-primary - #222;
+
+}
+
+#adminmenu .wp-submenu ul li .tf-arrow {
+    background: transparent url(../../images/menu-arrows.png) no-repeat 0 0;
+    width:10px;
+    height:38px;
+    position:absolute;
+    top:0px;
+    left:-10px;
+    z-index:1000;
+}
+
+#adminmenu .tf-selected {
+    background: transparent url(../../images/menu-arrows.png) no-repeat -20px 0;
+    width:10px;
+    height:38px;
+    position:absolute;
+    top:0px;
+    right:-1px;
+    z-index:1000;
+
+}
+
+
+#adminmenu .wp-submenu ul li:hover {
+    background-color: @tf-primary + #111;
+}
+
+#adminmenu .wp-submenu-wrap,
+.folded #adminmenu .wp-has-current-submenu .wp-submenu-wrap {
+    -moz-box-shadow: 2px 2px 5px rgba( 0, 0, 0, 0.4 );
+    -webkit-box-shadow: 2px 2px 5px rgba( 0, 0, 0, 0.4 );
+    box-shadow: 2px 2px 5px rgba( 0, 0, 0, 0.4 );
+}
+
+.folded #adminmenu .wp-has-current-submenu .wp-submenu-wrap {
+   
+}
+
+#adminmenu .wp-submenu .wp-submenu-head {
+    border-right-color: @am-light-2;
+    background-color: @am-bg;
+}
+
+#adminmenu div.wp-submenu {
+    background-color: transparent;
+}
+
+
+#adminmenu li.wp-not-current-submenu a.wp-not-current-submenu {
+    color: #7c7c7c !important;
+    text-shadow: 0 1px 1px rgba( 255, 255, 255, 0.9 );
+}
+
+#adminmenu li#collapse-menu {
+    display:none;
+}
+
+#adminmenuback,
+#adminmenuwrap,
+#adminmenu,
+#adminmenu .wp-submenu,
+#adminmenu .wp-submenu-wrap,
+.folded #adminmenu .wp-has-current-submenu .wp-submenu {
+    width: 175px;
+}
+
+.wp-menu-image {
+    margin: 4px 2px 0 2px;
+}
+
+#wpcontent, #footer {
+    margin-left: 195px;
+}
+
+#adminmenu > li:first-child {
+    margin-top:10px;
+}
+
+#adminmenu > li a.menu-top {
+    padding:10px 5px;
+}
+
+#adminmenu .wp-menu-arrow, #adminmenu .wp-menu-arrow div {
+    display:none !important;
+    background: transparent;
+}
+
+#adminmenu li .wp-submenu,
+.folded #adminmenu .wp-has-current-submenu .wp-submenu {
+    left: 176px;
+}
+
+#adminmenu .wp-has-current-submenu ul {
+    background-color: #464646  !important;
+    .box-shadow(inset 0 3px 2px rgba(0,0,0,0.3))
+}
+
+#adminmenu .wp-has-current-submenu .wp-submenu ul li {
+    border-top-color: ( #464646 + #111 ) ;
+    border-bottom-color: ( #464646 - #111 ) ;
+}
+
+#adminmenu .wp-has-current-submenu .wp-submenu ul li:first-child {
+    border-top-color: transparent !important;
+    padding-top:12px;
+}
+
+#adminmenu .wp-has-current-submenu .wp-submenu ul li:last-child {
+    .box-shadow(inset 0 -2px 3px rgba(0,0,0,0.1));
+    padding-bottom:12px;
+}
+
+#adminmenu .wp-has-current-submenu .wp-submenu ul li:hover {
+    background-color: (#464646 + #111) !important;
+}
+
+#adminmenushadow {
+    min-height:100% !important;
+}
+
+.widget .widget-top,
+.postbox h3,
+.stuffbox h3,
+.widefat thead tr th,
+.widefat tfoot tr th,
+h3.dashboard-widget-title,
+h3.dashboard-widget-title span,
+h3.dashboard-widget-title small,
+.find-box-head,
+.sidebar-name,
+#nav-menu-header,
+#nav-menu-footer,
+.menu-item-handle,
+#fullscreen-topbar {
+    background: #f2f2f2;
+    text-shadow: 0 1px 0 rgba( 255, 255, 255, 0.9 );
+    color: #7c7c7c;
+}
+
+body, div.sidebar-name h3, #menu-management .nav-tab, #dashboard_plugins h5, a.rsswidget, #dashboard_right_now td.b, #dashboard-widgets h4, .tool-box .title, #poststuff h3, .metabox-holder h3, .pressthis a, #your-profile legend, .inline-edit-row fieldset span.title, .inline-edit-row fieldset span.checkbox-title, .tablenav .displaying-num, .welcome-panel h3, .widefat th, .quicktags, .search {
+    font-family: sans-serif;
+}
+
+table.wp-list-table img {
+    .border-radius(10px);
+}
+
+.widefat th {
+    text-align: left;
+    line-height: 1.3em;
+    font-size: 13px;
+    font-weight:bold;
+    padding-top:12px;
+    padding-bottom:12px;
+}
+
+.wrap a.add-new-h2 {
+    font-family: sans-serif;
+    margin-left: 4px;
+    position: relative;
+    top: -2px;
+    text-decoration: none;
+    line-height:14px;
+    color: desaturate(@tf-primary, 100%);
+    #gradient > .vertical(@tf-neutral-highlight, @tf-neutral);
+    text-shadow: 0 1px 0 rgba(255,255,255,.40);
+    border:1px solid @tf-neutral;
+    font-size: 14px;
+    padding:8px 12px;
+    text-align:center;
+}
+
+.wrap a.add-new-h2:hover {
+	#gradient > .vertical((@tf-neutral-highlight + #111), (@tf-neutral + #111));
+ }
+
+tbody input[type="checkbox"], input[type="radio"] {
+        opacity:0.5;
+        margin-right:5px;
+}
+
+.widefat .check-column {
+        width:3em;
+}
+
+.widefat td {
+        padding: 8px 7px 6px;
+}
+
+tbody input[type="checkbox"]:checked, input[type="radio"]:checked {
+        opacity:1;
+}
+
+#widget-list .widget {
+    width: 248px !important;
+    margin: 0 15px 20px;
+    border: none !important;
+    background: transparent;
+    float: left;
+    .box-shadow(0 3px 10px rgba(0,0,0,0.2))
+}
+
+.widget-holder {
+    background:#ddd !important;
+    .box-shadow(inset 0 3px 5px rgba(0,0,0,0.2))
+}
+
+.widget-liquid-left p.description  {
+    text-shadow: 0 1px 0 rgba( 255, 255, 255, 0.9 );
+    padding: 10px 0px 7px 5px;
+}
+
+.widget-accent {
+    height:35px;
+    width:5px;
+    display:inline;
+    float:left;
+    border: 0px solid transparent !important;
+}
+
+.widget-description {
+    height:50px;
+    background: #fff;
+    text-shadow: 0 1px 0 rgba( 255, 255, 255, 0.9 );
+    color: (#7c7c7c + #111) !important;
+    -moz-border-radius-bottomright: 3px;
+    -moz-border-radius-bottomleft: 3px;
+    -webkit-border-radius: 0px 0px 3px 3px;
+    border-radius: 0px 0px 3px 3px;
+    font-size:12px !important;
+    padding: 5px 10px !important;
+    width:228px;
+}
+
+#widget-list .widget .widget-top {
+    margin-top:0px;
+    margin-bottom: 0px;
+    font-size: 12px;
+    font-weight: bold;
+    padding-top:0px;
+    padding-bottom:0px;
+    overflow: hidden;
+    -moz-border-radius-topleft: 3px;
+    -moz-border-radius-topright: 3px;
+    -moz-border-radius-bottomright: 0px;
+    -moz-border-radius-bottomleft: 0px;
+    -webkit-border-radius: 3px 3px 0px 0px;
+    border-radius: 3px 3px 0px 0px;
+    height:35px;
+}
+
+#widget-list .widget-top, .widget .widget-top
+{
+
+    background: #f2f2f2;
+    background: -moz-linear-gradient(top, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 30%, rgba(234,234,234,1) 70%, rgba(234,234,234,1) 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(255,255,255,1)), color-stop(30%,rgba(255,255,255,1)), color-stop(70%,rgba(234,234,234,1)), color-stop(100%,rgba(234,234,234,1)));
+    background: -webkit-linear-gradient(top, rgba(255,255,255,1) 0%,rgba(255,255,255,1) 30%,rgba(234,234,234,1) 70%,rgba(234,234,234,1) 100%);
+    background: -o-linear-gradient(top, rgba(255,255,255,1) 0%,rgba(255,255,255,1) 30%,rgba(234,234,234,1) 70%,rgba(234,234,234,1) 100%);
+    background: -ms-linear-gradient(top, rgba(255,255,255,1) 0%,rgba(255,255,255,1) 30%,rgba(234,234,234,1) 70%,rgba(234,234,234,1) 100%);
+    background: linear-gradient(top, rgba(255,255,255,1) 0%,rgba(255,255,255,1) 30%,rgba(234,234,234,1) 70%,rgba(234,234,234,1) 100%);
+}
+
+
+.widget .widget-top .widget-title {
+    padding:0px 10px;
+    margin:0;    
+}
+
+.widget .widget-top .widget-title h4 {
+    line-height:35px;
+    height:35px;  
+}
+
+/*
+
+Theme Force Stylesheet - Options & Settings
+
+*/
+
+/* General / Page / Wrap
+   -----------------------
+*/
+
+#tf-options-page {
+    width:700px;
+    margin:10px 0px 0px 20px;
+}
+
+/* Form Table (Regular)
+   -----------------------
+*/
+
+ #tf-options-panel {
+     width:700px;
+     background:#fff;
+ }
+ 
+ #tf-options-panel table {
+     border-spacing:0;
+     padding:10px 0px 20px 10px;
+ }
+
+#tf-options-page h3 {
+    font-size:18px;
+    margin:20px 0px 20px 0px;
+    padding-bottom:20px;
+    border-bottom:1px solid #ddd;
+}
+
+#tf-options-panel th {
+    width:260px;
+}
+
+#tf-options-panel th label {
+    font-size:15px;
+    min-height:34px;
+    line-height:34px;
+    vertical-align:middle;
+    display:block;
+    text-shadow:0px 1px #fff;  
+}
+
+#tf-options-page td {
+    padding: 10px 0px 20px 10px;
+}
+
+#tf-options-page td span.desc {
+    font-size:11px;
+    color:#787878;
+    padding: 0.5em;
+    display:inline-block;
+}
+
+/* Form Table (UI Elements)
+   -----------------------
+*/
+
+ #tf-options-page td, #tf-options-page input, #tf-options-page textarea, #tf-options-page select, .chzn-container-multi .chzn-choices  {
+    font-size:15px;
+}
+
+#tf-options-page input[type=text], #tf-options-page textarea, #tf-options-page select, .chzn-container-multi .chzn-choices  {
+    border: 1px solid #dfdfdf;
+    color: #555;
+    padding: 0.5em;
+    width:400px;
+    line-height: 1.2em;
+    background: #fff;
+    background-image: -webkit-gradient(
+        linear,
+        left bottom,
+        left top,
+        color-stop(1, rgb(235,235,235)),
+        color-stop(0.7, rgb(255,255,255))
+    );
+
+    background-image: -moz-linear-gradient(
+        center bottom,
+        rgb(235,235,235) 100%,
+        rgb(255,255,255) 70%
+    );
+    -webkit-box-shadow: 1px 1px 1px #fff;
+ }
+ 
+  #tf-options-page textarea {
+     min-height:100px;
+ }
+ 
+ 
+  #tf-options-page select {
+     background-image: url('../../images/ui-dropdown.jpg');
+     background-repeat: no-repeat;
+     background-position: right center;
+     -webkit-appearance: none;
+     -moz-appearance:none;
+     height:40px;
+ }
+ 
+ #tf-options-page input[type=checkbox],
+ #tf-options-page input[type=radio] {
+    display: inline-block;
+    line-height: 1em;
+    margin: 0 0.25em 0 0;
+    padding: 0;
+    width: 1.25em;
+    height: 1.25em;
+    vertical-align: text-top;
+ }
+
+ #tf-options-page input[type=radio] {
+    background: transparent url('../../images/ui-checks.png') 0px 0px no-repeat;
+    width:24px;
+    height:24px;
+    display: inline-block;
+    -webkit-appearance: none;
+    -moz-appearance:none;
+    border:none;
+    cursor: pointer;
+  }
+  
+  .tf-radio-img-img {
+	border:3px solid #fff;
+	margin:0 5px 10px 0;
+
+	cursor:pointer;
+	float:left;
+}
+  
+  #tf-options-page input[type=radio]:checked {
+    background: transparent url('../../images/ui-checks.png') -24px 0px no-repeat;
+  }
+  
+  #tf-options-page input[type=checkbox] {
+    background: transparent url('../../images/ui-checks.png') 0px -24px no-repeat;
+    width:24px;
+    height:24px;
+    display: inline-block;
+    border:none;
+    cursor: pointer;
+    -webkit-appearance: none;
+    -moz-appearance:none;
+  }
+  
+  #tf-options-page input[type=checkbox]:checked {
+    background: transparent url('../../images/ui-checks.png') -24px -24px no-repeat;
+  } 
+  
+  #tf-options-page input[type=checkbox]:disabled {
+    background: transparent url('../../images/ui-checks.png') -48px -24px no-repeat;
+  } 
+  
+  #tf-options-page .tf-options-img {
+    margin:20px 0;  
+  }
+  
+ #tf-options-page .image-radio label img {display:block;border:5px solid #eee;padding:10px;margin:0 15px 15px 0;border-radius:5px;}  
+ #tf-options-page .image-radio input[type="radio"] {display:none;width:0px !important; }
+ #tf-options-page .image-radio input[type="radio"]:checked+label img {border:5px solid #0086ba !important; cursor:pointer;}
+ #tf-options-page .image-radio label img:hover {opacity:0.7}
+
+/* Form Table (Wrapped)
+   -----------------------
+*/
+
+.tf-settings-wrap {
+    background:#ececec;
+    text-shadow:0px 1px 0px #ffffff;
+    border-radius:10px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -webkit-box-shadow: 0px 2px 3px 0px #9e9e9e;
+    -moz-box-shadow: 0px 2px 3px 0px #9e9e9e;
+    box-shadow: 0px 2px 3px 0px #9e9e9e;
+}
+
+#tf-options-page .tf-settings-wrap input[type=text], #tf-options-page .tf-settings-wrap select, #tf-options-page .tf-settings-wrap textarea {
+    width:380px;
+}
+
+.tf-text p, .tf-text li {
+    font-size:15px;
+    line-height:24px;
+}
+
+/* Form Table (Farbtastic)
+   -----------------------
+*/
+
+.tf-farbtastic {
+    min-height:350px;
+}
+
+#tf-options-page .tf-settings-wrap.tf-farbtastic input[type=text] {
+    width:100px;
+}
+
+#farbtastic-picker {
+    margin-top:60px;
+    margin-right:20px;
+    float:right;
+    padding:20px;
+    background-image: url('../../images/ui-pickerbg.jpg') !important;
+    background-position: 5px 5px !important;
+    background-repeat: no-repeat !important;
+}
+
+.colorwell {
+    border: 2px solid #fff;
+    text-align: center;
+    cursor: pointer;
+    background-image: none !important;
+   }
+   
+.colorwell-selected {
+    border: 2px solid #000;
+    font-weight: bold;
+    background-image: none !important;
+   }
+
+/* Tip Box
+   -----------------------
+*/
+ 
+ #tf-tip {
+    display:block;
+    min-height:100px;
+    border-radius:10px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    padding:20px 20px 20px 104px;
+    margin:40px 0px 20px 0px;
+    background: transparent url('../../images/options-tip.png') no-repeat 20px 10px;
+    text-shadow:0px 1px 0px #fff;
+    -webkit-box-shadow: 0px 2px 3px 0px #9e9e9e;
+    -moz-box-shadow: 0px 2px 3px 0px #9e9e9e;
+    box-shadow: 0px 2px 3px 0px #9e9e9e;
+ }
+ 
+#tf-options-page .social-box li, #tf-options-page  #tf-tip li, #tf-options-page .tf-text li {
+     list-style-type: disc;
+     list-style-position: inside;
+     padding-left: 1em;
+     text-indent: -1em;
+ }
+ 
+ .social-box {
+    padding:20px;
+    overflow:auto;
+    margin:20px 0 40px 0;
+ }
+ 
+ .social-box span {
+     font-size:15px;
+     height:29px;
+     line-height:29px;
+ }
+ 
+ .social-box a {
+     float:right;
+ }
+ 
+ .social-box .tf-button {
+     color:#218ac4;
+ }
+ 
+  #tf-tip h3 {
+      margin-top:10px;
+      margin-left:0px;
+ }
+ 
+   #tf-tip p {
+      line-height:24px;
+ }   
+   

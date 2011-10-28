@@ -16,9 +16,9 @@ th#tf_col_menu_id{width:60px;}
 th#tf_col_menu_order{width:60px}
 td.tf_col_menu_id{color:gray;text-align:right;}
 td.tf_col_menu_order{color:#219b38;text-align:right;}
-th#tf_col_menu_thumb { width: 55px; }
+th#tf_col_menu_thumb { width: 65px; }
 
-td.column-tf_col_menu_thumb { padding: 2px 0 !important; }
+td.column-tf_col_menu_thumb { padding: 8px 7px 6px !important; }
 td.tf_col_menu_thumb img, td.tf_col_ev_thumb img{ border:1px solid #d8d8d8}
 th#tf_col_menu_cat,th#tf_col_menu_title,th#tf_col_menu_size{width:150px}
 
