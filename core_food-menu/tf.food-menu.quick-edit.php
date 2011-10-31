@@ -42,30 +42,30 @@ function tf_food_menu_add_fields_to_quick_edit( $column_name, $post_type ) {
 			<div class="width-desc"><h3>Description</h3></div>
 		</div>
 		
-		<div id="tf-inline-edit-sizes">
-			<span class="title" style="float:left;">Sizes</span>
-			<span class="tf-food-size-varients" style="display:block; margin-left: 5em; padding-top:5px;">
-				<ul>
-					<li class="hidden size-row" style="overflow:hidden;">
-						<span class="size-row-name" style="width:40%; display:block; float:left; margin-right:5%;">
-							<input type="text" name="tf_food_varient_size[]" placeholder="Size"/>
-						</span>
-						<span class="size-row-price" style="width:55%; display:block; float:left;">
-							<em><?php echo get_option( 'tf_currency_symbol', '$' ) ?></em> <input type="text" name="tf_food_varient_price[]" placeholder="Price" />
-							<a class="size-row-price-remove tf-inline-edit-remove-variant" href="#"><img src="<?php bloginfo( 'template_url' ); ?>/framework/assets/images/qe-delete.png" /></a>
-						</span>
+		<div id="tf-inline-edit-sizes" style="">
+			<span class="tf-food-size-title">Sizes</span>
+			<span class="tf-food-size-variants">
+				<ul class="tf-food-sizes">
+					<li class="hidden size-row" style="overflow:hidden;" >
+						<div class="size-row-name">
+							<input style="margin:0" type="text" name="tf_food_varient_size[]" placeholder="Size"/>
+						</div>
+						<div class="size-row-price">
+							<div class="size-row-currency"><?php echo get_option( 'tf_currency_symbol', '$' ) ?></div><input type="text" name="tf_food_varient_price[]" placeholder="Price" style="float:left;width:50%" />
+							<a class="size-row-price-remove tf-inline-edit-remove-variant" href="#"><div class="size-row-remove"></div></a>
+						</div>
 					</li>
 				</ul>
 				
-				<a id="tf-inline-edit-add-new-size" class="button right">Add New Size</a>
+				<a id="tf-inline-edit-add-new-size" class="button" style="float:right;position:relative;top:-32px">Add New Size</a>
 			</span>
 		</div>
 		
-		<div id="tf-inline-edit-image" style="width:28%; float:left; padding:2% 0">
+		<div id="tf-inline-edit-image" style="width:92px; float:left; padding: 0 !important">
 			<?php _tf_tj_add_image_html_custom( '_tf_food_menu_image', 'Add Image', 0, array(), '', 'width=80&height=80&crop=1', '' ) ?>
 		</div>
 		
-		<div id="tf-inline-edit-description" style="width:66%; padding:2%; float:left;">
+		<div id="tf-inline-edit-description" style="width:66%; padding:2% 2% 2% 0; float:left;">
 			<textarea style="width:100%; height:100px;"></textarea>
 			<input type="hidden" name="tf_description" value="" />
 		</div>
@@ -435,7 +435,7 @@ function _tf_tj_add_image_html( $button_id, $post = null, $classes = null, $size
 
 	$type = ( $post->term_id ) ? 'term' : 'post'; ?>
 
-	<span id="<?php echo $button_id; ?>_container" class="<?php echo $classes; ?>">
+	<div id="<?php echo $button_id; ?>_container" class="<?php echo $classes; ?>">
 
 	<?php if ( $image_id = get_metadata( $type, $post->ID, $button_id, true  ) ) : ?>
 
@@ -449,7 +449,7 @@ function _tf_tj_add_image_html( $button_id, $post = null, $classes = null, $size
 
 	<?php endif; ?>
 
-	</span>
+	</div>
 
 	<a class="add-image button thickbox" onclick="return false;" title="Add an Image" href="media-upload.php?post=<?php echo $post->ID; ?>&amp;button=<?php echo $button_id; ?>&amp;type=image&amp;TB_iframe=true&amp;width=640&amp;height=197">
 	    <img alt="Add an Image" src="<?php bloginfo( 'url' ); ?>/wp-admin/images/media-button-image.gif" /> Upload / Insert
@@ -485,7 +485,7 @@ function _tf_tj_add_image_html_custom( $button_id, $title, $post_id, $image_ids,
 	?>
 
 	<style>
-		.image-wrapper { text-align: center; display: block; padding: 5px; border: 1px solid #DFDFDF; float: left; margin-right: 7px; margin-bottom: 7px; background-color: #F1F1F1; -moz-border-radius: 4px; border-radius: 4px; }
+		.image-wrapper { min-width:80px; min-height:80px; text-align: center; display: block; padding: 5px; border: 1px solid #DFDFDF; float: left; margin-right: 7px; margin-bottom: 7px; background-color: #F1F1F1; -webkit-border-radius: 5px;-moz-border-radius: 5px;border-radius: 5px;}
 		.sortable .image-wrapper { cursor: move; }
 		.sortable .image-wrapper:hover { border-style: dashed; }
 		.ui-sortable-placeholder { visibility: visible !important; background-color: transparent; border-style: dashed; }

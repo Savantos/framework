@@ -164,9 +164,13 @@ input[type="submit"].tf-inline {
  
  /* Forms - Input (Text)
  * ----------------------------------------------------------------- */
- 
+
+.tf-quickedit-content input[type="text"],
+.tf-quickedit-content textarea,
+.tf-quickedit-content .inline-edit-row fieldset textarea, 
+.tf-quickedit-content .inline-edit-row .input-text-wrap input[type="text"],
+.tf-quickedit-content .inline-edit-row fieldset input[type="text"],
 input[type="text"].tf-input-text, textarea.tf-input-text {
-    width:100%;
     border: 1px solid #dfdfdf;
     color: #555;
     padding: 10px;
@@ -194,6 +198,14 @@ textarea {
 	 overflow:auto;
  }
 
+.tf-quickedit-content input[type="text"],
+.tf-quickedit-content textarea,
+.tf-quickedit-content .inline-edit-row fieldset textarea, 
+.tf-quickedit-content .inline-edit-row .input-text-wrap input[type="text"],
+.tf-quickedit-content .inline-edit-row fieldset input[type="text"] {
+    padding:5px !important;
+}
+
 /* Widgets - Coloring for API Widgets
 * ----------------------------------------------------------------- */
 
@@ -212,8 +224,8 @@ textarea {
     }
 
     .tf-facebook-widget span.in-widget-title {
-        color:(@facebook + #777);
-        text-shadow: 0 -1px 0 rgba(0,0,0,.30);
+        color:(@facebook + #333);
+        text-shadow: 0 1px 0 rgba( 255, 255, 255, 0.9 );
         }
 
     /* gw */
@@ -226,8 +238,8 @@ textarea {
     }
 
     .tf-gowalla-widget span.in-widget-title {
-        color:(@gowalla + #777);
-        text-shadow: 0 -1px 0 rgba(0,0,0,.30);
+        color:(@gowalla + #333);
+        text-shadow: 0 1px 0 rgba( 255, 255, 255, 0.9 );
         }
 
     /* fs */    
@@ -240,8 +252,8 @@ textarea {
     }
 
     .tf-fs-widget span.in-widget-title {
-        color:(@foursquare + #777);
-        text-shadow: 0 -1px 0 rgba(0,0,0,.30);
+        color:(@foursquare + #333);
+        text-shadow: 0 1px 0 rgba( 255, 255, 255, 0.9 );
         }
 
     /* mc */
@@ -254,8 +266,8 @@ textarea {
     }
 
     .tf-mailchimp-widget span.in-widget-title {
-        color:(@mailchimp + #777);
-        text-shadow: 0 -1px 0 rgba(0,0,0,.30);
+        color:(@mailchimp + #333);
+        text-shadow: 0 1px 0 rgba( 255, 255, 255, 0.9 );
         }
 
     /* ot */
@@ -268,8 +280,8 @@ textarea {
     }
 
     .tf-opentable-widget span.in-widget-title {
-        color:(@opentable + #777);
-        text-shadow: 0 -1px 0 rgba(0,0,0,.30);
+        color:(@opentable + #333);
+        text-shadow: 0 1px 0 rgba( 255, 255, 255, 0.9 );
         }
 
 }
@@ -342,7 +354,7 @@ a:hover, a:active, a:focus {
     color: @tf-secondary;  
 }
 
-/* WP Admin Bar
+/* REWRITING WP CORE CSS - WP Admin Bar
 * ----------------------------------------------------------------- */
 
 @c-neutral: #ebebeb;
@@ -627,6 +639,9 @@ text-shadow: none;
     min-height:100% !important;
 }
 
+/* REWRITING WP CORE CSS - WP Backgrounds
+* ----------------------------------------------------------------- */
+
 .widget .widget-top,
 .postbox h3,
 .stuffbox h3,
@@ -641,42 +656,50 @@ h3.dashboard-widget-title small,
 #nav-menu-footer,
 .menu-item-handle,
 #fullscreen-topbar {
-    background: #f2f2f2;
-    text-shadow: 0 1px 0 rgba( 255, 255, 255, 0.9 );
-    color: #7c7c7c;
+        background: #f2f2f2;
+        text-shadow: 0 1px 0 rgba( 255, 255, 255, 0.9 );
+        color: #7c7c7c;
 }
 
 body, div.sidebar-name h3, #menu-management .nav-tab, #dashboard_plugins h5, a.rsswidget, #dashboard_right_now td.b, #dashboard-widgets h4, .tool-box .title, #poststuff h3, .metabox-holder h3, .pressthis a, #your-profile legend, .inline-edit-row fieldset span.title, .inline-edit-row fieldset span.checkbox-title, .tablenav .displaying-num, .welcome-panel h3, .widefat th, .quicktags, .search {
-    font-family: sans-serif;
+        font-family: sans-serif;
 }
 
-table.wp-list-table img {
-    .border-radius(10px);
+/* REWRITING WP CORE CSS - WP Tables
+* ----------------------------------------------------------------- */
+
+table.wp-list-table .table-thumb {
+        .border-radius(10px);
+        background:#f2f2f2;
+        width:60px;
+        height:60px;
+        overflow:hidden;
+        .box-shadow(inset 0 1px 2px rgba(0,0,0,0.2))
 }
 
 .widefat th {
-    text-align: left;
-    line-height: 1.3em;
-    font-size: 13px;
-    font-weight:bold;
-    padding-top:12px;
-    padding-bottom:12px;
+        text-align: left;
+        line-height: 1.3em;
+        font-size: 13px;
+        font-weight:bold;
+        padding-top:12px;
+        padding-bottom:12px;
 }
 
 .wrap a.add-new-h2 {
-    font-family: sans-serif;
-    margin-left: 4px;
-    position: relative;
-    top: -2px;
-    text-decoration: none;
-    line-height:14px;
-    color: desaturate(@tf-primary, 100%);
-    #gradient > .vertical(@tf-neutral-highlight, @tf-neutral);
-    text-shadow: 0 1px 0 rgba(255,255,255,.40);
-    border:1px solid @tf-neutral;
-    font-size: 14px;
-    padding:8px 12px;
-    text-align:center;
+        font-family: sans-serif;
+        margin-left: 4px;
+        position: relative;
+        top: -2px;
+        text-decoration: none;
+        line-height:14px;
+        color: desaturate(@tf-primary, 100%);
+        #gradient > .vertical(@tf-neutral-highlight, @tf-neutral);
+        text-shadow: 0 1px 0 rgba(255,255,255,.40);
+        border:1px solid @tf-neutral;
+        font-size: 14px;
+        padding:8px 12px;
+        text-align:center;
 }
 
 .wrap a.add-new-h2:hover {
@@ -688,18 +711,20 @@ tbody input[type="checkbox"], input[type="radio"] {
         margin-right:5px;
 }
 
-.widefat .check-column {
-        width:3em;
-}
+
 
 .widefat td {
-        padding: 8px 7px 6px;
+        padding: 8px 7px;
 }
 
 tbody input[type="checkbox"]:checked, input[type="radio"]:checked {
         opacity:1;
 }
 
+/* REWRITING WP CORE CSS - Widgets
+* ----------------------------------------------------------------- */
+
+#wp_inactive_widgets .widget,
 #widget-list .widget {
     width: 248px !important;
     margin: 0 15px 20px;
@@ -709,7 +734,17 @@ tbody input[type="checkbox"]:checked, input[type="radio"]:checked {
     .box-shadow(0 3px 10px rgba(0,0,0,0.2))
 }
 
-.widget-holder {
+.widgets-sortables .widget {
+    .box-shadow(0 3px 10px rgba(0,0,0,0.2))
+}
+
+.widget-top a.widget-action {
+    background-position: 4px 10px;
+}
+
+.widget-holder,
+.widget-holder.inactive,
+.widgets-sortables {
     background:#ddd !important;
     .box-shadow(inset 0 3px 5px rgba(0,0,0,0.2))
 }
@@ -741,7 +776,7 @@ tbody input[type="checkbox"]:checked, input[type="radio"]:checked {
     width:228px;
 }
 
-#widget-list .widget .widget-top {
+.widget .widget-top {
     margin-top:0px;
     margin-bottom: 0px;
     font-size: 12px;
@@ -749,18 +784,19 @@ tbody input[type="checkbox"]:checked, input[type="radio"]:checked {
     padding-top:0px;
     padding-bottom:0px;
     overflow: hidden;
+    height:35px !important;
+}
+
+#available-widgets .widget .widget-top {
     -moz-border-radius-topleft: 3px;
     -moz-border-radius-topright: 3px;
     -moz-border-radius-bottomright: 0px;
     -moz-border-radius-bottomleft: 0px;
     -webkit-border-radius: 3px 3px 0px 0px;
     border-radius: 3px 3px 0px 0px;
-    height:35px;
 }
 
-#widget-list .widget-top, .widget .widget-top
-{
-
+#widget-list .widget-top, .widget .widget-top {
     background: #f2f2f2;
     background: -moz-linear-gradient(top, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 30%, rgba(234,234,234,1) 70%, rgba(234,234,234,1) 100%);
     background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(255,255,255,1)), color-stop(30%,rgba(255,255,255,1)), color-stop(70%,rgba(234,234,234,1)), color-stop(100%,rgba(234,234,234,1)));
@@ -769,7 +805,6 @@ tbody input[type="checkbox"]:checked, input[type="radio"]:checked {
     background: -ms-linear-gradient(top, rgba(255,255,255,1) 0%,rgba(255,255,255,1) 30%,rgba(234,234,234,1) 70%,rgba(234,234,234,1) 100%);
     background: linear-gradient(top, rgba(255,255,255,1) 0%,rgba(255,255,255,1) 30%,rgba(234,234,234,1) 70%,rgba(234,234,234,1) 100%);
 }
-
 
 .widget .widget-top .widget-title {
     padding:0px 10px;
@@ -780,6 +815,79 @@ tbody input[type="checkbox"]:checked, input[type="radio"]:checked {
     line-height:35px;
     height:35px;  
 }
+
+/* REWRITING WP CORE CSS - Table Posts
+* ----------------------------------------------------------------- */
+
+.post-state {
+	 font-size:11px;
+	 font-weight:bold;
+	 padding:2px 6px;
+	 line-height:20px;
+	.border-radius(3px);
+	.box-shadow(0 1px 2px rgba(0,0,0,0.2));
+	border:1px solid @tf-notice;
+	#gradient > .vertical((@tf-notice + #555), (@tf-notice));
+	color: (@tf-notice - #777);
+	text-shadow: 0 1px 0 rgba(255,255,255,.30);
+ }
+
+.wp-list-table td.post-title a.row-title {
+        font-size:16px !important;
+}
+.cat-default {
+        display:inline-block;
+        font-weight:bold;
+        font-size:11px;
+        padding:2px 6px;
+        line-height:20px;
+        color: desaturate(@tf-primary, 100%);
+        .border-radius(3px);
+        #gradient > .vertical(@tf-neutral-highlight, @tf-neutral);
+        text-shadow: 0 1px 0 rgba(255,255,255,.40);
+        border:1px solid @tf-neutral;
+        margin-right:5px;
+        margin-bottom:5px;
+}
+
+.cat-featured {
+	color:@white;
+	#gradient > .vertical(@tf-primary-highlight, @tf-primary-dark);
+	text-shadow: 0 -1px 0 rgba(0,0,0,.30);
+        border:none;
+	
+ }
+
+/* REWRITING WP CORE CSS - WP General Buttons
+* ----------------------------------------------------------------- */
+
+.submit input, .button, input.button, .button-primary, input.button-primary, .button-secondary, input.button-secondary, .button-highlighted, input.button-highlighted, #postcustomstuff .submit input {
+    text-decoration: none;
+    font-size: 12px !important;
+    line-height: 13px;
+    padding: 3px 8px;
+    cursor: pointer;
+    -moz-box-sizing: content-box;
+    -webkit-box-sizing: content-box;
+    box-sizing: content-box;
+    color: desaturate(@tf-primary, 100%);
+    #gradient > .vertical(@tf-neutral-highlight, @tf-neutral);
+    text-shadow: 0 1px 0 rgba(255,255,255,.40);	
+    border:1px solid @tf-neutral;
+}
+
+
+
+input.button-primary, button.button-primary, a.button-primary {
+    color: @white !important;
+    #gradient > .vertical(@tf-primary-highlight, @tf-primary);
+    text-shadow: 0 -1px 0 rgba(0,0,0,.30);
+}
+
+/*
+div {outline:1px dashed lime}
+span {outline:1px dashed orange}
+*/
 
 /*
 
