@@ -28,6 +28,7 @@ th.check-column {
 .tf-food-size-variants {display:block; margin-left: 5em; padding-top:0px;}
 ul.tf-food-sizes {margin:10px 0 0 0;}
 .size-row-name {float:left; width:200px;}
+.size-row-name input[type="text"] {width:100%;}
 .size-row-price {float:left; width:120px;}
 .size-row-currency {float:left;padding:7px 4px 0 4px}
 .size-row-remove {float:left;width:20px;height:25px;background: url('../images/qe-delete.png') no-repeat 4px 7px}

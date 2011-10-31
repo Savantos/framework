@@ -43,11 +43,26 @@ function tf_events_add_fields_to_quick_edit( $column_name, $post_type ) {
 		</div>
 		
 		<div id="tf-inline-edit-dates" style="margin-top: 10px">
+                    
+                    <!-- Old Code -->  
+                    
+                        <!--
 			<span class="title" style="float:left;">Start Date</span>
 			<div class="start-date" style="display:block; margin-left: 5em; "></div>
 			
 			<span class="title" style="float:left;">End Date</span>
 			<div class="end-date" style="display:block; margin-left: 5em; padding-top:5px;"></div>
+                        -->
+                        
+                      <!-- New Code -->  
+                        
+                        <ul>
+                            <li><label>Start Date</label><input name="tf_events_startdate" class="tfdate" value="<?php echo $clean_sd; ?>" /></li>
+                            <li><label>Start Time</label><input name="tf_events_starttime" value="<?php echo $clean_st; ?>" /><em><?php _e('Use 24h format (7pm = 19:00)', 'themeforce'); ?></em></li>
+                            <li><label>End Date</label><input name="tf_events_enddate" class="tfdate" value="<?php echo $clean_ed; ?>" /></li>
+                            <li><label>End Time</label><input name="tf_events_endtime" value="<?php echo $clean_et; ?>" /><em><?php _e('Use 24h format (7pm = 19:00)', 'themeforce'); ?></em></li>
+                        </ul>
+                        
 		</div>
 		
 		<div id="tf-inline-edit-image" style="width:28%; float:left; padding:2% 0">
@@ -137,8 +152,10 @@ function tf_events_add_inline_js_to_footer() {
 	    		var data = window[jQuery( this).closest('tr').find('.tf-inline-data-variable').text()];
 	    		
 	    		// Dates
-	    		jQuery( '#inlineedit .inline-edit-date' ).closest( '.inline-edit-col').find('#tf-inline-edit-dates .start-date').html( data.start_date );
-	    		jQuery( '#inlineedit .inline-edit-date' ).closest( '.inline-edit-col').find('#tf-inline-edit-dates .end-date').html( data.end_date );
+                        
+                        // *** Commented out for Datepicker ***
+	    		// jQuery( '#inlineedit .inline-edit-date' ).closest( '.inline-edit-col').find('#tf-inline-edit-dates .start-date').html( data.start_date );
+	    		// jQuery( '#inlineedit .inline-edit-date' ).closest( '.inline-edit-col').find('#tf-inline-edit-dates .end-date').html( data.end_date );
 	    		
 				//image
 	    		if ( data.image_id )

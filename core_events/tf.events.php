@@ -301,11 +301,10 @@ function events_scripts() {
 		));
 }
 
-add_action( 'admin_print_styles-post.php', 'events_styles', 1000 );
-add_action( 'admin_print_styles-post-new.php', 'events_styles', 1000 );
-
-add_action( 'admin_print_scripts-post.php', 'events_scripts', 1000 );
-add_action( 'admin_print_scripts-post-new.php', 'events_scripts', 1000 );
+if ( in_array( $GLOBALS['pagenow'], array( 'edit.php') ) ) {
+    add_action( 'admin_print_styles', 'events_styles', 1000 );
+    add_action( 'admin_print_scripts', 'events_scripts', 1000 );
+}
 
 // 8. Create New Terms
 
