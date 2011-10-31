@@ -123,7 +123,7 @@ $options[] = array( 'type' => 'close');
 
     tf_display_settings( $options );
     ?> 
-	 <input type="submit" id="tf-submit" name="options_submit" value=" <?php _e( 'Save Changes' )  ?>" />
+	 <input type="submit" class="tf-button tf-major right" name="options_submit" value=" <?php _e( 'Save Changes' )  ?>" />
          <div style="clear:both;"></div>
     </form>
         

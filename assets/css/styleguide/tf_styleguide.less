@@ -107,7 +107,7 @@ input[type="button"].tf-inline,
 input[type="submit"].tf-inline {
         line-height:14px;
 	padding:15px;
-	color: desaturate(@tf-primary, 100%);
+	color: desaturate(@tf-primary, 100%) !important;
 	#gradient > .vertical(@tf-neutral-highlight, @tf-neutral);
 	text-shadow: 0 1px 0 rgba(255,255,255,.40);	
 	border:1px solid @tf-neutral;
@@ -132,6 +132,27 @@ input[type="submit"].tf-inline {
 	#gradient > .vertical((@tf-neutral-highlight + #111), (@tf-neutral + #111));
  }
  
+ .color-button {
+    border-color:#cfcfcf;
+    border-radius:10px !important;
+    -webkit-border-radius: 10px !important;
+    -moz-border-radius: 10px !important;
+    display:inline-block !important;
+    font-weight:bold;
+
+    height:40px !important;
+    font-size:15px;
+    line-height:15px;
+    text-decoration:none;
+    text-shadow:0px 1px 0px #ffffff;
+    border:1px #cfcfcf solid;
+    margin:1px;
+    width:auto !important;
+    height:auto !important;
+    white-space:pre;
+    padding:15px 30px 15px 45px;
+    background: transparent url('../../images/color_button.jpg') no-repeat top left;
+ }   
  
  /* Notices
  * ----------------------------------------------------------------- */
@@ -884,6 +905,10 @@ input.button-primary, button.button-primary, a.button-primary {
     text-shadow: 0 -1px 0 rgba(0,0,0,.30);
 }
 
+
+body, #wpbody, .form-table .pre {
+    color: #555555 !important;
+}
 /*
 div {outline:1px dashed lime}
 span {outline:1px dashed orange}
