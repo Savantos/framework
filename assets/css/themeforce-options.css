@@ -132,13 +132,13 @@ label.iPhoneCheckLabelOn {
 
   label.iPhoneCheckLabelOn span {
     padding-left: 8px; }
-label.iPhoneCheckLabelOff {
-  color: #8b8b8b;
-  background: url('../images/iphone-style-checkboxes/off.png') no-repeat right 0;
-  text-shadow: 0px 0px 2px rgba(255, 255, 255, 0.6);
-  text-align: right;
-  right: 0; }
-  label.iPhoneCheckLabelOff span {
+    label.iPhoneCheckLabelOff {
+      color: #8b8b8b;
+      background: url('../images/iphone-style-checkboxes/off.png') no-repeat right 0;
+      text-shadow: 0px 0px 2px rgba(255, 255, 255, 0.6);
+      text-align: right;
+      right: 0; }
+      label.iPhoneCheckLabelOff span {
     padding-right: 8px; }
 
 .iPhoneCheckHandle {
@@ -190,32 +190,7 @@ select.chzn-select {
 /* @end */
 
 /* @group Single Chosen */
-.chzn-container-single .chzn-single {
-  background-color: #fff;
-  background-image: -webkit-gradient(linear, left bottom, left top, color-stop(0, #eeeeee), color-stop(0.5, white));
-  background-image: -webkit-linear-gradient(center bottom, #eeeeee 0%, white 50%);
-  background-image: -moz-linear-gradient(center bottom, #eeeeee 0%, white 50%);
-  background-image: -o-linear-gradient(top, #eeeeee 0%,#ffffff 50%);
-  background-image: -ms-linear-gradient(top, #eeeeee 0%,#ffffff 50%);
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#eeeeee', endColorstr='#ffffff',GradientType=0 );
-  background-image: linear-gradient(top, #eeeeee 0%,#ffffff 50%);
-  -webkit-border-radius: 4px;
-  -moz-border-radius   : 4px;
-  border-radius        : 4px;
-  -moz-background-clip   : padding;
-  -webkit-background-clip: padding-box;
-  background-clip        : padding-box;
-  border: 1px solid #aaa;
-  display: block;
-  overflow: hidden;
-  white-space: nowrap;
-  position: relative;
-  height: 26px;
-  line-height: 26px;
-  padding: 0 0 0 8px;
-  color: #444;
-  text-decoration: none;
-}
+
 .chzn-container-single .chzn-single span {
   margin-right: 26px;
   display: block;
