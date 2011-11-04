@@ -95,11 +95,10 @@ function tf_events_edit_columns( $columns ) {
     $columns = array(
         "cb" => "<input type=\"checkbox\" />",
         "tf_col_ev_thumb" => __( '' ),
-        "title" => __( 'Event' ),
+        "tf_col_ev_date" => __( 'When' ),
+        "title" => __( 'Name' ),
         "tf_col_ev_cat" => __( 'Category' ),
-        "tf_col_ev_desc" => __( 'Description' ),
-        "tf_col_ev_date" => __( 'Dates' ),
-        "tf_col_ev_times" => __( 'Times' ),
+        "tf_col_ev_desc" => __( 'Description' )
         );
 
     return $columns;
@@ -118,33 +117,41 @@ function tf_events_custom_columns( $column ) {
                 $eventcats = get_the_terms($post->ID, "tf_eventcategory");
                 $eventcats_html = array();
                 if ( $eventcats ) {
-                    foreach ($eventcats as $eventcat)
-                    array_push($eventcats_html, $eventcat->name);
-                    echo implode($eventcats_html, ", ");
+                    foreach ($eventcats as $eventcat) {
+                        $event = $eventcat->name;
+                        echo '<span class="cat-default cat-' . strtolower($event) . '">' . $event . '</span>';
+                        }
                 } else {
-                _e('None', 'themeforce');;
+                echo '';
                 }
             break;
             case "tf_col_ev_date":
+                
                 // - show dates -
+                
                 $startd = $custom["tf_events_startdate"][0];
                 $endd = $custom["tf_events_enddate"][0];
-                $startdate = date("F j, Y", $startd);
-                $enddate = date("F j, Y", $endd);
-                echo $startdate . '<br /><em>' . $enddate . '</em>';
-            break;
-            case "tf_col_ev_times":
+                $day = date("j", $startd);
+                $month = date("M", $endd);
+                $year = date("y", $endd);
+                $weekday = date("l", $endd);
+                
                 // - show times -
+                
                 $startt = $custom["tf_events_startdate"][0];
                 $endt = $custom["tf_events_enddate"][0];
                 $time_format = get_option( 'time_format' );
                 $starttime = date($time_format, $startt);
                 $endtime = date($time_format, $endt);
-                echo $starttime . ' - ' .$endtime;
+                
+                echo '<div class="ev_block"><div class="ev_day">' . $day . '</div></div><div class="ev_block"><div class="ev_monthyear"><strong>' . $month . '</strong> ' . $year . '</div><div class="ev_weekday tf-detail">'. $weekday . '</div><div class="tf-detail">' . $starttime . ' to ' . $endtime . '</div></div>';
+                
             break;
             case "tf_col_ev_thumb":
                 // - show thumb -
-				the_post_thumbnail( 'width=50&height=50&crop=1' );
+                echo '<div class="table-thumb">';
+		the_post_thumbnail( 'width=60&height=60&crop=1' );
+                echo '</div>';
             break;
             case "tf_col_ev_desc";
                 the_excerpt();
@@ -294,11 +301,10 @@ function events_scripts() {
 	//	));
 }
 
-add_action( 'admin_print_styles-post.php', 'events_styles', 1000 );
-add_action( 'admin_print_styles-post-new.php', 'events_styles', 1000 );
-
-add_action( 'admin_print_scripts-post.php', 'events_scripts', 1000 );
-add_action( 'admin_print_scripts-post-new.php', 'events_scripts', 1000 );
+if ( in_array( $GLOBALS['pagenow'], array( 'edit.php') ) ) {
+    add_action( 'admin_print_styles', 'events_styles', 1000 );
+    add_action( 'admin_print_scripts', 'events_scripts', 1000 );
+}
 
 // 8. Create New Terms
 

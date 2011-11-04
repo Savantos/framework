@@ -23,7 +23,7 @@ function tf_create_foodmenu_postype() {
         'new_item' => __( 'New Menu Item' ),
         'view' => __( 'View Menu Item' ),
         'view_item' => __( 'View Menu Item' ),
-        'search_items' => __( 'Search  Menu Items' ),
+        'search_items' => __( 'Search Menu Items' ),
         'not_found' => __( 'No  Menu Items found' ),
         'not_found_in_trash' => __( 'No  Menu Items found in Trash' ),
         'parent' => __( 'Parent Menu Item' ),
@@ -92,12 +92,11 @@ function tf_foodmenu_edit_columns( $columns ) {
  	$columns = array(
  		"cb" => "<input type=\"checkbox\" />",
  		"tf_col_menu_thumb" => '',
- 		//"tf_col_menu_id" => __( 'ID' ),
  		"title" => __( 'Item' ),
  		"tf_col_menu_cat" => __( 'Section' ),
- 		"tf_col_menu_desc" => __( 'Description' ),
  		"tf_col_menu_size" => __( 'Size(s)' ),
  		"tf_col_menu_price" => __( 'Price(s)' ),
+                "tf_col_menu_desc" => __( 'Description' )
  	);
  	
  	return $columns;
@@ -130,7 +129,9 @@ function tf_foodmenu_custom_columns( $column ) {
 		       	break;
 		case "tf_col_menu_thumb":
 		       
-				the_post_thumbnail( 'width=50&height=50&crop=1' );
+                                echo '<div class="table-thumb">';
+                                the_post_thumbnail( 'width=60&height=60&crop=1' );
+                                echo '</div>';
 				break;
 		case "tf_col_menu_size":
 				$size1 = $custom["tf_menu_size1"][0];
@@ -147,9 +148,9 @@ function tf_foodmenu_custom_columns( $column ) {
 				$price3 = $custom["tf_menu_price3"][0];
 				
 				$output = '';
-				if ($price1 != '') { echo get_option( 'tf_currency_symbol' ).''.$price1; }
-				if ($price2 != '') { echo '<br />'; echo get_option( 'tf_currency_symbol' ).''.$price2; }
-				if ($price3 != '') { echo '<br />'; echo get_option( 'tf_currency_symbol' ).''.$price3; }
+				if ($price1 != '') { echo get_option( 'tf_currency_symbol' ).' '.$price1; }
+				if ($price2 != '') { echo '<br />'; echo get_option( 'tf_currency_symbol' ).' '.$price2; }
+				if ($price3 != '') { echo '<br />'; echo get_option( 'tf_currency_symbol' ).' '.$price3; }
 				break;
 	}
 }

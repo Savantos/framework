@@ -27,7 +27,7 @@ function themeforce_social_media_overview_page() {
             <li>50% of active users log on to Facebook <strong>everyday</strong>.</li>
             <li>Average user has <strong>130 friends</strong>.</li>
         </ul>
-        <div class="social-box tf-settings-wrap"><span><strong>Link</strong> to your Facebook Fan Page </span><a href="<?php echo get_admin_url() . 'admin.php?page=themeforce_facebook'; ?>"><div class="tf-button">Go to your Facebook Settings</div></a></div>
+        <div class="social-box tf-settings-wrap"><span><strong>Link</strong> to your Facebook Fan Page </span><a href="<?php echo get_admin_url() . 'admin.php?page=themeforce_facebook'; ?>"><div class="tf-button tf-inline">Go to your Facebook Settings</div></a></div>
         <div class="clearfix"></div>
         <!-- QYPE -->
         <img src="<?php echo get_bloginfo( 'template_url' ).'/framework/assets/images/social_twitter.jpg'; ?>" />
@@ -37,7 +37,7 @@ function themeforce_social_media_overview_page() {
             <li><strong>460, 000. </strong>Average number of new accounts per day (February 2011).</li>
             <li><strong>182%</strong>. Increase in number of mobile users over the past year.</li>
         </ul>
-        <div class="social-box tf-settings-wrap"><span><strong>Link</strong> to your Twitter Profile </span><a href="<?php echo get_admin_url() . 'admin.php?page=themeforce_twitter'; ?>"><div class="tf-button">Go to your Twitter Settings</div></a></div>
+        <div class="social-box tf-settings-wrap"><span><strong>Link</strong> to your Twitter Profile </span><a href="<?php echo get_admin_url() . 'admin.php?page=themeforce_twitter'; ?>"><div class="tf-button tf-inline">Go to your Twitter Settings</div></a></div>
         <div class="clearfix"></div>
         </div>
     </div>

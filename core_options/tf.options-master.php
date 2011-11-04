@@ -52,7 +52,7 @@ add_action( 'admin_menu', 'themeforce_socialmedia_options' );
 function themeforce_social_options() {
     add_menu_page( 'Social Proof Overview', 'Social Proof', 'manage_options', 'themeforce_social_options', 'themeforce_social_overview_page', TF_URL . '/assets/images/social_16.png', 35); // $function, $icon_url, $position 
     add_submenu_page('themeforce_social_options', 'Yelp', 'Yelp', 'manage_options', 'themeforce_yelp', 'themeforce_social_yelp_page');
-    add_submenu_page('themeforce_social_options', 'Qype', 'Qype', 'manage_options', 'themeforce_qype', 'themeforce_social_qype_page');
+    // add_submenu_page('themeforce_social_options', 'Qype', 'Qype', 'manage_options', 'themeforce_qype', 'themeforce_social_qype_page');
     add_submenu_page('themeforce_social_options', 'Foursquare', 'Foursquare', 'manage_options', 'themeforce_foursquare', 'themeforce_social_foursquare_page');   
     add_submenu_page('themeforce_social_options', 'Gowalla', 'Gowalla', 'manage_options', 'themeforce_gowalla', 'themeforce_social_gowalla_page');
 }

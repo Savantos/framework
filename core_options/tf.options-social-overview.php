@@ -27,7 +27,7 @@ function themeforce_social_overview_page() {
             <li>Over <strong>half a million calls</strong> were made to local businesses directly from the iPhone App.</li>
             <li>Nearly a <strong>million people generated point-to-point directions</strong> to a local business from their Yelp iPhone App last month.</li>
         </ul>
-        <div class="social-box tf-settings-wrap"><span>Use Yelp to <strong>display your Rating</strong> </span><a href="<?php echo get_admin_url() . 'admin.php?page=themeforce_yelp'; ?>"><div class="tf-button">Go to your Yelp Settings</div></a></div>
+        <div class="social-box tf-settings-wrap"><span>Use Yelp to <strong>display your Rating</strong> </span><a href="<?php echo get_admin_url() . 'admin.php?page=themeforce_yelp'; ?>"><div class="tf-button tf-inline">Go to your Yelp Settings</div></a></div>
         <div class="clearfix"></div>
         <!-- QYPE -->
         <!--
@@ -49,12 +49,12 @@ function themeforce_social_overview_page() {
             <li>59% of users search for a local business at least once a week</li>
             <li>86% of users check-in at least once a day.</li>
         </ul>
-        <div class="social-box tf-settings-wrap"><span>Use Foursquare to <strong>display your Guest Photos & Tips</strong> </span><a href="<?php echo get_admin_url() . 'admin.php?page=themeforce_foursquare'; ?>"><div class="tf-button">Go to your Foursquare Settings</div></a></div>
+        <div class="social-box tf-settings-wrap"><span>Use Foursquare to <strong>display your Guest Photos & Tips</strong> </span><a href="<?php echo get_admin_url() . 'admin.php?page=themeforce_foursquare'; ?>"><div class="tf-button tf-inline">Go to your Foursquare Settings</div></a></div>
         <div class="clearfix"></div>
         <!-- GOWALLA -->
         <img src="<?php echo get_bloginfo( 'template_url' ).'/framework/assets/images/social_gowalla.jpg'; ?>" />
         <p><a href="http://www.gowalla.com" target="_blank">Gowalla</a> is a primarily mobile web application that allows users to check in to locations that they visit using their mobile device. This is achieved either through the use of dedicated applications available on Google Android, iPhone, Palm WebOS and BlackBerry, or via m.gowalla.com. There is currently no way of checking in through the standard website. Check-ins can be pushed via Notifications to iPhones, and by linking accounts, to Twitter and Facebook.</p>
-        <div class="social-box tf-settings-wrap"><span>Use Gowalla to <strong>display your Check-ins & Guest Photos</strong> </span><a href="<?php echo get_admin_url() . 'admin.php?page=themeforce_gowalla'; ?>"><div class="tf-button">Go to your Gowalla Settings</div></a></div>
+        <div class="social-box tf-settings-wrap"><span>Use Gowalla to <strong>display your Check-ins & Guest Photos</strong> </span><a href="<?php echo get_admin_url() . 'admin.php?page=themeforce_gowalla'; ?>"><div class="tf-button tf-inline">Go to your Gowalla Settings</div></a></div>
         <div class="clearfix"></div>
         </div>
     </div>

@@ -276,6 +276,7 @@ function tf_add_tf_icon_classes_to_widgets() {
      			if( jQuery( this ).attr('id').indexOf( '-opentable-' ) > 1 )
 					jQuery( object ).addClass('tf-opentable-widget');
      		} );
+                        jQuery('.widget-top').prepend('<div class="widget-accent"></div>');
      		
      	} );
      </script>
