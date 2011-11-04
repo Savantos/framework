@@ -280,8 +280,8 @@ function events_styles() {
 
 function events_scripts() {
     global $post_type;
-    if ( 'tf_events' != $post_type )
-    return;
+//    if ( 'tf_events' != $post_type )
+//    return;
     // wp_deregister_script( 'jquery-ui-core' ); TODO removed deregister, seems to have no conflicting issues.
     wp_enqueue_script('jquery-ui', TF_URL . '/assets/js/jquery-ui-1.8.9.custom.min.js', array( 'jquery'), TF_VERSION );
     wp_enqueue_script('ui-datepicker', TF_URL . '/assets/js/jquery.ui.datepicker.js', array(), TF_VERSION );
@@ -289,9 +289,9 @@ function events_scripts() {
     // - pass local img path to js -
     $datepicker_img = TF_URL . '/assets/images/ui/icon-datepicker.png';
 
-    wp_localize_script( 'ui-datepicker-settings', 'themeforce', array(
-	  	'buttonImage' => $datepicker_img,
-		));
+ //   wp_localize_script( 'ui-datepicker-settings', 'themeforce', array(
+//	  	'buttonImage' => $datepicker_img,
+	//	));
 }
 
 add_action( 'admin_print_styles-post.php', 'events_styles', 1000 );
@@ -379,6 +379,19 @@ class TFDateSelector {
 	
 	public function getDateFromPostData() { return $this->getDateFromData( $_POST ); }
 	
+	public function getDateFromPostDataDatePicker() { return $this->getDateFromDataDatePicker( $_POST ); }
+	
+	public function getDateFromDataDatePicker( $data ) {
+	
+		$date_from_post['day'] = $data[$this->id . '-day'];
+		$date_from_post['hour'] =  $data[$this->id . '-hour'];
+		$date_from_post['minute'] =  $data[$this->id . '-minute'];
+				
+		$date = strtotime( $date_from_post['day'] .' '. $date_from_post['hour'] .':'. $date_from_post['minute'] . ':00'  );
+			
+		return $date;
+	}
+	
 	public function getDateFromData( $data ) {
 		
 		$y = $data[ $this->id . '_aa' ];
@@ -407,8 +420,27 @@ class TFDateSelector {
 		$data = preg_replace( '/name="([^"]+)"/', 'name="' . $this->id . '_$1"', $data );
 		
 		$post = $_post;
-		
+
 		return $data;
+	}
+	
+	public function getDatePickerHTML() {
+		
+		ob_start();  ?>
+			
+			<div class="enddate"> 
+				<p>
+					<input type="text" name="<?php echo $this->id . '-day'; ?>"  id="<?php echo $this->id . '-day'; ?>" value="<?php echo date( 'Y-m-d', $this->date ) ?>"/> @ 
+					<input type="text" name="<?php echo $this->id . '-hour'; ?>"  id="<?php echo $this->id . '-hour'; ?>" value="<?php echo date( 'H', $this->date ) ?>"/> : 
+					<input type="text" name="<?php echo $this->id . '-minute'; ?>"  id="<?php echo $this->id . '-minute'; ?>" value="<?php echo date( 'i', $this->date ) ?>"/>
+				</p>
+			</div>
+	     	<?php $data=ob_get_contents();
+		
+		ob_end_clean(); ?>
+			
+		<?php return $data;
+
 	}
 
 }

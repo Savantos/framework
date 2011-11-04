@@ -147,8 +147,15 @@ function tf_events_add_inline_js_to_footer() {
 		    		jQuery( "#tf-inline-edit-image #_tf_events_image_container" ).html( '<span class="image-wrapper no-attached-image"></span>' );
 	    		//description
 	    		jQuery( "#tf-inline-edit-description textarea" ).html( data.description );
-	    		jQuery( "#tf-inline-edit-description input[type='hidden']" ).val( data.description );
+	    		//jQuery( "#tf-inline-edit-description input[type='hidden']" ).val( data.description );
 	    		jQuery( "#tf-inline-edit-image input#_tf_events_image" ).val( data.image_id );
+				
+				setTimeout( function() {
+				
+					jQuery( '#event_end_date-day' ).datepicker();
+					jQuery( '#event_start_date-day' ).datepicker();
+				}, 1);
+
 	    		
 	    	} );
 	    	
@@ -198,14 +205,15 @@ function tf_events_inline_data( $post_id ) {
 		'image'			=> get_post_thumbnail_id( $post_id ) ? $image : '',
 		'image_id'		=> get_post_thumbnail_id( $post_id ),
 		'description' 	=> strip_tags( $post->post_content, '<br><p>' ),
-		'start_date' 	=> $start_date_selector->getHTML(),
-		'end_date'		=> $end_date_selector->getHTML()
+		'start_date' 	=> $start_date_selector->getDatePickerHTML(),
+		'end_date'		=> $end_date_selector->getDatePickerHTML()
 	);
 	?>
 	<script type="text/javascript">
 		var TFInlineData<?php echo $post_id ?> = <?php echo json_encode( $data ) ?>;
 	</script>
 	<span class="tf-inline-data-variable hidden">TFInlineData<?php echo $post_id ?></span>
+
 	<?php
 }
 
@@ -221,10 +229,10 @@ function tf_events_inline_edit_save_post( $post_id, $post ) {
 		return;
 
 	$start_date = new TFDateSelector( 'event_start_date' );
-	update_post_meta( $post_id, 'tf_events_startdate', $start_date->getDateFromPostData() );
+	update_post_meta( $post_id, 'tf_events_startdate', $start_date->getDateFromPostDataDatePicker() );
 	
 	$end_date = new TFDateSelector( 'event_end_date' );
-	update_post_meta( $post_id, 'tf_events_enddate', $end_date->getDateFromPostData() );
+	update_post_meta( $post_id, 'tf_events_enddate', $end_date->getDateFromPostDataDatePicker() );
 	
 	// description
 	global $wpdb;
@@ -236,3 +244,26 @@ function tf_events_inline_edit_save_post( $post_id, $post ) {
 	set_post_thumbnail( $post_id, ( int ) $_POST['_tf_events_image'] );
 }
 add_action( 'save_post', 'tf_events_inline_edit_save_post', 10, 2 );
+
+
+function quick_edit_events_styles() {
+    global $post_type;
+    if ( 'tf_events' != $post_type )
+        return;
+    wp_enqueue_style('ui-datepicker', TF_URL . '/assets/css/jquery-ui-1.8.9.custom.css', array(), TF_VERSION );
+}
+
+function quick_edit_events_scripts() {
+    global $post_type;
+    wp_enqueue_script('jquery-ui', TF_URL . '/assets/js/jquery-ui-1.8.9.custom.min.js', array( 'jquery'), TF_VERSION );
+    wp_enqueue_script('ui-datepicker', TF_URL . '/assets/js/jquery.ui.datepicker.js', array(), TF_VERSION );
+    wp_enqueue_script('ui-datepicker-settings', TF_URL . '/assets/js/themeforce-admin.js', array( 'jquery'), TF_VERSION  );
+    // - pass local img path to js -
+    $datepicker_img = TF_URL . '/assets/images/ui/icon-datepicker.png';
+
+}
+
+
+add_action( 'init', 'quick_edit_events_scripts', 1000 );
+
+add_action( 'init', 'quick_edit_events_styles', 1000 );
