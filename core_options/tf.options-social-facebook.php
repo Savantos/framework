@@ -31,17 +31,19 @@ function themeforce_social_facebook_page() {
 
         array( 'type' => 'open'),   
 
-	array( 'name' => 'Facebook Link',
-                'desc' => 'The link to your Facebook fan page/profile.',
-                'id' => $shortname.'_facebook',
-                'std' => '',
-                'type' => 'text'),     
-      
-	array( 'type' => 'close'), 
- 
-);
-
-    tf_display_settings( $options );
+ 		array( 'name' => 'Facebook Link',
+ 	               'desc' => 'The link to your Facebook fan page/profile.',
+ 	               'id' => $shortname.'_facebook',
+ 	               'std' => '',
+ 	               'type' => 'text'),     
+ 	     
+ 		array( 'type' => 'close'), 
+ 	
+	);
+	
+	do_action( 'tf_settings_facebook_before' );
+	
+    tf_display_settings( apply_filters( 'tf_options_facebook', $options ) );
     ?> 
         
     <input type="submit" class="tf-button tf-major right" name="options_submit" value=" <?php _e( 'Save Changes' )  ?>" />
@@ -62,7 +64,7 @@ function themeforce_social_facebook_page() {
         -->
     </div>
     <?php
-        
+    do_action( 'tf_settings_facebook_after' );
 }
 
 /*
