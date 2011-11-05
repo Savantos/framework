@@ -168,9 +168,8 @@ function tf_events_add_inline_js_to_footer() {
 	    		jQuery( "#tf-inline-edit-image input#_tf_events_image" ).val( data.image_id );
 				
 				setTimeout( function() {
-				
 					jQuery( '#event_end_date-day' ).datepicker({
-                                            dateFormat: 'yy-mm-dd',
+                                            dateFormat: 'D - d M - y',
                                             showOn: 'both',
                                             buttonImage: '<?php echo TF_URL . '/assets/images/ui/icon-datepicker.png'; ?>',
                                             buttonImageOnly: true,
@@ -178,7 +177,7 @@ function tf_events_add_inline_js_to_footer() {
                                             changeYear: true,
                                             numberOfMonths: 3});
 					jQuery( '#event_start_date-day' ).datepicker({
-                                            dateFormat: 'yy-mm-dd',
+                                            dateFormat: 'D - d M - y',
                                             showOn: 'both',
                                             buttonImage: '<?php echo TF_URL . '/assets/images/ui/icon-datepicker.png'; ?>',
                                             buttonImageOnly: true,

@@ -78,8 +78,8 @@ td.tf_col_ev_date .ev_month {font-weight:bold;font-size:14px;text-align:center;t
 
 .tf_ev_title {float:left;padding-top:6px}
 img.ui-datepicker-trigger {float:left;margin-top:7px;padding-left:3px;padding-right:3px;}
-.tf_ev_inputdate {float:left;width:100px;}
-.tf_ev_inputspacer {float:left;color:gray;margin-top:5px;padding-left:3px;padding-right:3px;}
+.tf_ev_inputdate {float:left;width:120px;}
+.tf_ev_inputspacer {float:left;color:gray;margin-top:6px;padding-left:3px;padding-right:3px;}
 .tf_ev_inputtime {float:left;width:40px;}
 
 .inline-edit-row.inline-edit-tf_events .colspanchange { padding: 0; }

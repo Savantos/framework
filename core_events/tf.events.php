@@ -428,11 +428,12 @@ class TFDateSelector {
 		
 		ob_start();  ?>
 				
-                <input type="text" name="<?php echo $this->id . '-day'; ?>" class="tf_ev_inputdate" id="<?php echo $this->id . '-day'; ?>" value="<?php echo date( 'Y-m-d', $this->date ) ?>"/>
+                <input type="text" name="<?php echo $this->id . '-day'; ?>" class="tf_ev_inputdate" id="<?php echo $this->id . '-day'; ?>" value="<?php echo date( 'D - j M - y', $this->date ) ?>"/>
                 <div class="tf_ev_inputspacer"> @ </div>
                 <input type="text" name="<?php echo $this->id . '-hour'; ?>"  class="tf_ev_inputtime" id="<?php echo $this->id . '-hour'; ?>" value="<?php echo date( 'H', $this->date ) ?>"/>
                 <div class="tf_ev_inputspacer"> : </div>
                 <input type="text" name="<?php echo $this->id . '-minute'; ?>"  class="tf_ev_inputtime" id="<?php echo $this->id . '-minute'; ?>" value="<?php echo date( 'i', $this->date ) ?>"/>
+                <div class="tf_ev_inputspacer" style="font-style:italic;"> Use 24h format, 7pm is "19"</div>
                 				
 	     	<?php $data=ob_get_contents();
 		
