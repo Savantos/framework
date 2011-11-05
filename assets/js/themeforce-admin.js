@@ -6,7 +6,7 @@ jQuery(document).ready(function($) {
 		    dateFormat: 'D, M d, yy',
 		    showOn: 'both',
 			buttonImage: themeforce.buttonImage,
-		    buttonImageOnly: true,
+		    // buttonImageOnly: true,
 			changeMonth:true,
 			changeYear: true,
 		    numberOfMonths: 3

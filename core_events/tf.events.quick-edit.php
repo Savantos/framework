@@ -47,11 +47,11 @@ function tf_events_add_fields_to_quick_edit( $column_name, $post_type ) {
                     <!-- Old Code -->  
                     
                         
-			<span class="title" style="float:left;">Start Date</span>
+			<span class="tf_ev_title">Start Date</span>
 			<div class="start-date" style="display:block; margin-left: 5em; "></div>
-			
-			<span class="title" style="float:left;">End Date</span>
-			<div class="end-date" style="display:block; margin-left: 5em; padding-top:5px;"></div>
+			<div style="clear:both;height:10px;"></div>
+			<span class="tf_ev_title">End Date</span>
+			<div class="end-date" style="display:block; margin-left: 5em;"></div>
                         
                         
                       <!-- New Code -->  
@@ -168,10 +168,25 @@ function tf_events_add_inline_js_to_footer() {
 	    		jQuery( "#tf-inline-edit-image input#_tf_events_image" ).val( data.image_id );
 				
 				setTimeout( function() {
-				
-					jQuery( '#event_end_date-day' ).datepicker();
-					jQuery( '#event_start_date-day' ).datepicker();
+					jQuery( '#event_end_date-day' ).datepicker({
+                                            dateFormat: 'D - d M - y',
+                                            showOn: 'both',
+                                            buttonImage: '<?php echo TF_URL . '/assets/images/ui/icon-datepicker.png'; ?>',
+                                            buttonImageOnly: true,
+                                            changeMonth:true,
+                                            changeYear: true,
+                                            numberOfMonths: 3});
+					jQuery( '#event_start_date-day' ).datepicker({
+                                            dateFormat: 'D - d M - y',
+                                            showOn: 'both',
+                                            buttonImage: '<?php echo TF_URL . '/assets/images/ui/icon-datepicker.png'; ?>',
+                                            buttonImageOnly: true,
+                                            changeMonth:true,
+                                            changeYear: true,
+                                            numberOfMonths: 3});
 				}, 1);
+                                
+   
 
 	    		
 	    	} );

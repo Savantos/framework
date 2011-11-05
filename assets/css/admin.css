@@ -75,6 +75,13 @@ td.tf_col_ev_date .ev_dates {overflow:auto;margin:0;padding:0;}
 td.tf_col_ev_date .ev_monthyear  {text-transform: uppercase;font-size:16px;text-align:left;line-height: 19px}
 td.tf_col_ev_date .ev_month {font-weight:bold;font-size:14px;text-align:center;text-transform:uppercase;}
 
+
+.tf_ev_title {float:left;padding-top:6px}
+img.ui-datepicker-trigger {float:left;margin-top:7px;padding-left:3px;padding-right:3px;}
+.tf_ev_inputdate {float:left;width:120px;}
+.tf_ev_inputspacer {float:left;color:gray;margin-top:6px;padding-left:3px;padding-right:3px;}
+.tf_ev_inputtime {float:left;width:40px;}
+
 .inline-edit-row.inline-edit-tf_events .colspanchange { padding: 0; }
 .inline-edit-row.inline-edit-tf_events .tf-quickedit-content {padding-top:10px;}
 
@@ -135,8 +142,8 @@ background: linear-gradient(top, white 0%, white 30%, #EAEAEA 70%, #EAEAEA 100%)
 
 .inline-edit-row.inline-edit-tf_events .tf-quickedit-header h3 {
     padding-left:10px;
-    font-size: 14px !important;
-    font-weight: normal !important;
+    font-size: 13px !important;
+    font-weight: bold !important;
     color:#fff;
     text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.3);
 }
@@ -145,14 +152,14 @@ background: linear-gradient(top, white 0%, white 30%, #EAEAEA 70%, #EAEAEA 100%)
 
 .inline-edit-row.inline-edit-tf_foodmenu .width-item { float: left; width: 490px; }
 .inline-edit-row.inline-edit-tf_foodmenu .width-cat { float: left; width: 200px; }
-.inline-edit-row.inline-edit-tf_foodmenu .width-image { float: left; width: 90px; }
+.inline-edit-row.inline-edit-tf_foodmenu .width-image { float: left; width: 120px; }
 .inline-edit-row.inline-edit-tf_foodmenu .width-desc { float: left; width: 20%; }
 
 
 /* Section Widths - Image is fixed */
 
-.inline-edit-row.inline-edit-tf_events .width-item { float: left; width: 40%; }
-.inline-edit-row.inline-edit-tf_events .width-cat { float: left; width: 20%; }
+.inline-edit-row.inline-edit-tf_events .width-item { float: left; width: 490px; }
+.inline-edit-row.inline-edit-tf_events .width-cat { float: left; width: 200px }
 .inline-edit-row.inline-edit-tf_events .width-image { float: left; width: 120px; }
 .inline-edit-row.inline-edit-tf_events .width-desc { float: left; width: 20%; }
 
