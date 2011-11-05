@@ -321,6 +321,10 @@ function tf_display_settings( $options ) {
         <table>      
         
         <?php break;
+        
+        
+        default :
+        	do_action( 'tf_display_setting_type_' . $value['type'], $value );
         }
 	}
 	
