@@ -90,13 +90,13 @@ add_action( "manage_posts_custom_column", "tf_foodmenu_custom_columns" );
 function tf_foodmenu_edit_columns( $columns ) {
 
  	$columns = array(
- 		"cb" => "<input type=\"checkbox\" />",
- 		"tf_col_menu_thumb" => '',
- 		"title" => __( 'Item' ),
- 		"tf_col_menu_cat" => __( 'Section' ),
- 		"tf_col_menu_size" => __( 'Size(s)' ),
- 		"tf_col_menu_price" => __( 'Price(s)' ),
-                "tf_col_menu_desc" => __( 'Description' )
+ 		'cb' 				=> 	'<input type="checkbox" />',
+ 		'tf_col_menu_thumb' => '',
+ 		'title' 			=> __( 'Item' ),
+ 		'tf_col_menu_cat'	=> __( 'Section' ),
+ 		'tf_col_menu_size' 	=> __( 'Size(s)' ),
+ 		'tf_col_menu_price' => __( 'Price(s)' ),
+        'tf_col_menu_desc' 	=> __( 'Description' )
  	);
  	
  	return $columns;
@@ -129,9 +129,9 @@ function tf_foodmenu_custom_columns( $column ) {
 		       	break;
 		case "tf_col_menu_thumb":
 		       
-                                echo '<div class="table-thumb">';
-                                the_post_thumbnail( 'width=60&height=60&crop=1' );
-                                echo '</div>';
+				echo '<div class="table-thumb">';
+				the_post_thumbnail( 'width=60&height=60&crop=1' );
+				echo '</div>';
 				break;
 		case "tf_col_menu_size":
 				$size1 = $custom["tf_menu_size1"][0];
@@ -162,7 +162,8 @@ function tf_foodmenu_create_meta_boxes() {
 }
 add_action( 'admin_init', 'tf_foodmenu_create_meta_boxes' );
 
-function tf_foodmenu_meta () {
+function tf_foodmenu_meta() {
+
     global $post;
     $custom 	= get_post_custom( $post->ID );
     $metasize1 	= $custom["tf_menu_size1"][0];
