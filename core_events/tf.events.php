@@ -293,12 +293,6 @@ function events_scripts() {
     wp_enqueue_script('jquery-ui', TF_URL . '/assets/js/jquery-ui-1.8.9.custom.min.js', array( 'jquery'), TF_VERSION );
     wp_enqueue_script('ui-datepicker', TF_URL . '/assets/js/jquery.ui.datepicker.js', array(), TF_VERSION );
     wp_enqueue_script('ui-datepicker-settings', TF_URL . '/assets/js/themeforce-admin.js', array( 'jquery'), TF_VERSION  );
-    // - pass local img path to js -
-    $datepicker_img = TF_URL . '/assets/images/ui/icon-datepicker.png';
-
- //   wp_localize_script( 'ui-datepicker-settings', 'themeforce', array(
-//	  	'buttonImage' => $datepicker_img,
-	//	));
 }
 
 if ( in_array( $GLOBALS['pagenow'], array( 'edit.php') ) ) {
@@ -433,14 +427,13 @@ class TFDateSelector {
 	public function getDatePickerHTML() {
 		
 		ob_start();  ?>
-			
-			<div class="enddate"> 
-				<p>
-					<input type="text" name="<?php echo $this->id . '-day'; ?>"  id="<?php echo $this->id . '-day'; ?>" value="<?php echo date( 'Y-m-d', $this->date ) ?>"/> @ 
-					<input type="text" name="<?php echo $this->id . '-hour'; ?>"  id="<?php echo $this->id . '-hour'; ?>" value="<?php echo date( 'H', $this->date ) ?>"/> : 
-					<input type="text" name="<?php echo $this->id . '-minute'; ?>"  id="<?php echo $this->id . '-minute'; ?>" value="<?php echo date( 'i', $this->date ) ?>"/>
-				</p>
-			</div>
+				
+                <input type="text" name="<?php echo $this->id . '-day'; ?>" class="tf_ev_inputdate" id="<?php echo $this->id . '-day'; ?>" value="<?php echo date( 'Y-m-d', $this->date ) ?>"/>
+                <div class="tf_ev_inputspacer"> @ </div>
+                <input type="text" name="<?php echo $this->id . '-hour'; ?>"  class="tf_ev_inputtime" id="<?php echo $this->id . '-hour'; ?>" value="<?php echo date( 'H', $this->date ) ?>"/>
+                <div class="tf_ev_inputspacer"> : </div>
+                <input type="text" name="<?php echo $this->id . '-minute'; ?>"  class="tf_ev_inputtime" id="<?php echo $this->id . '-minute'; ?>" value="<?php echo date( 'i', $this->date ) ?>"/>
+                				
 	     	<?php $data=ob_get_contents();
 		
 		ob_end_clean(); ?>

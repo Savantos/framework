@@ -75,6 +75,13 @@ td.tf_col_ev_date .ev_dates {overflow:auto;margin:0;padding:0;}
 td.tf_col_ev_date .ev_monthyear  {text-transform: uppercase;font-size:16px;text-align:left;line-height: 19px}
 td.tf_col_ev_date .ev_month {font-weight:bold;font-size:14px;text-align:center;text-transform:uppercase;}
 
+
+.tf_ev_title {float:left;padding-top:6px}
+img.ui-datepicker-trigger {float:left;margin-top:7px;padding-left:3px;padding-right:3px;}
+.tf_ev_inputdate {float:left;width:100px;}
+.tf_ev_inputspacer {float:left;color:gray;margin-top:5px;padding-left:3px;padding-right:3px;}
+.tf_ev_inputtime {float:left;width:40px;}
+
 .inline-edit-row.inline-edit-tf_events .colspanchange { padding: 0; }
 .inline-edit-row.inline-edit-tf_events .tf-quickedit-content {padding-top:10px;}
 
