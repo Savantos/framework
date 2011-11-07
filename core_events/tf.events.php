@@ -5,7 +5,6 @@ require_once( TF_PATH . '/core_events/tf.events.widget.php' );
 require_once( TF_PATH . '/core_events/tf.events.shortcodes.php' );
 require_once( TF_PATH . '/core_events/tf.events.rss.php' );
 require_once( TF_PATH . '/core_events/tf.events.ical.php' );
-require_once( TF_PATH . '/core_events/tf.events.facebook.php' );
 require_once( TF_PATH . '/core_events/tf.events.quick-edit.php' );
 /*
  * EVENTS FUNCTION (CUSTOM POST TYPE)
@@ -293,12 +292,6 @@ function events_scripts() {
     wp_enqueue_script('jquery-ui', TF_URL . '/assets/js/jquery-ui-1.8.9.custom.min.js', array( 'jquery'), TF_VERSION );
     wp_enqueue_script('ui-datepicker', TF_URL . '/assets/js/jquery.ui.datepicker.js', array(), TF_VERSION );
     wp_enqueue_script('ui-datepicker-settings', TF_URL . '/assets/js/themeforce-admin.js', array( 'jquery'), TF_VERSION  );
-    // - pass local img path to js -
-    $datepicker_img = TF_URL . '/assets/images/ui/icon-datepicker.png';
-
- //   wp_localize_script( 'ui-datepicker-settings', 'themeforce', array(
-//	  	'buttonImage' => $datepicker_img,
-	//	));
 }
 
 if ( in_array( $GLOBALS['pagenow'], array( 'edit.php') ) ) {
@@ -390,9 +383,22 @@ class TFDateSelector {
 	public function getDateFromDataDatePicker( $data ) {
 	
 		$date_from_post['day'] = $data[$this->id . '-day'];
-		$date_from_post['hour'] =  $data[$this->id . '-hour'];
+		
+		if ( $data[$this->id . '-ampm'] == 'am'  ){
+			if( $data[$this->id . '-hour'] == '12' )
+				$date_from_post['hour'] = '00';
+			else
+				$date_from_post['hour'] =  $data[$this->id . '-hour'];
+		}else{
+			if ( $data[$this->id . '-hour'] == '12' )
+				$date_from_post['hour'] = $data[$this->id . '-hour'];
+			else	
+				$date_from_post['hour'] = (string) ( (int) $data[$this->id . '-hour'] + 12);
+		}
+		
 		$date_from_post['minute'] =  $data[$this->id . '-minute'];
-				
+		
+		$date_from_post['day'] = str_replace( '- ', '', $date_from_post['day'] );		
 		$date = strtotime( $date_from_post['day'] .' '. $date_from_post['hour'] .':'. $date_from_post['minute'] . ':00'  );
 			
 		return $date;
@@ -431,16 +437,32 @@ class TFDateSelector {
 	}
 	
 	public function getDatePickerHTML() {
-		
+		$minute_options = array( '00', '15', '30','45' );
+
 		ob_start();  ?>
-			
-			<div class="enddate"> 
-				<p>
-					<input type="text" name="<?php echo $this->id . '-day'; ?>"  id="<?php echo $this->id . '-day'; ?>" value="<?php echo date( 'Y-m-d', $this->date ) ?>"/> @ 
-					<input type="text" name="<?php echo $this->id . '-hour'; ?>"  id="<?php echo $this->id . '-hour'; ?>" value="<?php echo date( 'H', $this->date ) ?>"/> : 
-					<input type="text" name="<?php echo $this->id . '-minute'; ?>"  id="<?php echo $this->id . '-minute'; ?>" value="<?php echo date( 'i', $this->date ) ?>"/>
-				</p>
-			</div>
+				
+                <input type="text" name="<?php echo $this->id . '-day'; ?>" class="tf_ev_inputdate" id="<?php echo $this->id . '-day'; ?>" value="<?php echo date( 'D - j M - y', $this->date ) ?>"/>
+                <div class="tf_ev_inputspacer"> @ </div>
+                
+                <select name="<?php echo $this->id . '-hour'; ?>"  class="tf_ev_inputtime" id="<?php echo $this->id . '-hour'; ?>">
+                		<?php for( $hour = 1; $hour < 13; $hour++ ): ?>
+                			<option value="<?php echo $hour?>" <?php if ( date( 'g', $this->date ) == $hour ) echo 'selected="selected"' ?>><?php echo $hour?></option>
+                		<?php endfor; ?>
+                </select>
+     
+                <div class="tf_ev_inputspacer"> : </div>
+                
+                <select name="<?php echo $this->id . '-minute'; ?>"  class="tf_ev_inputtime" id="<?php echo $this->id . '-minute'; ?>">
+                		<?php foreach( $minute_options as $value ): ?>
+                			<option value="<?php echo $value?>" <?php if ( date( 'i', $this->date ) == $value ) echo 'selected="selected"' ?>><?php echo $value?></option>
+                		<?php endforeach; ?>
+                </select>
+                
+                <select name="<?php echo $this->id . '-ampm'; ?>" class="tf_ev_inputtime" id="<?php echo $this->id . '-ampm'; ?>">
+                	<option value="am" <?php if ( (int) date( 'H', $this->date ) < 13) echo 'selected="selected"'; ?>>am</option>
+                	<option value="pm" <?php if ( (int) date( 'H', $this->date ) > 11) echo 'selected="selected"'; ?>>pm</option>
+                </select>
+                                   				
 	     	<?php $data=ob_get_contents();
 		
 		ob_end_clean(); ?>
