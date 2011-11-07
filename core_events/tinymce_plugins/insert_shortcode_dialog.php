@@ -10,12 +10,14 @@ header('Content-Type: text/html; charset=' . get_bloginfo( 'charset') );
 <script type="text/javascript" src="<?php bloginfo( 'url' )?>/wp-includes/js/tinymce/tiny_mce_popup.js?ver=342"></script>
 <script type="text/javascript" src="<?php bloginfo( 'url' )?>/wp-includes/js/jquery/jquery.js"></script>
 <?php
-wp_admin_css( 'global', true );
+
 wp_admin_css( 'wp-admin', true );
 wp_admin_css( 'colors-fresh', true );
 
 ?>
 <style type="text/css">
+	body { min-width: 200px; } 
+
 	#wphead {
 		font-size: 80%;
 		border-top: 0;

@@ -432,7 +432,7 @@ function tf_food_menu_add_insert_bar_to_edit_page() {
 	
 		<strong>Insert:</strong>
 		
-		<a class="tf-button tf-tiny" href="javascript:tinyMCE.activeEditor.execCommand( 'mceExecTFFoodMenuInsertShortcode' ); return false;"><img src="<?php echo TF_URL . '/core_food-menu/tinymce_plugins/food_20.png' ?>"/><span>Food Menu</span></a>
+		<a class="tf-button tf-tiny" href="javascript:tinyMCE.activeEditor.execCommand( 'mceExecTFFoodMenuInsertShortcode' );"><img src="<?php echo TF_URL . '/core_food-menu/tinymce_plugins/food_20.png' ?>"/><span>Food Menu</span></a>
 		
 		<?php do_action( 'tf_above_editor_insert_items' ) ?>
 		<script type="text/javascript">

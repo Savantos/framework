@@ -186,7 +186,11 @@ function tf_sortable_admin_rows_column( $columns ) {
 	if( !isset( $columns['tf_col_menu_cat'] ) || empty( $_GET['term'] ) )
 		return $columns;
 	
-	$columns['tf_sortable_column'] = '';
+	$cols_1 = array_slice( $columns, 0, 1 );
+	$cols_2 = array( 'tf_sortable_column' => '' );
+	$cols_3 = array_slice( $columns, 1 );
+	
+	$columns = array_merge( $cols_1, $cols_2, $cols_3 );
 	
 	return $columns;
 }
