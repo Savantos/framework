@@ -1561,6 +1561,34 @@ a:hover, a:active, a:focus {
     color: @tf-secondary;  
 }
 
+#contextual-help-wrap {
+    max-height:500px;
+}
+
+#contextual-help-back,
+.contextual-help-tabs {
+    background: @tf-notice
+}
+
+.contextual-help-tabs ul li.active a,
+.contextual-help-tabs-wrap {
+    background: @tf-notice + #666 !important;
+    color: @tf-notice - #999 !important
+}
+
+.contextual-help-tabs ul li a {
+    color: @tf-notice - #666 !important
+}
+
+.contextual-help-tabs ul li.active a:hover {
+    background: @tf-notice + #666 !important;
+}
+
+.contextual-help-tabs ul li a:hover {
+    color: @tf-notice - #666 !important;
+    background: @tf-notice + #111 !important
+}
+
 /*
 div {outline:1px dashed lime}
 span {outline:1px dashed orange}
