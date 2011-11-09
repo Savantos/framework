@@ -470,5 +470,17 @@ class TFDateSelector {
 		<?php return $data;
 
 	}
+	
+}
+
+add_action( 'parse_query', 'set_events_order' );
+function set_events_order( $obj){
+	if ( ($obj->query_vars['post_type'] != 'tf_events') || ( $obj->query_vars['orderby'] ) )
+		return;
+		
+	$obj->query_vars['order'] = 'desc';
+	$obj->query_vars['orderby'] = 'meta_value_num';
+	$obj->query_vars['meta_key'] ='tf_events_enddate';
+	return $obj;
 
 }
