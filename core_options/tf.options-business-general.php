@@ -106,6 +106,14 @@ function themeforce_business_page() {
                 'id' => 'tf_terminalnotice',
                 'std' => '',
                 'type' => 'text'),
+        
+        array( 'name' => 'Google Apps Domain Verification',
+                'desc' => 'Please enter the key here if you need to verfiy a domain, i.e. <em>&lt;meta name="google-site-verification" content="<strong>THIS_IS_THE_KEY</strong>" /&gt;</em>',
+                'id' => 'tf_googleapps',
+                'std' => '',
+                'type' => 'text'),
+        
+
  
 );
 
