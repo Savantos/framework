@@ -115,11 +115,11 @@ function themeforce_slider_page() {
             
             $imagesize = getimagesize($image);
             if ( $imagesize ) {
-                if ( $imagesize[0] < TF_SLIDERWIDTH && $imagesize[1] < TF_SLIDERHEIGHT ) {
+                if ( $imagesize[0] < TF_SLIDERWIDTH && $imagesize[1] < TF_SLIDERHEIGHT && $type != 'content' ) {
                     echo '<div class="tf-notice">Oops, the dimensions of the image below aren\'t quite enough. Please ensure the image is at least <strong>' . TF_SLIDERWIDTH . 'px wide by ' . TF_SLIDERHEIGHT . 'px high.</strong></div>';
                 } else {     
-                    if ($imagesize[0] < TF_SLIDERWIDTH ) {echo '<div class="tf-notice">Oops, the width of the image below is too short. Please ensure the image is at least <strong>' . TF_SLIDERWIDTH . 'px wide.</strong></div>';}
-                    if ($imagesize[1] < TF_SLIDERHEIGHT ) {echo '<div class="tf-notice">Oops, the height of the image below is too short. Please ensure the image is at least <strong>' . TF_SLIDERHEIGHT . 'px high.</strong></div>';}
+                    if ($imagesize[0] < TF_SLIDERWIDTH && $type != 'content' ) {echo '<div class="tf-notice">Oops, the width of the image below is too short. Please ensure the image is at least <strong>' . TF_SLIDERWIDTH . 'px wide.</strong></div>';}
+                    if ($imagesize[1] < TF_SLIDERHEIGHT && $type != 'content' ) {echo '<div class="tf-notice">Oops, the height of the image below is too short. Please ensure the image is at least <strong>' . TF_SLIDERHEIGHT . 'px high.</strong></div>';}
                     }
             }      
                 
