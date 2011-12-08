@@ -3,9 +3,6 @@
 The **Theme Force Framework** is the most comprehensive solution for **restaurant websites** based on WordPress. It is
 structured as a **modular feature-set** highly relevant to industry needs. This read-me only provides usage instructions, please see the developer page below for more information.
 
-![Theme Force Model](http://www.theme-force.com/tf-model.jpg)
-(if the image doesn't completely load or has a pink stripe, **reload the page**)
-
 ## Resources
 
 * **Must-Read** Developer Homepage: http://www.theme-force.com/framework-developers/
