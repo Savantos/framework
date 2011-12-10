@@ -296,7 +296,10 @@ function quick_edit_events_scripts() {
 
 }
 
+if ( is_admin() ) {
 
 add_action( 'init', 'quick_edit_events_scripts', 1000 );
 
 add_action( 'init', 'quick_edit_events_styles', 1000 );
+
+}
