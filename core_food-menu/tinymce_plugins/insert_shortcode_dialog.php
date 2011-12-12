@@ -207,7 +207,7 @@ wp_admin_css( 'colors-fresh', true );
 				<select name="tf_foodmenucat">
 					<option value="">All</option>
 					<?php foreach ( get_terms( 'tf_foodmenucat' ) as $term ) : ?>
-						<option <?php selected( isset( $_GET['id'] ) && ( $_GET['id'] == $term->slug || $_GET['id'] == $term->name ) ) ?>  value="<?php echo $term->name ?>"><?php echo $term->name ?></option>
+						<option <?php selected( isset( $_GET['id'] ) && ( $_GET['id'] == $term->slug || $_GET['id'] == $term->name ) ) ?>  value="<?php echo $term->slug ?>"><?php echo $term->name ?></option>
 					<?php endforeach; ?>
 				</select>
 			</p>
