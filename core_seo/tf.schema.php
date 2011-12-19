@@ -33,21 +33,13 @@ add_action('tf_body_bottom', 'tf_close_schema_restaurant', 8);
 
 function tf_schema_meta() {
     
-        $cuisine_all = null;
-    
-        $cuisines = get_option( 'tf_schema_cuisine' );
-        foreach($cuisines as $cuisine){
-            $cuisine_all .= $cuisine . ', ';
-            }
-        $cuisine_all = rtrim($cuisine_all, ", ");    
-            
-        echo '<!-- schema meta -->';
-        echo '<meta itemprop="servesCuisine" content="' . $cuisine_all . '" />';
-        echo '<meta itemprop="acceptsReservations" content="' . get_option( 'tf_schema_reservations' ) . '" />'; 
+	$cuisines = (array) get_option( 'tf_schema_cuisine', array() );
+	$cuisine_all = implode( ', ', $cuisines );
+	    
+	echo '<!-- schema meta -->';
+	echo '<meta itemprop="servesCuisine" content="' . $cuisine_all . '" />';
+	echo '<meta itemprop="acceptsReservations" content="' . get_option( 'tf_schema_reservations' ) . '" />'; 
 	echo '<meta itemprop="priceRange" content="' . get_option( 'tf_schema_pricerange' ) . '" />';
-        echo '<!-- / schema meta -->';
+    echo '<!-- / schema meta -->';
 }
-
 add_action('tf_body_top', 'tf_schema_meta', 12);
-
-?>
