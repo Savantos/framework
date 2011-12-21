@@ -36,10 +36,15 @@ class tf_opentable_widget extends WP_Widget {
 
                 if ( $title ) {echo $before_title . $title . $after_title;}
                 
+					if ( TF_THEME != 'fineforce' ) { $iconstyle = 'dark'; } else { $iconstyle = 'dark'; }
+				
                     $opentable = trim( get_option( 'tf_opentable_id' ) );
-                    echo '<div style="margin:0 auto !important;width:165px;">';
-                    echo '<script type="text/javascript" src="http://www.opentable.com/frontdoor/default.aspx?rid='. $opentable. '&restref='. $opentable. '&bgcolor=F6F6F3&titlecolor=0F0F0F&subtitlecolor=0F0F0F&btnbgimage=http://www.opentable.com/frontdoor/img/ot_btn_red.png&otlink=FFFFFF&icon=dark&mode=short"></script>';
-                    echo '<style type="text/css">.OT_wrapper{background:none;border:none;} .OT_day, .OT_time, .OT_party, .OT_submit {border:none;}</style>';
+                    echo '<div class="tf-opentable" style="margin:0 auto !important;width:165px;">';
+                    echo '<script type="text/javascript" src="http://www.opentable.com/frontdoor/default.aspx?rid='. $opentable. '&restref='. $opentable. '&bgcolor=F6F6F3&titlecolor=0F0F0F&subtitlecolor=0F0F0F&btnbgimage=http://www.opentable.com/frontdoor/img/ot_btn_red.png&otlink=FFFFFF&icon='. $iconstyle .'&mode=short"></script>';
+                    echo '<style type="text/css">';
+					// echo '.OT_wrapper{background:none;border:none;} .OT_day, .OT_time, .OT_party, .OT_submit {border:none;}';
+					if ( TF_THEME == 'fineforce' ) {echo 'ul.OT_list, ul.OT_list li {list-style-type: none}';}
+					echo '</style>';
                     echo '</div>';
 
                 echo $after_widget;
