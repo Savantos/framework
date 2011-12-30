@@ -95,7 +95,7 @@
 		
 		_do_events_shortcode_image_replace : function(co) {
 		
-			return co.replace(/(\[tf-events-([^\]]*)\])/g, function(a,b) {
+			return co.replace(/(\[tf-events-(feat|full)([^\]]*)\])/g, function(a,b) {
 				
 				var args = t._parseShortcode( b );
 				var style = '';
@@ -108,7 +108,7 @@
 				else if( args.align == 'right' )
 					style = 'float:right; width: 49%;';
 				else
-					style = 'clear:both; width: 100%;'
+					style = 'clear:both; width: 100%;';
 
 				return '<input type="button" class="tfEventsShortcode" data-shortcode="'+encodedShortode+'" style="' + style + '" value="EVENTS  -  Category: '+ args.group + '  -  Style: ' + args.type + '" />';
 				

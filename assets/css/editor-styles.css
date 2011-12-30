@@ -4,7 +4,7 @@
 
 p { overflow: hidden; }
 
-.tfFoodMenuShortcode, .tfEventsShortcode {
+.tfFoodMenuShortcode, .tfEventsShortcode, .tfFBEventsShortcode {
         font-size: 13px;
         color: white !important;
         background-color: #0054A4;
@@ -40,6 +40,8 @@ p { overflow: hidden; }
 }
 
 .tfFoodMenuShortcode.left:first-child:last-child,
+.tfFBEventsShortcode.left:first-child:last-child,
 .tfEventsShortcode.left:first-child:last-child { clear: both; margin-right: 51% !important; }
 .tfFoodMenuShortcode.right:first-child:last-child,
+.tfFBEventsShortcode.right:first-child:last-child
 .tfEventsShortcode.right:first-child:last-child { clear: both; margin-left: 51% !important; }
