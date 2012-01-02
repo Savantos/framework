@@ -41,7 +41,7 @@ that your theme executes. Our modular approach means that you can do just that. 
 	add_theme_support( 'tf_settings_api' );
 
 	
-The main file that brings everything together within the *"themeforce/** folder is is:
+The main file that brings everything together within the *"framework/** folder is is:
 
 	framework/themeforce.php
 	
