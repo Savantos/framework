@@ -1605,3 +1605,263 @@ a:hover, a:active, a:focus {
 div {outline:1px dashed lime}
 span {outline:1px dashed orange}
 */
+
+/* Food Menu v2
+* ----------------------------------------------------------------- */
+
+.foodmenuv2-header {
+    border:1px solid #dfdfdf;
+    width:800px;
+}
+
+.foodmenuv2-nav {
+    margin-top:20px;
+}
+
+.foodmenuv2-catwrap {
+    width:820px;
+}
+
+.foodmenuv2-catbar {
+    margin-top:20px;
+    padding:15px 20px 15px 0px;
+    border:1px solid #DFDFDF;
+    .border-radius(3px);
+    .box-shadow(rgb(255, 255, 255) 0px 1px 0px 0px inset);
+    background-attachment: scroll;
+    background-clip: border-box;
+    background-color: #F2F2F2;
+    background-image: none;
+    overflow:auto;
+}
+
+.foodmenuv2-catbar-move {
+    width:40px;
+    height:20px;
+    float:left;
+    background: transparent url('../../images/row-move.png') no-repeat 10px 2px;
+}
+
+.foodmenuv2-catarea {
+
+    clear:both;
+}
+
+.foodmenuv2-itemhalf {
+    overflow:auto;
+    height:120px;
+    float:left;
+    border-top:none;
+    width:408px;
+    border-bottom: 1px dashed #DFDFDF - #111;
+    border-right: 1px dashed #DFDFDF - #111;
+}
+
+.foodmenuv2-itemfull {
+    overflow:auto;
+    width:100%;
+    border-right: 1px dashed #DFDFDF - #111;
+    border-left: 1px dashed #DFDFDF - #111;
+    border-bottom: 1px dashed #DFDFDF - #111;
+}
+
+.foodmenuv2-itemfull:last-child {
+
+}
+
+.foodmenuv2-itembar {
+    width:40px;
+    float:left;
+    height:110px;
+    background: #f2f2f2;
+    .box-shadow(rgb(255, 255, 255) 0px 1px 0px 0px inset);
+    border-right: 1px dashed #DFDFDF - #111;
+    cursor:hand;cursor:pointer;
+    vertical-align:middle;
+}
+
+.foodmenuv2-itembar-control {
+    opacity:0;
+    margin:9px 4px 0px 4px;
+    width:32px;
+    height:92px;
+    .box-shadow(rgba(0,0,0,0.3) 0px 1px 3px 0px inset);
+    .border-radius(16px);
+    #gradient > .vertical(@tf-primary-highlight, @tf-primary);
+    -webkit-transition: opacity 0.5s ease-in-out;
+    -moz-transition: opacity 0.5s ease-in-out;
+    -o-transition: opacity 0.5s ease-in-out;
+    -ms-transition: opacity 0.5s ease-in-out;	
+    transition: opacity 0.5s ease-in-out;
+}
+
+.foodmenuv2-itemfull:hover .foodmenuv2-itembar-control,
+.foodmenuv2-itemhalf:hover .foodmenuv2-itembar-control {
+    opacity:1;
+}
+
+.foodmenuv2-icon-move {
+    width:36px;
+    height:20px;
+    padding:10px 0 4px 0;
+    background: transparent url('../../images/foodmenu-move.png') no-repeat 8px 10px;
+}
+
+.foodmenuv2-icon-edit {
+    width:36px;
+    height:20px;
+    padding:4px 0;
+    background: transparent url('../../images/foodmenu-edit.png') no-repeat 8px 5px;
+}
+
+.foodmenuv2-icon-delete {
+    width:36px;
+    height:20px;
+    padding:4px 0;
+    background: transparent url('../../images/foodmenu-delete.png') no-repeat 8px 5px;
+}
+
+.foodmenuv2-itemhalf:nth-child(odd) {
+    border-left: 1px dashed #DFDFDF - #111;
+}
+
+.foodmenuv2-itemhalf:nth-child(odd) .foodmenuv2-itembar {
+    
+}
+
+.foodmenuv2-itemhalf:nth-child(even) .foodmenuv2-itembar {
+
+}
+
+
+.mid-menu {
+    float:left;
+    margin: 0;
+    padding:20px;
+    width:729px;
+}
+
+.mid-menu .leftbox {
+    float:left;
+    width:480px;
+}
+
+.mid-menu .title {
+    font-weight:bold;
+    height:20px;
+    background: url(../../images/dot.png) repeat-x 0px 0px;
+}
+
+.mid-menu .left {
+    overflow:hidden;
+    height:20px;
+    font-size: 15px;
+    padding-right:5px;
+    background: url(../../images/dotoff.png) repeat-x 0px 0px;
+    line-height:20px;
+}
+
+.mid-menu .desc {
+    width:360px;
+    margin-top:6px;
+    line-height:20px;
+    padding-right:10px;
+    font-size:11px;
+}
+
+.mid-menu .rightbox {
+    font-size: 12px;
+    font-style:normal;
+    width:249px;
+    float:right;
+    clear:right;
+    margin-bottom:3px;
+    line-height:23px;
+    background: url(../../images/dot.png) repeat-x 0px 0px;
+}
+
+.mid-menu .rightbox .size {
+    height:20px;
+    overflow:hidden;
+    max-width: 135px;
+    padding: 0 3px 0 3px;
+    line-height: 23px;
+    float:left;
+    font-style:italic;
+    background: url(../../images/dotoff.png) repeat-x 0px 0px;
+}
+
+.mid-menu .rightbox .price {
+    font-weight:bold;
+    height:20px;
+    font-size: 14px;
+    padding-left:5px;
+    float:right;
+    text-align:right;
+    background: url(../../images/dotoff.png) repeat-x 0px 0px;
+}
+
+
+.small-menu {
+    padding:20px;
+    width:290px;
+    margin-bottom:15px;
+    display:block;
+}
+
+.small-menu .leftbox {
+    float:left;
+    width:150px;
+}
+
+.small-menu .title {
+	font-weight:bold;
+    display:block;
+    width:160px;
+    line-height:18px;
+    padding: 0 0 5px 0;
+    background: url(../../images/dot.png) repeat-x 0px 0px;
+}
+
+.small-menu .lefttext {
+    display:inline-block;
+    line-height:20px;
+    min-height:18px;
+    padding-right:5px;
+    font-size: 15px;
+    background: url(../../images/dotoff.png) repeat-x 0px 0px;
+}
+
+.small-menu .desc {
+    float:left;
+    line-height:20px;
+    font-size:11px;
+    opacity:0.7;
+}
+
+.small-menu .rightbox {
+    height:18px;
+    font-size: 12px;
+    width:130px;
+    float:right;
+    clear:right;
+    margin-bottom:3px;
+    background: url(../../images/dot.png) repeat-x 0px 0px;
+}
+.small-menu .rightbox .size {
+    height:18px;
+    padding: 0 5px 0 5px;
+    line-height:22px;
+    float:left;
+    background: url(../../images/dotoff.png) repeat-x 0px 0px;
+}
+.small-menu .rightbox .price {
+    font-weight:bold;
+    height:18px;
+    padding-left:5px;
+    float:right;
+    text-align:right;
+    line-height:20px;
+    font-size:14px;
+    background: url(../../images/dotoff.png) repeat-x 0px 0px;
+}

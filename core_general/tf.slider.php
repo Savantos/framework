@@ -177,7 +177,7 @@ function themeforce_slider_page() {
     
     <h3>Create New Slide</h3>
     <div class="tf-settings-wrap">
-    <form class="form-table"method="post" action="" name="" onsubmit="return checkformf( this );">
+    <form class="form-table" method="post" action="" name="" onsubmit="return checkformf( this );">
     
     <table>
             
