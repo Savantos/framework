@@ -44,7 +44,7 @@ class tf_fs_photos_widget extends WP_Widget {
                 $venue = tf_foursquare_transient();
 				    
 				if ( is_wp_error( $venue ) || !$venue ) {
-                	echo 'Please configure foursquare in the Theme Options';
+                	echo '<p>Please configure your foursquare settings (under Social Media)</p>';
 					
 				if ( is_wp_error( $venue ) )
 						echo '<!-- FourSquare returned error: ' . $venue->get_error_message() . '-->';
