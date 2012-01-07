@@ -59,7 +59,7 @@ function tf_nivoslider_css() {
  */
 
 function tf_fancybox_js() {
-	wp_enqueue_script('fancybox', TF_URL . '/assets/js/jquery.fancybox-1.3.4.pack.js', array( 'jquery'), TF_VERSION );
+    wp_enqueue_script('fancybox', TF_URL . '/assets/js/jquery.fancybox-1.3.4.pack.js', array( 'jquery'), TF_VERSION );
     
     // adds pop-up to .thumb classes
     wp_enqueue_script('fancybox-settings', TF_URL . '/assets/js/jquery.fancybox-settings.js', array( 'jquery'), TF_VERSION );
@@ -83,6 +83,17 @@ function tf_fancybox_css() {
  
 function tf_bxslider_js() {
 	wp_enqueue_script('bxslider', TF_URL . '/assets/js/jquery.bxSlider.min.js', array( 'jquery'), TF_VERSION );
+}
+
+/* 
+FullCalendar
+ --------------------------------------
+ v 3.0
+
+ */
+
+function tf_fullcalendar_js() {
+	wp_enqueue_script('fullcalendar', TF_URL . '/assets/js/fullcalendar.js', array( 'jquery'), TF_VERSION );
 }
 	
 ?>
