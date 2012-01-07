@@ -149,97 +149,96 @@ function tf_colorpalette($hex, $type) {
     return $colors;
 }
 
-/**
- * Convert a hex color into an RGB triplet. 
- */ 
 
-function _color_unpack($hex, $normalize = false) { 
-  if ( strlen($hex ) == 4) { 
-    $hex = $hex[1] . $hex[1] . $hex[2] . $hex[2] . $hex[3] . $hex[3]; 
-  } 
-  $c = hexdec( $hex ); 
-  for ($i = 16; $i >= 0; $i -= 8) { 
-    $out[] = number_format( (($c >> $i) & 0xFF) / ($normalize ? 255 : 1), '100'); 
-  } 
-  return $out; 
-} 
+function hex2rgb($color)
+{
+    
+    if ($color[0] == '#')
+        $color = substr($color, 1);
 
-function _color_rgb2hsl( $rgb ) { 
-  $r = $rgb[0]; 
-  $g = $rgb[1]; 
-  $b = $rgb[2]; 
-  $min = min($r, min($g, $b)); 
-  $max = max($r, max($g, $b)); 
-  $delta = number_format($max - $min, '100'); 
-  $l = number_format( (($min + $max) / 2), '100'); 
-  $s = 0; 
-  if ($l > 0 && $l < 1) { 
-    $s = number_format( ($delta / ($l < 0.5 ? (2 * $l) : (2 - 2 * $l))), '100'); 
-  } 
-  $h = 0; 
-  if ($delta > 0) { 
-    if ($max == $r && $max != $g) $h += number_format( (($g - $b) / $delta), '100'); 
-    if ($max == $g && $max != $b) $h += number_format( (2 + ($b - $r) / $delta), '100'); 
-    if ($max == $b && $max != $r) $h += number_format( (4 + ($r - $g) / $delta), '100'); 
-    $h = number_format( $h/6, '100' ); 
-  } 
-  return array($h, $s, $l); 
-} 
+    if (strlen($color) == 6)
+        list($r, $g, $b) = array($color[0].$color[1],
+                                 $color[2].$color[3],
+                                 $color[4].$color[5]);
+    elseif (strlen($color) == 3)
+        list($r, $g, $b) = array($color[0].$color[0], $color[1].$color[1], $color[2].$color[2]);
+    else
+        return false;
 
-function _color_hsl2rgb( $hsl ) { 
-  $h = $hsl[0]; 
-  $s = $hsl[1]; 
-  $l = $hsl[2]; 
-  $m2 = number_format( ($l <= 0.5) ? $l * ($s + 1) : $l + $s - $l*$s, '100'); 
-  $m1 = number_format($l * 2 - $m2, '100'); 
-  return array(_color_hue2rgb($m1, $m2, $h + ( 1/3) ), 
-               _color_hue2rgb($m1, $m2, $h), 
-               _color_hue2rgb($m1, $m2, $h - ( 1/3)) ); 
+    $r = hexdec($r); $g = hexdec($g); $b = hexdec($b);
+
+    return array($r, $g, $b);
+    
 }
 
-/** 
- * Helper function for _color_hsl2rgb(). 
- */ 
+function rgb2hsl($rgb){
+   
+     $clrR = ($rgb[0] / 255);
+     $clrG = ($rgb[1] / 255);
+     $clrB = ($rgb[2] / 255);
+   
+     $clrMin = min($clrR, $clrG, $clrB);
+     $clrMax = max($clrR, $clrG, $clrB);
+     $deltaMax = $clrMax - $clrMin;
+   
+     $L = ($clrMax + $clrMin) / 2;
+   
+     if (0 == $deltaMax){
+         $H = 0;
+         $S = 0;
+         }
+    else{
+         if (0.5 > $L){
+             $S = $deltaMax / ($clrMax + $clrMin);
+             }
+        else{
+             $S = $deltaMax / (2 - $clrMax - $clrMin);
+             }
+         $deltaR = ((($clrMax - $clrR) / 6) + ($deltaMax / 2)) / $deltaMax;
+         $deltaG = ((($clrMax - $clrG) / 6) + ($deltaMax / 2)) / $deltaMax;
+         $deltaB = ((($clrMax - $clrB) / 6) + ($deltaMax / 2)) / $deltaMax;
+         if ($clrR == $clrMax){
+             $H = $deltaB - $deltaG;
+             }
+        else if ($clrG == $clrMax){
+             $H = (1 / 3) + $deltaR - $deltaB;
+             }
+        else if ($clrB == $clrMax){
+             $H = (2 / 3) + $deltaG - $deltaR;
+             }
+         if (0 > $H) $H += 1;
+         if (1 < $H) $H -= 1;
+         }
+     return array($H, $S, $L);
+     }
+     
 
-function _color_hue2rgb($m1, $m2, $h) { 
-  $h = number_format( ($h < 0) ? $h + 1 : ( ($h > 1) ? $h - 1 : $h), '100'); 
-  if ($h * 6 < 1) return $m1 + ($m2 - $m1) * $h * 6; 
-  if ($h * 2 < 1) return $m2; 
-  if ($h * 3 < 2) return $m1 + ($m2 - $m1) * ( (2/3 ) - $h) * 6; 
-  return $m1; 
-} 
+function hsl2rgb($hsl) {
+      $h = $hsl[0]; 
+      $s = $hsl[1]; 
+      $v = $hsl[2]; 
+    
+    if($s == 0) {
+        $r = $g = $B = $v * 255;
+    } else {
+        $var_H = $h * 6;
+        $var_i = floor( $var_H );
+        $var_1 = $v * ( 1 - $s );
+        $var_2 = $v * ( 1 - $s * ( $var_H - $var_i ) );
+        $var_3 = $v * ( 1 - $s * (1 - ( $var_H - $var_i ) ) );
 
-/** 
- * Convert an RGB triplet to a hex color. 
- */ 
+        if       ($var_i == 0) { $var_R = $v     ; $var_G = $var_3  ; $var_B = $var_1 ; }
+        else if  ($var_i == 1) { $var_R = $var_2 ; $var_G = $v      ; $var_B = $var_1 ; }
+        else if  ($var_i == 2) { $var_R = $var_1 ; $var_G = $v      ; $var_B = $var_3 ; }
+        else if  ($var_i == 3) { $var_R = $var_1 ; $var_G = $var_2  ; $var_B = $v     ; }
+        else if  ($var_i == 4) { $var_R = $var_3 ; $var_G = $var_1  ; $var_B = $v     ; }
+        else                   { $var_R = $v     ; $var_G = $var_1  ; $var_B = $var_2 ; }
 
-function _color_pack($rgb, $normalize = false) { 
-  foreach ($rgb as $k => $v) { 
-    $out |= ( ($v * ($normalize ? 255 : 1)) << (16 - $k * 8)); 
-  } 
-  return str_pad( dechex($out ), 6, 0, STR_PAD_LEFT); 
-} 
-
-/* $testrgb = array( 0.2, 0.75, 0.4 ); //RGB to start with 
-print_r( $testrgb ); */ 
-
-/*
-  print "Hex: "; 
-  $testhex = "#C5003E"; 
-  print $testhex; 
-  $testhex2rgb = _color_unpack( $testhex, true );  
-  print "<br />RGB: "; 
-  var_dump( $testhex2rgb ); 
-  print "<br />HSL color module: "; 
-  $testrgb2hsl = _color_rgb2hsl( $testhex2rgb ); //Converteren naar HSL 
-  var_dump( $testrgb2hsl ); 
-  print "<br />RGB: "; 
-  $testhsl2rgb = _color_hsl2rgb( $testrgb2hsl ); // En weer terug naar RGB 
-  var_dump( $testhsl2rgb ); 
-  print "<br />Hex: "; 
-  $testrgb2hex = _color_pack( $testhsl2rgb, true ); 
-  var_dump( $testrgb2hex ); 
-*/
-
+        $r = round($var_R * 255);
+        $g = round($var_G * 255);
+        $B = round($var_B * 255);
+    }    
+    return array($r, $g, $B);
+}
     
 ?>

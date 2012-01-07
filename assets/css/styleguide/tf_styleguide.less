@@ -119,6 +119,7 @@ input[type="button"].tf-tiny,
 	text-shadow: 0 1px 0 rgba(255,255,255,.40);	
 	border:1px solid @tf-neutral;
         .border-radius(11px);
+        text-decoration:none;
         cursor:pointer;cursor:hand;
  }
  
@@ -1630,7 +1631,6 @@ span {outline:1px dashed orange}
 }
 
 .foodmenuv2-catwrap {
-    position: relative;
     margin-bottom:20px;
 }
 
@@ -1688,14 +1688,16 @@ span {outline:1px dashed orange}
 }
 
 .foodmenuv2-itemhalf {
-    position:relative !important;
-    height:120px;
+    position:relative;
     float:left;
+    height:120px;
     border-top:none;
     width:408px;
+    background:@white;
     border-bottom: 1px dashed #DFDFDF - #111;
     border-right: 1px dashed #DFDFDF - #111;
 }
+
 
 .foodmenuv2-itemfull {
     position:relative;
@@ -1718,6 +1720,17 @@ span {outline:1px dashed orange}
     .box-shadow(inset 0 1px 6px rgba(0,0,0,0.15));
     background-color: #F2F2F2 - #111;
     height:50px;
+    border-bottom:1px solid #F2F2F2 - #222;
+}
+
+.foodmenuv2-itemhalf-placeholder {
+    .box-shadow(inset 0 1px 6px rgba(0,0,0,0.15));
+    background-color: #F2F2F2 - #111;
+    height:50px;
+    width:408px;
+    float:left;
+    border-bottom:1px solid #F2F2F2 - #222;
+    border-right:1px solid #F2F2F2 - #222;
 }
 
 .foodmenuv2-cat-sort {
@@ -1791,14 +1804,6 @@ span {outline:1px dashed orange}
 
 .foodmenuv2-itemhalf:nth-child(odd) {
     border-left: 1px dashed #DFDFDF - #111;
-}
-
-.foodmenuv2-itemhalf:nth-child(odd) .foodmenuv2-itembar {
-    
-}
-
-.foodmenuv2-itemhalf:nth-child(even) .foodmenuv2-itembar {
-
 }
 
 .full-menu {

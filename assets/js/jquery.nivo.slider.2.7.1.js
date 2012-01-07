@@ -6,6 +6,7 @@
  * Free to use and abuse under the MIT license.
  * http://www.opensource.org/licenses/mit-license.php
  * 
+ * Dec 2011 - Added CSS3 Round Corners (Abhinay Rathore: http://web3o.blogspot.com/2011/02/jquery-nivo-slider-with-css3-round.html)
  * March 2010
  */
 
@@ -20,6 +21,7 @@
             currentSlide: 0,
             currentImage: '',
             totalSlides: 0,
+
             running: false,
             paused: false,
             stop: false
@@ -28,7 +30,7 @@
         //Get this slider
         var slider = $(element);
         slider.data('nivo:vars', vars);
-        slider.css('position','relative');
+         slider.css({'position': 'relative', '-webkit-border-radius': settings.borderRadius + 'px', '-moz-border-radius': settings.borderRadius + 'px', 'border-radius': settings.borderRadius + 'px'});
         slider.addClass('nivoSlider');
         
         //Find our slider children
@@ -90,11 +92,12 @@
 
         //Create caption
         slider.append(
-            $('<div class="nivo-caption"><p></p></div>').css({ display:'none', opacity:settings.captionOpacity })
+            $('<div class="nivo-caption"><p></p></div>').css({ display:'none', opacity:settings.captionOpacity, '-webkit-border-bottom-right-radius': settings.borderRadius + 'px', '-webkit-border-bottom-left-radius': settings.borderRadius + 'px', '-moz-border-radius-bottomright': settings.borderRadius + 'px', '-moz-border-radius-bottomleft': settings.borderRadius + 'px', 'border-bottom-right-radius': settings.borderRadius + 'px', 'border-bottom-left-radius': settings.borderRadius + 'px' })
         );		
         
         // Cross browser default caption opacity
         $('.nivo-caption', slider).css('opacity', 0);
+
 		
 		// Process caption function
 		var processCaption = function(settings){
@@ -134,9 +137,9 @@
             if(settings.directionNavHide){
                 $('.nivo-directionNav', slider).hide();
                 slider.hover(function(){
-                    $('.nivo-directionNav', slider).show();
+                    $('.nivo-directionNav', slider).show("fast");
                 }, function(){
-                    $('.nivo-directionNav', slider).hide();
+                    $('.nivo-directionNav', slider).hide("fast");
                 });
             }
             
@@ -271,6 +274,26 @@
 					);
 				}
 			}
+			
+			// Set Round Corners on left and right slices
+			var firstSlice = $('.nivo-slice:eq(0)', slider);
+			var lastSlice = $('.nivo-slice:eq(' + (settings.slices-1) + ')', slider);
+			firstSlice.css({
+				'-webkit-border-top-left-radius': settings.borderRadius + 'px',
+				'-webkit-border-bottom-left-radius': settings.borderRadius + 'px',
+				'-moz-border-radius-topleft': settings.borderRadius + 'px',
+				'-moz-border-radius-bottomleft': settings.borderRadius + 'px',
+				'border-top-left-radius': settings.borderRadius + 'px',
+				'border-bottom-left-radius': settings.borderRadius + 'px'
+			});
+			lastSlice.css({
+				'-webkit-border-top-right-radius': settings.borderRadius + 'px',
+				'-webkit-border-bottom-right-radius': settings.borderRadius + 'px',
+				'-moz-border-radius-topright': settings.borderRadius + 'px',
+				'-moz-border-radius-bottomright': settings.borderRadius + 'px',
+				'border-top-right-radius': settings.borderRadius + 'px',
+				'border-bottom-right-radius': settings.borderRadius + 'px'
+			});
         }
 		
 		// Add boxes for box animations
@@ -387,6 +410,7 @@
 			//Run effects
 			vars.running = true;
 			if(currentEffect == 'sliceDown' || currentEffect == 'sliceDownRight' || currentEffect == 'sliceDownLeft'){
+
 				createSlices(slider, settings, vars);
 				var timeBuff = 0;
 				var i = 0;
@@ -410,6 +434,7 @@
 				});
 			} 
 			else if(currentEffect == 'sliceUp' || currentEffect == 'sliceUpRight' || currentEffect == 'sliceUpLeft'){
+
 				createSlices(slider, settings, vars);
 				var timeBuff = 0;
 				var i = 0;
@@ -433,6 +458,7 @@
 				});
 			} 
 			else if(currentEffect == 'sliceUpDown' || currentEffect == 'sliceUpDownRight' || currentEffect == 'sliceUpDownLeft'){
+
 				createSlices(slider, settings, vars);
 				var timeBuff = 0;
 				var i = 0;
@@ -491,7 +517,10 @@
 				var firstSlice = $('.nivo-slice:first', slider);
                 firstSlice.css({
                     'height': '100%',
-                    'width': slider.width() + 'px'
+                    'width': slider.width() + 'px',
+					'-webkit-border-radius': settings.borderRadius + 'px',
+					'-moz-border-radius': settings.borderRadius + 'px',
+					'border-radius': settings.borderRadius + 'px'
                 });
     
 				firstSlice.animate({ opacity:'1.0' }, (settings.animSpeed*2), '', function(){ slider.trigger('nivo:animFinished'); });
@@ -503,7 +532,10 @@
                 firstSlice.css({
                     'height': '100%',
                     'width': '0px',
-                    'opacity': '1'
+                    'opacity': '1',
+					'-webkit-border-radius': settings.borderRadius + 'px',
+					'-moz-border-radius': settings.borderRadius + 'px',
+					'border-radius': settings.borderRadius + 'px'
                 });
 
                 firstSlice.animate({ width: slider.width() + 'px' }, (settings.animSpeed*2), '', function(){ slider.trigger('nivo:animFinished'); });
@@ -517,7 +549,10 @@
                     'width': '0px',
                     'opacity': '1',
                     'left': '',
-                    'right': '0px'
+                    'right': '0px',
+					'-webkit-border-radius': settings.borderRadius + 'px',
+					'-moz-border-radius': settings.borderRadius + 'px',
+					'border-radius': settings.borderRadius + 'px'
                 });
 
                 firstSlice.animate({ width: slider.width() + 'px' }, (settings.animSpeed*2), '', function(){ 
@@ -537,6 +572,33 @@
 				var timeBuff = 0;
 				
 				var boxes = shuffle($('.nivo-box', slider));
+
+				// Apply Round Corners to corner Boxes
+				var topleftBox = $('.nivo-box:eq(0)', slider);
+				topleftBox.css({
+					'-webkit-border-top-left-radius': settings.borderRadius + 'px',
+					'-moz-border-radius-topleft': settings.borderRadius + 'px',
+					'border-top-left-radius': settings.borderRadius + 'px'
+				});
+				var toprightBox = $('.nivo-box:eq(' + (settings.boxCols-1) + ')', slider);
+				toprightBox.css({
+					'-webkit-border-top-right-radius': settings.borderRadius + 'px',
+					'-moz-border-radius-topright': settings.borderRadius + 'px',
+					'border-top-right-radius': settings.borderRadius + 'px'
+				});
+				var bottomleftBox = $('.nivo-box:eq(' + (settings.boxCols * (settings.boxRows -1)) + ')', slider);
+				bottomleftBox.css({
+					'-webkit-border-bottom-left-radius': settings.borderRadius + 'px',
+					'-moz-border-radius-bottomleft': settings.borderRadius + 'px',
+					'border-bottom-left-radius': settings.borderRadius + 'px'
+				});
+				var bottomrightBox = $('.nivo-box:eq(' + ((settings.boxCols * settings.boxRows)-1) + ')', slider);
+				bottomrightBox.css({
+					'-webkit-border-bottom-right-radius': settings.borderRadius + 'px',
+					'-moz-border-radius-bottomright': settings.borderRadius + 'px',
+					'border-bottom-right-radius': settings.borderRadius + 'px'
+				});
+				
 				boxes.each(function(){
 					var box = $(this);
 					if(i == totalBoxes-1){
@@ -553,6 +615,8 @@
 				});
 			}
 			else if(currentEffect == 'boxRain' || currentEffect == 'boxRainReverse' || currentEffect == 'boxRainGrow' || currentEffect == 'boxRainGrowReverse'){
+
+
 				createBoxes(slider, settings, vars);
 				
 				var totalBoxes = settings.boxCols * settings.boxRows;
@@ -565,8 +629,10 @@
 				var box2Darr = new Array();
 				box2Darr[rowIndex] = new Array();
 				var boxes = $('.nivo-box', slider);
+				var reverseBoxes = false;
 				if(currentEffect == 'boxRainReverse' || currentEffect == 'boxRainGrowReverse'){
 					boxes = $('.nivo-box', slider)._reverse();
+					reverseBoxes = true;
 				}
 				boxes.each(function(){
 					box2Darr[rowIndex][colIndex] = $(this);
@@ -576,6 +642,37 @@
 						colIndex = 0;
 						box2Darr[rowIndex] = new Array();
 					}
+				});
+				
+				// Apply Round Corners to corner Boxes
+				$('.nivo-box', slider).css({'-webkit-border-radius': '0px', '-moz-border-radius': '0px', 'border-radius': '0px'});
+				var topleftBox = box2Darr[0][0];
+				if(reverseBoxes) topleftBox = box2Darr[settings.boxRows-1][settings.boxCols-1];
+				topleftBox.css({
+					'-webkit-border-top-left-radius': settings.borderRadius + 'px',
+					'-moz-border-radius-topleft': settings.borderRadius + 'px',
+					'border-top-left-radius': settings.borderRadius + 'px'
+				});
+				var toprightBox = box2Darr[0][settings.boxCols-1];
+				if(reverseBoxes) toprightBox = box2Darr[settings.boxRows-1][0];
+				toprightBox.css({
+					'-webkit-border-top-right-radius': settings.borderRadius + 'px',
+					'-moz-border-radius-topright': settings.borderRadius + 'px',
+					'border-top-right-radius': settings.borderRadius + 'px'
+				});
+				var bottomleftBox = box2Darr[settings.boxRows-1][0];
+				if(reverseBoxes) bottomleftBox = box2Darr[0][settings.boxCols-1];
+				bottomleftBox.css({
+					'-webkit-border-bottom-left-radius': settings.borderRadius + 'px',
+					'-moz-border-radius-bottomleft': settings.borderRadius + 'px',
+					'border-bottom-left-radius': settings.borderRadius + 'px'
+				});
+				var bottomrightBox = box2Darr[settings.boxRows-1][settings.boxCols-1];
+				if(reverseBoxes) bottomrightBox = box2Darr[0][0];
+				bottomrightBox.css({
+					'-webkit-border-bottom-right-radius': settings.borderRadius + 'px',
+					'-moz-border-radius-bottomright': settings.borderRadius + 'px',
+					'border-bottom-right-radius': settings.borderRadius + 'px'
 				});
 				
 				// Run animation
@@ -591,6 +688,8 @@
                                 var w = box.width();
                                 var h = box.height();
                                 if(currentEffect == 'boxRainGrow' || currentEffect == 'boxRainGrowReverse'){
+
+
                                     box.width(0).height(0);
                                 }
 								if(i == totalBoxes-1){
@@ -668,6 +767,7 @@
 		animSpeed: 500,
 		pauseTime: 3000,
 		startSlide: 0,
+		borderRadius: 10,
 		directionNav: true,
 		directionNavHide: true,
 		controlNav: true,
@@ -678,7 +778,7 @@
 		keyboardNav: true,
 		pauseOnHover: true,
 		manualAdvance: false,
-		captionOpacity: 0.8,
+		captionOpacity: 1,
 		prevText: 'Prev',
 		nextText: 'Next',
 		randomStart: false,

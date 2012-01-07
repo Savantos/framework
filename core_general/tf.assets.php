@@ -39,11 +39,11 @@
  */
 
 function tf_nivoslider_js() {
-	wp_enqueue_script('nivoslider', TF_URL . '/assets/js/jquery.nivo.slider.js', array( 'jquery'), TF_VERSION  );
+	wp_enqueue_script('nivoslider', TF_URL . '/assets/js/jquery.nivo.slider.2.7.1.js', array( 'jquery'), TF_VERSION  );
 }
 	
 function tf_nivoslider_css() {
-	wp_enqueue_style('nivoslider', TF_URL . '/assets/css/nivo-slider.css', array(), TF_VERSION );
+	wp_enqueue_style('nivoslidercss', TF_URL . '/assets/css/nivo-slider.css', array(), TF_VERSION );
 }
 	
 /* 

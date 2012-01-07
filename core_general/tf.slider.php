@@ -396,6 +396,8 @@ function themeforce_slider_display() {
             if ( TF_THEME == 'baseforce' )
                 {
                 $b_image = wpthumb( $image, 'width=960&height=250&crop=1', false);
+                echo '<img src="' . $b_image . '" alt="" />';
+                /*
                 echo '<li>';
                 if ($link && $type == 'image') {echo '<a href="' . $link . '">';}
                 echo '<div style="width:960px;height:300px;background: url(' . $b_image . ')">';
@@ -410,6 +412,8 @@ function themeforce_slider_display() {
                 echo '</div>';
                 if ($link && $type == 'image') {echo '</a>';}
                 echo '</li>';
+                 
+                 */
                 }
             
              if ( TF_THEME == 'chowforce' )

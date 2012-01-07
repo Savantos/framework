@@ -1,11 +1,12 @@
 /*
- * jQuery Nivo Slider v2.7.1
+ * jQuery Nivo Slider v2.6
  * http://nivo.dev7studios.com
  *
  * Copyright 2011, Gilbert Pellegrom
  * Free to use and abuse under the MIT license.
  * http://www.opensource.org/licenses/mit-license.php
  * 
+ * July 2011 - Added CSS3 Round Corners (Abhinay Rathore: http://web3o.blogspot.com/2011/02/jquery-nivo-slider-with-css3-round.html)
  * March 2010
  */
 
@@ -20,6 +21,7 @@
             currentSlide: 0,
             currentImage: '',
             totalSlides: 0,
+            randAnim: '',
             running: false,
             paused: false,
             stop: false
@@ -28,7 +30,7 @@
         //Get this slider
         var slider = $(element);
         slider.data('nivo:vars', vars);
-        slider.css('position','relative');
+        slider.css({'position': 'relative', '-webkit-border-radius': settings.borderRadius + 'px', '-moz-border-radius': settings.borderRadius + 'px', 'border-radius': settings.borderRadius + 'px'});
         slider.addClass('nivoSlider');
         
         //Find our slider children
@@ -62,11 +64,6 @@
             vars.totalSlides++;
         });
         
-        //If randomStart
-        if(settings.randomStart){
-        	settings.startSlide = Math.floor(Math.random() * vars.totalSlides);
-        }
-        
         //Set startSlide
         if(settings.startSlide > 0){
             if(settings.startSlide >= vars.totalSlides) settings.startSlide = vars.totalSlides - 1;
@@ -90,11 +87,8 @@
 
         //Create caption
         slider.append(
-            $('<div class="nivo-caption"><p></p></div>').css({ display:'none', opacity:settings.captionOpacity })
-        );		
-        
-        // Cross browser default caption opacity
-        $('.nivo-caption', slider).css('opacity', 0);
+            $('<div class="nivo-caption"><p></p></div>').css({ display:'none', opacity:settings.captionOpacity, '-webkit-border-bottom-right-radius': settings.borderRadius + 'px', '-webkit-border-bottom-left-radius': settings.borderRadius + 'px', '-moz-border-radius-bottomright': settings.borderRadius + 'px', '-moz-border-radius-bottomleft': settings.borderRadius + 'px', 'border-bottom-right-radius': settings.borderRadius + 'px', 'border-bottom-left-radius': settings.borderRadius + 'px' })
+        );			
 		
 		// Process caption function
 		var processCaption = function(settings){
@@ -103,17 +97,17 @@
 				var title = vars.currentImage.attr('title');
 				if(title.substr(0,1) == '#') title = $(title).html();	
 
-				if(nivoCaption.css('opacity') != 0){
-					nivoCaption.find('p').stop().fadeTo(settings.animSpeed, 0, function(){
+				if(nivoCaption.css('display') == 'block'){
+					nivoCaption.find('p').fadeOut(settings.animSpeed, function(){
 						$(this).html(title);
-						$(this).stop().fadeTo(settings.animSpeed, 1);
+						$(this).fadeIn(settings.animSpeed);
 					});
 				} else {
 					nivoCaption.find('p').html(title);
 				}					
-				nivoCaption.stop().fadeTo(settings.animSpeed, settings.captionOpacity);
+				nivoCaption.fadeIn(settings.animSpeed);
 			} else {
-				nivoCaption.stop().fadeTo(settings.animSpeed, 0);
+				nivoCaption.fadeOut(settings.animSpeed);
 			}
 		}
 		
@@ -271,6 +265,26 @@
 					);
 				}
 			}
+			
+			// Set Round Corners on left and right slices
+			var firstSlice = $('.nivo-slice:eq(0)', slider);
+			var lastSlice = $('.nivo-slice:eq(' + (settings.slices-1) + ')', slider);
+			firstSlice.css({
+				'-webkit-border-top-left-radius': settings.borderRadius + 'px',
+				'-webkit-border-bottom-left-radius': settings.borderRadius + 'px',
+				'-moz-border-radius-topleft': settings.borderRadius + 'px',
+				'-moz-border-radius-bottomleft': settings.borderRadius + 'px',
+				'border-top-left-radius': settings.borderRadius + 'px',
+				'border-bottom-left-radius': settings.borderRadius + 'px'
+			});
+			lastSlice.css({
+				'-webkit-border-top-right-radius': settings.borderRadius + 'px',
+				'-webkit-border-bottom-right-radius': settings.borderRadius + 'px',
+				'-moz-border-radius-topright': settings.borderRadius + 'px',
+				'-moz-border-radius-bottomright': settings.borderRadius + 'px',
+				'border-top-right-radius': settings.borderRadius + 'px',
+				'border-bottom-right-radius': settings.borderRadius + 'px'
+			});
         }
 		
 		// Add boxes for box animations
@@ -363,35 +377,29 @@
 			// Remove any boxes from last transition
 			$('.nivo-box', slider).remove();
 			
-			var currentEffect = settings.effect;
-			//Generate random effect
 			if(settings.effect == 'random'){
 				var anims = new Array('sliceDownRight','sliceDownLeft','sliceUpRight','sliceUpLeft','sliceUpDown','sliceUpDownLeft','fold','fade',
                 'boxRandom','boxRain','boxRainReverse','boxRainGrow','boxRainGrowReverse');
-				currentEffect = anims[Math.floor(Math.random()*(anims.length + 1))];
-				if(currentEffect == undefined) currentEffect = 'fade';
+				vars.randAnim = anims[Math.floor(Math.random()*(anims.length + 1))];
+				if(vars.randAnim == undefined) vars.randAnim = 'fade';
 			}
             
             //Run random effect from specified set (eg: effect:'fold,fade')
             if(settings.effect.indexOf(',') != -1){
                 var anims = settings.effect.split(',');
-                currentEffect = anims[Math.floor(Math.random()*(anims.length))];
-				if(currentEffect == undefined) currentEffect = 'fade';
-            }
-            
-            //Custom transition as defined by "data-transition" attribute
-            if(vars.currentImage.attr('data-transition')){
-            	currentEffect = vars.currentImage.attr('data-transition');
+                vars.randAnim = anims[Math.floor(Math.random()*(anims.length))];
+				if(vars.randAnim == undefined) vars.randAnim = 'fade';
             }
 		
 			//Run effects
 			vars.running = true;
-			if(currentEffect == 'sliceDown' || currentEffect == 'sliceDownRight' || currentEffect == 'sliceDownLeft'){
+			if(settings.effect == 'sliceDown' || settings.effect == 'sliceDownRight' || vars.randAnim == 'sliceDownRight' ||
+				settings.effect == 'sliceDownLeft' || vars.randAnim == 'sliceDownLeft'){
 				createSlices(slider, settings, vars);
 				var timeBuff = 0;
 				var i = 0;
 				var slices = $('.nivo-slice', slider);
-				if(currentEffect == 'sliceDownLeft') slices = $('.nivo-slice', slider)._reverse();
+				if(settings.effect == 'sliceDownLeft' || vars.randAnim == 'sliceDownLeft') slices = $('.nivo-slice', slider)._reverse();
 				
 				slices.each(function(){
 					var slice = $(this);
@@ -409,12 +417,13 @@
 					i++;
 				});
 			} 
-			else if(currentEffect == 'sliceUp' || currentEffect == 'sliceUpRight' || currentEffect == 'sliceUpLeft'){
+			else if(settings.effect == 'sliceUp' || settings.effect == 'sliceUpRight' || vars.randAnim == 'sliceUpRight' ||
+					settings.effect == 'sliceUpLeft' || vars.randAnim == 'sliceUpLeft'){
 				createSlices(slider, settings, vars);
 				var timeBuff = 0;
 				var i = 0;
 				var slices = $('.nivo-slice', slider);
-				if(currentEffect == 'sliceUpLeft') slices = $('.nivo-slice', slider)._reverse();
+				if(settings.effect == 'sliceUpLeft' || vars.randAnim == 'sliceUpLeft') slices = $('.nivo-slice', slider)._reverse();
 				
 				slices.each(function(){
 					var slice = $(this);
@@ -432,13 +441,14 @@
 					i++;
 				});
 			} 
-			else if(currentEffect == 'sliceUpDown' || currentEffect == 'sliceUpDownRight' || currentEffect == 'sliceUpDownLeft'){
+			else if(settings.effect == 'sliceUpDown' || settings.effect == 'sliceUpDownRight' || vars.randAnim == 'sliceUpDown' || 
+					settings.effect == 'sliceUpDownLeft' || vars.randAnim == 'sliceUpDownLeft'){
 				createSlices(slider, settings, vars);
 				var timeBuff = 0;
 				var i = 0;
 				var v = 0;
 				var slices = $('.nivo-slice', slider);
-				if(currentEffect == 'sliceUpDownLeft') slices = $('.nivo-slice', slider)._reverse();
+				if(settings.effect == 'sliceUpDownLeft' || vars.randAnim == 'sliceUpDownLeft') slices = $('.nivo-slice', slider)._reverse();
 				
 				slices.each(function(){
 					var slice = $(this);
@@ -463,7 +473,7 @@
 					v++;
 				});
 			} 
-			else if(currentEffect == 'fold'){
+			else if(settings.effect == 'fold' || vars.randAnim == 'fold'){
 				createSlices(slider, settings, vars);
 				var timeBuff = 0;
 				var i = 0;
@@ -485,30 +495,36 @@
 					i++;
 				});
 			}  
-			else if(currentEffect == 'fade'){
+			else if(settings.effect == 'fade' || vars.randAnim == 'fade'){
 				createSlices(slider, settings, vars);
 				
 				var firstSlice = $('.nivo-slice:first', slider);
                 firstSlice.css({
                     'height': '100%',
-                    'width': slider.width() + 'px'
+                    'width': slider.width() + 'px',
+					'-webkit-border-radius': settings.borderRadius + 'px',
+					'-moz-border-radius': settings.borderRadius + 'px',
+					'border-radius': settings.borderRadius + 'px'
                 });
     
 				firstSlice.animate({ opacity:'1.0' }, (settings.animSpeed*2), '', function(){ slider.trigger('nivo:animFinished'); });
 			}          
-            else if(currentEffect == 'slideInRight'){
+            else if(settings.effect == 'slideInRight' || vars.randAnim == 'slideInRight'){
 				createSlices(slider, settings, vars);
 				
                 var firstSlice = $('.nivo-slice:first', slider);
                 firstSlice.css({
                     'height': '100%',
                     'width': '0px',
-                    'opacity': '1'
+                    'opacity': '1',
+					'-webkit-border-radius': settings.borderRadius + 'px',
+					'-moz-border-radius': settings.borderRadius + 'px',
+					'border-radius': settings.borderRadius + 'px'
                 });
 
                 firstSlice.animate({ width: slider.width() + 'px' }, (settings.animSpeed*2), '', function(){ slider.trigger('nivo:animFinished'); });
             }
-            else if(currentEffect == 'slideInLeft'){
+            else if(settings.effect == 'slideInLeft' || vars.randAnim == 'slideInLeft'){
 				createSlices(slider, settings, vars);
 				
                 var firstSlice = $('.nivo-slice:first', slider);
@@ -517,7 +533,10 @@
                     'width': '0px',
                     'opacity': '1',
                     'left': '',
-                    'right': '0px'
+                    'right': '0px',
+					'-webkit-border-radius': settings.borderRadius + 'px',
+					'-moz-border-radius': settings.borderRadius + 'px',
+					'border-radius': settings.borderRadius + 'px'
                 });
 
                 firstSlice.animate({ width: slider.width() + 'px' }, (settings.animSpeed*2), '', function(){ 
@@ -529,7 +548,7 @@
                     slider.trigger('nivo:animFinished'); 
                 });
             }
-			else if(currentEffect == 'boxRandom'){
+			else if(settings.effect == 'boxRandom' || vars.randAnim == 'boxRandom'){
 				createBoxes(slider, settings, vars);
 				
 				var totalBoxes = settings.boxCols * settings.boxRows;
@@ -537,6 +556,33 @@
 				var timeBuff = 0;
 				
 				var boxes = shuffle($('.nivo-box', slider));
+				
+				// Apply Round Corners to corner Boxes
+				var topleftBox = $('.nivo-box:eq(0)', slider);
+				topleftBox.css({
+					'-webkit-border-top-left-radius': settings.borderRadius + 'px',
+					'-moz-border-radius-topleft': settings.borderRadius + 'px',
+					'border-top-left-radius': settings.borderRadius + 'px'
+				});
+				var toprightBox = $('.nivo-box:eq(' + (settings.boxCols-1) + ')', slider);
+				toprightBox.css({
+					'-webkit-border-top-right-radius': settings.borderRadius + 'px',
+					'-moz-border-radius-topright': settings.borderRadius + 'px',
+					'border-top-right-radius': settings.borderRadius + 'px'
+				});
+				var bottomleftBox = $('.nivo-box:eq(' + (settings.boxCols * (settings.boxRows -1)) + ')', slider);
+				bottomleftBox.css({
+					'-webkit-border-bottom-left-radius': settings.borderRadius + 'px',
+					'-moz-border-radius-bottomleft': settings.borderRadius + 'px',
+					'border-bottom-left-radius': settings.borderRadius + 'px'
+				});
+				var bottomrightBox = $('.nivo-box:eq(' + ((settings.boxCols * settings.boxRows)-1) + ')', slider);
+				bottomrightBox.css({
+					'-webkit-border-bottom-right-radius': settings.borderRadius + 'px',
+					'-moz-border-radius-bottomright': settings.borderRadius + 'px',
+					'border-bottom-right-radius': settings.borderRadius + 'px'
+				});
+				
 				boxes.each(function(){
 					var box = $(this);
 					if(i == totalBoxes-1){
@@ -552,7 +598,8 @@
 					i++;
 				});
 			}
-			else if(currentEffect == 'boxRain' || currentEffect == 'boxRainReverse' || currentEffect == 'boxRainGrow' || currentEffect == 'boxRainGrowReverse'){
+			else if(settings.effect == 'boxRain' || vars.randAnim == 'boxRain' || settings.effect == 'boxRainReverse' || vars.randAnim == 'boxRainReverse' || 
+                    settings.effect == 'boxRainGrow' || vars.randAnim == 'boxRainGrow' || settings.effect == 'boxRainGrowReverse' || vars.randAnim == 'boxRainGrowReverse'){
 				createBoxes(slider, settings, vars);
 				
 				var totalBoxes = settings.boxCols * settings.boxRows;
@@ -565,8 +612,11 @@
 				var box2Darr = new Array();
 				box2Darr[rowIndex] = new Array();
 				var boxes = $('.nivo-box', slider);
-				if(currentEffect == 'boxRainReverse' || currentEffect == 'boxRainGrowReverse'){
+				var reverseBoxes = false;
+				if(settings.effect == 'boxRainReverse' || vars.randAnim == 'boxRainReverse' ||
+                   settings.effect == 'boxRainGrowReverse' || vars.randAnim == 'boxRainGrowReverse'){
 					boxes = $('.nivo-box', slider)._reverse();
+					reverseBoxes = true;
 				}
 				boxes.each(function(){
 					box2Darr[rowIndex][colIndex] = $(this);
@@ -576,6 +626,37 @@
 						colIndex = 0;
 						box2Darr[rowIndex] = new Array();
 					}
+				});
+				
+				// Apply Round Corners to corner Boxes
+				$('.nivo-box', slider).css({'-webkit-border-radius': '0px', '-moz-border-radius': '0px', 'border-radius': '0px'});
+				var topleftBox = box2Darr[0][0];
+				if(reverseBoxes) topleftBox = box2Darr[settings.boxRows-1][settings.boxCols-1];
+				topleftBox.css({
+					'-webkit-border-top-left-radius': settings.borderRadius + 'px',
+					'-moz-border-radius-topleft': settings.borderRadius + 'px',
+					'border-top-left-radius': settings.borderRadius + 'px'
+				});
+				var toprightBox = box2Darr[0][settings.boxCols-1];
+				if(reverseBoxes) toprightBox = box2Darr[settings.boxRows-1][0];
+				toprightBox.css({
+					'-webkit-border-top-right-radius': settings.borderRadius + 'px',
+					'-moz-border-radius-topright': settings.borderRadius + 'px',
+					'border-top-right-radius': settings.borderRadius + 'px'
+				});
+				var bottomleftBox = box2Darr[settings.boxRows-1][0];
+				if(reverseBoxes) bottomleftBox = box2Darr[0][settings.boxCols-1];
+				bottomleftBox.css({
+					'-webkit-border-bottom-left-radius': settings.borderRadius + 'px',
+					'-moz-border-radius-bottomleft': settings.borderRadius + 'px',
+					'border-bottom-left-radius': settings.borderRadius + 'px'
+				});
+				var bottomrightBox = box2Darr[settings.boxRows-1][settings.boxCols-1];
+				if(reverseBoxes) bottomrightBox = box2Darr[0][0];
+				bottomrightBox.css({
+					'-webkit-border-bottom-right-radius': settings.borderRadius + 'px',
+					'-moz-border-radius-bottomright': settings.borderRadius + 'px',
+					'border-bottom-right-radius': settings.borderRadius + 'px'
 				});
 				
 				// Run animation
@@ -590,7 +671,8 @@
 								var box = $(box2Darr[row][col]);
                                 var w = box.width();
                                 var h = box.height();
-                                if(currentEffect == 'boxRainGrow' || currentEffect == 'boxRainGrowReverse'){
+                                if(settings.effect == 'boxRainGrow' || vars.randAnim == 'boxRainGrow' ||
+                                   settings.effect == 'boxRainGrowReverse' || vars.randAnim == 'boxRainGrowReverse'){
                                     box.width(0).height(0);
                                 }
 								if(i == totalBoxes-1){
@@ -668,6 +750,7 @@
 		animSpeed: 500,
 		pauseTime: 3000,
 		startSlide: 0,
+		borderRadius: 10,
 		directionNav: true,
 		directionNavHide: true,
 		controlNav: true,
@@ -681,7 +764,6 @@
 		captionOpacity: 0.8,
 		prevText: 'Prev',
 		nextText: 'Next',
-		randomStart: false,
 		beforeChange: function(){},
 		afterChange: function(){},
 		slideshowEnd: function(){},

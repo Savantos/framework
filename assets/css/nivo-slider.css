@@ -1,5 +1,5 @@
 /*
- * jQuery Nivo Slider v2.6
+ * jQuery Nivo Slider v2.7.1
  * http://nivo.dev7studios.com
  *
  * Copyright 2011, Gilbert Pellegrom
@@ -71,6 +71,11 @@
 	top:45%;
 	z-index:9;
 	cursor:pointer;
+                -webkit-transition: opacity 0.2s ease-in-out;
+        -moz-transition: opacity 0.2s ease-in-out;
+        -o-transition: opacity 0.2s ease-in-out;
+        -ms-transition: opacity 0.2s ease-in-out;	
+        transition: opacity 0.2s ease-in-out;
 }
 .nivo-prevNav {
 	left:0px;
