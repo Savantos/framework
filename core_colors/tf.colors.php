@@ -149,6 +149,84 @@ function tf_colorpalette($hex, $type) {
     return $colors;
 }
 
+// NEW FUNCTIONS
+
+function tf_color_alpha_flip( $hex ) {
+    
+    // Grab
+    $hsl = rgb2hsl( hex2rgb( $hex ) );
+    
+    // Barriers for Display
+    if ( $hsl[2] > 0.9 ) { $hsl[2] = 0.9; }
+    if ( $hsl[2] < 0.1 ) { $hsl[2] = 0.1; }
+    
+    // Generate Alpha
+    $alpha = 1 - $hsl[2];
+    
+    return $alpha;
+   
+}
+
+function tf_color_change_l( $hex, $change) {
+    
+    // Grab
+    $rgb = hex2rgb( $hex );
+    
+    //print_r($rgb);
+    
+    $hsl = rgb2hsl( $rgb );
+    
+    //print_r($hsl);
+    
+    $oldl = $hsl[2];
+ 
+    // Change Luminosity
+    $hsl[2] = $oldl + $change;
+
+    //print_r($hsl);
+    
+    // Barriers for Display
+    if ( $hsl[2] > 1 ) { $hsl[2] = 0.99; }
+    if ( $hsl[2] < 0 ) { $hsl[2] = 0.01; }
+    
+    
+    // Generate RGB Array
+    $rgb = hsl2rgb($hsl);
+    
+    
+    //print_r($rgb);
+    return $rgb;
+    
+}
+
+function tf_color_textshadow ( $front, $back, $change) {
+    
+    // Process
+    $rgb = tf_color_change_l( $front, $change);
+    $alpha = tf_color_alpha_flip( $back );
+    
+    // Concatenate
+    $rgba = $rgb[0] . ', ' . $rgb[1] . ', '  . $rgb[2] . ', ' . round($alpha,2);
+    
+    return $rgba;
+    
+}
+
+function tf_color_rgb ( $color) {
+    
+    // Process
+    $rgb = hex2rgb( $color);
+    
+    // Concatenate
+    $rgba = $rgb[0] . ', ' . $rgb[1] . ', '  . $rgb[2];
+    
+    return $rgba;
+    
+}
+
+
+// HELPER FUNCTIONS
+
 
 function hex2rgb($color)
 {
