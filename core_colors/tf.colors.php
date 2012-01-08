@@ -212,7 +212,7 @@ function rgb2hsl($rgb){
      return array($H, $S, $L);
      }
      
-
+/*
 function hsl2rgb($hsl) {
       $h = $hsl[0]; 
       $s = $hsl[1]; 
@@ -240,5 +240,24 @@ function hsl2rgb($hsl) {
     }    
     return array($r, $g, $B);
 }
+*/
+
+function hsl2rgb($hsl) {
+  $h = $hsl[0];
+  $s = $hsl[1];
+  $l = $hsl[2];
+  $m2 = ($l <= 0.5) ? $l * ($s + 1) : $l + $s - $l*$s;
+  $m1 = $l * 2 - $m2;
+  return array(round(_color_hue2rgb($m1, $m2, $h + 0.33333)*255),
+               round(_color_hue2rgb($m1, $m2, $h)*255),
+               round(_color_hue2rgb($m1, $m2, $h - 0.33333)*255));
+}
     
+function _color_hue2rgb($m1, $m2, $h) {
+  $h = ($h < 0) ? $h + 1 : (($h > 1) ? $h - 1 : $h);
+  if ($h * 6 < 1) return $m1 + ($m2 - $m1) * $h * 6;
+  if ($h * 2 < 1) return $m2;
+  if ($h * 3 < 2) return $m1 + ($m2 - $m1) * (0.66666 - $h) * 6;
+  return $m1;
+}
 ?>
