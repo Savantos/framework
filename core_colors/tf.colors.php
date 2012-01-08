@@ -224,9 +224,35 @@ function tf_color_rgb ( $color) {
     
 }
 
+// RGB TO HEX
 
-// HELPER FUNCTIONS
+function rgb2hex($r, $g, $b, $uppercase=false, $shorten=false)
+{
+  // The output
+  $out = "";
+  
+  // If shorten should be attempted, determine if it is even possible
+  if ($shorten && ($r + $g + $b) % 17 !== 0) $shorten = false;
+  
+  // Red, green and blue as color
+  foreach (array($r, $g, $b) as $c)
+  {
+    // The HEX equivalent
+    $hex = base_convert($c, 10, 16);
+    
+    // If it should be shortened, and if it is possible, then
+    // only grab the first HEX character
+    if ($shorten) $out .= $hex[0];
+    
+    // Otherwise add the full HEX value (if the decimal color
+    // is below 16 then we have to prepend a 0 to it)
+    else $out .= ($c < 16) ? ("0".$hex) : $hex;
+  }
+  // Package and away we go!
+  return $uppercase ? strtoupper($out) : $out;
+}
 
+// HEX TO RGB
 
 function hex2rgb($color)
 {
@@ -248,6 +274,8 @@ function hex2rgb($color)
     return array($r, $g, $b);
     
 }
+
+// RGB TO HSL
 
 function rgb2hsl($rgb){
    
@@ -290,35 +318,7 @@ function rgb2hsl($rgb){
      return array($H, $S, $L);
      }
      
-/*
-function hsl2rgb($hsl) {
-      $h = $hsl[0]; 
-      $s = $hsl[1]; 
-      $v = $hsl[2]; 
-    
-    if($s == 0) {
-        $r = $g = $B = $v * 255;
-    } else {
-        $var_H = $h * 6;
-        $var_i = floor( $var_H );
-        $var_1 = $v * ( 1 - $s );
-        $var_2 = $v * ( 1 - $s * ( $var_H - $var_i ) );
-        $var_3 = $v * ( 1 - $s * (1 - ( $var_H - $var_i ) ) );
-
-        if       ($var_i == 0) { $var_R = $v     ; $var_G = $var_3  ; $var_B = $var_1 ; }
-        else if  ($var_i == 1) { $var_R = $var_2 ; $var_G = $v      ; $var_B = $var_1 ; }
-        else if  ($var_i == 2) { $var_R = $var_1 ; $var_G = $v      ; $var_B = $var_3 ; }
-        else if  ($var_i == 3) { $var_R = $var_1 ; $var_G = $var_2  ; $var_B = $v     ; }
-        else if  ($var_i == 4) { $var_R = $var_3 ; $var_G = $var_1  ; $var_B = $v     ; }
-        else                   { $var_R = $v     ; $var_G = $var_1  ; $var_B = $var_2 ; }
-
-        $r = round($var_R * 255);
-        $g = round($var_G * 255);
-        $B = round($var_B * 255);
-    }    
-    return array($r, $g, $B);
-}
-*/
+// HSL TO RGB
 
 function hsl2rgb($hsl) {
   $h = $hsl[0];
