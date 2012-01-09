@@ -16,7 +16,7 @@ class TF_Twitter_Widget extends WP_Widget {
 
 		$widget_ops = array('classname' => 'tf_twitter_widget', 'description' => 'This widget is used to show your recent Twitter activity using your Twitter account');
 		$control_ops = null;
-		parent::__construct('opinionpanel-text-with-image-widget', __('Twitter - Display Feed'), $widget_ops, $control_ops);
+		parent::__construct('tf_twitter_widget', __('Twitter - Display Feed'), $widget_ops, $control_ops);
 
 	}
 
