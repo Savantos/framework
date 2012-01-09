@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: Twitter Widget
-Description: Adds a sidebar widget to display Twitter updates. Adapted from Sean Spalding's Twitter Widget, for use with Theme Force
+Description: Adds a sidebar widget to display Twitter updates. Adapted and upgraded from Sean Spalding's Twitter Widget, for use with Theme Force
 Version: 1.0
 Author: ThemeForce
 Author URI: http://theme-force.com
@@ -9,13 +9,21 @@ License: GPL
 
 */
 
-function tf_twitter_widget_init() {
+class TF_Twitter_Widget extends WP_Widget {
 
-	if ( !function_exists('register_sidebar_widget') )
-		return;
+	
+	function __construct() {
 
-	function tf_twitter_widget($args) {
+		$widget_ops = array('classname' => 'tf_twitter_widget', 'description' => 'This widget is used to show your recent Twitter activity using your Twitter account');
+		$control_ops = null;
+		parent::__construct('opinionpanel-text-with-image-widget', __('Twitter - Display Feed'), $widget_ops, $control_ops);
 
+	}
+
+
+	//Widget output on front end
+	function widget( $args, $instance ) {
+		
 		// "$args is an array of strings that help widgets to conform to
 		// the active theme: before_widget, before_title, after_widget,
 		// and after_title are the array keys." - These are set up by the theme
@@ -39,53 +47,43 @@ function tf_twitter_widget_init() {
 
 
 		// echo widget closing tag
-		echo $after_widget;
+		echo $after_widget;	
+	
 	}
 
-	// Settings form
-	function tf_twitter_widget_admin() {
-
-		// Get options
-		$options = get_option('tf_twitter_widget');
-		// options exist? if not set defaults
-		if ( !is_array($options) )
-			$options = array('account'=>'themeforce', 'title'=>'Twitter Updates', 'show'=>'5');
-
-        // form posted?
-		if ( $_POST['Twitter-submit'] ) {
-
-			// Remember to sanitize and format use input appropriately.
-			$options['account'] = strip_tags(stripslashes($_POST['Twitter-account']));
-			$options['title'] = strip_tags(stripslashes($_POST['Twitter-title']));
-			$options['show'] = strip_tags(stripslashes($_POST['Twitter-show']));
-			update_option('tf_twitter_widget', $options);
-		}
-
-		// Get options for form fields to show
-		$account = htmlspecialchars($options['account'], ENT_QUOTES);
-		$title = htmlspecialchars($options['title'], ENT_QUOTES);
-		$show = htmlspecialchars($options['show'], ENT_QUOTES);
+	//The widget form seen in 'Widgets' screen
+	function form( $instance ) {
+		
+		$instance = wp_parse_args( (array) $instance, array( 'account' => 'themeforce', 'title' => 'Twitter Updates', 'show' => 5 ) );
+		
+		$account = strip_tags( $instance['account'] );
+		$title = strip_tags( $instance['title'] );
+		$show = strip_tags( $instance['show'] );
 
 		// The form fields
 		?>
-		<p style="text-align:right;">
+		<p>
 				<label for="Twitter-account"><?php echo __('Twitter Account:'); ?>
-				<input style="width: 200px;" id="Twitter-account" name="Twitter-account" type="text" value="<?php echo $account; ?>" />
-				</label></p>
-		
-		<p style="text-align:right;">
-				<label for="Twitter-title"><?php echo __('Widget Title:'); ?>
-				<input style="width: 200px;" id="Twitter-title" name="Twitter-title" type="text" value="<?php echo $title; ?>" />
-				</label></p>
-		
-		<p style="text-align:right;">
-				<label for="Twitter-show"><?php echo __('Display Posts:'); ?>
 				
-				<select style="width: 200px;" id="Twitter-show" name="Twitter-show" type="text">
+				<input style="width: 200px;" id="<?php echo $this->get_field_id('account'); ?>" name="<?php echo $this->get_field_name('account'); ?>" type="text" value="<?php echo $account; ?>" />
+				
+				</label></p>
+		
+		<p>
+				<label for="Twitter-title"><?php echo __('Widget Title:'); ?>
+				
+				<input style="width: 200px;" id="<?php echo $this->get_field_id('title'); ?>" name="<?php echo $this->get_field_name('title'); ?>" type="text" value="<?php echo $title; ?>" />
+				
+				</label></p>
+		
+		<p>
+				<label for="Twitter-show"><?php echo __('Display Tweets:'); ?>
+				
+				<select style="width: 200px;" id="<?php echo $this->get_field_id('show'); ?>" name="<?php echo $this->get_field_name('show'); ?>" type="text">
 					
 					<?php for( $i=1; $i<=10; $i++ ): ?>
 					
-						<option value="<?php echo $i?>" <?php selected( (int) $show, $i ); ?>"><?php echo $i; ?></option>
+						<option value="<?php echo $i?>" <?php selected( (int) $show, $i ); ?>><?php echo $i; ?></option>
 					
 					<?php endfor; ?>
 				
@@ -94,19 +92,15 @@ function tf_twitter_widget_init() {
 				</label></p>
 				
 		<input type="hidden" id="Twitter-submit" name="Twitter-submit" value="1" />
-	
-	<?php 	
+		<?php
+
 	}
-	
-
-	// Register widget for use
-	register_sidebar_widget(array('Twitter', 'widgets'), 'tf_twitter_widget');
-
-	// Register settings for use, 300x200 pixel form
-	register_widget_control(array('Twitter', 'widgets'), 'tf_twitter_widget_admin', 300, 200);
 }
 
-// Run code and init
-add_action('widgets_init', 'tf_twitter_widget_init');
+/* register widget. */
+function tf_register_twitter_widget() {
+	register_widget( 'TF_Twitter_Widget' );
+}
 
-?>
+/* Add  function to the widgets_init hook. */
+add_action( 'widgets_init', 'tf_register_twitter_widget' );
