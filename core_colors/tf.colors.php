@@ -149,7 +149,7 @@ function tf_colorpalette($hex, $type) {
     return $colors;
 }
 
-// NEW FUNCTIONS
+// TF COLOR MANIPULATION FUNCTIONS
 
 function tf_color_alpha_flip( $hex ) {
     
