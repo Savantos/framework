@@ -9,17 +9,15 @@ License: GPL
 
 */
 
-class TF_Twitter_Widget extends WP_Widget {
+class tf_twitter_widget extends WP_Widget {
 
-	
-	function __construct() {
+	function tf_twitter_widget() {
 
 		$widget_ops = array('classname' => 'tf_twitter_widget', 'description' => 'This widget is used to show your recent Twitter activity using your Twitter account');
 		$control_ops = null;
 		parent::__construct('tf_twitter_widget', __('Twitter - Display Feed'), $widget_ops, $control_ops);
 
 	}
-
 
 	//Widget output on front end
 	function widget( $args, $instance ) {
@@ -31,76 +29,96 @@ class TF_Twitter_Widget extends WP_Widget {
 
 		// These are our own options
 		$options = get_option('tf_twitter_widget');
-		$account = $options['account'];  // Your Twitter account name
-		$title = $options['title'];  // Title in sidebar for widget
-		$show = $options['show'];  // # of Updates to show
+
+        $title = apply_filters('widget_title', $instance['tf_twitter_title'] );
+        $account = $instance['tf_twitter_account'];
+        $show = $instance['tf_twitter_count'];
 
         // Output
 		echo $before_widget ;
 
 		// start
-		echo '<div id="twitter_div">'
-              .$before_title.$title.$after_title;
+
+        if ( $title ) {echo $before_title . $title . $after_title;}
+        
 		echo '<ul id="twitter_update_list"></ul></div>
 		      <script type="text/javascript" src="http://twitter.com/javascripts/blogger.js"></script>';
 		echo '<script type="text/javascript" src="http://twitter.com/statuses/user_timeline/'.$account.'.json?callback=twitterCallback2&amp;count='.$show.'"></script>';
 
-
 		// echo widget closing tag
+        
 		echo $after_widget;	
 	
 	}
 
 	//The widget form seen in 'Widgets' screen
-	function form( $instance ) {
-		
-		$instance = wp_parse_args( (array) $instance, array( 'account' => 'themeforce', 'title' => 'Twitter Updates', 'show' => 5 ) );
-		
-		$account = strip_tags( $instance['account'] );
-		$title = strip_tags( $instance['title'] );
-		$show = strip_tags( $instance['show'] );
+    function update( $new_instance, $old_instance ) {
 
-		// The form fields
-		?>
-		<p>
-				<label for="Twitter-account"><?php echo __('Twitter Account:'); ?>
-				
-				<input style="width: 200px;" id="<?php echo $this->get_field_id('account'); ?>" name="<?php echo $this->get_field_name('account'); ?>" type="text" value="<?php echo $account; ?>" />
-				
-				</label></p>
-		
-		<p>
+        $instance = $old_instance;
+
+        $instance['tf_twitter_title'] = strip_tags( $new_instance['tf_twitter_title'] );
+        $instance['tf_twitter_account'] = strip_tags( $new_instance['tf_twitter_account'] );
+        $instance['tf_twitter_count'] = strip_tags( $new_instance['tf_twitter_count'] );
+
+        return $instance;
+
+    }
+
+
+    function form( $instance ) {
+
+        $defaults = array( 'tf_twitter_title' => __('Twitter Feed', 'themeforce'));
+        $instance = wp_parse_args( (array) $instance, $defaults );
+        $show = $instance['tf_twitter_count'];
+
+        ?>
+
+        <p>
+
 				<label for="Twitter-title"><?php echo __('Widget Title:'); ?>
 				
-				<input style="width: 200px;" id="<?php echo $this->get_field_id('title'); ?>" name="<?php echo $this->get_field_name('title'); ?>" type="text" value="<?php echo $title; ?>" />
+				<input style="width: 200px;" id="<?php echo $this->get_field_id('tf_twitter_title'); ?>" name="<?php echo $this->get_field_name('tf_twitter_title'); ?>" type="text" value="<?php echo $instance['tf_twitter_title']; ?>" />
 				
-				</label></p>
+				</label>
+        
+        </p>
+
+        <p>
+            <label for="Twitter-account"><?php echo __('Twitter Account:'); ?>
+
+                <input style="width: 200px;" id="<?php echo $this->get_field_id('tf_twitter_account'); ?>" name="<?php echo $this->get_field_name('tf_twitter_account'); ?>" type="text" value="<?php echo $instance['tf_twitter_account']; ?>" />
+
+            </label>
+        
+        </p>
+
 		
 		<p>
 				<label for="Twitter-show"><?php echo __('Display Tweets:'); ?>
 				
-				<select style="width: 200px;" id="<?php echo $this->get_field_id('show'); ?>" name="<?php echo $this->get_field_name('show'); ?>" type="text">
+				<select style="width: 200px;" id="<?php echo $this->get_field_id('tf_twitter_count'); ?>" name="<?php echo $this->get_field_name('tf_twitter_count'); ?>" type="text">
 					
 					<?php for( $i=1; $i<=10; $i++ ): ?>
-					
-						<option value="<?php echo $i?>" <?php selected( (int) $show, $i ); ?>><?php echo $i; ?></option>
+
+						<option value="<?php echo $i; ?>" <?php selected( $show, $i ); ?>><?php echo $i; ?></option>
 					
 					<?php endfor; ?>
 				
 				</select>
 				
-				</label></p>
-				
-		<input type="hidden" id="Twitter-submit" name="Twitter-submit" value="1" />
-		<?php
+				</label>
 
+        </p>
+
+		<?php
 	}
 }
 
 /* register widget. */
 function tf_register_twitter_widget() {
-	register_widget( 'TF_Twitter_Widget' );
+	register_widget( 'tf_twitter_widget' );
 }
 
 /* Add  function to the widgets_init hook. */
 add_action( 'widgets_init', 'tf_register_twitter_widget' );
+?>
