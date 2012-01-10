@@ -15,7 +15,7 @@ In order to make use of our complete feature set, you will not require any other
 
 ## Adding to your Theme
 
-The contents of this framework should be pulled into a folder called **themeforce** within your theme:
+The contents of this framework should be pulled into a folder called **framework** within your theme:
 
 	../wp-content/themes/your-theme/framework/
 
