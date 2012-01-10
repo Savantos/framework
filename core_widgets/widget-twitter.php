@@ -28,7 +28,6 @@ class tf_twitter_widget extends WP_Widget {
 		extract($args);
 
 		// These are our own options
-		$options = get_option('tf_twitter_widget');
 
         $title = apply_filters('widget_title', $instance['tf_twitter_title'] );
         $account = $instance['tf_twitter_account'];
@@ -41,7 +40,7 @@ class tf_twitter_widget extends WP_Widget {
 
         if ( $title ) {echo $before_title . $title . $after_title;}
         
-		echo '<ul id="twitter_update_list"></ul></div>
+		echo '<ul id="twitter_update_list"></ul>
 		      <script type="text/javascript" src="http://twitter.com/javascripts/blogger.js"></script>';
 		echo '<script type="text/javascript" src="http://twitter.com/statuses/user_timeline/'.$account.'.json?callback=twitterCallback2&amp;count='.$show.'"></script>';
 
@@ -75,16 +74,16 @@ class tf_twitter_widget extends WP_Widget {
 
         <p>
 
-				<label for="Twitter-title"><?php echo __('Widget Title:'); ?>
-				
-				<input style="width: 200px;" id="<?php echo $this->get_field_id('tf_twitter_title'); ?>" name="<?php echo $this->get_field_name('tf_twitter_title'); ?>" type="text" value="<?php echo $instance['tf_twitter_title']; ?>" />
-				
-				</label>
+            <label for="twitter-title"><?php echo __('Widget Title:'); ?>
+
+                <input style="width: 200px;" id="<?php echo $this->get_field_id('tf_twitter_title'); ?>" name="<?php echo $this->get_field_name('tf_twitter_title'); ?>" type="text" value="<?php echo $instance['tf_twitter_title']; ?>" />
+
+            </label>
         
         </p>
 
         <p>
-            <label for="Twitter-account"><?php echo __('Twitter Account:'); ?>
+            <label for="twitter-account"><?php echo __('Twitter Account:'); ?>
 
                 <input style="width: 200px;" id="<?php echo $this->get_field_id('tf_twitter_account'); ?>" name="<?php echo $this->get_field_name('tf_twitter_account'); ?>" type="text" value="<?php echo $instance['tf_twitter_account']; ?>" />
 
@@ -94,19 +93,20 @@ class tf_twitter_widget extends WP_Widget {
 
 		
 		<p>
-				<label for="Twitter-show"><?php echo __('Display Tweets:'); ?>
-				
-				<select style="width: 200px;" id="<?php echo $this->get_field_id('tf_twitter_count'); ?>" name="<?php echo $this->get_field_name('tf_twitter_count'); ?>" type="text">
-					
-					<?php for( $i=1; $i<=10; $i++ ): ?>
 
-						<option value="<?php echo $i; ?>" <?php selected( $show, $i ); ?>><?php echo $i; ?></option>
-					
-					<?php endfor; ?>
-				
-				</select>
-				
-				</label>
+            <label for="twitter-show"><?php echo __('Display Tweets:'); ?>
+
+            <select style="width: 200px;" id="<?php echo $this->get_field_id('tf_twitter_count'); ?>" name="<?php echo $this->get_field_name('tf_twitter_count'); ?>" type="text">
+
+                <?php for( $i=1; $i<=10; $i++ ): ?>
+
+                    <option value="<?php echo $i; ?>" <?php selected( $show, $i ); ?>><?php echo $i; ?></option>
+
+                <?php endfor; ?>
+
+            </select>
+
+            </label>
 
         </p>
 
