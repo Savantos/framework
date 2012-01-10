@@ -63,7 +63,6 @@ class tf_twitter_widget extends WP_Widget {
 
     }
 
-
     function form( $instance ) {
 
         $defaults = array( 'tf_twitter_title' => __('Twitter Feed', 'themeforce'), 'tf_twitter_account' => '@themeforce' , 'tf_twitter_count' => '5');
