@@ -70,7 +70,7 @@ function tf_events_full ( $atts ) {
 	$events = $wpdb->get_results($querystr, OBJECT);
 	
 	// - declare fresh day -
-	$daycheck = null;
+
 	$date_format = get_option( 'date_format' );
 	
 	echo '<!-- www.schema.org -->';
@@ -88,16 +88,14 @@ function tf_events_full ( $atts ) {
 	$ed = $custom["tf_events_enddate"][0];
 		$post_image_id = get_post_thumbnail_id( get_the_ID() );
 	        if ( $post_image_id ) {
-		             if ( $thumbnail = wp_get_attachment_image_src( $post_image_id, 'width=130&height=130&crop=1', false) ) 
+		             if ( $thumbnail = wp_get_attachment_image_src( $post_image_id, 'width=80&height=80&crop=1', false) )
                     	( string ) $thumbnail = $thumbnail[0];
 	        }
 			
 	// - determine if it's a new day -
 	$sqldate = date('Y-m-d H:i:s', $sd);
 	$longdate = mysql2date($date_format, $sqldate);
-	if ($daycheck == null) { echo '<h2 class="full-events">' . $longdate . '</h2>'; }
-	if ($daycheck != $longdate && $daycheck != null) { echo '<h2 class="full-events">' . $longdate . '</h2>'; }		
-	
+
 	// - determine date -
 	$sqldate = date('Y-m-d H:i:s', $sd);
 	$schema_startdate = date('Y-m-d\TH:i', $sd); // <- Date for Google Rich Snippets
@@ -116,32 +114,43 @@ function tf_events_full ( $atts ) {
 	// TODO add fallback for nothumb
 	
 	// - output - ?>
-	<div itemprop="events" itemscope itemtype="http://schema.org/Event">
-	<div class="full-events">
-	    <div class="text">
-	        <div class="title">
-				<?php if ($thumbnail != '') {?>
-				<!-- img -->  <meta itemprop="photo" content="<?php echo $thumbnail; ?>" />
-				<?php } ?>
-	            <!-- date --> <div class="time"><span itemprop="startDate" content="<?php echo $schema_startdate; ?>"><?php echo $stime . ' - ' . $etime; ?></span></div>
-				<!-- duration --> <meta itemprop="duration" content="PT<?php echo $schema_duration; ?>M" />
-				<!-- category --> <meta itemprop="eventType" content="<?php tf_list_cats(); ?>" />
-	            <!-- url & name --> <div class="eventtext"><a itemprop="url" href="<?php the_permalink(); ?>"><div itemprop="name"><?php the_title(); ?></div></a></div>
-				<!-- location --> <meta itemprop="location" content="<?php echo $location;?>" />
-	        </div>
-	    </div>
-	    <!-- description --><div class="desc" itemprop="description"><?php the_content() ?></div>
-	</div>
-	</div>
-	
+
+    <div class="full-events" itemprop="events" itemscope itemtype="http://schema.org/Event">
+
+        <div class="event-thumb">
+
+            <?php if ($thumbnail != '') {?><img itemprop="photo" src="<?php echo $thumbnail; ?>" alt="<?php the_title(); ?>" /><?php } ?>
+
+        </div>
+
+        <div class="event-text">
+
+            <!-- url & name -->
+            <div class="title"><a itemprop="url" href="<?php the_permalink(); ?>"><span itemprop="name"><?php the_title(); ?></span></a></div>
+            <!-- date -->
+            <div class="datetime">
+                <span class="date"><?php echo $longdate; ?></span><span class="date-sep"> &bull; </span></span><span class="time" itemprop="startDate" content="<?php echo $schema_startdate; ?>"><?php echo $stime . ' - ' . $etime; ?></span>
+            </div>
+            <!-- meta -->
+            <meta itemprop="duration" content="PT<?php echo $schema_duration; ?>M" />
+            <meta itemprop="location" content="<?php echo $location;?>" />
+            <meta itemprop="eventType" content="<?php tf_list_cats(); ?>" />
+            <!-- description -->
+            <div class="desc" itemprop="description">
+                <?php the_content() ?>
+            </div>
+
+        </div>
+
+    </div>
+
+
 	<!-- www.schema.org -->  
 	
 	<?php
-	
-	// - fill daycheck with the current day -
-	$daycheck = $longdate;
-	// - .... and back to the top now -
-	
+
+    $thumbnail = null;
+
 	endforeach;
 	else :
 	endif;
