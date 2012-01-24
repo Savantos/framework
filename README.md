@@ -24,6 +24,7 @@ The contents of this framework should be pulled into a folder called **framework
 We understand you may not want to use all the features, so it's only normal that you reduce the number of queries
 that your theme executes. Our modular approach means that you can do just that. Just add any (or all) of the functions below to grab what you need (within **functions.php**).
 
+	´´´php
 	// Set up theme supports
 	
 	add_theme_support( 'tf_food_menu' );
@@ -39,7 +40,7 @@ that your theme executes. Our modular approach means that you can do just that. 
 	add_theme_support( 'tf_mailchimp' );
 	
 	add_theme_support( 'tf_settings_api' );
-
+	´´´
 	
 The main file that brings everything together within the *"framework/** folder is is:
 
