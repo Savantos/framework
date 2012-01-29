@@ -150,7 +150,7 @@ class TF_Upload_Image_Well {
     	
     	$html = '';
     	?>
-    	<div style="<?php echo $style ?> <?php echo $this->attachment_id ? '' : 'display: none;' ?>" class="current-image">
+    	<div style="<?php echo $style ?> <?php echo $this->attachment_id ? '' : 'display: none;' ?> line-height: <?php echo $this->size['height'] ?>px;" class="current-image">
     		<?php if ( $this->attachment_id ) : ?>
 	    		<?php echo wp_get_attachment_image( $this->attachment_id, $this->size, false, 'id=' . $this->id ) ?>
 	    	<?php else : ?>

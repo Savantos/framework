@@ -1,7 +1,6 @@
 var tf_image_uploaders = {};
 
-jQuery( document ).ready( function($)
-{
+jQuery( document ).ready( function($) {
 	// Object containing all the plupload uploaders
 	var 
 		hundredMB				= null,
