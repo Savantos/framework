@@ -174,7 +174,7 @@ class TF_Upload_Image_Well {
 
     	?>
     	<div style="<?php echo $style ?>" class="loading-block hidden">
-    		loading...
+    		<img src="<?php echo get_bloginfo( 'template_url' ).'/framework/assets/images/spinner.gif'; ?>" />
     	</div>
     	<?php
 

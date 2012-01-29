@@ -37,6 +37,7 @@ function themeforce_logo_page() {
                 'desc' => 'Your business logo (choose from an array of formats .JPG, .GIF, .PNG)',
                 'id' => $shortname.'_logo_id',
                 'std' => '',
+                'size' => 'width=300&height=300&crop=0',
                 'type' => 'image'),
 		
 	// new 3.2.2		
