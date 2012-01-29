@@ -46,6 +46,7 @@ function themeforce_socialmedia_options() {
     add_menu_page( 'Social Media Overview', 'Social Media', 'manage_options', 'themeforce_socialmedia_options', 'themeforce_social_media_overview_page', TF_URL . '/assets/images/socialmedia_16.png', 30); // $function, $icon_url, $position 
     add_submenu_page('themeforce_socialmedia_options', 'Facebook', 'Facebook', 'manage_options', 'themeforce_facebook', 'themeforce_social_facebook_page');
     add_submenu_page('themeforce_socialmedia_options', 'Twitter', 'Twitter', 'manage_options', 'themeforce_twitter', 'themeforce_social_twitter_page');
+    
 }
 add_action( 'admin_menu', 'themeforce_socialmedia_options' );
 
@@ -55,6 +56,7 @@ function themeforce_social_options() {
     // add_submenu_page('themeforce_social_options', 'Qype', 'Qype', 'manage_options', 'themeforce_qype', 'themeforce_social_qype_page');
     add_submenu_page('themeforce_social_options', 'Foursquare', 'Foursquare', 'manage_options', 'themeforce_foursquare', 'themeforce_social_foursquare_page');   
     add_submenu_page('themeforce_social_options', 'Gowalla', 'Gowalla', 'manage_options', 'themeforce_gowalla', 'themeforce_social_gowalla_page');
+    
 }
 add_action( 'admin_menu', 'themeforce_social_options' );
 
@@ -91,6 +93,7 @@ function tf_settings_validate( $input ) {
 
 	return $newinput;
 }
+
 
 // Display Settings
 
@@ -232,6 +235,7 @@ function tf_display_settings( $options ) {
         <?php break;
         
         case "image":
+
         ?>
 
         <tr>
@@ -239,11 +243,22 @@ function tf_display_settings( $options ) {
 
             </th>
             <td>
-            <?php
-            if ( get_option( $value['id'] ) != "") { $val = stripslashes(get_option( $value['id'])  ); } else { $val =  $value['std']; }
-            ?>
-            <?php echo tf_optionsframework_medialibrary_uploader( $value['id'], $val ); ?>
-            <br /><span class="desc"><?php echo $value['desc'] ?></span>
+            	<?php
+            	if ( get_option( $value['id'] ) != "") { $val = stripslashes(get_option( $value['id'])  ); } else { $val =  $value['std']; }
+            	?>
+            	<?php
+            	$value['allowed_extensions'] = $value['allowed_extensions'] ? $value['allowed_extensions'] : array( 'jpeg', 'jpg', 'png', 'gif' );
+            	$drop_text = ! empty( $value['drop_text'] ) ? $value['drop_text'] : 'Drop image here';
+            	$uploader = new TF_Upload_Image_Well( $value['id'], $val, 'width=' . $value['preview_width'] . '&height' . $value['preview_width'] . '&crop=1', $drop_text, $value['allowed_extensions'] );
+            	$uploader->admin_print_styles();
+            	$uploader->html();
+            	
+            	?>
+            	
+            	<?php //echo tf_optionsframework_medialibrary_uploader( $value['id'], $val ); ?>
+            	<br /><span class="desc"><?php echo $value['desc'] ?></span>
+            	
+            	
             </td>
         </tr>
         

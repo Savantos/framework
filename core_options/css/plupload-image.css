@@ -1,0 +1,62 @@
+/* CSS Document */
+
+.hm-uploader { position: relative; height: 208px }
+
+.hm-uploader.with-image .rwmb-drag-drop { display: none }
+.hm-uploader.with-image .rwmb-drag-drop { display: none }
+
+.hm-uploader .current-image { line-height: 200px; text-align: center;  position: absolute; top: 0; left: 0; z-index: 3 }
+.hm-uploader .current-image img { display: inline; vertical-align: middle; }
+
+.hm-uploader .current-image .image-options { position: absolute; bottom: 0; right: 0; background: rgba(0,0,0,.4); color: #fff; height: 20px; line-height: 20px; padding: 0 5px; }
+.hm-uploader .current-image .image-options a { color: #fff }
+.hidden { display: none; }
+
+div.loading-block {
+	
+	text-align: center;
+	line-height: 180px;
+	border-image: initial;	
+	position: absolute;
+	top: 0; left: 0;
+	background: #f7f7f7;
+	box-shadow: inset 0 0 10px rgba( 0, 0, 0, .3 );
+	z-index: 2
+}
+
+div.rwmb-drag-drop {
+	box-shadow: inset 0 0 10px rgba( 0, 0, 0, .3 );
+	border-image: initial;	
+	position: absolute;
+	top: 0; left: 0;
+	z-index: 1
+}
+
+div.rwmb-drag-drop-inside {
+	margin: 70px auto 0;
+	width: 200px;
+}
+
+div.rwmb-drag-drop-inside p {
+	text-align: center;
+	display: block;
+	font-size: 20px;
+	margin: 5px 0;
+	color: #AAA;	
+}
+
+.rwmb-images div{
+	color: #fff;
+	font-weight: bold;
+	position: absolute;
+	background: #000;
+	bottom: 0;
+	right: 0;
+	padding: 5px;
+}
+
+.rwmb-images div a{
+	position: relative;
+	color: #fff;
+	font-weight: bold; 	
+}

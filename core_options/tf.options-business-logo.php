@@ -35,16 +35,18 @@ function themeforce_logo_page() {
 	// new 3.2.2					
 	 array( 'name' => 'Logo',
                 'desc' => 'Your business logo (choose from an array of formats .JPG, .GIF, .PNG)',
-                'id' => $shortname.'_logo',
+                'id' => $shortname.'_logo_id',
                 'std' => '',
                 'type' => 'image'),
 		
 	// new 3.2.2		
-	array( 'name' => 'Favicon',
+   	array( 'name' => 'Favicon',
                 'desc' => 'Your Favicon, make sure it is 16px by 16px (you can <a href=\'http://www.favicon.cc/\' target=\'_blank\'>generate one here</a>)',
                 'id' => $shortname.'_favicon',
                 'std' => '',
-                'type' => 'image'), 					
+                'type' => 'image',
+                'allowed_extensions' => array( 'ico' ),
+                'drop_text' => 'Drop favicon here'), 					
       
 	array( 'type' => 'close'), 
  
