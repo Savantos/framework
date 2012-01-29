@@ -32,30 +32,24 @@ jQuery( document ).ready( function($) {
 		
 		var input = jQuery( this )
 		// Adding container, browser button and drag ang drop area
-		tf_well_plupload_init = $.extend( 
+		var tf_well_plupload_init = $.extend( 
 			{
 				container:		prefix + '-container',
 				browse_button:	prefix + '-browse-button',
 				drop_element:	prefix + '-dragdrop'
 			},
-			tf_well_plupload_defaults 
+			tf_well_plupload_defaults
 		);
-
+			
 		
-		// Add field_id to the ajax call
-		$.extend( 
-			tf_well_plupload_init.multipart_params, 
-			{
-				field_id:	prefix,
-				size:		input.parent().find( '.upload-form' ).attr( 'data-size' )
-			}
-		);
-		
+		tf_well_plupload_init.multipart_params.field_id = prefix;
+		tf_well_plupload_init.multipart_params.size = input.parent().find( '.upload-form' ).attr( 'data-size' );
+				
 		if ( totalRWMB == 1 )
 			tf_well_plupload_init.filters[0].extensions = input.parent().find( '.upload-form' ).attr( 'data-extensions' );
 
 		// Create new uploader
-		tf_image_uploaders[ prefix ] = new plupload.Uploader( tf_well_plupload_init );
+		tf_image_uploaders[ prefix ] = new plupload.Uploader( $.extend( true, {}, tf_well_plupload_init ) );
 
 		tf_image_uploaders[ prefix ].init();
 		//
