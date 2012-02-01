@@ -132,8 +132,11 @@
 					if( args.type == 'short' )
 						note = 'Short is not supported on Full Width template.';
 				}
-				
-				return '<input type="button" class="tfFoodMenuShortcode ' + args.align + '" data-shortcode="'+encodedShortode+'" style="' + style + '" value="FOOD MENU  -  Category: '+ args.id + '  -  Style: ' + args.type + (note?"\n"+'[Note: '+note+']':'') + '" />' + after;
+				if ( args.type == 'All' )
+					return '<input type="button" class="tfFoodMenuShortcode ' + args.align + '" data-shortcode="'+encodedShortode+'" style="' + style + '" value="FOOD MENU  -  Menu: '+ args.name + (note?"\n"+'[Note: '+note+']':'') + '" />' + after;
+
+				else
+					return '<input type="button" class="tfFoodMenuShortcode ' + args.align + '" data-shortcode="'+encodedShortode+'" style="' + style + '" value="FOOD MENU  -  Category: '+ args.id + '  -  Style: ' + args.type + (note?"\n"+'[Note: '+note+']':'') + '" />' + after;
 			});
 		
 		},
@@ -192,7 +195,7 @@
 		},
 		
 		_parseShortcode : function( shortcode ) {
-		
+				
 			var args = {};
 			
 			function getAttr(s, n) {
@@ -213,7 +216,8 @@
 			args.align = getAttr( shortcode, 'align' ) ? getAttr( shortcode, 'align' ) : 'none';
 			args.type = new RegExp('\\[tf-menu-([^ ]+)', 'g').exec(shortcode);
 			args.showHeader = getAttr( shortcode, 'header' ) ? getAttr( shortcode, 'header' ) : 'no';
-
+			args.name = getAttr( shortcode, 'name' ) ? getAttr( shortcode, 'name' ) : null;
+			
 			if( !args.type )
 				args.type = 'full';
 			else
