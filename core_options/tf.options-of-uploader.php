@@ -1,311 +1,187 @@
 <?php
 
-/**
- * WooThemes Media Library-driven AJAX File Uploader Module ( 2010-11-05 )
- *
- * Slightly modified for use in the Options Framework.
- */
-
-define( 'TF_OPTIONS_FRAMEWORK_URL', TF_URL . '/core_options/' );
-if ( is_admin() ) {
+class TF_Upload_Image_Well {
 	
-	// Load additional css and js for image uploads on the Options Framework page
-	add_action( "admin_print_styles", 'tf_optionsframework_mlu_css', 0 );
-	add_action( "admin_print_scripts", 'tf_optionsframework_mlu_js', 0 );
-	add_action( "admin_print_styles-media-upload-popup", "tf_optionsframework_mlu_insidepopup" );
-}
-
-/**
- * Sets up a custom post type to attach image to.  This allows us to have
- * individual galleries for different uploaders.
- */
-
-if ( ! function_exists( 'tf_optionsframework_mlu_init' ) ) {
-	function tf_optionsframework_mlu_init () {
-		register_post_type( 'optionsframework', array(
-			'labels' => array(
-				'name' => __( 'Options Framework Internal Container' ),
-			),
-			'public' => true,
-			'show_ui' => false,
-			'capability_type' => 'post',
-			'hierarchical' => false,
-			'rewrite' => false,
-			'supports' => array( 'title', 'editor' ), 
-			'query_var' => false,
-			'can_export' => true,
-			'show_in_nav_menus' => false
-		) );
-	}
-}
-tf_optionsframework_mlu_init();
-
-/**
- * Adds the Thickbox CSS file and specific loading and button images to the header
- * on the pages where this function is called.
- */
-
-if ( ! function_exists( 'tf_optionsframework_mlu_css' ) ) {
-
-	function tf_optionsframework_mlu_css () {
-	
-		$_html = '';
-		$_html .= '<link rel="stylesheet" href="' . site_url() . '/' . WPINC . '/js/thickbox/thickbox.css" type="text/css" media="screen" />' . "\n";
-		$_html .= '<script type="text/javascript">
-		var tb_pathToImage = "' . site_url() . '/' . WPINC . '/js/thickbox/loadingAnimation.gif";
-	    var tb_closeImage = "' . site_url() . '/' . WPINC . '/js/thickbox/tb-close.png";
-	    </script>' . "\n";
+	public $save_on_upload;
+	public $allowed_extensions;
+	public $drop_text;
+    
+    function __construct( $id, $attachment_id, $size = '', $drop_text = 'Drop image here', $allowed_extensions = array( 'jpg', 'jpeg', 'png', 'gif' ) ) {
+    	$this->id 				= $id;
+    	$this->attachment_id 	= $attachment_id;
+    	$this->size 			= wp_parse_args( $size, 'width=440&height=200&crop=1' );
+    	$this->drop_text 		= $drop_text;
+    	$this->allowed_extensions = $allowed_extensions;
+    	$this->save_on_upload	= false;
+    	
+    	if ( empty( $this->size['width'] ) )
+    		$this->size['width'] = '440';
+    	
+    	if ( empty( $this->size['height'] ) )
+    		$this->size['height'] = '200';
+    	
+    	if ( ! is_string( $size ) )
+	    	$this->size_str = sprintf( 'width=%d&height=%d&crop=%s', $this->size['width'], $this->size['height'], $this->size['crop'] );
 	    
-	    echo $_html;
+	    else
+	    	$this->size_str = $size;
+    }
+	
+	static function enqueue_scripts() {
 		
+		require_once( ABSPATH . 'wp-admin/includes/template.php' );		
+		
+		global $post;
+    	// Enqueue same scripts and styles as for file field
+
+    	wp_enqueue_script( 'plupload-all' );
+    	wp_enqueue_style( 'tf-well-plupload-image', TF_URL . '/core_options/css/plupload-image.css', array() );
+
+    	wp_enqueue_script( 'tf-well-plupload-image', TF_URL . '/core_options/js/plupload-image.js', array( 'jquery-ui-sortable', 'wp-ajax-response', 'plupload-all' ), 1 );
+    	wp_localize_script( 'tf-well-plupload-image', 'tf_well_plupload_defaults', array(
+    		'runtimes'				=> 'html5,silverlight,flash,html4',
+    		'file_data_name'		=> 'async-upload',
+    		'multiple_queues'		=> true,
+    		'max_file_size'			=> wp_max_upload_size().'b',
+    		'url'					=> admin_url('admin-ajax.php'),
+    		'flash_swf_url'			=> includes_url( 'js/plupload/plupload.flash.swf' ),
+    		'silverlight_xap_url'	=> includes_url( 'js/plupload/plupload.silverlight.xap' ),
+    		'filters'				=> array( array( 'title' => __( 'Allowed Image Files' ), 'extensions' => '*' ) ),
+    		'multipart'				=> true,
+    		'urlstream_upload'		=> true,			
+    		// additional post data to send to our ajax hook
+    		'multipart_params'		=> array(
+    			'_ajax_nonce'	=> wp_create_nonce( 'plupload_image' ),
+    			'action'    	=> 'plupload_image_upload'
+    		)
+
+    	));
 	}
+	
+    /**
+     * Upload
+     * Ajax callback function
+     * 
+     * @return error or (XML-)response
+     */
+    static function handle_upload () {
+    	header( 'Content-Type: text/html; charset=UTF-8' );
 
+    	if ( ! defined('DOING_AJAX' ) )
+    		define( 'DOING_AJAX', true );
+
+    	check_ajax_referer('plupload_image');
+
+    	$post_id = 0;
+    	if ( is_numeric( $_REQUEST['post_id'] ) )
+    		$post_id = (int) $_REQUEST['post_id'];
+
+    	// you can use WP's wp_handle_upload() function:
+    	$file = $_FILES['async-upload'];
+    	$file_attr = wp_handle_upload( $file, array('test_form'=>true, 'action' => 'plupload_image_upload') );
+    	$attachment = array(
+    		'post_mime_type'	=> $file_attr['type'],
+    		'post_title'		=> preg_replace( '/\.[^.]+$/', '', basename( $file['name'] ) ),
+    		'post_content'		=> '',
+    		'post_status'		=> 'inherit'
+    	);
+
+    	// Adds file as attachment to WordPress
+    	$id = wp_insert_attachment( $attachment, $file_attr['file'], $post_id );
+    	if ( ! is_wp_error( $id ) )
+    	{
+    		$response = new WP_Ajax_Response();
+    		wp_update_attachment_metadata( $id, wp_generate_attachment_metadata( $id, $file_attr['file'] ) );
+    		if ( isset( $_REQUEST['field_id'] ) ) 
+    		{
+    			// Save file ID in meta field
+    			add_post_meta( $post_id, $_REQUEST['field_id'], $id, false );
+    		}
+    		
+    		$src = wp_get_attachment_image_src( $id, $_REQUEST['size'] );
+    		
+    		$response->add( array(
+    			'what'			=>'tf_well_image_response',
+    			'data'			=> $id,
+    			'supplemental'	=> array(
+    				'thumbnail'	=>  $src[0],
+    				'edit_link'	=> get_edit_post_link($id)
+    			)
+    		) );
+    		$response->send();
+    	}
+
+    	exit;
+    }
+
+    /**
+     * Enqueue scripts and styles
+     * 
+     * @return void
+     */
+    public function admin_print_styles() 
+    {
+    	return self::enqueue_scripts();
+    }
+
+    /**
+     * Get field HTML
+     *
+     * @param string $html
+     * @param mixed  $meta
+     * @param array  $field
+     *
+     * @return string
+     */
+    public function html()  {
+    	// Filter to change the drag & drop box background string
+    	$drop_text = $this->drop_text;
+    	$extensions = implode( ',', $this->allowed_extensions );
+    	$i18n_select	= 'Select Files';
+    	$img_prefix		= $this->id;
+    	$style = sprintf( 'width: %dpx; height: %dpx;', $this->size['width'], $this->size['height'] );
+    	
+    	$html = "<div style='$style' class='hm-uploader " . ( $this->attachment_id ? 'with-image' : '' ) . "' id='{$img_prefix}-container'>";
+    	
+    	$html .= "<input type='hidden' class='field-id rwmb-image-prefix' value='{$img_prefix}' />";
+    	$html .= "<input type='hidden' class='field-val' name='{$this->id}' value='{$this->attachment_id}' />";
+    	
+    	echo $html;
+    	
+    	$html = '';
+    	?>
+    	<div style="<?php echo $style ?> <?php echo $this->attachment_id ? '' : 'display: none;' ?> line-height: <?php echo $this->size['height'] ?>px;" class="current-image">
+    		<?php if ( $this->attachment_id ) : ?>
+	    		<?php echo wp_get_attachment_image( $this->attachment_id, $this->size, false, 'id=' . $this->id ) ?>
+	    	<?php else : ?>
+	    		<img src="" />
+    		<?php endif; ?>
+    		<div class="image-options">
+    			<a href="#" class="delete-image">Delete</a>
+    		</div>
+    	</div>
+    	<?php
+    	
+    	// Show form upload
+    	$html = "
+    	<div style='{$style}' id='{$img_prefix}-dragdrop' data-extensions='$extensions' data-size='{$this->size_str}' class='rwmb-drag-drop upload-form'>
+    		<div class = 'rwmb-drag-drop-inside'>
+    			<p>{$drop_text}</p>
+				<p>or</p>
+    			<p><input id='{$img_prefix}-browse-button' type='button' value='{$i18n_select}' class='button' /></p>
+    		</div>
+    	</div>";
+
+    	?>
+    	<div style="<?php echo $style ?>" class="loading-block hidden">
+    		<img src="<?php echo get_bloginfo( 'template_url' ).'/framework/assets/images/spinner.gif'; ?>" />
+    	</div>
+    	<?php
+
+    	$html .= "</div>";
+
+    	echo $html;
+    }
 }
 
-/**
- * Registers and enqueues ( loads ) the necessary JavaScript file for working with the
- * Media Library-driven AJAX File Uploader Module.
- */
-
-if ( ! function_exists( 'tf_optionsframework_mlu_js' ) ) {
-
-	function tf_optionsframework_mlu_js () {
-	
-		// Registers custom scripts for the Media Library AJAX uploader.
-		wp_register_script( 'of-medialibrary-uploader', TF_OPTIONS_FRAMEWORK_URL .'js/of-medialibrary-uploader.js', array( 'jquery', 'thickbox' ), TF_VERSION );
-		wp_enqueue_script( 'of-medialibrary-uploader' );
-		wp_enqueue_script( 'media-upload' );
-	}
-
-}
-
-/**
- * Media Uploader Using the WordPress Media Library.
- *
- * Parameters:
- * - string $_id - A token to identify this field (the name).
- * - string $_value - The value of the field, if present.
- * - string $_mode - The display mode of the field.
- * - string $_desc - An optional description of the field.
- * - int $_postid - An optional post id (used in the meta boxes).
- *
- * Dependencies:
- * - tf_optionsframework_mlu_get_silentpost()
- */
-
-if ( ! function_exists( 'tf_optionsframework_medialibrary_uploader' ) ) {
-
-	function tf_optionsframework_medialibrary_uploader( $_id, $_value, $_mode = 'full', $_desc = '', $_postid = 0, $_name = '', $size='400') {
-	
-		$tf_optionsframework_settings = get_option( 'optionsframework' );
-		
-		// Gets the unique option id
-		$option_name = $tf_optionsframework_settings['id'];
-	
-		$output = '';
-		$id = '';
-		$class = '';
-		$int = '';
-		$value = '';
-		$name = '';
-		
-		$id = strip_tags( strtolower( $_id ) );
-		// Change for each field, using a "silent" post. If no post is present, one will be created.
-		$int = tf_optionsframework_mlu_get_silentpost( $id );
-		
-		// If a value is passed and we don't have a stored value, use the value that's passed through.
-		if ( $_value != '' && $value == '' ) {
-			$value = $_value;
-		}
-		
-		if ($_name != '') {
-			$name = $_name;
-		}
-		else {
-			$name = $id;
-		}
-		
-		if ( $value ) { $class = ' has-file'; }
-		$output .= '<input id="' . $id . '" class="upload' . $class . ' tf-button tf-inline" type="hidden" name="'.$name.'" value="' . $value . '" />' . "\n";
-		$output .= '<input id="upload_' . $id . '" class="upload_button tf-button tf-inline" type="button" value="' . __( 'Upload' ) . '" rel="' . $int . '" />' . "\n";
-		
-		if ( $_desc != '' ) {
-			$output .= '<span class="of_metabox_desc">' . $_desc . '</span>' . "\n";
-		}
-		
-		$output .= '<div class="screenshot" id="' . $id . '_image">' . "\n";
-		
-		if ( $value != '' ) { 
-			$remove = '<div class="clear:both;"></div><a href="javascript:( void );" class="mlu_remove tf-button tf-inline">Remove</a>';
-			$image = in_array( strtolower( end( $_p = explode( '.', $value ) ) ), array( 'png', 'gif', 'jpg', 'jpeg', 'ico' ) );
-             
-            // TODO Not sure why this isn't playing along, just outputs the full image, ideas?
-            //var_dump( $value );
-            //$wpthumb = wpthumb($value, 'width=400&height=200&crop=1', false);
-            $wpthumb = $value;
-            
-			if ( $image ) {
-				$output .= '<img class="tf-options-img" src="' . $wpthumb . '" alt="" />'.$remove.'';
-			} else {
-				$parts = explode( "/", $value );
-				for( $i = 0; $i < sizeof( $parts ); ++$i ) {
-					$title = $parts[$i];
-				}
-
-				// No output preview if it's not an image.			
-				$output .= '';
-			
-				// Standard generic output if it's not an image.	
-				$title = __( 'View File', 'optionsframework' );
-				$output .= '<div class="no_image"><span class="file_link"><a href="' . $value . '" target="_blank" rel="external">'.$title.'</a></span>' . $remove . '</div>';
-			}	
-		}
-		$output .= '</div>' . "\n";
-		return $output;
-	}	
-}
-
-/**
- * Uses "silent" posts in the database to store relationships for images.
- * This also creates the facility to collect galleries of, for example, logo images.
- * 
- * Return: $_postid.
- *
- * If no "silent" post is present, one will be created with the type "optionsframework"
- * and the post_name of "of-$_token".
- *
- * Example Usage:
- * tf_optionsframework_mlu_get_silentpost ( 'of_logo' );
- */
-
-if ( ! function_exists( 'tf_optionsframework_mlu_get_silentpost' ) ) {
-
-	function tf_optionsframework_mlu_get_silentpost ( $_token ) {
-	
-		global $wpdb;
-		$_id = 0;
-	
-		// Check if the token is valid against a whitelist.
-		// $_whitelist = array( 'of_logo', 'of_custom_favicon', 'of_ad_top_image' );
-		// Sanitise the token.
-		
-		$_token = strtolower( str_replace( ' ', '_', $_token ) );
-		
-		// if ( in_array( $_token, $_whitelist ) ) {
-		if ( $_token ) {
-			
-			// Tell the function what to look for in a post.
-			
-			$_args = array( 'post_type' => 'optionsframework', 'post_name' => 'of-' . $_token, 'post_status' => 'draft', 'comment_status' => 'closed', 'ping_status' => 'closed' );
-			
-			// Look in the database for a "silent" post that meets our criteria.
-			$query = 'SELECT ID FROM ' . $wpdb->posts . ' WHERE post_parent = 0';
-			foreach ( $_args as $k => $v ) {
-				$query .= ' AND ' . $k . ' = "' . $v . '"';
-			} // End FOREACH Loop
-			
-			$query .= ' LIMIT 1';
-			$_posts = $wpdb->get_row( $query );
-			
-			// If we've got a post, loop through and get it's ID.
-			if ( count( $_posts ) ) {
-				$_id = $_posts->ID;
-			} else {
-			
-				// If no post is present, insert one.
-				// Prepare some additional data to go with the post insertion.
-				$_words = explode( '_', $_token );
-				$_title = join( ' ', $_words );
-				$_title = ucwords( $_title );
-				$_post_data = array( 'post_title' => $_title );
-				$_post_data = array_merge( $_post_data, $_args );
-				$_id = wp_insert_post( $_post_data );
-			}	
-		}
-		return $_id;
-	}
-}
-
-/**
- * Trigger code inside the Media Library popup.
- */
-
-if ( ! function_exists( 'tf_optionsframework_mlu_insidepopup' ) ) {
-
-	function tf_optionsframework_mlu_insidepopup () {
-	
-		if ( isset( $_REQUEST['is_optionsframework'] ) && $_REQUEST['is_optionsframework'] == 'yes' ) {
-		
-			add_action( 'admin_head', 'tf_optionsframework_mlu_js_popup' );
-			add_filter( 'media_upload_tabs', 'tf_optionsframework_mlu_modify_tabs' );
-		}
-	}
-}
-
-if ( ! function_exists( 'tf_optionsframework_mlu_js_popup' ) ) {
-
-	function tf_optionsframework_mlu_js_popup () {
-
-		$_of_title = $_REQUEST['of_title'];
-		if ( ! $_of_title ) { $_of_title = 'file'; } // End IF Statement
-?>
-	<script type="text/javascript">
-	<!--
-	jQuery( function($ ) {
-		
-		jQuery.noConflict();
-		
-		// Change the title of each tab to use the custom title text instead of "Media File".
-		$( 'h3.media-title' ).each ( function () {
-			var current_title = $( this ).html();
-			var new_title = current_title.replace( 'media file', '<?php echo $_of_title; ?>' );
-			$( this ).html( new_title );
-		
-		} );
-		
-		// Change the text of the "Insert into Post" buttons to read "Use this File".
-		$( '.savesend input.button[value*="Insert into Post"], .media-item #go_button' ).attr( 'value', 'Use this File' );
-		
-		setInterval( function() {		
-			// Select the FUll Size option in Size Options (as it's hidden)
-			$( '.image-size input[value="full"]' ).attr('checked', true);
-		}, 500 );
-
-		// Hide the "Insert Gallery" settings box on the "Gallery" tab.
-		$( 'div#gallery-settings' ).hide();
-		
-		// Preserve the "is_optionsframework" parameter on the "delete" confirmation button.
-		$( '.savesend a.del-link' ).click ( function () {
-		
-			var continueButton = $( this ).next( '.del-attachment' ).children( 'a.button[id*="del"]' );
-			var continueHref = continueButton.attr( 'href' );
-			continueHref = continueHref + '&is_optionsframework=yes';
-			continueButton.attr( 'href', continueHref );
-		
-		} );
-		
-	});
-	-->
-	</script>
-	
-	<style type="text/css">
-		.slidetoggle tr.post_title, .slidetoggle tr.image_alt, .slidetoggle tr.post_excerpt, .slidetoggle tr.post_content, .slidetoggle tr.url, .slidetoggle tr.align, .slidetoggle tr.crop-from-position, .slidetoggle tr.image-size, .media-upload-form p.savebutton.ml-submit { display: none !important; }
-	</style>
-
-<?php
-	}
-}
-
-/**
- * Triggered inside the Media Library popup to modify the title of the "Gallery" tab.
- */
-
-if ( ! function_exists( 'tf_optionsframework_mlu_modify_tabs' ) ) {
-
-	function tf_optionsframework_mlu_modify_tabs ( $tabs ) {
-		$tabs['gallery'] = str_replace( __( 'Gallery', 'optionsframework' ), __( 'Previously Uploaded', 'optionsframework' ), $tabs['gallery'] );
-
-		unset( $tabs['library'] );
-		return $tabs;
-	}
-}
+add_action( 'wp_ajax_plupload_image_upload', array( 'TF_Upload_Image_Well', 'handle_upload' ) );
