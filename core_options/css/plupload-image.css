@@ -1,11 +1,11 @@
 /* CSS Document */
 
-.hm-uploader { position: relative; height: 208px }
+.hm-uploader { position: relative; height: 208px; background:#f2f2f2; border-radius:10px;}
 
 .hm-uploader.with-image .rwmb-drag-drop { display: none }
 .hm-uploader.with-image .rwmb-drag-drop { display: none }
 
-.hm-uploader .current-image { text-align: center;  position: absolute; top: 0; left: 0; z-index: 3 }
+.hm-uploader .current-image { background:#f2f2f2; box-shadow: inset 0 1px 3px 1px rgba( 0, 0, 0, .2 ); border-radius:10px;text-align: center;  position: absolute; top: 0; left: 0; z-index: 3 }
 .hm-uploader .current-image img { display: inline; vertical-align: middle; }
 
 .hm-uploader .current-image .image-options { position: absolute; bottom: 0; right: 0; background: rgba(0,0,0,.4); color: #fff; height: 20px; line-height: 20px; padding: 0 5px; }
@@ -20,15 +20,17 @@ div.loading-block {
 	position: absolute;
 	top: 0; left: 0;
 	background: #f7f7f7;
-	box-shadow: inset 0 0 10px rgba( 0, 0, 0, .3 );
+	box-shadow: inset 0 2px 3px 1px rgba( 0, 0, 0, .3 );
+    border-radius:10px;
 	z-index: 2
 }
 
 div.rwmb-drag-drop {
-	box-shadow: inset 0 0 10px rgba( 0, 0, 0, .3 );
+    box-shadow: inset 0 1px 3px 1px rgba( 0, 0, 0, .2 );
 	border-image: initial;	
 	position: absolute;
 	top: 0; left: 0;
+    border-radius:10px;
 	z-index: 1
 }
 
@@ -36,6 +38,19 @@ div.rwmb-drag-drop-inside {
 	margin: -40px auto 0;
 	width: 100%;
 	position: absolute; top: 50%;
+    text-shadow: 0 1px 0 #fff;
+}
+
+div.rwmb-drag-drop-inside input[type=button] {
+    position.relative;
+    box-shadow: 0 2px 3px 1px rgba( 0, 0, 0, .25 );
+}
+
+div.rwmb-drag-drop-inside input[type=button]:hover {
+    color:#727272;
+    top:1px;
+    box-shadow: 0 1px 2px 1px rgba( 0, 0, 0, .3 );
+    border:none;
 }
 
 div.rwmb-drag-drop-inside p {
