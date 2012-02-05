@@ -5,7 +5,7 @@
 .hm-uploader.with-image .rwmb-drag-drop { display: none }
 .hm-uploader.with-image .rwmb-drag-drop { display: none }
 
-.hm-uploader .current-image { background:#f2f2f2; box-shadow: inset 0 1px 3px 1px rgba( 0, 0, 0, .2 ); border-radius:10px;text-align: center;  position: absolute; top: 0; left: 0; z-index: 3 }
+.hm-uploader .current-image { text-align: center;  position: absolute; top: 0; left: 0; z-index: 3 }
 .hm-uploader .current-image img { display: inline; vertical-align: middle; }
 
 .hm-uploader .current-image .image-options { position: absolute; bottom: 0; right: 0; background: rgba(0,0,0,.4); color: #fff; height: 20px; line-height: 20px; padding: 0 5px; }
