@@ -9,7 +9,7 @@ function tf_enqueue_fb_code_in_footer() {
 	$_enqueue_fb_code_in_footer = true;
 	
 	?>
-	<div id="fb-root"></div>';
+	<div id="fb-root"></div>
     <script type="text/javascript">
     	(function(d, s, id) {
 			var js, fjs = d.getElementsByTagName(s)[0];
