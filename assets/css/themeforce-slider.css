@@ -95,8 +95,11 @@
 }
 
 #tf-slider-list .ui-state-highlight {
-    height:115px;
-    background:#eafbea !important;
+    height:102px;
+    background:#eee !important;
+    -webkit-box-shadow: inset 0px 1px 2px 1px rgba(0, 0, 0, 0.1);
+    -moz-box-shadow: inset 0px 1px 2px 1px rgba(0, 0, 0, 0.1);
+    box-shadow: inset 0px 1px 2px 1px rgba(0, 0, 0, 0.1);
 }
 /*
 #add-tf-slider label {
