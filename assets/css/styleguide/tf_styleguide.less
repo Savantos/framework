@@ -44,13 +44,13 @@ input.tf-button,
 input[type="button"].tf-button,
 input[type="submit"].tf-button {
 	cursor: hand;
-        border:0px !important;
+    border:0px !important;
 	font-size: 14px;
 	font-weight: 700;
 	padding:15px 20px;
 	text-align:center;
 	display:inline-block !important;
-        text-decoration:none !important;
+    text-decoration:none !important;
 	text-shadow: 0 -1px 0 rgba(0,0,0,.25);
 	.border-radius(10px);
 	.box-shadow (0 1px 3px rgba(0,0,0,.40));
@@ -2040,26 +2040,35 @@ h2.full-menu {
     background: url(../../images/dotoff.png) repeat-x 0px 0px;
 }
 
-#foodmenuv2-modal-wrap {
 
+/* --- Food Modal --- */
+
+#foodmenuv2-modal-wrap {
+    width:580px;
+}
+
+#foodmenuv2-modal-wrap #tf-options-page {
+    width:580px;
+    position:relative;
+}
+
+#foodmenuv2-modal-wrap #tf-options-page .thumb {
+    position:absolute;
+    top:0;
+    left:0;
+    width: 200px;
+    height: 200px;
 }
 
 #foodmenuv2-modal-wrap .title {
     color:@white;
     text-transform:uppercase;
     font-weight:bold;
-    width: 560px;
+    width: 540px;
     padding: 12px 20px;
     background: #464646;
     text-shadow: 0 1px 1px #000;
     .border-radius(3px);
-}
-
-#foodmenuv2-modal-wrap .thumb {
-    width: 200px;
-    height: 200px;
-    float: left;
-    margin-right: 20px;
 }
 
 #foodmenuv2-modal-wrap .dummythumb {
@@ -2078,13 +2087,67 @@ h2.full-menu {
 }
 
 #foodmenuv2-modal-wrap .content #tf-options-page {
-    width: 340px !important;
     margin: 0px !important;
 }
 
+/* --- Default --- */
 
-#foodmenuv2-modal-wrap #tf-options-page input[type=text],
+#foodmenuv2-modal-wrap #tf-options-page input.tf_foodmenu_item_name {margin-bottom:10px;}
+
+#foodmenuv2-modal-wrap #tf-options-page input.tf_foodmenu_item_name,
 #foodmenuv2-modal-wrap #tf-options-page textarea {
+    margin-left:220px;
     width: 340px !important;
     .border-radius(3px);
+    font-family: sans-serif;
+}
+
+/* --- Sizes --- */
+
+tf_foodmenu_options_container {
+    position:relative;
+}
+
+input.tf_foodmenu_item_option_name,
+input.tf_foodmenu_item_option_price,
+a.tf_foodmenu_add_item_option {
+    position:relative;
+    float:left;
+}
+
+input.tf_foodmenu_item_option_name {width:300px !important}
+input.tf_foodmenu_item_option_price {width:100px !important}
+
+input.tf_foodmenu_item_option_name,
+input.tf_foodmenu_item_option_price {
+    margin-right:10px;
+    .border-radius(3px);
+}
+
+a.tf_foodmenu_add_item_option {top:5px;}
+
+/* --- Save --- */
+
+input.food-save {
+        margin-top:10px;
+        width: 574px;
+        padding: 12px 20px;
+        color: @white !important;
+        #gradient > .vertical(@tf-primary-highlight, @tf-primary);
+        text-shadow: 0 -1px 0 rgba(0,0,0,.30);
+        border:0px !important;
+        font-size: 14px;
+        font-weight: 700;
+        text-align:center;
+        letter-spacing:1px;
+        text-transform:uppercase;
+        text-decoration:none !important;
+        text-shadow: 0 -1px 0 rgba(0,0,0,.25);
+        .border-radius(10px);
+        .box-shadow (0 1px 3px rgba(0,0,0,.40));
+        cursor:pointer;cursor:hand;
+}
+
+input.food-save:hover {
+        #gradient > .vertical(@tf-primary-highlight + #111, @tf-primary  + #111);
 }
