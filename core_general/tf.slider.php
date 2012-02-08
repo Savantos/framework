@@ -110,7 +110,7 @@ function themeforce_slider_page() {
             
             $link = $custom["tfslider_link"][0];
             $image = $custom["tfslider_image"][0];
-            $thumbnail = wpthumb( $image, 'width=250&height=100&crop=1', false);
+            $thumbnail = wpthumb( $image, 'width=628&height=100&crop=1', false);
             
             // Warning Statement
             $imagesize = getimagesize($image);
