@@ -233,10 +233,10 @@
 				
 				//legacy
 				
-				args.id = getAttr( shortcode, 'id' ) ? getAttr( shortcode, 'id' ) : 'All';
-				args.align = getAttr( shortcode, 'align' ) ? getAttr( shortcode, 'align' ) : 'none';
-				args.type = new RegExp('\\[tf-menu-([^ ]+)', 'g').exec(shortcode);
-				args.showHeader = getAttr( shortcode, 'header' ) ? getAttr( shortcode, 'header' ) : 'no';
+			args.id = getAttr( shortcode, 'id' ) ? getAttr( shortcode, 'id' ) : 'All';
+			args.align = getAttr( shortcode, 'align' ) ? getAttr( shortcode, 'align' ) : 'none';
+			args.type = new RegExp('\\[tf-menu-([^ ]+)', 'g').exec(shortcode);
+			args.showHeader = getAttr( shortcode, 'header' ) ? getAttr( shortcode, 'header' ) : 'no';
 			} else if ( shortcode.indexOf( 'tf-menu-' ) != -1 ) {
 			
 				args.type = getAttr( shortcode, 'menu' );

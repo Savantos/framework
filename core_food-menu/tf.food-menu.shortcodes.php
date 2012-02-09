@@ -10,9 +10,68 @@
  *
  */
 
+function tf_menu_all ( $atts ) {
+
+	extract(shortcode_atts(array(
+	     'menuid' => '', // Menu Name or Post ID
+	     'header' => 'yes', // Menu Section Header On or Off
+	     'type' => 'menu', // Menu or Single
+	     'posts_per_page' => 99,
+	 ), $atts));
+	 
+	 $menus = get_option( '_tf_food_menu_array', true );
+	 
+	 $menu = $menus[$atts['menuid']];
+
+	foreach ( $menu['categories'] as $key => $id ) {
+	
+		
+		$style = get_term_meta( $id, '_design_style_' . $atts['menuid'], true );
+	
+
+				
+		$category = get_term( $id, 'tf_foodmenucat' );
+			
+		$cat_atts = array(
+	 		'id' => $category->slug, // Menu Name or Post ID
+	 		'header' => $atts['header'], // Menu Section Header On or Off
+	 		'currency'=> $defaultfx, // Currency On or Off
+	 		'type' => 'menu', // Menu or Single
+	 		'align' => '', // For full width
+	 		'posts_per_page' => 99,
+
+	    );
+	
+			switch ( $style ){
+			
+				case 'full':
+					$out .= tf_menu_full( $cat_atts );
+					break;
+				
+				case 'list':
+					$out .= tf_menu_list ( $cat_atts );
+					break;
+					
+				case 'short':
+					$out .= tf_menu_short ( $cat_atts );
+					break;
+					
+				default: 
+					$out .= tf_menu_full ( $cat_atts );
+					break;	
+			}			
+	}
+
+
+return $out;
+
+}
+add_shortcode('tf-menu-all', 'tf_menu_all' );
+
+
+
 // 1) FULL MENU
 //***********************************************
-
 function tf_menu_full( $atts ) {
 
 	// - get options -
