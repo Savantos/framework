@@ -53,11 +53,17 @@
 			ed.onMouseDown.add(function(ed, e) {
 			
 				if ( e.target.nodeName == 'INPUT' && ed.dom.hasClass(e.target, 'tfFoodMenuShortcode') ) {
-					ed.plugins.wordpress._showButtons(e.target, 'tf_foodmenu_btns');
+					
+					if ( ed.dom.hasClass(e.target, 'legacy' ) )
+						ed.plugins.wordpress._showButtons(e.target, 'tf_foodmenu_btns_legacy');
+					
+					else
+						ed.plugins.wordpress._showButtons(e.target, 'tf_foodmenu_btns');
 					
 					ed.selection.select(e.target);
 					
 				} else {
+					tinymce.DOM.hide('tf_foodmenu_btns_legacy');
 					tinymce.DOM.hide('tf_foodmenu_btns');
 				}
 								
@@ -65,6 +71,7 @@
 			});
 			
 			ed.onBeforeSetContent.add(function(ed, o) {
+				o.content = t._do_foodmenu_legacy_shortcode_image_replace( o.content );
 				o.content = t._do_foodmenu_shortcode_image_replace(o.content);
 			});
 			
@@ -82,6 +89,7 @@
 			
 			ed.onChange.add(function(ed, l) {
 				tinymce.DOM.hide('tf_foodmenu_btns');
+				tinymce.DOM.hide('tf_foodmenu_btns_legacy');
 			} );
 			
 		},
@@ -101,7 +109,7 @@
 			
 		},
 		
-		_do_foodmenu_shortcode_image_replace : function(co) {
+		_do_foodmenu_legacy_shortcode_image_replace : function(co) {
 		
 			return co.replace(/(\[tf-menu-([^\]]*)\])/g, function(a,b) {
 				
@@ -133,7 +141,32 @@
 						note = 'Short is not supported on Full Width template.';
 				}
 				
-				return '<input type="button" class="tfFoodMenuShortcode ' + args.align + '" data-shortcode="'+encodedShortode+'" style="' + style + '" value="FOOD MENU  -  Category: '+ args.id + '  -  Style: ' + args.type + (note?"\n"+'[Note: '+note+']':'') + '" />' + after;
+				return '<input type="button" class="tfFoodMenuShortcode legacy ' + args.align + '" data-shortcode="'+encodedShortode+'" style="' + style + '" value="FOOD MENU  -  Category: '+ args.id + '  -  Style: ' + args.type + (note?"\n"+'[Note: '+note+']':'') + '" />' + after;
+			});
+		
+		},
+		
+		_do_foodmenu_shortcode_image_replace : function(co) {
+		
+			return co.replace(/(\[foodmenu ([^\]]*)\])/g, function(a,b) {
+				
+				var args = t._parseShortcode( b );
+				var style = '';
+				var encodedShortode = b.replace( /"|'/g, '&quot;' );
+				
+				style = 'clear:both; width:100%;'
+
+				var after = '&nbsp;';
+				
+				if ( typeof ( window.TFFoodMenus[Number(args.id)] ) == 'undefined' )
+					after += '[WARNING: Menu does not exist]';
+					
+				else
+					after += window.TFFoodMenus[Number(args.id)]["menu-name"];
+
+				var note = '';
+								
+				return '<input type="button" class="tfFoodMenuShortcode" data-shortcode="'+encodedShortode+'" style="' + style + '" value="FOOD MENU ' + after + '" />';
 			});
 		
 		},
@@ -145,13 +178,19 @@
 			//DOM.remove('wp_gallerybtns');
 			DOM.remove('wp_editbtns');
 			DOM.remove('tf_foodmenu_btns');
-			
+			DOM.remove('tf_foodmenu_btns_legacy');
+						
 			DOM.add(document.body, 'div', {
 				id : 'tf_foodmenu_btns',
 				style : 'display:none;position:absolute;'
 			});
+			
+			DOM.add(document.body, 'div', {
+				id : 'tf_foodmenu_btns_legacy',
+				style : 'display:none;position:absolute;'
+			});
 
-			editButton = DOM.add('tf_foodmenu_btns', 'img', {
+			editButton = DOM.add('tf_foodmenu_btns_legacy', 'img', {
 				src : t.url+'/food_20.png',
 				id : 'tf_foodmenu_btn_edit',
 				width : '20',
@@ -169,6 +208,27 @@
 				ed.execCommand("mceExecTFFoodMenuInsertShortcode");
 			});
 
+			dellButton = DOM.add('tf_foodmenu_btns_legacy', 'img', {
+				src : t.url+'/img/delete.png',
+				id : 'tf_foodmenu_legacy_btn_del',
+				width : '20',
+				height : '20',
+				title : ed.getLang('wordpress.delgallery'),
+				style: 'background: #fff; padding: 2px; border-radius:3px; border: 1px solid #999;'
+
+			});
+
+			tinymce.dom.Event.add(dellButton, 'mousedown', function(e) {
+				var ed = tinyMCE.activeEditor, el = ed.selection.getNode();
+
+				if ( el.nodeName == 'INPUT' && ed.dom.hasClass(el, 'tfFoodMenuShortcode') ) {
+					ed.dom.remove(el);
+					tinymce.DOM.hide('tf_foodmenu_btns_legacy');
+					ed.execCommand('mceRepaint');
+					return false;
+				}
+			});
+			
 			dellButton = DOM.add('tf_foodmenu_btns', 'img', {
 				src : t.url+'/img/delete.png',
 				id : 'tf_foodmenu_btn_del',
@@ -209,10 +269,20 @@
 				return '';
 			};
 			
-			args.id = getAttr( shortcode, 'id' ) ? getAttr( shortcode, 'id' ) : 'All';
-			args.align = getAttr( shortcode, 'align' ) ? getAttr( shortcode, 'align' ) : 'none';
-			args.type = new RegExp('\\[tf-menu-([^ ]+)', 'g').exec(shortcode);
-			args.showHeader = getAttr( shortcode, 'header' ) ? getAttr( shortcode, 'header' ) : 'no';
+			if ( shortcode.indexOf( 'tf-menu-' ) != -1 ) {
+				
+				//legacy
+				
+				args.id = getAttr( shortcode, 'id' ) ? getAttr( shortcode, 'id' ) : 'All';
+				args.align = getAttr( shortcode, 'align' ) ? getAttr( shortcode, 'align' ) : 'none';
+				args.type = new RegExp('\\[tf-menu-([^ ]+)', 'g').exec(shortcode);
+				args.showHeader = getAttr( shortcode, 'header' ) ? getAttr( shortcode, 'header' ) : 'no';
+				
+			} else if ( shortcode.indexOf( 'foodmenu' ) != -1 ) {
+			
+				args.type = 'menu';
+				args.id = getAttr( shortcode, 'id' );
+			}
 
 			if( !args.type )
 				args.type = 'full';

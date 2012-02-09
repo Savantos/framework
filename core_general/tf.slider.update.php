@@ -92,14 +92,13 @@ if ( $chowforce ) {
     	
     	    // Create New Slide
     	    $post_id = wp_insert_post( $new_post );
-    	
+    		
     	    // Update Meta Data
     	    $order_id = intval( $post_id )*100;
     	    update_post_meta( $post_id, '_tfslider_type', $slidertype);
     	    update_post_meta( $post_id, '_tfslider_order', $order_id);
     	    update_post_meta( $post_id, 'tfslider_image', $imageurl);
     	    if ( $link ) {update_post_meta( $post_id, 'tfslider_link', $link);}
-    	    if ( $button ) {update_post_meta( $post_id, 'tfslider_button', $button);}
     	    }
     	$c++;
     endwhile;

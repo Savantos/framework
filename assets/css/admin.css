@@ -94,19 +94,21 @@ td.tf_col_menu_price, td.tf_col_menu_size, td.tf_col_ev_date, td.tf_col_ev_times
 
 /* Main Containers */
 
+
 .inline-edit-row.inline-edit-tf_events .tf-quickedit-header,
 .inline-edit-row.inline-edit-tf_foodmenu .tf-quickedit-header {
-    -webkit-box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
-    -moz-box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
-    box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
-    background-color: #0054A4;
-    background-image: -moz-linear-gradient(top, #3fbaff, #0054a4);
-    background-image: -ms-linear-gradient(top, #3fbaff, #0054a4);
-    background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #3fbaff), color-stop(100%, #0054a4));
-    background-image: -webkit-linear-gradient(top, #3fbaff, #0054a4);
-    background-image: -o-linear-gradient(top, #3fbaff, #0054a4);
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#3fbaff', endColorstr='#0054a4', GradientType=0);
-    background-image: linear-gradient(top, #3fbaff, #0054a4);
+    color: white !important;
+    background-color: #CC3F00;
+    background-repeat: repeat-x;
+    background-image: -khtml-gradient(linear, left top, left bottom, from(#ffa533), to(#cc3f00));
+    background-image: -moz-linear-gradient(top, #ffa533, #cc3f00);
+    background-image: -ms-linear-gradient(top, #ffa533, #cc3f00);
+    background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #ffa533), color-stop(100%, #cc3f00));
+    background-image: -webkit-linear-gradient(top, #ffa533, #cc3f00);
+    background-image: -o-linear-gradient(top, #ffa533, #cc3f00);
+    background-image: linear-gradient(top, #ffa533, #cc3f00);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffa533', endColorstr='#cc3f00', GradientType=0);
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.3);
     overflow:auto;
 }
 

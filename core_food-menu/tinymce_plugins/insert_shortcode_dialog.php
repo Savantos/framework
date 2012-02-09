@@ -145,7 +145,7 @@ wp_admin_css( 'colors-fresh', true );
 	#tf_menu_shortcode_form select { width: 150px; }
 	
 	.split-column { float: left; width: 43%; margin-right: 5%; }
-	
+
 </style>
 </head>
 <body>
@@ -153,25 +153,48 @@ wp_admin_css( 'colors-fresh', true );
 		<h2>Insert Food Menu</h2>
 		
 		<script type="text/javascript">
-			function sendShortcodeToEditor() {
+			
+			function sendCategoryShortcodeToEditor() {
 				var shortcode = "[tf-menu-";
 				
 				//shortcode type				
-				shortcode += jQuery( '#tf_menu_shortcode_form select[name="tf_food_menu_type"]' ).val();
+				shortcode += jQuery( '#tf_category_only_shortcode_form select[name="tf_food_menu_type"]' ).val();
 				
-				if( jQuery( '#tf_menu_shortcode_form select[name="tf_foodmenucat"]' ).val() > '') {
-					shortcode += " id='" + jQuery( '#tf_menu_shortcode_form select[name="tf_foodmenucat"]' ).val() + "'"
+				if( jQuery( '#tf_category_only_shortcode_form select[name="tf_foodmenucat"]' ).val() > '') {
+					shortcode += " id='" + jQuery( '#tf_category_only_shortcode_form select[name="tf_foodmenucat"]' ).val() + "'"
 				}
 				
-				if( jQuery( '#tf_menu_shortcode_form select[name="tf_food_menu_align"]' ).val() > '' ) {
-					shortcode += " align='" + jQuery('#tf_menu_shortcode_form select[name="tf_food_menu_align"]' ).val() + "'";
+				if( jQuery( '#tf_category_only_shortcode_form select[name="tf_food_menu_align"]' ).val() > '' ) {
+					shortcode += " align='" + jQuery('#tf_category_only_shortcode_form select[name="tf_food_menu_align"]' ).val() + "'";
 				}
 				
-				shortcode += jQuery( '#tf_menu_shortcode_form input[name="tf_food_menu_show_titles"]' ).is( ":checked" ) ? " header='yes'" : " header='no'";
+				shortcode += jQuery( '#tf_category_only_shortcode_form input[name="tf_food_menu_show_titles"]' ).is( ":checked" ) ? " header='yes'" : " header='no'";
 				
 				shortcode += "]";
 				
 				tinyMCE.execInstanceCommand( "content", "mceInsertContent", false, shortcode );
+			}
+			
+			
+			function sendMenuShortcodeToEditor() {
+			
+				var shortcode = "[tf-menu-all";
+				
+				//shortcode type				
+				shortcode += " menuid='" + jQuery( '#tf_full_menu_shortcode_form select[name="tf_food_menu_select"]' ).val() + "'";
+				
+				shortcode += " name='" + jQuery( '#tf_full_menu_shortcode_form select[name="tf_food_menu_select"]' ).text() +"'";
+				
+				shortcode += jQuery( '#tf_category_only_shortcode_form input[name="tf_food_menu_show_titles"]' ).is( ":checked" ) ? " header='yes'" : " header='no'";
+				
+				shortcode += " fullmenu='true'";	
+				
+				shortcode += " ]";
+				
+				console.log( shortcode );
+				
+				tinyMCE.execInstanceCommand( "content", "mceInsertContent", false, shortcode );
+			
 			}
 			
 			function getWin() {
@@ -179,13 +202,37 @@ wp_admin_css( 'colors-fresh', true );
 			}
 			
 			jQuery( document ).ready( function() {
-				jQuery( "#tf_menu_shortcode_form" ).submit( function() {
-					sendShortcodeToEditor();
+				
+				jQuery( "#tf_category_only_shortcode_form" ).submit( function() {
+					sendCategoryShortcodeToEditor();
 					
 					tinyMCEPopup.close();
 					
 				} );
 				
+								
+				 jQuery( "#tf_full_menu_shortcode_form" ).submit( function() {
+					sendMenuShortcodeToEditor();
+					
+					tinyMCEPopup.close();
+					
+				} );
+				
+				jQuery( 'input[name="add_type"]' ).live( 'click', function ( e ) {
+							
+						if ( jQuery( this ).is( ':checked' ) && jQuery( this ).val() == "category" ){
+						
+							jQuery( '#tf_full_menu_shortcode_form' ).hide();
+							jQuery( '#tf_category_only_shortcode_form').show();						
+						}else{
+						
+							jQuery( '#tf_full_menu_shortcode_form' ).show();
+							jQuery( '#tf_category_only_shortcode_form').hide();	
+						}
+				
+				} );
+				
+
 				if( window.parent.jQuery( '#page_template' ).val() != 'page-full.php' && window.parent.jQuery( '#page_template' ).val() != 'onecolumn-page.php' )
 					jQuery( 'p._align' ).val('').hide();
 				else
@@ -193,7 +240,69 @@ wp_admin_css( 'colors-fresh', true );
 				
 			} );
 		</script>
-		<form id="tf_menu_shortcode_form">
+		
+		<input type="radio" name="add_type" value="menu"  <?php checked( ! isset( $_GET['type'] ) || $_GET['type'] == 'All' ); ?>  /> Insert a full Menu <br />
+		<input type="radio" name="add_type" value="category" <?php checked( isset( $_GET['type'] ) && $_GET['type'] != 'All' ); ?>  /> Insert a Menu Category only
+		
+			<?php tf_foodmenu_output_full_menu_form(); ?>
+			
+			<?php tf_foodmenu_output_category_only_form(); ?>
+			
+		</div>
+</body>
+</html>
+
+<?php 
+
+function tf_foodmenu_output_full_menu_form() {
+
+	?>
+	<form id="tf_full_menu_shortcode_form" style="<?php if ( isset( $_GET['type'] ) && $_GET['type'] != 'All' ) echo "display: none;"; ?>">
+	    <p class="split-column _type">
+	    	
+	    	<label>Menu</label><br />
+	    	<select name="tf_food_menu_select">
+	    		
+	    		<?php foreach( get_option( '_tf_food_menu_array' ) as $key => $menu ): ?>
+	    		
+	    			<option value="<?php echo $key; ?>"><?php echo $menu['menu-name']; ?></option>
+	    		
+	    		<?php endforeach; ?>
+	
+	    	</select>
+	    </p>
+	    
+	    <p class="split-column">
+	    
+	    </p>
+	    
+	    <?php if ( get_current_theme() != 'Pubforce' ) : ?>
+	    	<p class="split-column _align">
+	    		<label>Align Side (Only for Full Width)</label><br />
+	    		<select name="tf_food_menu_align">
+	    			<option value="">None</option>
+	    			<option <?php selected( isset( $_GET['align'] ) && $_GET['align'] == 'left' ) ?> value="left">Left</option>
+	    			<option <?php selected( isset( $_GET['align'] ) && $_GET['align'] == 'right' ) ?> value="right">Right</option>
+	    		</select>
+	    	</p>
+	    <?php endif; ?>
+	    
+	    <p class="clear">
+	    	<label><input type="checkbox" name="tf_food_menu_show_titles" <?php checked( 'yes', isset( $_GET['showHeader'] ) ? $_GET['showHeader'] : 'yes' ) ?> /> Show Category Headers</label>
+	    </p>
+	    
+	    <p class="submitbox" style="margin-top:15px;">
+	    	<a href="#" onclick="tinyMCEPopup.close();" class="submitdelete deletion" style="float:left">Cancel</a>
+	    	<input type="submit" class="right button-primary" style="float:right" value="Insert Menu" />
+	    </p>
+	</form>
+	<?php
+}
+
+function tf_foodmenu_output_category_only_form() {
+
+?>
+		<form id="tf_category_only_shortcode_form" style="<?php if ( ! isset( $_GET['type'] ) || $_GET['type'] == 'All' ) echo "display: none;"; ?>">
 			<p class="split-column _type">
 				<label>Display Style</label><br />
 				<select name="tf_food_menu_type">
@@ -232,6 +341,5 @@ wp_admin_css( 'colors-fresh', true );
 				<input type="submit" class="right button-primary" style="float:right" value="Insert Menu" />
 			</p>
 		</form>
-	</div>
-</body>
-</html>
+<?php
+}

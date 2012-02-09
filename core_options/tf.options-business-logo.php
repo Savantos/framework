@@ -35,16 +35,19 @@ function themeforce_logo_page() {
 	// new 3.2.2					
 	 array( 'name' => 'Logo',
                 'desc' => 'Your business logo (choose from an array of formats .JPG, .GIF, .PNG)',
-                'id' => $shortname.'_logo',
+                'id' => $shortname.'_logo_id',
                 'std' => '',
+                'size' => 'width=300&height=300&crop=0',
                 'type' => 'image'),
 		
 	// new 3.2.2		
-	array( 'name' => 'Favicon',
+   	array( 'name' => 'Favicon',
                 'desc' => 'Your Favicon, make sure it is 16px by 16px (you can <a href=\'http://www.favicon.cc/\' target=\'_blank\'>generate one here</a>)',
                 'id' => $shortname.'_favicon',
                 'std' => '',
-                'type' => 'image'), 					
+                'type' => 'image',
+                'allowed_extensions' => array( 'ico' ),
+                'drop_text' => 'Drop favicon here'), 					
       
 	array( 'type' => 'close'), 
  
@@ -66,4 +69,52 @@ function themeforce_logo_page() {
     <?php
         
 }	
-?>
+
+function tf_logo( $size ='width=250&height=200&crop=0' ) {
+	
+	if ( get_option( 'tf_logo_id' ) )
+		$logo_id = (int) get_option( 'tf_logo_id' );
+	
+	else
+		$logo_id = null;
+	
+	if ( $logo_id )
+		$logo_src = reset( wp_get_attachment_image_src( $logo_id, $size ) );
+	
+	elseif ( get_option( 'tf_logo' ) )
+		$logo_src = get_option( 'tf_logo' );
+	
+	else
+		$logo_src = get_bloginfo( 'template_directory' ) . '/images/logo.jpg';
+	
+	$logomobile = wpthumb( $logo_src, 'width=200&height=160&crop=0' ); 
+	
+	if ( is_user_logged_in() ) :
+		
+		$uploader = new TF_Upload_Image_Well( 'tf_logo_id', $logo_id, $size );
+		$uploader->drop_text = 'Drop your logo here';
+	    ?>
+
+	    <div style="float:left;">
+	    	<?php $uploader->html() ?>
+	    </div>
+	
+	<?php else : ?>
+	
+	    <div style="float:left;"><a href="<?php bloginfo('url'); ?>" id="logo"><div id="logo" style="background-image:url(<?php echo $logo_src; ?>)"></div></a></div>
+	
+	<?php endif; ?>
+	    
+    <div id="logo-mobile" style="display:none;">
+        <a href="<?php bloginfo('url'); ?>"><div style="background:url('<?php echo $logomobile; ?>') no-repeat center center"></div></a>
+    </div>
+	
+	<?php
+
+}
+
+//include the image picker JS etc
+add_action( 'wp_head', function() {
+	if ( is_user_logged_in() )
+		TF_Upload_Image_Well::enqueue_scripts();
+}, 1 );

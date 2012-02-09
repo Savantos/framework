@@ -10,9 +10,56 @@
  *
  */
 
+function tf_menu_all ( $atts ) {
+
+	extract(shortcode_atts(array(
+	     'id' => '' // Menu Name or Post ID
+	), $atts));
+	 
+	$menus = tf_foodmenu_get_menus();
+	
+	$menu = $menus[$atts['id']];
+
+	foreach ( $menu['categories'] as $key => $id ) {
+	
+		$style = get_term_meta( $id, '_design_style_' . $atts['id'], true );
+		$atts['header'] = get_term_meta( $id, '_show_header_' . $atts['id'], true ) ? 'yes' : 'no';
+		$category = get_term( $id, 'tf_foodmenucat' );
+		
+		$cat_atts = array(
+	 		'id' => $category->slug, // Menu Name or Post ID
+	 		'header' => $atts['header'], // Menu Section Header On or Off
+	 		'type' => 'menu', // Menu or Single
+		);
+	
+		switch ( $style ){
+		
+		    case 'full':
+		    	$out .= tf_menu_full( $cat_atts );
+		    	break;
+		    
+		    case 'list':
+		    	$out .= tf_menu_list ( $cat_atts );
+		    	break;
+		    	
+		    case 'short':
+		    	$out .= tf_menu_short ( $cat_atts );
+		    	break;
+		    	
+		    default: 
+		    	$out .= tf_menu_full ( $cat_atts );
+		    	break;	
+		}			
+	}
+	
+	return $out;
+}
+add_shortcode('foodmenu', 'tf_menu_all' );
+
+
+
 // 1) FULL MENU
 //***********************************************
-
 function tf_menu_full( $atts ) {
 
 	// - get options -
@@ -67,7 +114,6 @@ function tf_menu_full( $atts ) {
 	    $orderby = 'title';
 	}
 	
-	// - arguments -
 	$args = array(
 	    'post_type' => 'tf_foodmenu',
 	    $posttype => $id,
@@ -78,7 +124,6 @@ function tf_menu_full( $atts ) {
 	    'posts_per_page' => 99
 	);
 	
-	// - header text -
 	$term = get_term_by( 'slug', $id, 'tf_foodmenucat' );
 	$term_name = $term->name;
 	
@@ -86,10 +131,8 @@ function tf_menu_full( $atts ) {
 	    echo '<h2 class="full-menu">' . $term_name . '</h2>';
 	}
 	
-	// - query -
-	$my_query = null;
-	$my_query = new WP_query( $args );
-	
+	$my_query = new WP_Query( $args );
+		
 	while ( $my_query->have_posts() ) : $my_query->the_post();
 	
 	    // - variables -
@@ -428,16 +471,46 @@ function tf_food_menu_add_insert_bar_to_edit_page() {
 			#tf-above-editor-insert-area a { color: #666; text-decoration: none; margin-left: 15px; }
 			#tf-above-editor-insert-area a.button { border-radius: 3px; padding-left: 4px; }
 			#tf-above-editor-insert-area img { vertical-align: middle; margin-right: 5px; }
+			#tf-above-editor-insert-area a.tf-button.hidden { display: none !important; }
 		</style>
 	
 		<strong>Insert:</strong>
 		
-		<a class="tf-button tf-tiny" href="javascript:tinyMCE.activeEditor.execCommand( 'mceExecTFFoodMenuInsertShortcode' );"><img src="<?php echo TF_URL . '/core_food-menu/tinymce_plugins/food_20.png' ?>"/><span>Food Menu</span></a>
+		<a class="tf-button tf-tiny" id="add-foodmenu-button" href="#"><img src="<?php echo TF_URL . '/core_food-menu/tinymce_plugins/food_20.png' ?>"/><span>Food Menu</span></a>
 		
+		<select id="menu-menu-id" class="hidden">
+			<option value="">- Select Food Menu -</option>
+			<?php foreach ( tf_foodmenu_get_menus() as $key => $menu ) : ?>
+				<option value="<?php echo $key ?>"><?php echo $menu['menu-name'] ?></option>
+			<?php endforeach; ?>
+		</select>
+	
 		<?php do_action( 'tf_above_editor_insert_items' ) ?>
 		<script type="text/javascript">
 			jQuery( document ).ready( function() {
 				jQuery( '#tf-above-editor-insert-area' ).insertBefore( '#postdivrich' );
+				
+				jQuery( '#menu-menu-id' ).on( 'change', window.TFInsertMenuSelectChanged );
+				
+				jQuery( '#add-foodmenu-button' ).on( 'click', function(e) {
+					e.preventDefault();
+					jQuery( this ).addClass('hidden');
+					jQuery( '#menu-menu-id' ).fadeIn();
+				} )
+				
+				window.TFInsertMenuSelectChanged = function() {
+					
+					menu_id = jQuery( '#menu-menu-id' ).val() 
+					
+					if ( ! menu_id )
+						return;
+						
+					var shortcode = '[foodmenu id="' + menu_id + '"]'
+					
+					send_to_editor( shortcode );
+				}
+				
+				window.TFFoodMenus = <?php echo json_encode( tf_foodmenu_get_menus() ) ?>;
 			} );  
 		</script>
 	</div>

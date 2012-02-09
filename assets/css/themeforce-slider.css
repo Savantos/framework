@@ -1,5 +1,6 @@
 #tf-slider-list {
     list-style: none;
+
 }
 
 #tf-slider-list li {
@@ -11,10 +12,12 @@
     -moz-border-radius: 10px;
     border-radius: 10px;
     width:680px;
+    cursor: default;
 }
 
 #tf-slider-list li h4 {
     font-size:26px !important;
+    position:relative;
 }
 
 #tf-slider-list li .handle {
@@ -36,15 +39,17 @@
     float:left;
     border:1px #DFDFDF solid !important;
     display:block;
-    width:250px;
+    width:628px;
     height:100px;
     margin-right:10px;
 }
 
 #tf-slider-list .slider-content {
-    float:left;
-    display:block;
+    position:absolute;
+    background:transparent;
     width:360px;
+    right:34px;
+    top:34px;
 }
 
 #tf-slider-list .slider-content h3 {
@@ -62,7 +67,7 @@
     position:relative;
     left:1px;
     display:block;
-    cursor: pointer;
+    cursor:pointer;cursor:hand;
     margin-bottom: 10px;
     width:24px;
     height:24px;
@@ -73,14 +78,13 @@
     position:relative;
     left:-2px;
     display:block;
-    cursor: pointer;
+    cursor:pointer;cursor:hand;
     width:24px;
     height:24px;
     background: transparent url('../images/slider-delete.png') top right no-repeat;
 }
 
 #tf-slider-list .slider-content span {
-    cursor: pointer;
     display:inline;
 }
 
@@ -91,8 +95,11 @@
 }
 
 #tf-slider-list .ui-state-highlight {
-    height:115px;
-    background:#eafbea !important;
+    height:102px;
+    background:#eee !important;
+    -webkit-box-shadow: inset 0px 1px 2px 1px rgba(0, 0, 0, 0.1);
+    -moz-box-shadow: inset 0px 1px 2px 1px rgba(0, 0, 0, 0.1);
+    box-shadow: inset 0px 1px 2px 1px rgba(0, 0, 0, 0.1);
 }
 /*
 #add-tf-slider label {
