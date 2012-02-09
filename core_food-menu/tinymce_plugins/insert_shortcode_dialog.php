@@ -252,50 +252,51 @@ wp_admin_css( 'colors-fresh', true );
 </body>
 </html>
 
+<?php 
 
-<?php function tf_foodmenu_output_full_menu_form() {
+function tf_foodmenu_output_full_menu_form() {
 
-?>
-		<form id="tf_full_menu_shortcode_form" style="<?php if ( isset( $_GET['type'] ) && $_GET['type'] != 'All' ) echo "display: none;"; ?>">
-			<p class="split-column _type">
-				
-				<label>Menu</label><br />
-				<select name="tf_food_menu_select">
-					
-					<?php foreach( get_option( '_tf_food_menu_array' ) as $key => $menu ): ?>
-					
-						<option value="<?php echo $key; ?>"><?php echo $menu['menu-name']; ?></option>
-					
-					<?php endforeach; ?>
+	?>
+	<form id="tf_full_menu_shortcode_form" style="<?php if ( isset( $_GET['type'] ) && $_GET['type'] != 'All' ) echo "display: none;"; ?>">
+	    <p class="split-column _type">
+	    	
+	    	<label>Menu</label><br />
+	    	<select name="tf_food_menu_select">
+	    		
+	    		<?php foreach( get_option( '_tf_food_menu_array' ) as $key => $menu ): ?>
+	    		
+	    			<option value="<?php echo $key; ?>"><?php echo $menu['menu-name']; ?></option>
+	    		
+	    		<?php endforeach; ?>
 	
-				</select>
-			</p>
-			
-			<p class="split-column">
-			
-			</p>
-			
-			<?php if ( get_current_theme() != 'Pubforce' ) : ?>
-				<p class="split-column _align">
-					<label>Align Side (Only for Full Width)</label><br />
-					<select name="tf_food_menu_align">
-						<option value="">None</option>
-						<option <?php selected( isset( $_GET['align'] ) && $_GET['align'] == 'left' ) ?> value="left">Left</option>
-						<option <?php selected( isset( $_GET['align'] ) && $_GET['align'] == 'right' ) ?> value="right">Right</option>
-					</select>
-				</p>
-			<?php endif; ?>
-			
-			<p class="clear">
-				<label><input type="checkbox" name="tf_food_menu_show_titles" <?php checked( 'yes', isset( $_GET['showHeader'] ) ? $_GET['showHeader'] : 'yes' ) ?> /> Show Category Headers</label>
-			</p>
-			
-			<p class="submitbox" style="margin-top:15px;">
-				<a href="#" onclick="tinyMCEPopup.close();" class="submitdelete deletion" style="float:left">Cancel</a>
-				<input type="submit" class="right button-primary" style="float:right" value="Insert Menu" />
-			</p>
-		</form>
-<?php
+	    	</select>
+	    </p>
+	    
+	    <p class="split-column">
+	    
+	    </p>
+	    
+	    <?php if ( get_current_theme() != 'Pubforce' ) : ?>
+	    	<p class="split-column _align">
+	    		<label>Align Side (Only for Full Width)</label><br />
+	    		<select name="tf_food_menu_align">
+	    			<option value="">None</option>
+	    			<option <?php selected( isset( $_GET['align'] ) && $_GET['align'] == 'left' ) ?> value="left">Left</option>
+	    			<option <?php selected( isset( $_GET['align'] ) && $_GET['align'] == 'right' ) ?> value="right">Right</option>
+	    		</select>
+	    	</p>
+	    <?php endif; ?>
+	    
+	    <p class="clear">
+	    	<label><input type="checkbox" name="tf_food_menu_show_titles" <?php checked( 'yes', isset( $_GET['showHeader'] ) ? $_GET['showHeader'] : 'yes' ) ?> /> Show Category Headers</label>
+	    </p>
+	    
+	    <p class="submitbox" style="margin-top:15px;">
+	    	<a href="#" onclick="tinyMCEPopup.close();" class="submitdelete deletion" style="float:left">Cancel</a>
+	    	<input type="submit" class="right button-primary" style="float:right" value="Insert Menu" />
+	    </p>
+	</form>
+	<?php
 }
 
 function tf_foodmenu_output_category_only_form() {
