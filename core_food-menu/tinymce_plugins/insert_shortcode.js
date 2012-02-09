@@ -65,6 +65,7 @@
 			});
 			
 			ed.onBeforeSetContent.add(function(ed, o) {
+				o.content = t._do_foodmenu_legacy_shortcode_image_replace( o.content );
 				o.content = t._do_foodmenu_shortcode_image_replace(o.content);
 			});
 			
@@ -101,7 +102,7 @@
 			
 		},
 		
-		_do_foodmenu_shortcode_image_replace : function(co) {
+		_do_foodmenu_legacy_shortcode_image_replace : function(co) {
 		
 			return co.replace(/(\[tf-menu-([^\]]*)\])/g, function(a,b) {
 				
@@ -134,6 +135,25 @@
 				}
 				
 				return '<input type="button" class="tfFoodMenuShortcode ' + args.align + '" data-shortcode="'+encodedShortode+'" style="' + style + '" value="FOOD MENU  -  Category: '+ args.id + '  -  Style: ' + args.type + (note?"\n"+'[Note: '+note+']':'') + '" />' + after;
+			});
+		
+		},
+		
+		_do_foodmenu_shortcode_image_replace : function(co) {
+		
+			return co.replace(/(\[foodmenu ([^\]]*)\])/g, function(a,b) {
+				
+				var args = t._parseShortcode( b );
+				var style = '';
+				var encodedShortode = b.replace( /"|'/g, '&quot;' );
+				
+				style = 'clear:both; width:100%;'
+				
+				var after = '&nbsp;';
+
+				var note = '';
+								
+				return '<input type="button" class="tfFoodMenuShortcode ' + args.align + '" data-shortcode="'+encodedShortode+'" style="' + style + '" value="FOOD MENU  "' + after;
 			});
 		
 		},
@@ -209,10 +229,19 @@
 				return '';
 			};
 			
-			args.id = getAttr( shortcode, 'id' ) ? getAttr( shortcode, 'id' ) : 'All';
-			args.align = getAttr( shortcode, 'align' ) ? getAttr( shortcode, 'align' ) : 'none';
-			args.type = new RegExp('\\[tf-menu-([^ ]+)', 'g').exec(shortcode);
-			args.showHeader = getAttr( shortcode, 'header' ) ? getAttr( shortcode, 'header' ) : 'no';
+			if ( shortcode.indexOf( 'tf-menu-' ) != -1 ) {
+				
+				//legacy
+				
+				args.id = getAttr( shortcode, 'id' ) ? getAttr( shortcode, 'id' ) : 'All';
+				args.align = getAttr( shortcode, 'align' ) ? getAttr( shortcode, 'align' ) : 'none';
+				args.type = new RegExp('\\[tf-menu-([^ ]+)', 'g').exec(shortcode);
+				args.showHeader = getAttr( shortcode, 'header' ) ? getAttr( shortcode, 'header' ) : 'no';
+			} else if ( shortcode.indexOf( 'tf-menu-' ) != -1 ) {
+			
+				args.type = getAttr( shortcode, 'menu' );
+			
+			}
 
 			if( !args.type )
 				args.type = 'full';
