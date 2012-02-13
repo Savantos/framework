@@ -318,7 +318,7 @@ ul.tf-db-progress {
 
 ul.tf-db-progress li {
         #gradient > .vertical(@white, @tf-neutral);
-	text-shadow: 0 1px 0 rgba(255,255,255,.40);
+	    text-shadow: 0 1px 0 rgba(255,255,255,.40);
         padding:10px;
         margin-bottom:14px;
         height:22px;
@@ -1097,7 +1097,6 @@ text-shadow: none;
 
 #adminmenu li.wp-not-current-submenu.menu-top:hover > a {
     text-shadow: 0 1px 0 rgba( 255, 255, 255, 0.4 );
-    /* -- can't be achieved via mixin -- */
     background: rgb(255,255,255);
     background: -moz-linear-gradient(top, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 30%, rgba(234,234,234,1) 70%, rgba(234,234,234,1) 100%);
     background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(255,255,255,1)), color-stop(30%,rgba(255,255,255,1)), color-stop(70%,rgba(234,234,234,1)), color-stop(100%,rgba(234,234,234,1)));
@@ -1152,12 +1151,13 @@ text-shadow: none;
 #adminmenu .wp-submenu li.current,
 #adminmenu .wp-submenu li.current a,
 #adminmenu .wp-submenu li.current a:hover {
+
     color:  @white !important;
 }
 
 #adminmenu .wp-submenu ul a {
-    color:  @white !important;
-    text-shadow:0 -1px 1px rgba(0,0,0,0.5);
+    color: #7c7c7c !important;
+    text-shadow: 0 1px 1px rgba( 255, 255, 255, 0.9 );
     padding-top:0px;
     padding-bottom:0px;
 }
@@ -1168,7 +1168,7 @@ text-shadow: none;
 }
 
 #adminmenu .wp-submenu ul {
-    background-color: @tf-primary;
+    background-color:#f2f2f2;
     border:none;
     padding:1px 0 0 0;
 }
@@ -1178,9 +1178,8 @@ text-shadow: none;
     padding:10px 5px;
     height:18px;
     line-height:18px;
-    border-top: 1px solid @tf-primary + #222;
-    border-bottom: 1px solid @tf-primary - #222;
-
+    border-top: 1px solid @am-light-1;
+    border-bottom: 1px solid @am-dark-1;
 }
 
 #adminmenu .wp-submenu ul li .tf-arrow {
@@ -1201,12 +1200,10 @@ text-shadow: none;
     top:0px;
     right:-1px;
     z-index:1000;
-
 }
 
-
 #adminmenu .wp-submenu ul li:hover {
-    background-color: @tf-primary + #111;
+    background-color: @white;
 }
 
 #adminmenu .wp-submenu-wrap,
