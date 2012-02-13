@@ -1151,13 +1151,11 @@ text-shadow: none;
 #adminmenu .wp-submenu li.current,
 #adminmenu .wp-submenu li.current a,
 #adminmenu .wp-submenu li.current a:hover {
-
     color:  @white !important;
 }
 
-#adminmenu .wp-submenu ul a {
+#adminmenu .wp-submenu .sub-open ul a {
     color: #7c7c7c !important;
-    text-shadow: 0 1px 1px rgba( 255, 255, 255, 0.9 );
     padding-top:0px;
     padding-bottom:0px;
 }
@@ -1167,7 +1165,7 @@ text-shadow: none;
 }
 
 #adminmenu li .wp-submenu-wrap li a {
-    text-shadow: 0 -1px 0 rgba( 0, 0, 0, 0.3 ) !important;
+    text-shadow: 0 -1px 0 rgba( 0, 0, 0, 0.3 );
     }
 
 #adminmenu .wp-submenu ul {
@@ -1176,7 +1174,7 @@ text-shadow: none;
     padding:1px 0 0 0;
 }
 
-#adminmenu .wp-submenu ul li {
+#adminmenu .wp-submenu .sub-open ul li {
     position:relative;
     padding:10px 5px;
     height:18px;
@@ -1214,6 +1212,7 @@ text-shadow: none;
     -moz-box-shadow: 2px 2px 5px rgba( 0, 0, 0, 0.4 );
     -webkit-box-shadow: 2px 2px 5px rgba( 0, 0, 0, 0.4 );
     box-shadow: 2px 2px 5px rgba( 0, 0, 0, 0.4 );
+        text-shadow: 0 1px 1px rgba( 255, 255, 255, 0.9 ) !important;
 }
 
 .folded #adminmenu .wp-has-current-submenu .wp-submenu-wrap {
