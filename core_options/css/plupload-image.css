@@ -41,6 +41,7 @@ div.rwmb-drag-drop-inside {
     text-shadow: 0 1px 0 #fff;
 }
 
+a.delete-image,
 div.rwmb-drag-drop-inside input[type=button] {
     position.relative;
     box-shadow: 0 2px 3px 1px rgba( 0, 0, 0, .25 );
@@ -53,7 +54,7 @@ div.rwmb-drag-drop-inside input[type=button] {
     -moz-box-sizing: content-box;
     -webkit-box-sizing: content-box;
     box-sizing: content-box;
-    color: gray;
+    color: gray !important;
     background-color: #DDD;
     background-repeat: repeat-x;
     background-image: -khtml-gradient(linear, left top, left bottom, from(#ffffff), to(#dddddd));
@@ -81,6 +82,7 @@ div.rwmb-drag-drop-inside input[type=button]:hover {
 }
 
 div.rwmb-drag-drop-inside p {
+    font-family: sans-serif;
 	text-align: center;
 	display: block;
 	font-size: 20px;
