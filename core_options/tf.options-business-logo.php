@@ -12,6 +12,25 @@
 // TODO Add functionality to edit existing slides.
 
 function themeforce_logo_page() {
+	
+	
+	// migrate tf_logo to tf_logo_id
+	if ( ! get_option( 'tf_logo_id' ) && get_option( 'tf_logo' ) ) {
+	
+		$logo = hm_remote_get_file( get_option( 'tf_logo' ) );
+		$info = getimagesize( $logo );
+		$post_id = wp_insert_attachment( array( 'post_mime_type' => $info['mime'] ), $logo );
+		
+		$meta = wp_generate_attachment_metadata( $post_id, $logo );
+		wp_update_attachment_metadata( $post_id, $meta );
+
+		if ( $post_id ) {
+			update_option( 'tf_logo_id', $post_id );
+			delete_option( 'tf_logo' );
+		}
+			
+	}
+	
     ?>
     <div class="wrap" id="tf-options-page">
     <div id="tf-options-panel">
