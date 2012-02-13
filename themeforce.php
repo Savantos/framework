@@ -45,6 +45,9 @@ require_once( TF_PATH . '/core_general/tf.slider.php' );
 require_once( TF_PATH . '/core_general/tf.mobile.php' );
 require_once( TF_PATH . '/core_colors/tf.colors.php' );
 
+// LESS
+require_once( TF_PATH . '/assets/less/wp-less.php' );
+
 /*
  * Should all be set now.
  * 
@@ -113,7 +116,6 @@ if( current_theme_supports( 'tf_foursquare' ) ) {
 	require_once( TF_PATH . '/api_foursquare/tf.foursquare.php' ); 
 	require_once( TF_PATH . '/core_widgets/widget-foursquare-photos.php' );
 	require_once( TF_PATH . '/core_widgets/widget-foursquare-tips.php' );
-	/* require_once( TF_PATH . '/widgets/widget-foursquare-herenow.php' ); WIP */
 }
 
 // Yelp
@@ -150,14 +152,12 @@ add_action( 'admin_print_scripts-edit.php', 'tf_sortable_admin_rows_scripts' );
 /* Admin Global JS & Stylesheets
 =========================================*/
 
-function tf_less_js() {
-        wp_enqueue_script('less-js', TF_URL . '/assets/js/less-1.1.3.min.js' );
-        wp_enqueue_style('less-css', TF_URL . '/assets/css/styleguide/tf_styleguide.less' );
+function tf_less_css() {
+        wp_enqueue_style('style', TF_URL . '/assets/css/styleguide/tf_styleguide.less' );
 }
-add_action('admin_enqueue_scripts','tf_less_js');
+add_action('admin_enqueue_scripts','tf_less_css');
 
-
-
+/*
 function enqueue_less_styles($tag, $handle) {
     global $wp_styles;
     $match_pattern = '/\.less$/U';
@@ -173,6 +173,7 @@ function enqueue_less_styles($tag, $handle) {
     return $tag;
 }
 add_filter( 'style_loader_tag', 'enqueue_less_styles', 5, 2);
+*/
 
 /* Food Menu Sorting
 =========================================*/	

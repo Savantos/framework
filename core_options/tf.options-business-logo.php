@@ -12,6 +12,25 @@
 // TODO Add functionality to edit existing slides.
 
 function themeforce_logo_page() {
+	
+	
+	// migrate tf_logo to tf_logo_id
+	if ( ! get_option( 'tf_logo_id' ) && get_option( 'tf_logo' ) ) {
+	
+		$logo = hm_remote_get_file( get_option( 'tf_logo' ) );
+		$info = getimagesize( $logo );
+		$post_id = wp_insert_attachment( array( 'post_mime_type' => $info['mime'] ), $logo );
+		
+		$meta = wp_generate_attachment_metadata( $post_id, $logo );
+		wp_update_attachment_metadata( $post_id, $meta );
+
+		if ( $post_id ) {
+			update_option( 'tf_logo_id', $post_id );
+			delete_option( 'tf_logo' );
+		}
+			
+	}
+	
     ?>
     <div class="wrap" id="tf-options-page">
     <div id="tf-options-panel">
@@ -82,12 +101,13 @@ function tf_logo( $size ='width=250&height=200&crop=0' ) {
 		$logo_src = reset( wp_get_attachment_image_src( $logo_id, $size ) );
 	
 	elseif ( get_option( 'tf_logo' ) )
+
 		$logo_src = get_option( 'tf_logo' );
 	
 	else
+
 		$logo_src = get_bloginfo( 'template_directory' ) . '/images/logo.jpg';
-	
-	$logomobile = wpthumb( $logo_src, 'width=200&height=160&crop=0' ); 
+	    $logomobile = wpthumb( $logo_src, 'width=200&height=160&crop=0' );
 	
 	if ( is_user_logged_in() ) :
 		
@@ -95,13 +115,14 @@ function tf_logo( $size ='width=250&height=200&crop=0' ) {
 		$uploader->drop_text = 'Drop your logo here';
 	    ?>
 
+
 	    <div style="float:left;">
 	    	<?php $uploader->html() ?>
 	    </div>
 	
 	<?php else : ?>
 	
-	    <div style="float:left;"><a href="<?php bloginfo('url'); ?>" id="logo"><div id="logo" style="background-image:url(<?php echo $logo_src; ?>)"></div></a></div>
+	    <div style=""><a href="<?php bloginfo('url'); ?>" id="logo"><div id="logo" style="background-image:url(<?php echo $logo_src; ?>)"></div></a></div>
 	
 	<?php endif; ?>
 	    
@@ -111,6 +132,20 @@ function tf_logo( $size ='width=250&height=200&crop=0' ) {
 	
 	<?php
 
+}
+
+function tf_get_favicon_url() {
+	
+	if ( is_numeric( get_option( 'tf_favicon' ) ) )
+		$logo_src = wp_get_attachment_image_src( $logo_id, 'width=16&height=16' ) ? reset( wp_get_attachment_image_src( $logo_id, 'width=16&height=16' ) ) : '';
+	
+	elseif ( get_option( 'tf_favicon' ) )
+		$logo_src = get_option( 'tf_favicon' );
+	
+	elseif ( get_option( 'tf_custom_favicon' ) )
+		$logo_src = get_option( 'tf_custom_favicon' );
+	
+	return $logo_src;
 }
 
 //include the image picker JS etc
