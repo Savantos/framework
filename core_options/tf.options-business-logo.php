@@ -96,7 +96,7 @@ function tf_logo( $size ='width=250&height=200&crop=0' ) {
 	
 	if ( is_user_logged_in() ) :
 		
-		$uploader = new TF_Upload_Image_Well( 'tf_logo_id', $logo_id, $size );
+		$uploader = new TF_Upload_Image_Well( 'tf_logo_id', get_option( 'tf_logo_id', 0 ), $size );
 		$uploader->drop_text = 'Drop your logo here';
 	    ?>
 
@@ -132,11 +132,11 @@ function tf_logo_url( $size ='width=250&height=200&crop=0' ) {
 	
 	elseif ( get_option( 'tf_logo' ) )
 
-		$logo_src = get_option( 'tf_logo' );
+		$logo_src = wpthumb( get_option( 'tf_logo' ), $size );
 	
 	else
 
-		$logo_src = get_bloginfo( 'template_directory' ) . '/images/logo.jpg';
+		$logo_src = wpthumb( get_bloginfo( 'template_directory' ) . '/images/logo.jpg', $size );
 	
 	return $logo_src;
 }
