@@ -107,7 +107,7 @@ function tf_logo( $size ='width=250&height=200&crop=0' ) {
 	
 	<?php else : ?>
 	
-	    <div style=""><a href="<?php bloginfo('url'); ?>" id="logo"><div id="logo" style="background-image:url(<?php echo $logo_src; ?>)"></div></a></div>
+	    <div style=""><a href="<?php bloginfo('url'); ?>"><div id="logo" style="background-image:url(<?php echo $logo_src; ?>)"></div></a></div>
 	
 	<?php endif; ?>
 	    
