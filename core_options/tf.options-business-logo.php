@@ -91,23 +91,8 @@ function themeforce_logo_page() {
 
 function tf_logo( $size ='width=250&height=200&crop=0' ) {
 	
-	if ( get_option( 'tf_logo_id' ) )
-		$logo_id = (int) get_option( 'tf_logo_id' );
-	
-	else
-		$logo_id = null;
-	
-	if ( $logo_id )
-		$logo_src = reset( wp_get_attachment_image_src( $logo_id, $size ) );
-	
-	elseif ( get_option( 'tf_logo' ) )
-
-		$logo_src = get_option( 'tf_logo' );
-	
-	else
-
-		$logo_src = get_bloginfo( 'template_directory' ) . '/images/logo.jpg';
-	    $logomobile = wpthumb( $logo_src, 'width=200&height=160&crop=0' );
+	$logo_src = tf_logo_url( $size );
+	$logomobile = wpthumb( $logo_src, 'width=200&height=160&crop=0' );
 	
 	if ( is_user_logged_in() ) :
 		
@@ -132,6 +117,28 @@ function tf_logo( $size ='width=250&height=200&crop=0' ) {
 	
 	<?php
 
+}
+
+function tf_logo_url( $size ='width=250&height=200&crop=0' ) {
+	
+	if ( get_option( 'tf_logo_id' ) )
+		$logo_id = (int) get_option( 'tf_logo_id' );
+	
+	else
+		$logo_id = null;
+	
+	if ( $logo_id )
+		$logo_src = reset( wp_get_attachment_image_src( $logo_id, $size ) );
+	
+	elseif ( get_option( 'tf_logo' ) )
+
+		$logo_src = get_option( 'tf_logo' );
+	
+	else
+
+		$logo_src = get_bloginfo( 'template_directory' ) . '/images/logo.jpg';
+	
+	return $logo_src;
 }
 
 function tf_get_favicon_url() {
