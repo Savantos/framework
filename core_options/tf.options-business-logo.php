@@ -135,9 +135,10 @@ function tf_logo_url( $size ='width=250&height=200&crop=0' ) {
 		$logo_src = wpthumb( get_option( 'tf_logo' ), $size );
 	
 	else
+		$logo_src = '';
 
-        // This is defaulting to a logo when we probably want to keep it empty
-		// $logo_src = wpthumb( get_bloginfo( 'template_directory' ) . '/images/logo.jpg', $size );
+    // This is defaulting to a logo when we probably want to keep it empty
+	// $logo_src = wpthumb( get_bloginfo( 'template_directory' ) . '/images/logo.jpg', $size );
 	
 	return $logo_src;
 }
