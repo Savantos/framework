@@ -12,7 +12,7 @@ require_once( TF_PATH . '/core_options/tf.options-of-uploader.php' );
 require_once( TF_PATH . '/core_options/tf.options-business-general.php' );
 require_once( TF_PATH . '/core_options/tf.options-business-location.php' );
 require_once( TF_PATH . '/core_options/tf.options-business-logo.php' );
-require_once( TF_PATH . '/core_options/tf.options-opentable.php' );
+
 
 require_once( TF_PATH . '/core_options/tf.options-social-media.php' );
 require_once( TF_PATH . '/core_options/tf.options-social-facebook.php' );
@@ -21,9 +21,12 @@ require_once( TF_PATH . '/core_options/tf.options-social-twitter.php' );
 require_once( TF_PATH . '/core_options/tf.options-social-overview.php' );
 require_once( TF_PATH . '/core_options/tf.options-social-gowalla.php' );
 require_once( TF_PATH . '/core_options/tf.options-social-yelp.php' );
-/* require_once( TF_PATH . '/core_options/tf.options-social-qype.php' ); */
 require_once( TF_PATH . '/core_options/tf.options-social-foursquare.php' );
+
+require_once( TF_PATH . '/core_options/tf.options-3rdparty.php' );
 require_once( TF_PATH . '/core_options/tf.options-mailchimp.php' );
+require_once( TF_PATH . '/core_options/tf.options-opentable.php' );
+require_once( TF_PATH . '/core_options/tf.options-opendining.php' );
 
 if ( TF_MOBILE == true ) {
     require_once( TF_PATH . '/core_options/tf.options-mobile.php' );
@@ -37,8 +40,7 @@ function themeforce_business_options() {
     add_submenu_page('themeforce_business_options', 'Business Details', 'Business Details', 'edit_posts', 'themeforce_business', 'themeforce_business_page');
     add_submenu_page('themeforce_business_options', 'Logo', 'Logo', 'edit_posts', 'themeforce_logo', 'themeforce_logo_page');   
     add_submenu_page('themeforce_business_options', 'Your Location', 'Location', 'edit_posts', 'themeforce_location', 'themeforce_location_page');
-    add_submenu_page('themeforce_business_options', 'Newsletter', 'Newsletter', 'edit_posts', 'themeforce_mailchimp', 'themeforce_mailchimp_page');
-    add_submenu_page('themeforce_business_options', 'OpenTable', 'OpenTable', 'edit_posts', 'themeforce_opentable', 'themeforce_opentable_page');
+
 }
 add_action( 'admin_menu', 'themeforce_business_options' );
 
@@ -53,12 +55,20 @@ add_action( 'admin_menu', 'themeforce_socialmedia_options' );
 function themeforce_social_options() {
     add_menu_page( 'Social Proof Overview', 'Social Proof', 'manage_options', 'themeforce_social_options', 'themeforce_social_overview_page', TF_URL . '/assets/images/social_16.png', 35); // $function, $icon_url, $position 
     add_submenu_page('themeforce_social_options', 'Yelp', 'Yelp', 'manage_options', 'themeforce_yelp', 'themeforce_social_yelp_page');
-    // add_submenu_page('themeforce_social_options', 'Qype', 'Qype', 'manage_options', 'themeforce_qype', 'themeforce_social_qype_page');
     add_submenu_page('themeforce_social_options', 'Foursquare', 'Foursquare', 'manage_options', 'themeforce_foursquare', 'themeforce_social_foursquare_page');   
     add_submenu_page('themeforce_social_options', 'Gowalla', 'Gowalla', 'manage_options', 'themeforce_gowalla', 'themeforce_social_gowalla_page');
     
 }
 add_action( 'admin_menu', 'themeforce_social_options' );
+
+function themeforce_3rdparty_options() {
+    add_menu_page( '3rd Party Integrations', 'Integrations', 'manage_options', 'themeforce_3rdparty_options', 'themeforce_3rdparty_overview_page', TF_URL . '/assets/images/integrate_16.png', 36); // $function, $icon_url, $position
+    add_submenu_page('themeforce_3rdparty_options', 'MailChimp Newsletter', 'MailChimp Newsletter', 'edit_posts', 'themeforce_mailchimp', 'themeforce_mailchimp_page');
+    add_submenu_page('themeforce_3rdparty_options', 'OpenTable', 'OpenTable', 'edit_posts', 'themeforce_opentable', 'themeforce_opentable_page');
+    add_submenu_page('themeforce_3rdparty_options', 'Open Dining', 'Open Dining', 'edit_posts', 'themeforce_dining', 'themeforce_opendining_page');
+
+}
+add_action( 'admin_menu', 'themeforce_3rdparty_options');
 
 // Load jQuery & relevant CSS
 // -----------------------------------------
@@ -93,7 +103,6 @@ function tf_settings_validate( $input ) {
 
 	return $newinput;
 }
-
 
 // Display Settings
 
