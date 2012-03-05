@@ -125,8 +125,12 @@ if( current_theme_supports( 'tf_yelp' ) ) {
 
 // OpenTable
 
-require_once( TF_PATH . '/api_opentable/tf.opentable.php' );
-require_once( TF_PATH . '/core_widgets/widget-opentable.php' );
+    require_once( TF_PATH . '/api_opentable/tf.opentable.php' );
+    require_once( TF_PATH . '/core_widgets/widget-opentable.php' );
+
+// OpenDining
+
+    require_once( TF_PATH . '/api_opendining/tf.opendining.php' );
 
 // Gowalla
 if( current_theme_supports( 'tf_gowalla' ) ) {

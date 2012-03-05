@@ -1,5 +1,5 @@
 <?php
-/* ------------------- THEME FORCE ---------------------- */
+/* ------------------- THEME FORCE --------------------- */
 
 /*
  * FOOD MENU SHORTCODES (CUSTOM POST TYPE)
