@@ -1,0 +1,47 @@
+/*
+* common.css aims to bring together the various re-used items from each theme
+*/
+
+/* yelp */
+
+    #yelpbar {
+        height:40px;
+        width:100%;
+        background-color: #fff;
+        border-bottom: 2px solid #c41200;
+        text-align:center;
+    }
+
+    #yelpcontent {
+        display: inline-block;
+        padding-top:5px;
+        height:30px;
+        margin:0 auto;
+    }
+
+    .yelptext {
+        float:left;
+        padding:5px 0 0 0;
+        margin-right:7px;
+        color:#5f5f5f;
+        font-family: Georgia, Times, 'Times New Roman', serif;
+        font-size:14px;
+        font-style:italic;
+        height:30px;
+    }
+
+    .yelpimg {
+        float:left;
+        height:30px;
+        margin-right:7px;
+    }
+
+    #yelpcontent a {
+        color:#c41200;
+    }
+
+@media screen and (max-width: 480px) {
+
+    .yelptext {display:none;}
+
+}

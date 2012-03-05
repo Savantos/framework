@@ -1,4 +1,15 @@
 <?php
+
+/*
+* -------------------------------------
+* Common Library of TF Assets
+* -------------------------------------
+*/
+
+function tf_common_css() {
+    wp_enqueue_style('tfcommoncss', TF_URL . '/assets/css/common.css', array(), TF_VERSION );
+}
+
 /* 
 * -------------------------------------
 * Common Library of 3rd Party Assets
