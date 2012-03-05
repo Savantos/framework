@@ -62,6 +62,8 @@ function tf_menu_all ( $atts ) {
         $i++;
     }
 
+    $out .= '<div class="clearfix"></div>';
+
     return $out;
 }
 
