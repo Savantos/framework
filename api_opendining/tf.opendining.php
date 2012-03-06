@@ -38,7 +38,7 @@ function tf_opendining_mobile() {
 
             $restid = trim(get_option(tf_opendining_rest_id));
             $output .= '<!-- opendining (mobile) -->';
-            $output .= '<div class="opendining-mobile"><a class="opendining" href="http://www.opendining.net/m/' . $restid . '">Order Online</a></div>';
+            $output .= '<div class="opendining-mobile"><a style="color:white !important;" href="http://www.opendining.net/m/' . $restid . '">Order Online</a></div>';
             $output .= '<!-- / opendining (mobile) -->';
 
         }
