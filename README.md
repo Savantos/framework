@@ -1,3 +1,5 @@
+**Warning:** At this point & without our full infrastructure, you will be missing certain functions (primarily in the food area). We hope to consolidate these at one poin in the future. For now however, this **repository should be used as a reference** as a opposed to a solution you depend on.
+
 # Introduction
 
 The **Theme Force Framework** is the most comprehensive solution for **restaurant websites** based on WordPress. It is
