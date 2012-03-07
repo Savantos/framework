@@ -1,5 +1,7 @@
 <?php
 
+// DISCONTINUED as per request of the Qype API team, leaving it here for github reference.
+
 // Grab qype API Data
 
 function tf_get_qype_api_xml() {
