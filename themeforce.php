@@ -1,20 +1,26 @@
 <?php /*
 
-Theme-Force.com - WordPress Framework (v 3.2.2)
+Theme-Force.com - WordPress Framework (v 3.3.1)
 ===================================================
 
 Introduction
-------------
+---------------
 
 The Theme Force Framework is the most comprehensive solution for restaurant websites based on WordPress. It is
 structured as a modular feature-set highly relevant to industry needs.
 
 Resources
----------
+---------------
 
-Developer Homepage: 	http://www.theme-force.com/developers
-GitHub Homepage: 	https://github.com/themeforce/framework
-Discussion & News: 	http://www.facebook.com/themeforce
+Developer Homepage: 	    http://www.theme-force.com/developers
+GitHub Homepage: 	        https://github.com/themeforce/framework
+Discussion & News: 	        http://www.facebook.com/themeforce
+
+Important
+---------------
+
+Theme Force changed to happytables in Feb. '12, the vendor prefix "tf_" will remain for now.
+
 
  /* Definitions
 =========================================*/
@@ -22,7 +28,7 @@ Discussion & News: 	http://www.facebook.com/themeforce
 define( 'TF_DIR_SLUG', end( explode( DIRECTORY_SEPARATOR, dirname( __FILE__ ) ) ) );
 define( 'TF_PATH', dirname( __FILE__ ) );
 define( 'TF_URL', get_bloginfo( 'template_directory' ) . '/' . TF_DIR_SLUG );
-define ('TF_VERSION', '3.2.3');
+define ('TF_VERSION', '3.3.1');
 
 /* Theme Force Core Tools
 =========================================*/
@@ -48,15 +54,6 @@ require_once( TF_PATH . '/core_colors/tf.colors.php' );
 // LESS
 require_once( TF_PATH . '/assets/less/wp-less.php' );
 
-/*
- * Should all be set now.
- * 
-if ( get_option('tf_sliderconversion') != 'true' ) {
-	require_once( TF_PATH . '/core_general/tf.slider.update.php' );
-}
- *
- */
-        
 // Food Menu
 if( current_theme_supports( 'tf_food_menu' ) )
 	require_once( TF_PATH . '/core_food-menu/tf.food-menu.php' );
@@ -161,23 +158,10 @@ function tf_less_css() {
 }
 add_action('admin_enqueue_scripts','tf_less_css');
 
-/*
-function enqueue_less_styles($tag, $handle) {
-    global $wp_styles;
-    $match_pattern = '/\.less$/U';
-    if ( preg_match( $match_pattern, $wp_styles->registered[$handle]->src ) ) {
-        $handle = $wp_styles->registered[$handle]->handle;
-        $media = $wp_styles->registered[$handle]->args;
-        $href = $wp_styles->registered[$handle]->src . '?ver=' . $wp_styles->registered[$handle]->ver;
-        $rel = isset($wp_styles->registered[$handle]->extra['alt']) && $wp_styles->registered[$handle]->extra['alt'] ? 'alternate stylesheet' : 'stylesheet';
-        $title = isset($wp_styles->registered[$handle]->extra['title']) ? "title='" . esc_attr( $wp_styles->registered[$handle]->extra['title'] ) . "'" : '';
-
-        $tag = "<link rel='stylesheet' id='$handle' $title href='$href' type='text/less' media='$media' />";
-    }
-    return $tag;
+function tf_enqueue_admin_css() {
+    wp_enqueue_style('tf-functions-css', TF_URL . '/assets/css/admin.css', array(), TF_VERSION );
 }
-add_filter( 'style_loader_tag', 'enqueue_less_styles', 5, 2);
-*/
+add_action('admin_init', 'tf_enqueue_admin_css');
 
 /* Food Menu Sorting
 =========================================*/	
@@ -233,19 +217,10 @@ function tf_sortable_admin_row_request() {
 }
 add_action( 'wp_ajax_tf_sort_admin_rows', 'tf_sortable_admin_row_request' );
 
-// Enqueue Admin Styles
- 
-
-function tf_enqueue_admin_css() {
-    wp_enqueue_style('tf-functions-css', TF_URL . '/assets/css/admin.css', array(), TF_VERSION );
-}
-add_action('admin_init', 'tf_enqueue_admin_css');
-
-
 
 /* Theme Force Upgrade Tools
 =========================================
-   You won't require this for a fresh install
+   You won't require this for a fresh install, can likely be deleted soonish (Mar'12)
 */	
 
 require_once( TF_PATH . '/tf.upgrade.php' );

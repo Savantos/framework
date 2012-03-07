@@ -1,5 +1,9 @@
 <?php 
 
+/*
+ * This can be discontinued (obsolote, pending confirmation JH)
+ */
+
 function tf_upgrade_scripts() {
 
 	if ( apply_filters( 'tf_upgrade_scripts', null ) )
@@ -17,8 +21,9 @@ function tf_upgrade_admin_notice() {
 
 /**
  * Submit action for the pubforce options migrator.
- * 
+ *
  */
+
 function tf_upgrade_scripts_action() {
 
 	if ( empty( $_GET['tf_action'] ) || $_GET['tf_action'] !== 'update_legacy_options' || !wp_verify_nonce( $_GET['_wpnonce'], 'update_legacy_options' ) )
