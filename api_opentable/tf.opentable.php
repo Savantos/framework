@@ -18,7 +18,7 @@ function tf_opentable_bar() {
             echo '<div id="opentablebar">';
             echo '<div id="opentablebar-center">';
             echo '<script type="text/javascript" src="http://www.opentable.com/frontdoor/default.aspx?rid='. $opentable. '&restref='. $opentable. '&bgcolor=F6F6F3&titlecolor=0F0F0F&subtitlecolor=0F0F0F&btnbgimage=http://www.opentable.com/frontdoor/img/ot_btn_red.png&otlink=FFFFFF&icon=dark&mode=wide"></script>';
-            echo '<style type="text/css">.OT_wrapper{background:none;border:none;} .OT_day, .OT_time, .OT_party, .OT_submit {border:none;}</style>';
+            echo '<style type="text/css">.OT_wrapper{background:none;border:none;} .OT_day, .OT_time, .OT_party, .OT_submit {border:none;} .OT_searchTimeField, .OT_searchDateField, .OT_searchPartyField {padding: 1px 3px 2px 5px !important;}</style>';
             echo '</div></div>';
             echo '<!-- / opentable bar -->';
         } else {
