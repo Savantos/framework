@@ -129,6 +129,10 @@ if( current_theme_supports( 'tf_yelp' ) ) {
 
     require_once( TF_PATH . '/api_opendining/tf.opendining.php' );
 
+// Localina
+
+    require_once( TF_PATH . '/api_localina/tf.localina.php' );
+
 // Gowalla
 if( current_theme_supports( 'tf_gowalla' ) ) {
 	// photos

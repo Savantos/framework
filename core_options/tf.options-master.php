@@ -27,6 +27,7 @@ require_once( TF_PATH . '/core_options/tf.options-3rdparty.php' );
 require_once( TF_PATH . '/core_options/tf.options-mailchimp.php' );
 require_once( TF_PATH . '/core_options/tf.options-opentable.php' );
 require_once( TF_PATH . '/core_options/tf.options-opendining.php' );
+require_once( TF_PATH . '/core_options/tf.options-localina.php' );
 
 if ( TF_MOBILE == true ) {
     require_once( TF_PATH . '/core_options/tf.options-mobile.php' );
@@ -66,6 +67,7 @@ function themeforce_3rdparty_options() {
     add_submenu_page('themeforce_3rdparty_options', 'MailChimp Newsletter', 'MailChimp Newsletter', 'edit_posts', 'themeforce_mailchimp', 'themeforce_mailchimp_page');
     add_submenu_page('themeforce_3rdparty_options', 'OpenTable', 'OpenTable', 'edit_posts', 'themeforce_opentable', 'themeforce_opentable_page');
     add_submenu_page('themeforce_3rdparty_options', 'Open Dining', 'Open Dining', 'edit_posts', 'themeforce_dining', 'themeforce_opendining_page');
+    add_submenu_page('themeforce_3rdparty_options', 'Localina', 'Localina', 'edit_posts', 'themeforce_localina', 'themeforce_localina_page');
 
 }
 add_action( 'admin_menu', 'themeforce_3rdparty_options');

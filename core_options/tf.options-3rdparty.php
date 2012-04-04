@@ -1,15 +1,12 @@
 <?php
 
 /*
- * TF OPTIONS: SOCIAL MEDIA - OVERVIEW
+ * TF OPTIONS: 3RD PARTY - OVERVIEW
  * 
  * Provide easy to use options for Theme Force users.
  * 
  */
 
-// Create Page
-// -----------------------------------------
-// TODO Add functionality to edit existing slides.
 
 function themeforce_3rdparty_overview_page() {
     ?>
