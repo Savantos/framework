@@ -1,28 +1,33 @@
 <?php
 // Output Linked Google Map (with Schema)
 
+/**
+ * @param Shortcode variables (width, height, color, zoom, align, address)
+ * @return string DOM output
+ */
 function tf_googlemaps ( $atts ) {
 
     extract( shortcode_atts( array(
-         'width' => '578',
-         'height' => '200',
-         'color' => 'green',
-         'zoom' => '13',
-         'align' => 'center'
-     ), $atts) );
+        'width' => '578',
+        'height' => '200',
+        'color' => 'green',
+        'zoom' => '13',
+        'align' => 'center',
+        'address' => ''
+        ), $atts) );
 
     ob_start();
     
     // Grab Addresss Data
     
-    $new_address = get_option( 'tf_address_street' ) . ', ' . get_option( 'tf_address_locality' ) . ', ' . get_option( 'tf_address_postalcode' ) . ' ' . get_option( 'tf_address_region' ) . ' ' . get_option( 'tf_address_country' );
+    $options_address = get_option( 'tf_address_street' ) . ', ' . get_option( 'tf_address_locality' ) . ', ' . get_option( 'tf_address_postalcode' ) . ' ' . get_option( 'tf_address_region' ) . ' ' . get_option( 'tf_address_country' );
     
     // Choose
     
-    if ( get_option('tf_address_street' ) . get_option( 'tf_address_country' ) !== '' ) {
-        $valid_address = $new_address;    
+    if ( $address != '' ) {
+        $valid_address = $address;
     } else {
-        $valid_address = get_option( 'tf_business_address' );
+        $valid_address = $options_address;
     }
     
     $address_url = preg_replace( '![^a-z0-9]+!i', '+', $valid_address );
@@ -53,6 +58,7 @@ function tf_google_maps_register_tinymce_buttons() {
 	
 	add_filter( 'mce_external_plugins', 'tf_google_maps_add_tinymce_plugins' );
 }
+
 add_action( 'load-post.php', 'tf_google_maps_register_tinymce_buttons' );
 add_action( 'load-post-new.php', 'tf_google_maps_register_tinymce_buttons' );
 
@@ -69,7 +75,6 @@ function tf_google_maps_add_tinymce_plugins( $plugin_array ) {
 	return $plugin_array;
 }
 
-
 function tf_google_maps_add_insert_events_above_editor() {
 	?>
 	<a class="tf-button tf-tiny" href="javascript:tinyMCE.activeEditor.execCommand( 'mceExecTFGoogleMapsInsertShortcode' );"><img src="<?php echo TF_URL . '/api_google/tinymce_plugins/map_20.png' ?>"/>Maps</a>
@@ -78,4 +83,5 @@ function tf_google_maps_add_insert_events_above_editor() {
 	</script>
 	<?php
 }
+
 add_action( 'tf_above_editor_insert_items', 'tf_google_maps_add_insert_events_above_editor' );

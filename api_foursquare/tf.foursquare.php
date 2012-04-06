@@ -1,6 +1,4 @@
 <?php
-// - FOURSQUARE TRANSIENTS -
-//---------------------------------------------
 
 /**
  * Retrieves the foursquare response.

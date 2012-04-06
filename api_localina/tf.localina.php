@@ -1,5 +1,4 @@
 <?php
-
 /*
  * Localina Integration
  * ---------------------------------------------
@@ -9,6 +8,11 @@
  *
 */
 
+/**
+ * Creates Localina Bar at the top
+ *
+ * @return string DOM output
+ */
 function tf_localina_bar() {
 
     ob_start();
@@ -20,9 +24,11 @@ function tf_localina_bar() {
         $text = trim(get_option(tf_localina_bar_text));
 
         echo '<div id="localinabar">';
+
             echo '<div id="localinabar-center">';
             echo '<a class="localinalink" href="javascript:;" onclick="Localina.startBooking(\'' . $phone . '\', \''. $api . '\', \'de\', $(this)); return false;">' . $text . '</a>';
             echo '</div>';
+
         echo '</div>';
 
     }
@@ -30,10 +36,14 @@ function tf_localina_bar() {
     $output = ob_get_contents();
     ob_end_clean();
     echo $output;
+
 };
 
 add_action('tf_body_top', 'tf_localina_bar', 12);
 
+/**
+ * Enqueues Localina JS if API & Phone field are populated
+ */
 function load_localina_js() {
 
     wp_enqueue_script('localina', 'http://localina.com/code/localina.js', array('jquery'), TF_VERSION );

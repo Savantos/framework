@@ -1,13 +1,17 @@
 <?php
-
-// Grab API
-// No API at this point in time, we'll leave this part open for when they do decide to create one.
-
-
-/* - OpenTable Bar -
-* ---------------------------------------------
+/*
+ * Open Table Integration
+ * ---------------------------------------------
+ *
+ * This is a pretty light integration to see how visitors will use it. This will not degrade for mobile.
+ *
 */
 
+/**
+ * Returns Open Table bar at top of the website (fixed position)
+ *
+ * @return string DOM output
+ */
 function tf_opentable_bar() {
     
     ob_start();
@@ -28,6 +32,7 @@ function tf_opentable_bar() {
     $output = ob_get_contents();
     ob_end_clean();    
     echo $output;
+
 };
 
 add_action('tf_body_top', 'tf_opentable_bar', 12);

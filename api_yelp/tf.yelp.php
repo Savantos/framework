@@ -1,7 +1,17 @@
 <?php
+/*
+ * Yelp Bar Integration
+ * ---------------------------------------------
+ *
+ * Adds Yelp bar containing ratings (will degrade for mobile)
+ *
+*/
 
-// Grab API
-
+/**
+ * Get Yelp API Response
+ *
+ * @return array|mixed|null Fresh API Response
+ */
 function tf_yelp_api() {
 
     $api_key = get_option( 'tf_yelp_api_key' );
@@ -19,8 +29,11 @@ function tf_yelp_api() {
     return $yelp;
 }
 
-// Store API Data
-
+/**
+ * Check Yelp API Transient
+ *
+ * @return array|mixed|null Transient API Response
+ */
 function tf_yelp_transient() {
 
     // - get transient -
@@ -39,22 +52,24 @@ function tf_yelp_transient() {
 
 /**
  * Delete & Update the Transient upon settings update.
- * 
  */
 function tf_delete_yelp_transient_on_update_option() {
 	
 	delete_transient( 'themeforce_yelp_json' );
+
 }
 add_action( 'update_option_tf_yelp_api_key', 'tf_delete_yelp_transient_on_update_option' );
 add_action( 'update_option_tf_yelp_phone', 'tf_delete_yelp_transient_on_update_option' );
 add_action( 'update_option_tf_yelp_country_code', 'tf_delete_yelp_transient_on_update_option' );
 
-/* - YELP BAR -
-* ---------------------------------------------
-*  - Follows Yelp Display Requirements
-*  - Schema enhanced now ( Thing > Intangible > Rating > AggregateRating )
-*/
 
+/**
+ * Display Yelp Bar
+ *  - Follows Yelp Display Requirements
+ *  - Schema enhanced now ( Thing > Intangible > Rating > AggregateRating )
+ *
+ * @return mixed DOM Output
+ */
 function tf_yelp_bar() {
     
     ob_start();
@@ -96,6 +111,7 @@ function tf_yelp_bar() {
     $output = ob_get_contents();
     ob_end_clean();    
     echo $output;
+
 };
 
 add_action('tf_body_top', 'tf_yelp_bar', 12);
