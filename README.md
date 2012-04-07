@@ -34,11 +34,12 @@ that your theme executes. Our modular approach means that you can do just that. 
 	add_theme_support( 'tf_widget_opening_times' );
 	add_theme_support( 'tf_widget_google_maps' );
 	add_theme_support( 'tf_widget_payments' );
+    add_theme_support( 'tf_widget_twitter' );
+
 	add_theme_support( 'tf_foursquare' );
-	add_theme_support( 'tf_gowalla' );
 	add_theme_support( 'tf_yelp' );
-	add_theme_support( 'tf_qype' );
 	add_theme_support( 'tf_mailchimp' );
+	add_theme_support( 'tf_fullbackground' );
 	
 	add_theme_support( 'tf_settings_api' );
 	
