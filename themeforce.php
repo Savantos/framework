@@ -7,14 +7,15 @@ Introduction
 ---------------
 
 The Theme Force Framework is the most comprehensive solution for restaurant websites based on WordPress. It is
-structured as a modular feature-set highly relevant to industry needs.
+structured as a modular feature-set highly relevant to industry needs. It's currently a code resource as
+opposed to a solution that can be used out of the box.
 
 Resources
 ---------------
 
-Developer Homepage: 	    http://www.theme-force.com/developers
+Developer Homepage: 	    http://www.happytables.com/framework-developers
 GitHub Homepage: 	        https://github.com/themeforce/framework
-Discussion & News: 	        http://www.facebook.com/themeforce
+Discussion & News: 	        http://www.facebook.com/happytables
 
 Important
 ---------------
@@ -139,11 +140,13 @@ if( current_theme_supports( 'tf_mailchimp' ) )
 
 // Datepicker JS
 
+/*
 function tf_sortable_admin_rows_scripts() {
 	wp_enqueue_script('ui-datepicker-settings', TF_URL . '/assets/js/themeforce-admin.js', array('jquery'), TF_VERSION );
 
 }
 add_action( 'admin_print_scripts-edit.php', 'tf_sortable_admin_rows_scripts' );
+*/
 
 /* Admin Global JS & Stylesheets
 =========================================*/
