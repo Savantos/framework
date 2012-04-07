@@ -7,9 +7,6 @@
  * 
  */
 
-// Create Page
-// -----------------------------------------
-
 function themeforce_localina_page() {
     ?>
     <div class="tf-options-page">
@@ -21,7 +18,6 @@ function themeforce_localina_page() {
     // List of Options used within Dropdowns, etc.
     
     $shortname = "tf";
-    $options_yesno = array ( 'yes', 'no' );
     
     // Options
     
@@ -30,34 +26,34 @@ function themeforce_localina_page() {
         array( 'type' => 'open'),
 
         array(
-        'name' => 'Restaurant API Key',
-        'desc' => 'This is your personal API key',
+        'name' => __( 'Restaurant API Key', 'themeforce'),
+        'desc' => __( 'This is your personal API key', 'themeforce'),
         'id' => 'tf_localina_api',
         'std' => '',
         'type' => 'text'
         ),
 
         array( 
-		'name' => 'Restaurant Phone Number',
-		'desc' => 'This is the numeric phone number of your restaurant, with full prefix, i.e. \'0041431234567\'',
+		'name' => __( 'Restaurant Phone Number', 'themeforce'),
+		'desc' => __( 'This is the numeric phone number of your restaurant, with full prefix, i.e. \'0041431234567\'', 'themeforce'),
 		'id' => 'tf_localina_phone',
 		'std' => '',
 		'type' => 'text'
         ),
 
         array( 
-		'name' => 'Enable Localina Reservation Bar?',
-		'desc' => 'This will show the Localina bar at the top of your website on every page',
+		'name' => __( 'Enable Localina Reservation Bar?', 'themeforce'),
+		'desc' => __( 'This will show the Localina bar at the top of your website on every page', 'themeforce'),
 		'id' => 'tf_localina_bar_enabled',
 		'std' => 'false',
 		'type' => 'checkbox'
         ),
 
         array(
-        'name' => 'Reservation Bar Text',
-        'desc' => 'Text used for the link',
+        'name' => __( 'Reservation Bar Text', 'themeforce'),
+        'desc' => __( 'Text used for the link', 'themeforce'),
         'id' => 'tf_localina_bar_text',
-        'std' => 'Reserve a table online',
+        'std' => __( 'Reserve a table online', 'themeforce'),
         'type' => 'text'
         ),
               
@@ -69,7 +65,7 @@ function themeforce_localina_page() {
 
     tf_display_settings( $options );
     ?> 
-	 <input type="submit" class="tf-button tf-major right" name="options_submit" value=" <?php _e( 'Save Changes' )  ?>" />
+	 <input type="submit" class="tf-button tf-major right" name="options_submit" value=" <?php _e( 'Save Changes', 'themeforce' )  ?>" />
          <div style="clear:both;"></div>
     </form>
 

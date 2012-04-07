@@ -10,7 +10,7 @@
 
 // Create Page
 // -----------------------------------------
-// TODO Add functionality to edit existing slides.
+
 
 function themeforce_location_page() {
     ?>
@@ -23,58 +23,50 @@ function themeforce_location_page() {
     // List of Options used within Dropdowns, etc.
     
     $shortname = "tf";
-    $options_yesno = array ( 'yes', 'no' );
-    
+
     // Options
     
     $options = array (
  
-        array( 'name' => 'Location Details', 'type' => 'title'),
+    array( 'name' => __('Location Details', 'themeforce'), 'type' => 'title'),
 
-        array( 'type' => 'open'),   
-	
-        // LOCATION
-	// -----------------------------------------------------------------
+    array( 'type' => 'open'),
 
-	// new 3.2.2					
-	 array( 'name' => 'Street Name',
-                'desc' => 'The street address. For exampl: 1600 Amphitheatre Pkwy',
+	array( 'name' => __('Street Name', 'themeforce'),
+                'desc' => __('The street address. For exampl: 1600 Amphitheatre Pkwy', 'themeforce'),
                 'id' => $shortname.'_address_street',
                 'std' => '',
                 'type' => 'text'),
-		
-	// new 3.2.2		
-	array( 'name' => 'Town or Locality',
-                'desc' => 'The locality. For example, Mountain View, Miami, Sydney, etc.',
+
+	array( 'name' => __('Town or Locality', 'themeforce'),
+                'desc' => __('The locality. For example, Mountain View, Miami, Sydney, etc.', 'themeforce'),
                 'id' => $shortname.'_address_locality',
                 'std' => '',
                 'type' => 'text'), 					
-	
-	// new 3.2.2		
+
 	array( 'name' => 'State or Region',
-                'desc' => 'The region. For example, CA.',
+                'desc' => __('The region. For example, CA.', 'themeforce'),
                 'id' => $shortname.'_address_region',
                 'std' => '',
                 'type' => 'text'), 		
 
-	// new 3.2.2		
-	array( 'name' => 'Country',
-                'desc' => 'Select your country',
+	array( 'name' => __('Country', 'themeforce'),
+                'desc' => __('Select your country', 'themeforce'),
                 'id' => $shortname.'_address_country',
                 'std' => '',
                 'type' => 'text'), 	
 						
-	array( 'name' => 'Phone Number',
-                'desc' => 'Your business phone number.',
+	array( 'name' => __('Phone Number', 'themeforce'),
+                'desc' => __('Your business phone number.', 'themeforce'),
                 'id' => $shortname.'_business_phone',
-                'std' => '( 123 ) 456 789',
+                'std' => __('( 123 ) 456 789', 'themeforce'),
                 'type' => 'text'),
 							
 
-	array( 'name' => 'Short Contact Info',
-                'desc' => 'Visible contact information in the top-right corner (you can also leave blank)',
+	array( 'name' => __('Short Contact Info', 'themeforce'),
+                'desc' => __('Visible contact information in the top-right corner (you can also leave blank)', 'themeforce'),
                 'id' => 'chowforce_biz_contactinfo',
-                'std' => 'Call us at +01 ( 02 ) 123 57 89',
+                'std' => __('Call us at +01 ( 02 ) 123 57 89', 'themeforce'),
                 'type' => 'text'), 				
 
 	array( 'type' => 'close'), 
@@ -83,13 +75,13 @@ function themeforce_location_page() {
 
     tf_display_settings( $options );
     ?> 
-	 <input type="submit" class="tf-button tf-major right" name="options_submit" value=" <?php _e( 'Save Changes' )  ?>" />
+	 <input type="submit" class="tf-button tf-major right" name="options_submit" value=" <?php _e( 'Save Changes', 'themeforce' )  ?>" />
          <div style="clear:both;"></div>
     </form>
         
         <div id="tf-tip">
-            <h3>Why is Location important?</h3>
-            <p>We use location data to enhance content across your website. An example of this are Events: Your location is attached to individual events which means that you can potentially <strong>increase your traffic from Google, Yahoo or Bing</strong> for local event searches.</p>
+            <h3><?php _e('Why is Location important?', 'themeforce'); ?></h3>
+            <p><?php _e('We use location data to enhance content across your website. An example of this are Events: Your location is attached to individual events which means that you can potentially <strong>increase your traffic from Google, Yahoo or Bing</strong> for local event searches.', 'themeforce'); ?></p>
         </div>    
         
     </div>

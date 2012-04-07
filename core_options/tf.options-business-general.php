@@ -127,8 +127,8 @@ $options[] = array( 'type' => 'close');
     </form>
         
         <div id="tf-tip">
-            <h3>Why do you need all this?</h3>
-            <p>The questions asked above are used to provide <strong>search engines & content aggregators</strong> with relevant information about your restaurant. These websites can then automatically generate detailed profiles about your business, generating more traffic for your website.</p>
+            <h3><?php _e('Why do you need all this?', 'themeforce'); ?></h3>
+            <p><?php _e('The questions asked above are used to provide <strong>search engines & content aggregators</strong> with relevant information about your restaurant. These websites can then automatically generate detailed profiles about your business, generating more traffic for your website.', 'themeforce'); ?></p>
         </div>  
         
     </div>

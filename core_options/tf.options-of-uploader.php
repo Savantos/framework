@@ -137,7 +137,7 @@ class TF_Upload_Image_Well {
     	// Filter to change the drag & drop box background string
     	$drop_text = $this->drop_text;
     	$extensions = implode( ',', $this->allowed_extensions );
-    	$i18n_select	= 'Select Files';
+    	$i18n_select	= __('Select Files', 'themeforce');
     	$img_prefix		= $this->id;
     	$style = sprintf( 'width: %dpx; height: %dpx;', $this->size['width'], $this->size['height'] );
     	
@@ -157,7 +157,7 @@ class TF_Upload_Image_Well {
 	    		<img src="" />
     		<?php endif; ?>
     		<div class="image-options">
-    			<a href="#" class="delete-image">Delete</a>
+    			<a href="#" class="delete-image"><?php _e( 'Delete', 'themeforce'); ?></a>
     		</div>
     	</div>
     	<?php

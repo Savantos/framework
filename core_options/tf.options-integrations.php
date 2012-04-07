@@ -28,6 +28,8 @@ function themeforce_integrations_page() {
 
         <h3>Online Reservations</h3>
 
+        <!-- not translated yet, still need to finalize -->
+
         <div class="accordion">
             <!-- Display Checked if Venue ID in -->
 

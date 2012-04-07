@@ -7,10 +7,6 @@
  * 
  */
 
-// Create Page
-// -----------------------------------------
-// TODO Add functionality to edit existing slides.
-
 function themeforce_social_yelp_page() {
     ?>
     <div class="wrap" id="tf-options-page">
@@ -29,13 +25,13 @@ function themeforce_social_yelp_page() {
     
     $options = array (
  
-        array( 'name' => 'Yelp Settings', 'type' => 'title'),
+        array( 'name' => __( 'Yelp Settings', 'themeforce'), 'type' => 'title'),
 
         array( 'type' => 'open'),   
 
         array( 
-			'name' => 'Enable Yelp Bar?',
-			'desc' => 'This will show the Yelp bar above in line with Yelp display requirements. The fields below need to be completed in order for this to work.',
+			'name' => __( 'Enable Yelp Bar?', 'themeforce'),
+			'desc' => __( 'This will show the Yelp bar above in line with Yelp display requirements. The fields below need to be completed in order for this to work.', 'themeforce'),
 			'id' => 'tf_yelp_enabled',
             'std' => 'false',
             'type' => 'checkbox',
@@ -43,16 +39,16 @@ function themeforce_social_yelp_page() {
         ),
 
         array( 
-        	'name' => 'API Key',
-			'desc' => 'Required for Yelp Button  <a target=\'_blank\' href=\'http://www.yelp.com/developers/getting_started/api_overview\'>Get it from here (Yelp API)</a>',
+        	'name' => __( 'API Key', 'themeforce'),
+			'desc' => __( 'Required for Yelp Button  <a target=\'_blank\' href=\'http://www.yelp.com/developers/getting_started/api_overview\'>Get it from here (Yelp API)</a>', 'themeforce'),
 			'id' => 'tf_yelp_api_key',
 			'std' => '',
             'type' => 'text'
         ),
         
         array( 
-			'name' => 'Country',
-			'desc' => 'Required so that your Phone Number below can be correctly identified',
+			'name' => __( 'Country', 'themeforce'),
+			'desc' => __( 'Required so that your Phone Number below can be correctly identified', 'themeforce'),
 			'id' => 'tf_yelp_country_code',
 			'type' => 'select',
 			'class' => 'mini', //mini, tiny, small
@@ -60,8 +56,8 @@ function themeforce_social_yelp_page() {
 		),
         
         array( 
-			'name' => 'Phone number registered with Yelp',
-			'desc' => 'Required for Yelp Button (Used by the API to identify your business). Do not use special characters, only numbers.',
+			'name' => __( 'Phone number registered with Yelp', 'themeforce'),
+			'desc' => __( 'Required for Yelp Button (Used by the API to identify your business). Do not use special characters, only numbers.', 'themeforce'),
 			'id' => 'tf_yelp_phone',
             'std' => '',
             'type' => 'text'
@@ -75,7 +71,7 @@ function themeforce_social_yelp_page() {
 
     tf_display_settings( $options );
     ?> 
-	 <input type="submit" class="tf-button tf-major right" name="options_submit" value=" <?php _e( 'Save Changes' )  ?>" />
+	 <input type="submit" class="tf-button tf-major right" name="options_submit" value=" <?php _e( 'Save Changes', 'themeforce' )  ?>" />
          <div style="clear:both;"></div>
     </form>
         <div id="tf-tip">

@@ -41,34 +41,34 @@ if ( TF_MOBILE == true ) {
 // -----------------------------------------
 
 function themeforce_business_options() {
-    add_menu_page( 'Business Overview', 'Your Business', 'edit_posts', 'themeforce_business_options', '', TF_URL . '/assets/images/general_16.png', 25); // $function, $icon_url, $position 
-    add_submenu_page('themeforce_business_options', 'Business Details', 'Business Details', 'edit_posts', 'themeforce_business', 'themeforce_business_page');
-    add_submenu_page('themeforce_business_options', 'Logo', 'Logo', 'edit_posts', 'themeforce_logo', 'themeforce_logo_page');   
-    add_submenu_page('themeforce_business_options', 'Your Location', 'Location', 'edit_posts', 'themeforce_location', 'themeforce_location_page');
+    add_menu_page( __('Business Overview', 'themeforce'), __('Your Business', 'themeforce'), 'edit_posts', 'themeforce_business_options', '', TF_URL . '/assets/images/general_16.png', 25); // $function, $icon_url, $position
+    add_submenu_page('themeforce_business_options', __( 'Business Details', 'themeforce'), __( 'Business Details', 'themeforce'), 'edit_posts', 'themeforce_business', 'themeforce_business_page');
+    add_submenu_page('themeforce_business_options', __( 'Logo', 'themeforce'), __( 'Logo', 'themeforce'), 'edit_posts', 'themeforce_logo', 'themeforce_logo_page');
+    add_submenu_page('themeforce_business_options', __( 'Your Location', 'themeforce'), __( 'Location', 'themeforce'), 'edit_posts', 'themeforce_location', 'themeforce_location_page');
 
 }
 
 add_action( 'admin_menu', 'themeforce_business_options' );
 
 function themeforce_socialmedia_options() {
-    add_menu_page( 'Social Media Overview', 'Social Media', 'manage_options', 'themeforce_socialmedia_options', 'themeforce_social_media_overview_page', TF_URL . '/assets/images/socialmedia_16.png', 30); // $function, $icon_url, $position 
-    add_submenu_page('themeforce_socialmedia_options', 'Facebook', 'Facebook', 'manage_options', 'themeforce_facebook', 'themeforce_social_facebook_page');
-    add_submenu_page('themeforce_socialmedia_options', 'Twitter', 'Twitter', 'manage_options', 'themeforce_twitter', 'themeforce_social_twitter_page');
+    add_menu_page( __( 'Social Media Overview', 'themeforce'), __( 'Social Media', 'themeforce'), 'manage_options', 'themeforce_socialmedia_options', 'themeforce_social_media_overview_page', TF_URL . '/assets/images/socialmedia_16.png', 30); // $function, $icon_url, $position
+    add_submenu_page('themeforce_socialmedia_options', __( 'Facebook', 'themeforce'), __( 'Facebook', 'themeforce'), 'manage_options', 'themeforce_facebook', 'themeforce_social_facebook_page');
+    add_submenu_page('themeforce_socialmedia_options', __( 'Twitter', 'themeforce'), __('Twitter', 'themeforce'), 'manage_options', 'themeforce_twitter', 'themeforce_social_twitter_page');
 }
 
 add_action( 'admin_menu', 'themeforce_socialmedia_options' );
 
 function themeforce_social_options() {
-    add_menu_page( 'Social Proof Overview', 'Social Proof', 'manage_options', 'themeforce_social_options', 'themeforce_social_overview_page', TF_URL . '/assets/images/social_16.png', 35); // $function, $icon_url, $position 
-    add_submenu_page('themeforce_social_options', 'Yelp', 'Yelp', 'manage_options', 'themeforce_yelp', 'themeforce_social_yelp_page');
-    add_submenu_page('themeforce_social_options', 'Foursquare', 'Foursquare', 'manage_options', 'themeforce_foursquare', 'themeforce_social_foursquare_page');
+    add_menu_page( __('Social Proof Overview', 'themeforce'), __( 'Social Proof', 'themeforce'), 'manage_options', 'themeforce_social_options', 'themeforce_social_overview_page', TF_URL . '/assets/images/social_16.png', 35); // $function, $icon_url, $position
+    add_submenu_page('themeforce_social_options', __( 'Yelp', 'themeforce'), __( 'Yelp', 'themeforce'), 'manage_options', 'themeforce_yelp', 'themeforce_social_yelp_page');
+    add_submenu_page('themeforce_social_options', __( 'Foursquare', 'themeforce'), __( 'Foursquare', 'themeforce'), 'manage_options', 'themeforce_foursquare', 'themeforce_social_foursquare_page');
     
 }
 
 add_action( 'admin_menu', 'themeforce_social_options' );
 
 function themeforce_3rdparty_options() {
-    add_menu_page( '3rd Party Integrations', 'Integrations', 'manage_options', 'themeforce_integrations', 'themeforce_integrations_page', TF_URL . '/assets/images/integrate_16.png', 36); // $function, $icon_url, $position
+    add_menu_page( __( '3rd Party Integrations', 'themeforce'), __( 'Integrations', 'themeforce'), 'manage_options', 'themeforce_integrations', 'themeforce_integrations_page', TF_URL . '/assets/images/integrate_16.png', 36); // $function, $icon_url, $position
 
 
 }
@@ -262,7 +262,7 @@ function tf_display_settings( $options ) {
             	?>
             	<?php
             	$value['allowed_extensions'] = $value['allowed_extensions'] ? $value['allowed_extensions'] : array( 'jpeg', 'jpg', 'png', 'gif' );
-            	$drop_text = ! empty( $value['drop_text'] ) ? $value['drop_text'] : 'Drop image here';
+            	$drop_text = ! empty( $value['drop_text'] ) ? $value['drop_text'] : __( 'Drop image here', 'themeforce');
             	
             	$value['size'] = $value['size'] ? $value['size'] : 'width=440&height=220&crop=1';
             	

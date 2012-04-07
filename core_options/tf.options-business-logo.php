@@ -41,32 +41,29 @@ function themeforce_logo_page() {
     // List of Options used within Dropdowns, etc.
     
     $shortname = "tf";
-    $options_yesno = array ( 'yes', 'no' );
-    
+
     // Options
     
     $options = array (
  
-        array( 'name' => 'Logo', 'type' => 'title'),
+    array( 'name' => __('Logo', 'themeforce'), 'type' => 'title'),
 
-        array( 'type' => 'open'),   
-	
-	// new 3.2.2					
-	 array( 'name' => 'Logo',
-                'desc' => 'Your business logo (choose from an array of formats .JPG, .GIF, .PNG)',
+    array( 'type' => 'open'),
+
+	array( 'name' => __('Logo', 'themeforce'),
+                'desc' => __('Your business logo (choose from an array of formats .JPG, .GIF, .PNG)', 'themeforce'),
                 'id' => $shortname.'_logo_id',
                 'std' => '',
                 'size' => 'width=300&height=300&crop=0',
                 'type' => 'image'),
-		
-	// new 3.2.2		
-   	array( 'name' => 'Favicon',
-                'desc' => 'Your Favicon, make sure it is 16px by 16px (you can <a href=\'http://www.favicon.cc/\' target=\'_blank\'>generate one here</a>)',
+
+   	array( 'name' => __('Favicon', 'themeforce'),
+                'desc' => __('Your Favicon, make sure it is 16px by 16px (you can <a href=\'http://www.favicon.cc/\' target=\'_blank\'>generate one here</a>)', 'themeforce'),
                 'id' => $shortname.'_favicon',
                 'std' => '',
                 'type' => 'image',
                 'allowed_extensions' => array( 'ico' ),
-                'drop_text' => 'Drop favicon here'), 					
+                'drop_text' => __('Drop favicon here', 'themeforce')),
       
 	array( 'type' => 'close'), 
  
@@ -74,16 +71,10 @@ function themeforce_logo_page() {
 
     tf_display_settings( $options );
     ?> 
-	 <input type="submit" class="tf-button tf-major right" name="options_submit" value=" <?php _e( 'Save Changes' )  ?>" />
+	 <input type="submit" class="tf-button tf-major right" name="options_submit" value=" <?php _e( 'Save Changes','themeforce' )  ?>" />
          <div style="clear:both;"></div>
     </form>
-        <!--
-        <div id="tf-tip">
-            <h3>Why is Location important?</h3>
-            <p>We use location data to enhance content across your website. An example of this are Events: Your location is attached to individual events which means that you can potentially <strong>increase your traffic from Google, Yahoo or Bing</strong> for local event searches.</p>
-            <img src="http://1.bp.blogspot.com/_o5Na_9269nA/S1nnV8U-pYI/AAAAAAAADX0/FkIocIhR7Ig/s400/events-rich-snippets.png" />
-        </div>    
-        -->
+
     </div>
     <?php
         
@@ -97,7 +88,7 @@ function tf_logo( $size ='width=250&height=200&crop=0' ) {
 	if ( is_user_logged_in() ) :
 		
 		$uploader = new TF_Upload_Image_Well( 'tf_logo_id', get_option( 'tf_logo_id', 0 ), $size );
-		$uploader->drop_text = 'Drop your logo here';
+		$uploader->drop_text = __('Drop your logo here', 'themeforce');
 	    ?>
 
 

@@ -7,9 +7,6 @@
  * 
  */
 
-// Create Page
-// -----------------------------------------
-// TODO Add functionality to edit existing slides.
 
 function themeforce_mailchimp_page() {
     ?>
@@ -22,8 +19,7 @@ function themeforce_mailchimp_page() {
     // List of Options used within Dropdowns, etc.
     
     $shortname = "tf";
-    $options_yesno = array ( 'yes', 'no' );
-    
+
     // Options
     
     $options = array (
@@ -31,8 +27,8 @@ function themeforce_mailchimp_page() {
         array( 'type' => 'open'),   
 
         array( 
-		'name' => 'API Key',
-		'desc' => 'If you\'re unsure where to find your API key, please <a href=\'http://kb.mailchimp.com/article/where-can-i-find-my-api-key/\' target=\'_blank\'>click here</a>.',
+		'name' => __( 'API Key', 'themeforce'),
+		'desc' => __( 'If you\'re unsure where to find your API key, please <a href=\'http://kb.mailchimp.com/article/where-can-i-find-my-api-key/\' target=\'_blank\'>click here</a>.', 'themeforce'),
 		'id' => 'tf_mailchimp_api_key',
 		'std' => '',
 		'type' => 'text'
@@ -44,7 +40,7 @@ function themeforce_mailchimp_page() {
 
     tf_display_settings( $options );
     ?> 
-	 <input type="submit" class="tf-button tf-major right" name="options_submit" value=" <?php _e( 'Save Changes' )  ?>" />
+	 <input type="submit" class="tf-button tf-major right" name="options_submit" value=" <?php _e( 'Save Changes', 'themeforce' )  ?>" />
          <div style="clear:both;"></div>
     </form>
 

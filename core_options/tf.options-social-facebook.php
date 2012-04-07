@@ -7,10 +7,6 @@
  * 
  */
 
-// Create Page
-// -----------------------------------------
-// TODO Add functionality to edit existing slides.
-
 function themeforce_social_facebook_page() {
     ?>
     <div class="wrap tf-options-page">
@@ -27,12 +23,12 @@ function themeforce_social_facebook_page() {
     
     $options = array (
  
-        array( 'name' => 'Facebook Settings', 'type' => 'title'),
+        array( 'name' => __( 'Facebook Settings', 'themeforce'), 'type' => 'title'),
 
         array( 'type' => 'open'),   
 
- 		array( 'name' => 'Facebook Link',
- 	               'desc' => 'The link to your Facebook fan page/profile.',
+ 		array( 'name' => __( 'Facebook Link', 'themeforce'),
+ 	               'desc' => __( 'The link to your Facebook fan page/profile.', 'themeforce'),
  	               'id' => $shortname.'_facebook',
  	               'std' => '',
  	               'type' => 'text'),     
@@ -46,7 +42,7 @@ function themeforce_social_facebook_page() {
     tf_display_settings( apply_filters( 'tf_options_facebook', $options ) );
     ?> 
         
-    <input type="submit" class="tf-button tf-major right" name="options_submit" value=" <?php _e( 'Save Changes' )  ?>" />
+    <input type="submit" class="tf-button tf-major right" name="options_submit" value=" <?php _e( 'Save Changes', 'themeforce' )  ?>" />
     <div style="clear:both;"></div>
     
     </form>
