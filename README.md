@@ -1,4 +1,4 @@
-**Warning:** At this point & without our full infrastructure, you will be missing certain functions (primarily in the food area). We hope to consolidate these at one poin in the future. For now however, this **repository should be used as a reference** as a opposed to a solution you depend on.
+**Warning:** At this point & without our full infrastructure, you will be missing certain functions (primarily in the food area). We hope to consolidate these at one poin in the future. For now however, this **repository should be used as a reference** as a opposed to a solution you depend on. We also do not provide downloadable themes.
 
 # Introduction
 
@@ -7,9 +7,9 @@ structured as a **modular feature-set** highly relevant to industry needs. This 
 
 ## Resources
 
-* **Must-Read** Developer Homepage: http://www.theme-force.com/framework-developers/
+* **Must-Read** Developer Homepage: http://www.happytables.com/framework-developers/
 * GitHub Homepage: https://github.com/themeforce/framework
-* Discussion & News: http://www.facebook.com/themeforce
+* Discussion & News: http://www.happytables.com/themeforce
 
 ## Requirements
 
@@ -47,11 +47,11 @@ The main file that brings everything together within the *"framework/** folder i
 
 	framework/themeforce.php
 	
-## Using within your Theme	
+## Features
 
-If you'd like to learn how to use the Theme Force framework (i.e. shortcodes, widgets, etc.), please consult the **manual**:
+If you'd like to get a feeling for what we do, check out this page:
 
-* Manual: http://www.theme-force.com/members/manual/
+* Features: http://happytables.com/features/
 
 ## Contributing
 
