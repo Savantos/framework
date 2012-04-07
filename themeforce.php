@@ -133,15 +133,6 @@ if( current_theme_supports( 'tf_yelp' ) ) {
 
     require_once( TF_PATH . '/api_localina/tf.localina.php' );
 
-// Gowalla
-if( current_theme_supports( 'tf_gowalla' ) ) {
-	// photos
-	require_once( TF_PATH . '/api_gowalla/tf.gowalla.api-photos.php' );
-	require_once( TF_PATH . '/core_widgets/widget-gowalla-photos.php' );
-	// checkins
-	require_once( TF_PATH . '/api_gowalla/tf.gowalla.api-checkins.php' );
-	require_once( TF_PATH . '/core_widgets/widget-gowalla-checkins.php' );
-}
 // MailChimp
 if( current_theme_supports( 'tf_mailchimp' ) )
 	require_once( TF_PATH . '/api_mailchimp/mailchimp-widget.php' );

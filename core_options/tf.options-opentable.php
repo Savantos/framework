@@ -12,8 +12,9 @@
 
 function themeforce_opentable_page() {
     ?>
-    <div class="wrap" id="tf-options-page">
-    <div id="tf-options-panel">
+    <div class="tf-options-page">
+    <div class="tf-options-panel">
+
     <form class="form-table" action="options.php" method="post">
    
     <?php 
@@ -27,9 +28,7 @@ function themeforce_opentable_page() {
     
     $options = array (
  
-        array( 'name' => 'OpenTable Settings', 'type' => 'title'),
-
-        array( 'type' => 'open'),   
+        array( 'type' => 'open'),
 
         array( 
 		'name' => 'Restaurant ID',
@@ -58,6 +57,10 @@ function themeforce_opentable_page() {
 	 <input type="submit" class="tf-button tf-major right" name="options_submit" value=" <?php _e( 'Save Changes' )  ?>" />
          <div style="clear:both;"></div>
     </form>
+
+        <!--
+
+
         <div id="tf-tip">
             <h3>Did you know?</h3>
             <p>OpenTable is a leading provider of free, real-time online restaurant reservations for diners and reservation and guest management solutions for restaurants.</p>
@@ -66,7 +69,12 @@ function themeforce_opentable_page() {
                 <li>The OpenTable service is available throughout the United States, as well as in Canada, Germany, Japan, Mexico, and the United Kingdom.</li>
             </ul>
 
-        </div>    
+        </div>
+
+
+         -->
+
+    </div>
     </div>
     <?php
         

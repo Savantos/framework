@@ -39,16 +39,16 @@ Theme Force - Styleguide (including core admin css overwrite)
 input.tf-button,
 input[type="button"].tf-button,
 input[type="submit"].tf-button {
-    border:0px !important;
+
 	font-size: 14px;
-	font-weight: 700;
+	font-weight: 500;
 	padding:15px 20px;
 	text-align:center;
 	display:inline-block !important;
     text-decoration:none !important;
 	text-shadow: 0 -1px 0 rgba(0,0,0,.25);
-	.border-radius(10px);
-	.box-shadow (0 1px 3px rgba(0,0,0,.40));
+	.border-radius(7px);
+	.box-shadow (0 1px 3px rgba(0,0,0,.20));
     cursor:pointer;cursor:hand;
  }
 
@@ -63,9 +63,12 @@ input[type="button"].tf-major,
 input[type="submit"].tf-major {
         line-height:14px;
         display:inline-block !important;
-	color: @white !important;
-	#gradient > .vertical(@tf-primary-highlight, @tf-primary);
-	text-shadow: 0 -1px 0 rgba(0,0,0,.30);
+        color: @white !important;
+        #gradient > .vertical(@tf-primary-highlight, @tf-primary);
+        text-shadow: 0 -1px 0 rgba(0,0,0,.30);
+        border-width: 1px;
+        border-style: solid;
+        border-color: @tf-primary @tf-primary darken(@tf-primary, 15%);
  }
  
 .tf-major:hover
@@ -352,9 +355,6 @@ ul.tf-db-progress li.last {
 }
 
 
-
-
-
 /*
 
 Theme Force Stylesheet - Options & Settings
@@ -365,7 +365,7 @@ Theme Force Stylesheet - Options & Settings
    -----------------------
 */
 
-#tf-options-page {
+.tf-options-page {
     width:700px;
     margin:10px 0px 0px 20px;
 }
@@ -374,29 +374,29 @@ Theme Force Stylesheet - Options & Settings
    -----------------------
 */
 
- #tf-options-panel {
+.tf-options-panel {
      width:700px;
      background:#fff;
  }
  
- #tf-options-panel table {
+.tf-options-panel table {
      border-spacing:0;
      padding:10px 0px 20px 0px;
  }
 
-#tf-options-page h3 {
+.tf-options-page h3 {
     font-size:18px;
     margin:20px 0px 20px 0px;
     padding-bottom:20px;
     border-bottom:1px solid #ddd;
 }
 
-#tf-options-panel th {
+.tf-options-panel th {
     width:260px;
     padding:10px 0 10px 0;
 }
 
-#tf-options-panel th label {
+.tf-options-panel th label {
     font-size:15px;
     min-height:34px;
     line-height:34px;
@@ -405,12 +405,12 @@ Theme Force Stylesheet - Options & Settings
     text-shadow:0px 1px #fff;  
 }
 
-#tf-options-page td {
+.tf-options-page td {
     padding: 10px 0px 20px 0px;
     width:440px;
 }
 
-#tf-options-page td span.desc {
+.tf-options-page td span.desc {
     font-size:11px;
     color:#787878;
     padding: 0.5em;
@@ -421,11 +421,11 @@ Theme Force Stylesheet - Options & Settings
    -----------------------
 */
 
- #tf-options-page td, #tf-options-page input, #tf-options-page textarea, #tf-options-page select, .chzn-container-multi .chzn-choices  {
+ .tf-options-page td, .tf-options-page input, .tf-options-page textarea, .tf-options-page select, .chzn-container-multi .chzn-choices  {
     font-size:15px;
 }
 
-#tf-options-page input[type=text], #tf-options-page textarea, #tf-options-page select, .chzn-container-multi .chzn-choices  {
+.tf-options-page input[type=text], .tf-options-page textarea, .tf-options-page select, .chzn-container-multi .chzn-choices  {
     border: 1px solid #dfdfdf;
     color: #555;
     padding: 0.5em;
@@ -449,12 +449,12 @@ Theme Force Stylesheet - Options & Settings
 
  }
  
-  #tf-options-page textarea {
+  .tf-options-page textarea {
      min-height:100px;
  }
  
  
-  #tf-options-page select {
+  .tf-options-page select {
      background-image: url('@{themeurl}/framework/assets/images/ui-dropdown.jpg');
      background-repeat: no-repeat;
      background-position: right center;
@@ -463,8 +463,8 @@ Theme Force Stylesheet - Options & Settings
      height:40px;
  }
  
- #tf-options-page input[type=checkbox],
- #tf-options-page input[type=radio] {
+ .tf-options-page input[type=checkbox],
+ .tf-options-page input[type=radio] {
     display: inline-block;
     line-height: 1em;
     margin: 0 0.25em 0 0;
@@ -474,7 +474,7 @@ Theme Force Stylesheet - Options & Settings
     vertical-align: text-top;
  }
 
- #tf-options-page input[type=radio] {
+ .tf-options-page input[type=radio] {
     background: transparent url('@{themeurl}/framework/assets/images/ui-checks.png') 0px 0px no-repeat;
     width:24px;
     height:24px;
@@ -493,11 +493,11 @@ Theme Force Stylesheet - Options & Settings
 	float:left;
 }
   
-  #tf-options-page input[type=radio]:checked {
+  .tf-options-page input[type=radio]:checked {
     background: transparent url('@{themeurl}/framework/assets/images/ui-checks.png') -24px 0px no-repeat;
   }
   
-  #tf-options-page input[type=checkbox] {
+  .tf-options-page input[type=checkbox] {
     background: transparent url('@{themeurl}/framework/assets/images/ui-checks.png') 0px -24px no-repeat;
     width:24px;
     height:24px;
@@ -508,22 +508,22 @@ Theme Force Stylesheet - Options & Settings
     -moz-appearance:none;
   }
   
-  #tf-options-page input[type=checkbox]:checked {
+  .tf-options-page input[type=checkbox]:checked {
     background: transparent url('@{themeurl}/framework/assets/images/ui-checks.png') -24px -24px no-repeat;
   } 
   
-  #tf-options-page input[type=checkbox]:disabled {
+  .tf-options-page input[type=checkbox]:disabled {
     background: transparent url('@{themeurl}/framework/assets/images/ui-checks.png') -48px -24px no-repeat;
   } 
   
-  #tf-options-page .tf-options-img {
+  .tf-options-page .tf-options-img {
     margin:20px 0;
   }
   
- #tf-options-page .image-radio label img {display:block;border:5px solid #eee;padding:10px;margin:0 15px 15px 0;border-radius:5px;}  
- #tf-options-page .image-radio input[type="radio"] {display:none;width:0px !important; }
- #tf-options-page .image-radio input[type="radio"]:checked+label img {border:5px solid #0086ba !important; cursor:pointer;}
- #tf-options-page .image-radio label img:hover {opacity:0.7}
+ .tf-options-page .image-radio label img {display:block;border:5px solid #eee;padding:10px;margin:0 15px 15px 0;border-radius:5px;}  
+ .tf-options-page .image-radio input[type="radio"] {display:none;width:0px !important; }
+ .tf-options-page .image-radio input[type="radio"]:checked+label img {border:5px solid #0086ba !important; cursor:pointer;}
+ .tf-options-page .image-radio label img:hover {opacity:0.7}
 
 /* Form Table (Wrapped)
    -----------------------
@@ -541,7 +541,7 @@ Theme Force Stylesheet - Options & Settings
     box-shadow: 0px 2px 3px 0px #9e9e9e;
 }
 
-#tf-options-page .tf-settings-wrap input[type=text], #tf-options-page .tf-settings-wrap select, #tf-options-page .tf-settings-wrap textarea {
+.tf-options-page .tf-settings-wrap input[type=text], .tf-options-page .tf-settings-wrap select, .tf-options-page .tf-settings-wrap textarea {
     width:380px;
 }
 
@@ -558,7 +558,7 @@ Theme Force Stylesheet - Options & Settings
     min-height:350px;
 }
 
-#tf-options-page .tf-settings-wrap.tf-farbtastic input[type=text] {
+.tf-options-page .tf-settings-wrap.tf-farbtastic input[type=text] {
     width:100px;
 }
 
@@ -608,7 +608,7 @@ Theme Force Stylesheet - Options & Settings
     border-bottom:none;
   }
 
-#tf-options-page .social-box li, #tf-options-page  #tf-tip li, #tf-options-page .tf-text li {
+.tf-options-page .social-box li, .tf-options-page  #tf-tip li, .tf-options-page .tf-text li {
      list-style-type: disc;
      list-style-position: inside;
      padding-left: 1em;
@@ -2094,12 +2094,12 @@ h2.full-menu {
     width:580px;
 }
 
-#foodmenuv2-modal-wrap #tf-options-page {
+#foodmenuv2-modal-wrap .tf-options-page {
     width:580px;
     position:relative;
 }
 
-#foodmenuv2-modal-wrap #tf-options-page .thumb {
+#foodmenuv2-modal-wrap .tf-options-page .thumb {
     position:absolute;
     top:0;
     left:0;
@@ -2133,16 +2133,16 @@ h2.full-menu {
     padding: 12px 0px;
 }
 
-#foodmenuv2-modal-wrap .content #tf-options-page {
+#foodmenuv2-modal-wrap .content .tf-options-page {
     margin: 0px !important;
 }
 
 /* --- Default --- */
 
-#foodmenuv2-modal-wrap #tf-options-page input.tf_foodmenu_item_name {margin-bottom:10px;}
+#foodmenuv2-modal-wrap .tf-options-page input.tf_foodmenu_item_name {margin-bottom:10px;}
 
-#foodmenuv2-modal-wrap #tf-options-page input.tf_foodmenu_item_name,
-#foodmenuv2-modal-wrap #tf-options-page textarea {
+#foodmenuv2-modal-wrap .tf-options-page input.tf_foodmenu_item_name,
+#foodmenuv2-modal-wrap .tf-options-page textarea {
     margin-left:220px;
     width: 340px !important;
     .border-radius(3px);
@@ -2197,4 +2197,80 @@ input.food-save {
 
 input.food-save:hover {
         #gradient > .vertical(@tf-primary-highlight + #111, @tf-primary  + #111);
+}
+
+/* -- Accordion -- */
+
+.accordion-wrap h3 {
+    font-size:18px;
+    margin:40px 0px 20px 0px;
+    padding-bottom:20px;
+    border-bottom:1px solid #ddd;
+    }
+
+.accordion-header {
+    clear:both;
+    display:block;
+    font-size:14px;
+    text-shadow:0 1px 0 @white;
+    padding:15px 20px 15px 20px;
+    border:1px solid #DFDFDF;
+    .border-radius(3px);
+    .box-shadow(rgb(255, 255, 255) 0px 1px 0px 0px inset);
+    background-attachment: scroll;
+    background-clip: border-box;
+    background-color: #F2F2F2;
+    overflow:auto;
+    width: 798px;
+    margin:10px 0 20px;
+    height:22px;
+    line-height:22px;
+}
+
+.accordion-header:focus {
+    outline:none;
+}
+
+a.accordion-expand,
+.accordion-desc,
+.accordion-link {
+    display:inline-block;
+    height:22px;
+    line-height:22px;
+}
+
+a.accordion-expand {
+    float:left;
+    width:30%;
+    padding-left:30px;
+    background-repeat: no-repeat;
+    background-position: 0px 0px;
+    text-decoration: none;
+}
+
+
+
+a.accordion-checked {
+    background-image: url(@{themeurl}/framework/assets/images/accordion-checked.png);
+}
+
+a.accordion-unchecked {
+    background-image: url(@{themeurl}/framework/assets/images/accordion-expand.png);
+}
+
+.accordion-content {
+    padding:0 0 40px;
+    overflow:auto;
+    height:auto;
+    width:800px;
+}
+
+.accordion-desc {
+    float:left;
+    width:30%;
+}
+
+.accordion-link {
+    float:left;
+    width:30%;
 }

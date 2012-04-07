@@ -12,8 +12,8 @@
 
 function themeforce_opendining_page() {
     ?>
-    <div class="wrap" id="tf-options-page">
-    <div id="tf-options-panel">
+    <div class="tf-options-page">
+    <div class="tf-options-panel">
     <form class="form-table" action="options.php" method="post">
    
     <?php 
@@ -26,8 +26,6 @@ function themeforce_opendining_page() {
     // Options
     
     $options = array (
- 
-        array( 'name' => 'Open Dining Settings', 'type' => 'title'),
 
         array( 'type' => 'open'),   
 
@@ -75,6 +73,7 @@ function themeforce_opendining_page() {
             </ul>
 
         </div>    
+    </div>
     </div>
     <?php
         

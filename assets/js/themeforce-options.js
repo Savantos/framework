@@ -2,7 +2,7 @@ jQuery(document).ready(function($) {
  
     // Yes / No Slider
  
-    $('#tf-options-page .form-table .iphone:checkbox').iphoneStyle({
+    $('.tf-options-page .form-table .iphone:checkbox').iphoneStyle({
       checkedLabel: 'YES',
       uncheckedLabel: 'NO'
     });

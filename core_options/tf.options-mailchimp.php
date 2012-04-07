@@ -13,8 +13,8 @@
 
 function themeforce_mailchimp_page() {
     ?>
-    <div class="wrap" id="tf-options-page">
-    <div id="tf-options-panel">
+    <div class="tf-options-page">
+    <div class="tf-options-panel">
     <form class="form-table" action="options.php" method="post">
    
     <?php 
@@ -27,8 +27,6 @@ function themeforce_mailchimp_page() {
     // Options
     
     $options = array (
- 
-        array( 'name' => 'MailChimp Settings', 'type' => 'title'),
 
         array( 'type' => 'open'),   
 
@@ -49,10 +47,16 @@ function themeforce_mailchimp_page() {
 	 <input type="submit" class="tf-button tf-major right" name="options_submit" value=" <?php _e( 'Save Changes' )  ?>" />
          <div style="clear:both;"></div>
     </form>
+
+        <!--
+
         <div id="tf-tip">
             <h3>Why is a MailChimp Newsletter important?</h3>
             <p>A newsletter allows you to <strong>automatically</strong> keep in touch with your customer base, updating them on the latest news & events. You can set your newsletter to automatically send off your events on a weekly or monthly basis.</p>
-        </div>    
+        </div>
+
+         -->
+
     </div>
     <?php
         

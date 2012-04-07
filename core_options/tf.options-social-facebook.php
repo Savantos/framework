@@ -13,8 +13,8 @@
 
 function themeforce_social_facebook_page() {
     ?>
-    <div class="wrap" id="tf-options-page">
-    <div id="tf-options-panel">
+    <div class="wrap tf-options-page">
+    <div class="tf-options-panel">
     <form class="form-table" action="options.php" method="post">
    
     <?php 
