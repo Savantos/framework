@@ -63,6 +63,7 @@ function themeforce_opendining_page() {
 	 <input type="submit" class="tf-button tf-major right" name="options_submit" value=" <?php _e( 'Save Changes', 'themeforce' )  ?>" />
          <div style="clear:both;"></div>
     </form>
+        <!--
         <div id="tf-tip">
             <h3><?php _e('Did you know?', 'themeforce'); ?></h3>
             <p><a href="https://www.opendining.net/link/b1793c2f1bba061d188a11fff40aa30406455fae">Open Dining</a> <?php _e('gets your restaurant more orders, larger tickets, and more loyal customers with web, mobile, and Facebook ordering.', 'themeforce'); ?></p>
@@ -71,7 +72,8 @@ function themeforce_opendining_page() {
                 <li>The service is available globally.</li>
             </ul>
 
-        </div>    
+        </div>
+        -->
     </div>
     </div>
     <?php
