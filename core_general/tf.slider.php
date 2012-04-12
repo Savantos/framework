@@ -109,7 +109,18 @@ function themeforce_slider_page() {
             $order = $custom["_tfslider_order"][0];
             
             $link = $custom["tfslider_link"][0];
-            $image = $custom["tfslider_image"][0];
+
+            // - image (with fallback) -
+
+            $meta_image = $custom["tfslider_image"][0];
+            $post_image = wp_get_attachment_image_src( get_post_thumbnail_id( get_the_ID() ), 'full' );
+
+            if ( $post_image[0] ) {
+                $image = $post_image[0];
+            } else {
+                $image = $meta_image;
+            }
+
             $thumbnail = wpthumb( $image, 'width=628&height=100&crop=1', false);
             
             // Warning Statement
@@ -313,8 +324,6 @@ function themeforce_slider_catch_update() {
 
 add_action('admin_init', 'themeforce_slider_catch_update');
 
-
-//TODO Change function to match custom post types, not options.
 //TODO Could benefit from using transients api for scalability
 function themeforce_slider_display() {
 
@@ -340,9 +349,18 @@ function themeforce_slider_display() {
             $custom = get_post_custom( get_the_ID() );
             $id = ( $my_query->post->ID );
             $order = $custom["_tfslider_order"][0];
-            $image = $custom["tfslider_image"][0];
             $link = $custom["tfslider_link"][0];
-       
+
+            // - image (with fallback support)
+            $meta_image = $custom["tfslider_image"][0];
+            $post_image = wp_get_attachment_image_src( get_post_thumbnail_id( get_the_ID() ), 'full' );
+
+            if ( $post_image[0] ) {
+                $image = $post_image[0];
+            } else {
+                $image = $meta_image;
+            }
+
             // output
 
             // update mobile bg if not set yet
