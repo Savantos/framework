@@ -18,9 +18,9 @@ function create_slider_postype() {
     $args = array(
         'label' => __( 'Slider' ),
         'can_export' => true,
+        'public' => true,
         'show_ui' => false,
         'show_in_nav_menus' => false,
-        '_builtin' => false,
         'capability_type' => 'post',
         'hierarchical' => false,
         'rewrite' => array( "slug" => "food-menu" ),
@@ -76,8 +76,8 @@ add_action( 'admin_print_styles', 'themeforce_slider_styles' );
 
 function themeforce_slider_page() {
     ?>
-    <div class="wrap" id="tf-slider-page">
-    <div id="tf-options-page">    
+    <div class="wrap tf-slider-page">
+    <div class="tf-options-page">
     <?php screen_icon(); ?>
     <h2>Slider Options</h2>
     <h3>Manage Slides</h3>
