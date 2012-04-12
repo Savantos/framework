@@ -13,7 +13,7 @@
 
 function themeforce_social_media_overview_page() {
     ?>
-    <div class="wrap" id="tf-options-page">
+    <div class="wrap tf-options-page">
         <div class="tf-text">
         <h3>What is Social Media, and why you need it?</h3>
         <p>Social media is a great way for you to stay in touch with your existing customer base, as well as being able to attract others within those private networks. <strong>Social Proof</strong> on the other hand is where your customers will create most of your content (rating, reviews, photos, etc.) and is equally important, so check that out as well!</p>

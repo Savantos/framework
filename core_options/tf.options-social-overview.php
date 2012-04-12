@@ -13,7 +13,7 @@
 
 function themeforce_social_overview_page() {
     ?>
-    <div class="wrap" id="tf-options-page">
+    <div class="wrap tf-options-page">
         <div class="tf-text">
         <h3>What is Social Proof, and why you need it?</h3>
         <p>Social proof is a psychological mechanism whereby we look to others to help guide our daily decisions, i.e. music trends, clothes, etc. We've integrated with the following tools (which are all free for you to use by the way) to provide you with a way to come across as more credible to your online visitors.</p>
@@ -51,11 +51,7 @@ function themeforce_social_overview_page() {
         </ul>
         <div class="social-box tf-settings-wrap"><span>Use Foursquare to <strong>display your Guest Photos & Tips</strong> </span><a href="<?php echo get_admin_url() . 'admin.php?page=themeforce_foursquare'; ?>"><div class="tf-button tf-inline">Go to your Foursquare Settings</div></a></div>
         <div class="clearfix"></div>
-        <!-- GOWALLA -->
-        <img src="<?php echo get_bloginfo( 'template_url' ).'/framework/assets/images/social_gowalla.jpg'; ?>" />
-        <p><a href="http://www.gowalla.com" target="_blank">Gowalla</a> is a primarily mobile web application that allows users to check in to locations that they visit using their mobile device. This is achieved either through the use of dedicated applications available on Google Android, iPhone, Palm WebOS and BlackBerry, or via m.gowalla.com. There is currently no way of checking in through the standard website. Check-ins can be pushed via Notifications to iPhones, and by linking accounts, to Twitter and Facebook.</p>
-        <div class="social-box tf-settings-wrap"><span>Use Gowalla to <strong>display your Check-ins & Guest Photos</strong> </span><a href="<?php echo get_admin_url() . 'admin.php?page=themeforce_gowalla'; ?>"><div class="tf-button tf-inline">Go to your Gowalla Settings</div></a></div>
-        <div class="clearfix"></div>
+
         </div>
     </div>
     <?php

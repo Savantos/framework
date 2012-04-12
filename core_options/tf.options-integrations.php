@@ -36,7 +36,7 @@ function themeforce_integrations_page() {
             <div class="accordion-header">
             <a class="accordion-expand  accordion-<?php if ( get_option('tf_opentable_id') != '' ) { echo 'checked'; } else { echo 'unchecked'; } ?>" href="#">OpenTable</a>
                 <div class="accordion-desc">USA & 18 Countries</div>
-                <div class="accordion-link"><a href="http://www.opentable.com" target="_blank">Sign-up</a></div>
+                <!--  <div class="accordion-link"><a href="http://www.opentable.com" target="_blank">Sign-up</a></div> -->
             </div>
             <div class="accordion-content"><?php themeforce_opentable_page(); ?></div>
 
@@ -45,7 +45,7 @@ function themeforce_integrations_page() {
             <div class="accordion-header">
                 <a class="accordion-expand  accordion-<?php if ( get_option('tf_localina_api') && get_option('tf_localina_phone') ) { echo 'checked'; } else { echo 'unchecked'; } ?>" href="#">Localina</a>
                 <div class="accordion-desc">Switzerland</div>
-                <div class="accordion-link">Sign-up</div>
+                <!--  <div class="accordion-link">Sign-up</div> -->
             </div>
             <div class="accordion-content"><?php themeforce_localina_page(); ?></div>
 
@@ -58,7 +58,7 @@ function themeforce_integrations_page() {
             <div class="accordion-header">
                 <a class="accordion-expand  accordion-<?php if ( get_option('tf_opendining_app_id') && get_option('tf_opendining_rest_id') ) { echo 'checked'; } else { echo 'unchecked'; } ?>" href="#">Open Dining</a>
                 <div class="accordion-desc">Global & Free Plans</div>
-                <div class="accordion-link">More Information</div>
+               <!--  <div class="accordion-link">More Information</div> -->
             </div>
             <div class="accordion-content"><?php themeforce_opendining_page(); ?></div>
 
@@ -71,7 +71,7 @@ function themeforce_integrations_page() {
             <div class="accordion-header">
                 <a class="accordion-expand  accordion-<?php if ( get_option('tf_mailchimp_api_key') ) { echo 'checked'; } else { echo 'unchecked'; } ?>" href="#">MailChimp</a>
                 <div class="accordion-desc">Global & Free Plans</div>
-                <div class="accordion-link">More Information</div>
+                <!-- <div class="accordion-link">More Information</div> -->
             </div>
             <div class="accordion-content"><?php themeforce_mailchimp_page(); ?></div>
 
