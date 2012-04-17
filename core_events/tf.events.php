@@ -15,16 +15,16 @@ require_once( TF_PATH . '/core_events/tf.events.quick-edit.php' );
 function create_event_postype() {
 
 	$labels = array(
-	    'name' => _x('Events', 'post type general name'),
-	    'singular_name' => _x('Event', 'post type singular name'),
-	    'add_new' => _x('Add New', 'events'),
-	    'add_new_item' => __('Add New Event'),
-	    'edit_item' => __('Edit Event'),
-	    'new_item' => __('New Event'),
-	    'view_item' => __('View Event'),
-	    'search_items' => __('Search Events'),
-	    'not_found' =>  __('No events found'),
-	    'not_found_in_trash' => __('No events found in Trash'),
+	    'name' => _x('Events', 'post type general name', 'themeforce'),
+	    'singular_name' => _x('Event', 'post type singular name', 'themeforce'),
+	    'add_new' => _x('Add New', 'events', 'themeforce'),
+	    'add_new_item' => __('Add New Event', 'themeforce'),
+	    'edit_item' => __('Edit Event', 'themeforce'),
+	    'new_item' => __('New Event', 'themeforce'),
+	    'view_item' => __('View Event', 'themeforce'),
+	    'search_items' => __('Search Events', 'themeforce'),
+	    'not_found' =>  __('No events found', 'themeforce'),
+	    'not_found_in_trash' => __('No events found in Trash', 'themeforce'),
 	    'parent_item_colon' => '',
 	);
 	
@@ -55,29 +55,29 @@ add_action( 'init', 'create_event_postype' );
 function create_eventcategory_taxonomy() {
 
     $labels = array(
-        'name' => _x( 'Categories', 'taxonomy general name' ),
-        'singular_name' => _x( 'Category', 'taxonomy singular name' ),
-        'search_items' =>  __( 'Search Categories' ),
-        'popular_items' => __( 'Popular Categories' ),
-        'all_items' => __( 'All Categories' ),
+        'name' => _x( 'Categories', 'taxonomy general name', 'themeforce'),
+        'singular_name' => _x( 'Category', 'taxonomy singular name', 'themeforce'),
+        'search_items' =>  __( 'Search Categories', 'themeforce' ),
+        'popular_items' => __( 'Popular Categories', 'themeforce' ),
+        'all_items' => __( 'All Categories', 'themeforce' ),
         'parent_item' => null,
         'parent_item_colon' => null,
-        'edit_item' => __( 'Edit Category' ),
-        'update_item' => __( 'Update Category' ),
-        'add_new_item' => __( 'Add New Category' ),
-        'new_item_name' => __( 'New Category Name' ),
-        'separate_items_with_commas' => __( 'Separate categories with commas' ),
-        'add_or_remove_items' => __( 'Add or remove categories' ),
-        'choose_from_most_used' => __( 'Choose from the most used categories' ),
+        'edit_item' => __( 'Edit Category', 'themeforce' ),
+        'update_item' => __( 'Update Category', 'themeforce' ),
+        'add_new_item' => __( 'Add New Category', 'themeforce' ),
+        'new_item_name' => __( 'New Category Name', 'themeforce' ),
+        'separate_items_with_commas' => __( 'Separate categories with commas', 'themeforce' ),
+        'add_or_remove_items' => __( 'Add or remove categories', 'themeforce' ),
+        'choose_from_most_used' => __( 'Choose from the most used categories', 'themeforce' ),
     );
 
     register_taxonomy('tf_eventcategory', 'tf_events', array(
-        'label' => __('Event Category'),
+        'label' => __('Event Category', 'themeforce'),
         'labels' => $labels,
         'hierarchical' => true,
         'show_ui' => true,
         'query_var' => true,
-        'rewrite' => array( 'slug' => 'event-category' ),
+        'rewrite' => array( 'slug' => 'event-category', 'themeforce' ),
     ));
 
 }
@@ -94,10 +94,10 @@ function tf_events_edit_columns( $columns ) {
     $columns = array(
         "cb" => "<input type=\"checkbox\" />",
         "tf_col_ev_thumb" => '',
-        "tf_col_ev_date" => __( 'When' ),
-        "title" => __( 'Name' ),
-        "tf_col_ev_cat" => __( 'Category' ),
-        "tf_col_ev_desc" => __( 'Description' )
+        "tf_col_ev_date" => __( 'When', 'themeforce' ),
+        "title" => __( 'Name', 'themeforce' ),
+        "tf_col_ev_cat" => __( 'Category', 'themeforce' ),
+        "tf_col_ev_desc" => __( 'Description', 'themeforce' )
         );
 
     return $columns;
@@ -205,10 +205,10 @@ function tf_events_meta () {
     ?>
     <div class="tf-meta">
         <ul>
-            <li><label>Start Date</label><input name="tf_events_startdate" class="tfdate" value="<?php echo $clean_sd; ?>" /></li>
-            <li><label>Start Time</label><input name="tf_events_starttime" value="<?php echo $clean_st; ?>" /><em><?php _e('Use 24h format (7pm = 19:00)', 'themeforce'); ?></em></li>
-            <li><label>End Date</label><input name="tf_events_enddate" class="tfdate" value="<?php echo $clean_ed; ?>" /></li>
-            <li><label>End Time</label><input name="tf_events_endtime" value="<?php echo $clean_et; ?>" /><em><?php _e('Use 24h format (7pm = 19:00)', 'themeforce'); ?></em></li>
+            <li><label><?php __('Start Date', 'themeforce'); ?></label><input name="tf_events_startdate" class="tfdate" value="<?php echo $clean_sd; ?>" /></li>
+            <li><label><?php __('Start Time', 'themeforce'); ?></label><input name="tf_events_starttime" value="<?php echo $clean_st; ?>" /><em><?php _e('Use 24h format (7pm = 19:00)', 'themeforce'); ?></em></li>
+            <li><label><?php __('End Date', 'themeforce'); ?></label><input name="tf_events_enddate" class="tfdate" value="<?php echo $clean_ed; ?>" /></li>
+            <li><label><?php __('End Time', 'themeforce'); ?></label><input name="tf_events_endtime" value="<?php echo $clean_et; ?>" /><em><?php _e('Use 24h format (7pm = 19:00)', 'themeforce'); ?></em></li>
         </ul>
     </div>
     <?php
@@ -257,19 +257,19 @@ function events_updated_messages( $messages ) {
 
   $messages['tf_events'] = array(
     0 => '', // Unused. Messages start at index 1.
-    1 => sprintf( __('Event updated. <a href="%s">View item</a>'), esc_url( get_permalink( $post_ID ) ) ),
-    2 => __('Custom field updated.'),
-    3 => __('Custom field deleted.'),
-    4 => __('Event updated.'),
+    1 => sprintf( __('Event updated. <a href="%s">View item</a>', 'themeforce'), esc_url( get_permalink( $post_ID ) ) ),
+    2 => __('Custom field updated.', 'themeforce'),
+    3 => __('Custom field deleted.', 'themeforce'),
+    4 => __('Event updated.', 'themeforce'),
     /* translators: %s: date and time of the revision */
-    5 => isset( $_GET['revision'] ) ? sprintf( __('Event restored to revision from %s'), wp_post_revision_title( ( int ) $_GET['revision'], false ) ) : false,
-    6 => sprintf( __('Event published. <a href="%s">View event</a>'), esc_url( get_permalink( $post_ID ) ) ),
+    5 => isset( $_GET['revision'] ) ? sprintf( __('Event restored to revision from %s', 'themeforce'), wp_post_revision_title( ( int ) $_GET['revision'], false ) ) : false,
+    6 => sprintf( __('Event published. <a href="%s">View event</a>', 'themeforce'), esc_url( get_permalink( $post_ID ) ) ),
     7 => __('Event saved.'),
-    8 => sprintf( __('Event submitted. <a target="_blank" href="%s">Preview event</a>'), esc_url( add_query_arg( 'preview', 'true', get_permalink( $post_ID ) ) ) ),
-    9 => sprintf( __('Event scheduled for: <strong>%1$s</strong>. <a target="_blank" href="%2$s">Preview event</a>'),
+    8 => sprintf( __('Event submitted. <a target="_blank" href="%s">Preview event</a>', 'themeforce'), esc_url( add_query_arg( 'preview', 'true', get_permalink( $post_ID ) ) ) ),
+    9 => sprintf( __('Event scheduled for: <strong>%1$s</strong>. <a target="_blank" href="%2$s">Preview event</a>', 'themeforce'),
       // translators: Publish box date format, see http://php.net/date
-      date_i18n( __( 'M j, Y @ G:i' ), strtotime( $post->post_date ) ), esc_url( get_permalink( $post_ID ) ) ),
-    10 => sprintf( __('Event draft updated. <a target="_blank" href="%s">Preview event</a>'), esc_url( add_query_arg( 'preview', 'true', get_permalink( $post_ID ) ) ) ),
+      date_i18n( __( 'M j, Y @ G:i', 'themeforce' ), strtotime( $post->post_date ) ), esc_url( get_permalink( $post_ID ) ) ),
+    10 => sprintf( __('Event draft updated. <a target="_blank" href="%s">Preview event</a>', 'themeforce'), esc_url( add_query_arg( 'preview', 'true', get_permalink( $post_ID ) ) ) ),
   );
 
   return $messages;
@@ -309,19 +309,19 @@ function create_events_tax() {
         // Create the terms
         if (term_exists('Featured', 'tf_eventcategory') == false ) {
             wp_insert_term(
-              'Featured',
+              __('Featured', 'themeforce'),
               'tf_eventcategory'
               );
          }
         if (term_exists('Football', 'tf_eventcategory') == false ) {
             wp_insert_term(
-              'Football',
+              __('Football', 'themeforce'),
               'tf_eventcategory'
               );
          }
          if (term_exists('Quiz Night', 'tf_eventcategory') == false ) {
             wp_insert_term(
-              'Quiz Night',
+              __('Quiz Night', 'themeforce'),
               'tf_eventcategory'
               );
          }
