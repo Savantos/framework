@@ -93,7 +93,7 @@ function tf_events_edit_columns( $columns ) {
 
     $columns = array(
         "cb" => "<input type=\"checkbox\" />",
-        "tf_col_ev_thumb" => __( '' ),
+        "tf_col_ev_thumb" => '',
         "tf_col_ev_date" => __( 'When' ),
         "title" => __( 'Name' ),
         "tf_col_ev_cat" => __( 'Category' ),
