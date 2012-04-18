@@ -36,33 +36,20 @@ function tf_events_add_fields_to_quick_edit( $column_name, $post_type ) {
 	<?php if ( $column_name == 'tf_col_ev_cat' ): ?>
 		
 		<div class="tf-quickedit-header">
-			<div class="width-item"><h3>Item</h3></div>
-			<div class="width-cat"><h3>Event Categories</h3></div>
-			<div class="width-image"><h3>Image</h3></div>
-			<div class="width-desc"><h3>Description</h3></div>
+			<div class="width-item"><h3><?php _e('Item', 'themeforce'); ?></h3></div>
+			<div class="width-cat"><h3>s<?php _e('Event Categories', 'themeforce'); ?></h3></div>
+			<div class="width-image"><h3><?php _e('Image', 'themeforce'); ?></h3></div>
+			<div class="width-desc"><h3><?php _e('Description', 'themeforce'); ?></h3></div>
 		</div>
 		
 		<div id="tf-inline-edit-dates" style="margin-top: 10px">
-                    
-                    <!-- Old Code -->  
-                    
-                        
-			<span class="tf_ev_title">Start Date</span>
+
+			<span class="tf_ev_title"><?php _e('Start Date', 'themeforce'); ?></span>
 			<div class="start-date" style="display:block; margin-left: 5em; "></div>
 			<div style="clear:both;height:10px;"></div>
-			<span class="tf_ev_title">End Date</span>
+			<span class="tf_ev_title"><?php _e('End Date', 'themeforce'); ?></span>
 			<div class="end-date" style="display:block; margin-left: 5em;"></div>
-                        
-                        
-                      <!-- New Code -->  
-                        <!--
-                        <ul>
-                            <li><label>Start Date</label><input name="tf_events_startdate" class="tfdate" value="<?php echo $clean_sd; ?>" /></li>
-                            <li><label>Start Time</label><input name="tf_events_starttime" value="<?php echo $clean_st; ?>" /><em><?php _e('Use 24h format (7pm = 19:00)', 'themeforce'); ?></em></li>
-                            <li><label>End Date</label><input name="tf_events_enddate" class="tfdate" value="<?php echo $clean_ed; ?>" /></li>
-                            <li><label>End Time</label><input name="tf_events_endtime" value="<?php echo $clean_et; ?>" /><em><?php _e('Use 24h format (7pm = 19:00)', 'themeforce'); ?></em></li>
-                        </ul>
-                        -->
+
 		</div>
 		
 		<div id="tf-inline-edit-image" style="width:28%; float:left; padding:2% 0">

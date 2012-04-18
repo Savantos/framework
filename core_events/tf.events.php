@@ -55,8 +55,8 @@ add_action( 'init', 'create_event_postype' );
 function create_eventcategory_taxonomy() {
 
     $labels = array(
-        'name' => _x( 'Categories', 'taxonomy general name', 'themeforce'),
-        'singular_name' => _x( 'Category', 'taxonomy singular name', 'themeforce'),
+        'name' => __( 'Categories', 'themeforce'),
+        'singular_name' => __( 'Category', 'themeforce'),
         'search_items' =>  __( 'Search Categories', 'themeforce' ),
         'popular_items' => __( 'Popular Categories', 'themeforce' ),
         'all_items' => __( 'All Categories', 'themeforce' ),
@@ -149,7 +149,7 @@ function tf_events_custom_columns( $column ) {
             case "tf_col_ev_thumb":
                 // - show thumb -
                 echo '<div class="table-thumb">';
-		the_post_thumbnail( 'width=60&height=60&crop=1' );
+		            the_post_thumbnail( 'width=60&height=60&crop=1' );
                 echo '</div>';
             break;
             case "tf_col_ev_desc";
@@ -205,10 +205,10 @@ function tf_events_meta () {
     ?>
     <div class="tf-meta">
         <ul>
-            <li><label><?php __('Start Date', 'themeforce'); ?></label><input name="tf_events_startdate" class="tfdate" value="<?php echo $clean_sd; ?>" /></li>
-            <li><label><?php __('Start Time', 'themeforce'); ?></label><input name="tf_events_starttime" value="<?php echo $clean_st; ?>" /><em><?php _e('Use 24h format (7pm = 19:00)', 'themeforce'); ?></em></li>
-            <li><label><?php __('End Date', 'themeforce'); ?></label><input name="tf_events_enddate" class="tfdate" value="<?php echo $clean_ed; ?>" /></li>
-            <li><label><?php __('End Time', 'themeforce'); ?></label><input name="tf_events_endtime" value="<?php echo $clean_et; ?>" /><em><?php _e('Use 24h format (7pm = 19:00)', 'themeforce'); ?></em></li>
+            <li><label><?php _e('Start Date', 'themeforce'); ?></label><input name="tf_events_startdate" class="tfdate" value="<?php echo $clean_sd; ?>" /></li>
+            <li><label><?php _e('Start Time', 'themeforce'); ?></label><input name="tf_events_starttime" value="<?php echo $clean_st; ?>" /><em><?php _e('Use 24h format (7pm = 19:00)', 'themeforce'); ?></em></li>
+            <li><label><?php _e('End Date', 'themeforce'); ?></label><input name="tf_events_enddate" class="tfdate" value="<?php echo $clean_ed; ?>" /></li>
+            <li><label><?php _e('End Time', 'themeforce'); ?></label><input name="tf_events_endtime" value="<?php echo $clean_et; ?>" /><em><?php _e('Use 24h format (7pm = 19:00)', 'themeforce'); ?></em></li>
         </ul>
     </div>
     <?php

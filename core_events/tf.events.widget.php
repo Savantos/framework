@@ -39,6 +39,8 @@ class Example_Widget extends WP_Widget {
 
                 $today6am = strtotime('today 6:00') + ( get_option( 'gmt_offset' ) * 3600 );
 
+                // TODO Replace SQL SELECT with WP query
+
                 // - query -
                 global $wpdb;
                 $querystr = "
