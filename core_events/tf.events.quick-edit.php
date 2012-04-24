@@ -35,9 +35,9 @@ function tf_events_add_fields_to_quick_edit( $column_name, $post_type ) {
 	
 	<?php if ( $column_name == 'tf_col_ev_cat' ): ?>
 		
-		<div class="tf-quickedit-header">
+		<div class="tf-quickedit-header tf-primary-gradient">
 			<div class="width-item"><h3><?php _e('Item', 'themeforce'); ?></h3></div>
-			<div class="width-cat"><h3>s<?php _e('Event Categories', 'themeforce'); ?></h3></div>
+			<div class="width-cat"><h3><?php _e('Event Categories', 'themeforce'); ?></h3></div>
 			<div class="width-image"><h3><?php _e('Image', 'themeforce'); ?></h3></div>
 			<div class="width-desc"><h3><?php _e('Description', 'themeforce'); ?></h3></div>
 		</div>
