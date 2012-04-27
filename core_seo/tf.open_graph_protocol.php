@@ -79,8 +79,12 @@ function tf_add_og_meta_tags() {
 		
 		$meta[] = array( 'property' => 'og:type', 'content' => 'restaurant' );
 		
-		if ( $description = get_bloginfo( 'description' ) )
+		/*
+		We don't have this as an available option, so commetning out for now
+
+        if ( $description = get_bloginfo( 'description' ) )
 			$meta[] = array( 'property' => 'og:description', 'content' => $description );
+		*/
 				
 		if ( $phone_number = get_option( 'tf_business_phone' ) ) {
 			$meta[] = array( 'property' => 'og:phone_number', 'content' => $phone_number );
