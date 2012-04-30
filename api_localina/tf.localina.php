@@ -25,8 +25,9 @@ function tf_localina_bar() {
 
         echo '<div id="localinabar">';
 
-            echo '<div id="localinabar-center">';
-            echo '<a class="localinalink" href="javascript:;" onclick="Localina.startBooking(\'' . $phone . '\', \''. $api . '\', \'de\', $(this)); return false;">' . $text . '</a>';
+            echo '<div id="localinabar-center">'; ?>
+            <a class="localinalink" href="javascript:;" onclick="TFOpenLocalinaBookingForm()"><?php echo $text; ?></a>
+            <?php
             echo '</div>';
 
         echo '</div>';
@@ -55,3 +56,24 @@ if ( get_option('tf_localina_api' ) && get_option('tf_localina_phone' ) ) {
     add_action('wp_print_scripts', 'load_localina_js');
 
 }
+
+add_action( 'wp_footer', function() {
+    ?>
+
+<script>
+    var $ = jQuery;
+
+    function TFOpenLocalinaBookingForm() {
+
+        jQuery( document).ready( function ($) {
+
+            Localina.startBooking( '0041435348277', '81002020120326cd7f51405c2b60d77db182ab1adc5500', 'de' );
+        } );
+
+        return false;
+    }
+</script>
+
+<?php
+
+} );
