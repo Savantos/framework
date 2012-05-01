@@ -1,0 +1,1350 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Theme Force Theme Framework\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-05-01 16:28+0100\n"
+"PO-Revision-Date: 2012-05-01 16:28+0100\n"
+"Last-Translator: Tom Willmot <tom@humanmade.co.uk>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-KeywordsList: __;_e\n"
+"X-Poedit-Basepath: .\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: tf.upgrade.php:17
+msgid "You have legacy ThemeForce options that need updating, click the following button to update them."
+msgstr ""
+
+#: tf.upgrade.php:17
+msgid "Update Options"
+msgstr ""
+
+#: api_google/tinymce_plugins/insert_shortcode_dialog.php:9
+msgid "Insert Google Map"
+msgstr ""
+
+#: api_mailchimp/tf_mc_plugin.class.php:76
+msgid "Donate"
+msgstr ""
+
+#: api_mailchimp/tf_mc_plugin.class.php:173
+msgid "You'll need to add your MailChimp API key within the options before being able to use it. "
+msgstr ""
+
+#: api_mailchimp/tf_widget_mailchimp.class.php:26
+msgid "There was a problem processing your submission."
+msgstr ""
+
+#: api_mailchimp/tf_widget_mailchimp.class.php:27
+msgid "Join now!"
+msgstr ""
+
+#: api_mailchimp/tf_widget_mailchimp.class.php:28
+msgid "Thank you for joining our mailing list. Please check your email for a confirmation link."
+msgstr ""
+
+#: api_mailchimp/tf_widget_mailchimp.class.php:29
+msgid "Sign up for our Newsletter"
+msgstr ""
+
+#: api_mailchimp/tf_widget_mailchimp.class.php:31
+msgid "Displays a sign-up form for a MailChimp mailing list."
+msgstr ""
+
+#: api_mailchimp/tf_widget_mailchimp.class.php:33
+msgid "Newsletter ( MailChimp )"
+msgstr ""
+
+#: api_mailchimp/tf_widget_mailchimp.class.php:84
+msgid "General Settings"
+msgstr ""
+
+#: api_mailchimp/tf_widget_mailchimp.class.php:84
+msgid "Title :"
+msgstr ""
+
+#: api_mailchimp/tf_widget_mailchimp.class.php:86
+msgid "Select a Mailing List :"
+msgstr ""
+
+#: api_mailchimp/tf_widget_mailchimp.class.php:98
+msgid "This is the list your users will be signing up for in your sidebar."
+msgstr ""
+
+#: api_mailchimp/tf_widget_mailchimp.class.php:100
+msgid "Sign Up Button Text :"
+msgstr ""
+
+#: api_mailchimp/tf_widget_mailchimp.class.php:102
+msgid "Personal Information"
+msgstr ""
+
+#: api_mailchimp/tf_widget_mailchimp.class.php:102
+msgid "These fields won't (and shouldn't) be required. Should the widget form collect users' first and last names?"
+msgstr ""
+
+#: api_mailchimp/tf_widget_mailchimp.class.php:102
+msgid "Collect first name."
+msgstr ""
+
+#: api_mailchimp/tf_widget_mailchimp.class.php:102
+msgid "Collect last name."
+msgstr ""
+
+#: api_mailchimp/tf_widget_mailchimp.class.php:104
+msgid "Notifications"
+msgstr ""
+
+#: api_mailchimp/tf_widget_mailchimp.class.php:104
+msgid "Use these fields to customize what your visitors see after they submit the form"
+msgstr ""
+
+#: api_mailchimp/tf_widget_mailchimp.class.php:104
+msgid "Success :"
+msgstr ""
+
+#: api_mailchimp/tf_widget_mailchimp.class.php:104
+msgid "Failure :"
+msgstr ""
+
+#: api_mailchimp/tf_widget_mailchimp.class.php:288
+msgid "First Name :"
+msgstr ""
+
+#: api_mailchimp/tf_widget_mailchimp.class.php:296
+msgid "Last Name :"
+msgstr ""
+
+#: api_mailchimp/tf_widget_mailchimp.class.php:300
+msgid "E-mail :"
+msgstr ""
+
+#: api_yelp/tf.yelp.php:96
+msgid "users have rated our establishment"
+msgstr ""
+
+#: api_yelp/tf.yelp.php:100
+msgid "through"
+msgstr ""
+
+#: api_yelp/tf.yelp.php:102
+msgid "Reviews"
+msgstr ""
+
+#: core_events/tf.events.ical.php:16
+#: core_events/tf.events.ical.php:18
+#: core_events/tf.events.rss.php:14
+msgid " - Events"
+msgstr ""
+
+#: core_events/tf.events.php:21
+msgid "Add New Event"
+msgstr ""
+
+#: core_events/tf.events.php:22
+msgid "Edit Event"
+msgstr ""
+
+#: core_events/tf.events.php:23
+msgid "New Event"
+msgstr ""
+
+#: core_events/tf.events.php:24
+msgid "View Event"
+msgstr ""
+
+#: core_events/tf.events.php:25
+msgid "Search Events"
+msgstr ""
+
+#: core_events/tf.events.php:26
+msgid "No events found"
+msgstr ""
+
+#: core_events/tf.events.php:27
+msgid "No events found in Trash"
+msgstr ""
+
+#: core_events/tf.events.php:32
+#: core_events/tf.events.php:168
+#: core_events/tf.events.widget.php:20
+#: core_events/tf.events.widget.php:135
+msgid "Events"
+msgstr ""
+
+#: core_events/tf.events.php:58
+msgid "Categories"
+msgstr ""
+
+#: core_events/tf.events.php:59
+#: core_events/tf.events.php:99
+msgid "Category"
+msgstr ""
+
+#: core_events/tf.events.php:60
+msgid "Search Categories"
+msgstr ""
+
+#: core_events/tf.events.php:61
+msgid "Popular Categories"
+msgstr ""
+
+#: core_events/tf.events.php:62
+msgid "All Categories"
+msgstr ""
+
+#: core_events/tf.events.php:65
+msgid "Edit Category"
+msgstr ""
+
+#: core_events/tf.events.php:66
+msgid "Update Category"
+msgstr ""
+
+#: core_events/tf.events.php:67
+msgid "Add New Category"
+msgstr ""
+
+#: core_events/tf.events.php:68
+msgid "New Category Name"
+msgstr ""
+
+#: core_events/tf.events.php:69
+msgid "Separate categories with commas"
+msgstr ""
+
+#: core_events/tf.events.php:70
+msgid "Add or remove categories"
+msgstr ""
+
+#: core_events/tf.events.php:71
+msgid "Choose from the most used categories"
+msgstr ""
+
+#: core_events/tf.events.php:75
+msgid "Event Category"
+msgstr ""
+
+#: core_events/tf.events.php:97
+msgid "When"
+msgstr ""
+
+#: core_events/tf.events.php:98
+msgid "Name"
+msgstr ""
+
+#: core_events/tf.events.php:100
+#: core_events/tf.events.quick-edit.php:42
+#: core_food-menu/tf.food-menu.php:99
+msgid "Description"
+msgstr ""
+
+#: core_events/tf.events.php:208
+#: core_events/tf.events.quick-edit.php:47
+msgid "Start Date"
+msgstr ""
+
+#: core_events/tf.events.php:209
+msgid "Start Time"
+msgstr ""
+
+#: core_events/tf.events.php:209
+#: core_events/tf.events.php:211
+msgid "Use 24h format (7pm = 19:00)"
+msgstr ""
+
+#: core_events/tf.events.php:210
+#: core_events/tf.events.quick-edit.php:50
+msgid "End Date"
+msgstr ""
+
+#: core_events/tf.events.php:211
+msgid "End Time"
+msgstr ""
+
+#: core_events/tf.events.php:260
+#, php-format
+msgid "Event updated. <a href=\"%s\">View item</a>"
+msgstr ""
+
+#: core_events/tf.events.php:261
+#: core_food-menu/tf.food-menu.php:253
+msgid "Custom field updated."
+msgstr ""
+
+#: core_events/tf.events.php:262
+#: core_food-menu/tf.food-menu.php:254
+msgid "Custom field deleted."
+msgstr ""
+
+#: core_events/tf.events.php:263
+msgid "Event updated."
+msgstr ""
+
+#: core_events/tf.events.php:265
+#, php-format
+msgid "Event restored to revision from %s"
+msgstr ""
+
+#: core_events/tf.events.php:266
+#, php-format
+msgid "Event published. <a href=\"%s\">View event</a>"
+msgstr ""
+
+#: core_events/tf.events.php:267
+msgid "Event saved."
+msgstr ""
+
+#: core_events/tf.events.php:268
+#, php-format
+msgid "Event submitted. <a target=\"_blank\" href=\"%s\">Preview event</a>"
+msgstr ""
+
+#: core_events/tf.events.php:269
+#, php-format
+msgid "Event scheduled for: <strong>%1$s</strong>. <a target=\"_blank\" href=\"%2$s\">Preview event</a>"
+msgstr ""
+
+#: core_events/tf.events.php:271
+#: core_food-menu/tf.food-menu.php:261
+msgid "M j, Y @ G:i"
+msgstr ""
+
+#: core_events/tf.events.php:272
+#, php-format
+msgid "Event draft updated. <a target=\"_blank\" href=\"%s\">Preview event</a>"
+msgstr ""
+
+#: core_events/tf.events.php:312
+#: core_events/tf.events.shortcodes.php:21
+msgid "Featured"
+msgstr ""
+
+#: core_events/tf.events.php:318
+msgid "Football"
+msgstr ""
+
+#: core_events/tf.events.php:324
+msgid "Quiz Night"
+msgstr ""
+
+#: core_events/tf.events.quick-edit.php:39
+#: core_food-menu/tf.food-menu.php:95
+msgid "Item"
+msgstr ""
+
+#: core_events/tf.events.quick-edit.php:40
+msgid "Event Categories"
+msgstr ""
+
+#: core_events/tf.events.quick-edit.php:41
+msgid "Image"
+msgstr ""
+
+#: core_events/tf.events.quick-edit.php:81
+#: core_events/tf.events.quick-edit.php:185
+#: core_food-menu/tf.food-menu.php:21
+#: core_food-menu/tf.food-menu.quick-edit.php:90
+#: core_food-menu/tf.food-menu.quick-edit.php:191
+msgid "Edit"
+msgstr ""
+
+#: core_events/tf.events.singlepage.php:59
+msgid "Category: "
+msgstr ""
+
+#: core_events/tf.events.singlepage.php:62
+msgid "Date: "
+msgstr ""
+
+#: core_events/tf.events.singlepage.php:63
+msgid "Ends"
+msgstr ""
+
+#: core_events/tf.events.singlepage.php:66
+msgid "Location: "
+msgstr ""
+
+#: core_events/tf.events.singlepage.php:87
+msgid "Sorry, this page is not available. Please return to the main page or use the navigation above. "
+msgstr ""
+
+#: core_events/tf.events.widget.php:14
+msgid "Displays events within the widget areas"
+msgstr ""
+
+#: core_events/tf.events.widget.php:140
+msgid "Title:"
+msgstr ""
+
+#: core_events/tf.events.widget.php:142
+msgid "Number of Events:"
+msgstr ""
+
+#: core_events/tinymce_plugins/insert_shortcode_dialog.php:9
+msgid "Insert Events"
+msgstr ""
+
+#: core_food-menu/tf.food-menu.php:17
+#: core_food-menu/tf.food-menu.php:18
+#: core_food-menu/tf.food-menu.php:33
+#: core_food-menu/tf.food-menu.php:161
+msgid "Food Menu"
+msgstr ""
+
+#: core_food-menu/tf.food-menu.php:19
+msgid "Add Menu Item"
+msgstr ""
+
+#: core_food-menu/tf.food-menu.php:20
+msgid "Add New Menu Item"
+msgstr ""
+
+#: core_food-menu/tf.food-menu.php:22
+msgid "Edit Menu Item"
+msgstr ""
+
+#: core_food-menu/tf.food-menu.php:23
+msgid "New Menu Item"
+msgstr ""
+
+#: core_food-menu/tf.food-menu.php:24
+#: core_food-menu/tf.food-menu.php:25
+msgid "View Menu Item"
+msgstr ""
+
+#: core_food-menu/tf.food-menu.php:26
+msgid "Search Menu Items"
+msgstr ""
+
+#: core_food-menu/tf.food-menu.php:27
+msgid "No  Menu Items found"
+msgstr ""
+
+#: core_food-menu/tf.food-menu.php:28
+msgid "No  Menu Items found in Trash"
+msgstr ""
+
+#: core_food-menu/tf.food-menu.php:29
+msgid "Parent Menu Item"
+msgstr ""
+
+#: core_food-menu/tf.food-menu.php:60
+msgid "Menu Categories"
+msgstr ""
+
+#: core_food-menu/tf.food-menu.php:61
+msgid "Food Menu Category"
+msgstr ""
+
+#: core_food-menu/tf.food-menu.php:62
+msgid "Search Food Menu Categories"
+msgstr ""
+
+#: core_food-menu/tf.food-menu.php:63
+msgid "Popular Food Menu Categories"
+msgstr ""
+
+#: core_food-menu/tf.food-menu.php:64
+msgid "All Food Menu Categories"
+msgstr ""
+
+#: core_food-menu/tf.food-menu.php:67
+msgid "Edit Food Menu Category"
+msgstr ""
+
+#: core_food-menu/tf.food-menu.php:68
+msgid "Update Food Menu Category"
+msgstr ""
+
+#: core_food-menu/tf.food-menu.php:69
+msgid "Add New Food Menu Category"
+msgstr ""
+
+#: core_food-menu/tf.food-menu.php:70
+msgid "New Food Menu Category Name"
+msgstr ""
+
+#: core_food-menu/tf.food-menu.php:74
+msgid "Menu Category"
+msgstr ""
+
+#: core_food-menu/tf.food-menu.php:96
+msgid "Section"
+msgstr ""
+
+#: core_food-menu/tf.food-menu.php:97
+msgid "Size(s)"
+msgstr ""
+
+#: core_food-menu/tf.food-menu.php:98
+msgid "Price(s)"
+msgstr ""
+
+#: core_food-menu/tf.food-menu.php:122
+msgid "None"
+msgstr ""
+
+#: core_food-menu/tf.food-menu.php:187
+msgid "All Sizes are Optional"
+msgstr ""
+
+#: core_food-menu/tf.food-menu.php:190
+msgid "Use the decimal format you want display (i.e. 1, 1.9 , 1.99)"
+msgstr ""
+
+#: core_food-menu/tf.food-menu.php:252
+#, php-format
+msgid "Menu item updated. <a href=\"%s\">View item</a>"
+msgstr ""
+
+#: core_food-menu/tf.food-menu.php:255
+msgid "Menu item updated."
+msgstr ""
+
+#: core_food-menu/tf.food-menu.php:256
+#, php-format
+msgid "Menu item restored to revision from %s"
+msgstr ""
+
+#: core_food-menu/tf.food-menu.php:257
+#, php-format
+msgid "Menu item published. <a href=\"%s\">View menu item</a>"
+msgstr ""
+
+#: core_food-menu/tf.food-menu.php:258
+msgid "Menu saved."
+msgstr ""
+
+#: core_food-menu/tf.food-menu.php:259
+#, php-format
+msgid "Menu item submitted. <a target=\"_blank\" href=\"%s\">Preview menu item</a>"
+msgstr ""
+
+#: core_food-menu/tf.food-menu.php:260
+#, php-format
+msgid "Menu item scheduled for: <strong>%1$s</strong>. <a target=\"_blank\" href=\"%2$s\">Preview menu item</a>"
+msgstr ""
+
+#: core_food-menu/tf.food-menu.php:262
+#, php-format
+msgid "Menu item draft updated. <a target=\"_blank\" href=\"%s\">Preview menu item</a>"
+msgstr ""
+
+#: core_food-menu/tf.food-menu.quick-edit.php:364
+#: core_food-menu/tf.food-menu.quick-edit.php:375
+msgid "Insert into Post"
+msgstr ""
+
+#: core_food-menu/tf.food-menu.quick-edit.php:382
+msgid "Delete Permanently"
+msgstr ""
+
+#: core_food-menu/tf.food-menu.quick-edit.php:384
+msgid "Delete"
+msgstr ""
+
+#: core_food-menu/tf.food-menu.quick-edit.php:384
+#, php-format
+msgid "You are about to delete <strong>%s</strong>."
+msgstr ""
+
+#: core_food-menu/tf.food-menu.quick-edit.php:384
+msgid "Continue"
+msgstr ""
+
+#: core_food-menu/tf.food-menu.quick-edit.php:384
+msgid "Cancel"
+msgstr ""
+
+#: core_food-menu/tf.food-menu.quick-edit.php:386
+msgid "Move to Trash"
+msgstr ""
+
+#: core_food-menu/tf.food-menu.quick-edit.php:386
+msgid "Undo"
+msgstr ""
+
+#: core_food-menu/tinymce_plugins/insert_shortcode_dialog.php:9
+msgid "Insert Food Menu"
+msgstr ""
+
+#: core_general/tf.slider.php:19
+msgid "Slider"
+msgstr ""
+
+#: core_general/tf.slider.php:386
+#: core_general/tf.slider.php:396
+#: core_general/tf.slider.php:406
+msgid "Slide"
+msgstr ""
+
+#: core_options/tf.options-business-general.php:26
+msgid "yes"
+msgstr ""
+
+#: core_options/tf.options-business-general.php:26
+msgid "no"
+msgstr ""
+
+#: core_options/tf.options-business-general.php:32
+msgid "Business Options"
+msgstr ""
+
+#: core_options/tf.options-business-general.php:39
+msgid "Business Name"
+msgstr ""
+
+#: core_options/tf.options-business-general.php:40
+msgid "This is used within the Address HTML tags too, so make sure it's correct"
+msgstr ""
+
+#: core_options/tf.options-business-general.php:42
+msgid "Your Business Name"
+msgstr ""
+
+#: core_options/tf.options-business-general.php:46
+msgid "A short description of the location."
+msgstr ""
+
+#: core_options/tf.options-business-general.php:52
+msgid "Cuisine"
+msgstr ""
+
+#: core_options/tf.options-business-general.php:53
+msgid "The cuisine of the restaurant. Uses the Yelp cuisine categorization."
+msgstr ""
+
+#: core_options/tf.options-business-general.php:61
+msgid "Price Range"
+msgstr ""
+
+#: core_options/tf.options-business-general.php:62
+msgid "US Example: Price range is the approximate cost per person for a meal including one drink, tax, and tip. We're going for averages here, folks. $ = Cheap, Under $10 * $$ = Moderate, $11 - $30 * $$$ = Spendy, $31 - $60 * $$$$ = Splurge, Above $61"
+msgstr ""
+
+#: core_options/tf.options-business-general.php:70
+msgid "Payment Accepted"
+msgstr ""
+
+#: core_options/tf.options-business-general.php:71
+msgid "List the types of payments you accept, separate by comma."
+msgstr ""
+
+#: core_options/tf.options-business-general.php:73
+msgid "Cash, Credit Cards"
+msgstr ""
+
+#: core_options/tf.options-business-general.php:77
+msgid "Accept Reservations"
+msgstr ""
+
+#: core_options/tf.options-business-general.php:78
+msgid "Do you accept reservations at all?"
+msgstr ""
+
+#: core_options/tf.options-business-general.php:85
+msgid "Menu Currency"
+msgstr ""
+
+#: core_options/tf.options-business-general.php:86
+msgid "Please enter your currency symbol or 3-letter code, whichever looks better to you. Is used for the menu."
+msgstr ""
+
+#: core_options/tf.options-business-general.php:88
+msgid "$"
+msgstr ""
+
+#: core_options/tf.options-business-general.php:91
+msgid "Show currency for menu prices by default?"
+msgstr ""
+
+#: core_options/tf.options-business-general.php:92
+msgid "Otherwise you will need to set it manually by using the shortcode variable"
+msgstr ""
+
+#: core_options/tf.options-business-general.php:97
+msgid "Notice in Footer"
+msgstr ""
+
+#: core_options/tf.options-business-general.php:98
+msgid "A short text snippet to indicate any copyright or otherwise (you may also leave it blank)"
+msgstr ""
+
+#: core_options/tf.options-business-general.php:103
+msgid "Google Apps Domain Verification"
+msgstr ""
+
+#: core_options/tf.options-business-general.php:104
+msgid "Please enter the key here if you need to verfiy a domain, i.e. <em>&lt;meta name=\"google-site-verification\" content=\"<strong>THIS_IS_THE_KEY</strong>\" /&gt;</em>"
+msgstr ""
+
+#: core_options/tf.options-business-general.php:125
+#: core_options/tf.options-business-location.php:78
+#: core_options/tf.options-business-logo.php:74
+#: core_options/tf.options-full-background.php:50
+msgid "Save Changes"
+msgstr ""
+
+#: core_options/tf.options-business-general.php:130
+msgid "Why do you need all this?"
+msgstr ""
+
+#: core_options/tf.options-business-general.php:131
+msgid "The questions asked above are used to provide <strong>search engines & content aggregators</strong> with relevant information about your restaurant. These websites can then automatically generate detailed profiles about your business, generating more traffic for your website."
+msgstr ""
+
+#: core_options/tf.options-business-location.php:31
+msgid "Location Details"
+msgstr ""
+
+#: core_options/tf.options-business-location.php:35
+msgid "Street Name"
+msgstr ""
+
+#: core_options/tf.options-business-location.php:36
+msgid "The street address. For exampl: 1600 Amphitheatre Pkwy"
+msgstr ""
+
+#: core_options/tf.options-business-location.php:41
+msgid "Town or Locality"
+msgstr ""
+
+#: core_options/tf.options-business-location.php:42
+msgid "The locality. For example, Mountain View, Miami, Sydney, etc."
+msgstr ""
+
+#: core_options/tf.options-business-location.php:48
+msgid "The region. For example, CA."
+msgstr ""
+
+#: core_options/tf.options-business-location.php:53
+msgid "Country"
+msgstr ""
+
+#: core_options/tf.options-business-location.php:54
+msgid "Select your country"
+msgstr ""
+
+#: core_options/tf.options-business-location.php:59
+msgid "Phone Number"
+msgstr ""
+
+#: core_options/tf.options-business-location.php:60
+msgid "Your business phone number."
+msgstr ""
+
+#: core_options/tf.options-business-location.php:62
+msgid "( 123 ) 456 789"
+msgstr ""
+
+#: core_options/tf.options-business-location.php:66
+msgid "Short Contact Info"
+msgstr ""
+
+#: core_options/tf.options-business-location.php:67
+msgid "Visible contact information in the top-right corner (you can also leave blank)"
+msgstr ""
+
+#: core_options/tf.options-business-location.php:69
+msgid "Call us at +01 ( 02 ) 123 57 89"
+msgstr ""
+
+#: core_options/tf.options-business-location.php:83
+msgid "Why is Location important?"
+msgstr ""
+
+#: core_options/tf.options-business-location.php:84
+msgid "We use location data to enhance content across your website. An example of this are Events: Your location is attached to individual events which means that you can potentially <strong>increase your traffic from Google, Yahoo or Bing</strong> for local event searches."
+msgstr ""
+
+#: core_options/tf.options-business-logo.php:49
+#: core_options/tf.options-business-logo.php:53
+msgid "Logo"
+msgstr ""
+
+#: core_options/tf.options-business-logo.php:54
+msgid "Your business logo (choose from an array of formats .JPG, .GIF, .PNG)"
+msgstr ""
+
+#: core_options/tf.options-business-logo.php:60
+msgid "Favicon"
+msgstr ""
+
+#: core_options/tf.options-business-logo.php:61
+msgid "Your Favicon, make sure it is 16px by 16px (you can <a href='http://www.favicon.cc/' target='_blank'>generate one here</a>)"
+msgstr ""
+
+#: core_options/tf.options-business-logo.php:66
+msgid "Drop favicon here"
+msgstr ""
+
+#: core_options/tf.options-business-logo.php:91
+msgid "Drop your logo here"
+msgstr ""
+
+#: core_options/tf.options-full-background.php:9
+#: core_options/tf.options-full-background.php:28
+msgid "Full Background"
+msgstr ""
+
+#: core_options/tf.options-full-background.php:32
+msgid "Use Full-Screen Background?"
+msgstr ""
+
+#: core_options/tf.options-full-background.php:33
+msgid "Check this box if you'd like to use a full background image that resizes with the browser."
+msgstr ""
+
+#: core_options/tf.options-full-background.php:38
+msgid "Background Image"
+msgstr ""
+
+#: core_options/tf.options-full-background.php:39
+msgid "Your background image (we recommend using a JPG that is smaller than 300kb in size, yet around 1400px in width)"
+msgstr ""
+
+#: core_options/tf.options-full-background.php:54
+msgid "Create Depth"
+msgstr ""
+
+#: core_options/tf.options-full-background.php:55
+msgid "We recommend using an image that has perspective (i.e. foreground & background) to create depth visually within your website."
+msgstr ""
+
+#: core_options/tf.options-localina.php:29
+msgid "Restaurant API Key"
+msgstr ""
+
+#: core_options/tf.options-localina.php:30
+msgid "This is your personal API key"
+msgstr ""
+
+#: core_options/tf.options-localina.php:37
+msgid "Restaurant Phone Number"
+msgstr ""
+
+#: core_options/tf.options-localina.php:38
+msgid "This is the numeric phone number of your restaurant, with full prefix, i.e. '0041431234567'"
+msgstr ""
+
+#: core_options/tf.options-localina.php:45
+msgid "Enable Localina Reservation Bar?"
+msgstr ""
+
+#: core_options/tf.options-localina.php:46
+msgid "This will show the Localina bar at the top of your website on every page"
+msgstr ""
+
+#: core_options/tf.options-localina.php:53
+msgid "Reservation Bar Text"
+msgstr ""
+
+#: core_options/tf.options-localina.php:54
+msgid "Text used for the link"
+msgstr ""
+
+#: core_options/tf.options-localina.php:56
+msgid "Reserve a table online"
+msgstr ""
+
+#: core_options/tf.options-mailchimp.php:30
+#: core_options/tf.options-social-yelp.php:41
+msgid "API Key"
+msgstr ""
+
+#: core_options/tf.options-mailchimp.php:31
+msgid "If you're unsure where to find your API key, please <a href='http://kb.mailchimp.com/article/where-can-i-find-my-api-key/' target='_blank'>click here</a>."
+msgstr ""
+
+#: core_options/tf.options-master.php:44
+msgid "Business Overview"
+msgstr ""
+
+#: core_options/tf.options-master.php:44
+msgid "Your Business"
+msgstr ""
+
+#: core_options/tf.options-master.php:45
+msgid "Business Details"
+msgstr ""
+
+#: core_options/tf.options-master.php:47
+msgid "Your Location"
+msgstr ""
+
+#: core_options/tf.options-master.php:47
+msgid "Location"
+msgstr ""
+
+#: core_options/tf.options-master.php:54
+msgid "Social Media Overview"
+msgstr ""
+
+#: core_options/tf.options-master.php:54
+msgid "Social Media"
+msgstr ""
+
+#: core_options/tf.options-master.php:55
+msgid "Facebook"
+msgstr ""
+
+#: core_options/tf.options-master.php:56
+msgid "Twitter"
+msgstr ""
+
+#: core_options/tf.options-master.php:62
+msgid "Social Proof Overview"
+msgstr ""
+
+#: core_options/tf.options-master.php:62
+msgid "Social Proof"
+msgstr ""
+
+#: core_options/tf.options-master.php:63
+msgid "Yelp"
+msgstr ""
+
+#: core_options/tf.options-master.php:64
+msgid "Foursquare"
+msgstr ""
+
+#: core_options/tf.options-master.php:71
+msgid "3rd Party Integrations"
+msgstr ""
+
+#: core_options/tf.options-master.php:71
+msgid "Integrations"
+msgstr ""
+
+#: core_options/tf.options-master.php:265
+msgid "Drop image here"
+msgstr ""
+
+#: core_options/tf.options-mobile.php:13
+msgid "Mobile"
+msgstr ""
+
+#: core_options/tf.options-mobile.php:43
+msgid "Mobile Settings"
+msgstr ""
+
+#: core_options/tf.options-mobile.php:47
+msgid "Backgroung Image"
+msgstr ""
+
+#: core_options/tf.options-mobile.php:48
+msgid "We by default take your first Slider Image, but you may wish"
+msgstr ""
+
+#: core_options/tf.options-mobile.php:54
+msgid "Navigation Menu"
+msgstr ""
+
+#: core_options/tf.options-mobile.php:55
+msgid "If you'd like to display a shorter or different Navigation Menu, select it here."
+msgstr ""
+
+#: core_options/tf.options-mobile.php:71
+msgid "Why is Mobile important?"
+msgstr ""
+
+#: core_options/tf.options-mobile.php:72
+msgid "We've specifically tailored our mobile site to not only load faster, but also be easier to use on smaller screens, increasing the chance of engaging a user positively. Just whip out your mobile and give it a try!"
+msgstr ""
+
+#: core_options/tf.options-of-uploader.php:49
+msgid "Allowed Image Files"
+msgstr ""
+
+#: core_options/tf.options-of-uploader.php:140
+msgid "Select Files"
+msgstr ""
+
+#: core_options/tf.options-opendining.php:32
+msgid "App ID"
+msgstr ""
+
+#: core_options/tf.options-opendining.php:33
+msgid "This is the ID that Open Dining provides, usually a few a string of text that looks like this '4d278f47758d88fd32010000'"
+msgstr ""
+
+#: core_options/tf.options-opendining.php:40
+msgid "Restaurant ID"
+msgstr ""
+
+#: core_options/tf.options-opendining.php:41
+msgid "This is the ID of your restaurant at Open Dining, usually a few a string of text that looks like this '4d278f47758d88fd32010000'"
+msgstr ""
+
+#: core_options/tf.options-opendining.php:48
+msgid "Enable \"Order Online\" Button"
+msgstr ""
+
+#: core_options/tf.options-opendining.php:49
+msgid "This will show the Open Dining buton at the top of your website on every page"
+msgstr ""
+
+#: core_options/tf.options-opendining.php:68
+msgid "Did you know?"
+msgstr ""
+
+#: core_options/tf.options-opendining.php:69
+msgid "gets your restaurant more orders, larger tickets, and more loyal customers with web, mobile, and Facebook ordering."
+msgstr ""
+
+#: core_options/tf.options-social-facebook.php:26
+msgid "Facebook Settings"
+msgstr ""
+
+#: core_options/tf.options-social-facebook.php:30
+msgid "Facebook Link"
+msgstr ""
+
+#: core_options/tf.options-social-facebook.php:31
+msgid "The link to your Facebook fan page/profile."
+msgstr ""
+
+#: core_options/tf.options-social-foursquare.php:26
+msgid "Foursquare Settings"
+msgstr ""
+
+#: core_options/tf.options-social-foursquare.php:31
+msgid "Venue ID"
+msgstr ""
+
+#: core_options/tf.options-social-foursquare.php:32
+msgid "If your profile URL is http://foursquare.com/venue/12345, then your Venue ID is 12345"
+msgstr ""
+
+#: core_options/tf.options-social-foursquare.php:38
+msgid "Client ID"
+msgstr ""
+
+#: core_options/tf.options-social-foursquare.php:39
+msgid "Request API access here, register <a href='https://foursquare.com/oauth/' target='_blank'>here</a>. Callback URL does not matter for the Venues APIv2 we'll be using."
+msgstr ""
+
+#: core_options/tf.options-social-foursquare.php:45
+msgid "Client Secret"
+msgstr ""
+
+#: core_options/tf.options-social-foursquare.php:46
+msgid "Provided together with the Client ID above."
+msgstr ""
+
+#: core_options/tf.options-social-foursquare.php:61
+msgid "How can I get more out of Foursquare?"
+msgstr ""
+
+#: core_options/tf.options-social-foursquare.php:62
+msgid "If you're looking to increase check-ins, try creating special gifts for Mayors (the people who check in the most) as well as other special offers through Foursquare."
+msgstr ""
+
+#: core_options/tf.options-social-twitter.php:26
+msgid "Twitter Settings"
+msgstr ""
+
+#: core_options/tf.options-social-twitter.php:30
+msgid "Twitter Link"
+msgstr ""
+
+#: core_options/tf.options-social-twitter.php:31
+msgid "The link to your Twitter profile/username."
+msgstr ""
+
+#: core_options/tf.options-social-yelp.php:27
+msgid "Yelp Settings"
+msgstr ""
+
+#: core_options/tf.options-social-yelp.php:32
+msgid "Enable Yelp Bar?"
+msgstr ""
+
+#: core_options/tf.options-social-yelp.php:33
+msgid "This will show the Yelp bar above in line with Yelp display requirements. The fields below need to be completed in order for this to work."
+msgstr ""
+
+#: core_options/tf.options-social-yelp.php:42
+msgid "Required for Yelp Button  <a target='_blank' href='http://www.yelp.com/developers/getting_started/api_overview'>Get it from here (Yelp API)</a>"
+msgstr ""
+
+#: core_options/tf.options-social-yelp.php:50
+msgid "Required so that your Phone Number below can be correctly identified"
+msgstr ""
+
+#: core_options/tf.options-social-yelp.php:58
+msgid "Phone number registered with Yelp"
+msgstr ""
+
+#: core_options/tf.options-social-yelp.php:59
+msgid "Required for Yelp Button (Used by the API to identify your business). Do not use special characters, only numbers."
+msgstr ""
+
+#: core_widgets/newsletter-widget.php:14
+msgid "This widget is used to invite your visitors to sign-up for the newsletter."
+msgstr ""
+
+#: core_widgets/newsletter-widget.php:20
+#: core_widgets/newsletter-widget.php:68
+msgid "Newsletter"
+msgstr ""
+
+#: core_widgets/newsletter-widget.php:68
+msgid "Enter the Mailchimp link here"
+msgstr ""
+
+#: core_widgets/newsletter-widget.php:76
+msgid "Sign-up Form Link:"
+msgstr ""
+
+#: core_widgets/widget-facebook-facepile.php:14
+msgid "This widget is used to show a Facebook Facepile (based on your Facebook address)"
+msgstr ""
+
+#: core_widgets/widget-facebook-facepile.php:20
+msgid "Facebook - Facepile"
+msgstr ""
+
+#: core_widgets/widget-facebook-facepile.php:73
+msgid "Facebook Friends"
+msgstr ""
+
+#: core_widgets/widget-facebook-facepile.php:82
+msgid "Number of Rows:"
+msgstr ""
+
+#: core_widgets/widget-facebook-likebox.php:14
+msgid "This widget is used to show a Facebook Like Box (based on your Facebook address)"
+msgstr ""
+
+#: core_widgets/widget-facebook-likebox.php:20
+msgid "Facebook - Like Box"
+msgstr ""
+
+#: core_widgets/widget-facebook-likebox.php:82
+msgid "Like us on Facebook"
+msgstr ""
+
+#: core_widgets/widget-facebook-likebox.php:93
+#: core_widgets/widget-googlemaps.php:100
+msgid "Height (in pixels):"
+msgstr ""
+
+#: core_widgets/widget-facebook-likebox.php:95
+#: core_widgets/widget-googlemaps.php:102
+msgid "Zoom Factor:"
+msgstr ""
+
+#: core_widgets/widget-foursquare-herenow.php:14
+msgid "This widget is used to show Foursquare Check-ins"
+msgstr ""
+
+#: core_widgets/widget-foursquare-herenow.php:20
+msgid "Foursquare - Check-ins"
+msgstr ""
+
+#: core_widgets/widget-foursquare-herenow.php:93
+msgid "Latest Foursquare Check-ins"
+msgstr ""
+
+#: core_widgets/widget-foursquare-herenow.php:101
+#: core_widgets/widget-foursquare-photos.php:101
+#: core_widgets/widget-gowalla-checkins.php:102
+#: core_widgets/widget-gowalla-photos.php:102
+msgid "Display Limit:"
+msgstr ""
+
+#: core_widgets/widget-foursquare-herenow.php:112
+msgid "Text above herenow:"
+msgstr ""
+
+#: core_widgets/widget-foursquare-herenow.php:113
+msgid "Text below herenow:"
+msgstr ""
+
+#: core_widgets/widget-foursquare-photos.php:14
+msgid "This widget is used to show Foursquare Customer Photos"
+msgstr ""
+
+#: core_widgets/widget-foursquare-photos.php:20
+msgid "Foursquare - Photos"
+msgstr ""
+
+#: core_widgets/widget-foursquare-photos.php:93
+msgid "Foursquare Photos"
+msgstr ""
+
+#: core_widgets/widget-foursquare-photos.php:110
+#: core_widgets/widget-gowalla-photos.php:111
+msgid "Text above photos:"
+msgstr ""
+
+#: core_widgets/widget-foursquare-photos.php:111
+#: core_widgets/widget-gowalla-photos.php:112
+msgid "Text below photos:"
+msgstr ""
+
+#: core_widgets/widget-foursquare-tips.php:14
+msgid "This widget is used to show Foursquare Tips"
+msgstr ""
+
+#: core_widgets/widget-foursquare-tips.php:20
+msgid "Foursquare Tips"
+msgstr ""
+
+#: core_widgets/widget-foursquare-tips.php:62
+msgid " says "
+msgstr ""
+
+#: core_widgets/widget-foursquare-tips.php:97
+msgid "Guest Tips"
+msgstr ""
+
+#: core_widgets/widget-foursquare-tips.php:117
+msgid "Text above Tips:"
+msgstr ""
+
+#: core_widgets/widget-foursquare-tips.php:118
+msgid "Text below Tips:"
+msgstr ""
+
+#: core_widgets/widget-googlemaps.php:14
+msgid "This widget is used to show a Google Map of your business (based on your address in the options)"
+msgstr ""
+
+#: core_widgets/widget-googlemaps.php:20
+msgid "Google Maps"
+msgstr ""
+
+#: core_widgets/widget-googlemaps.php:90
+msgid "Our Location"
+msgstr ""
+
+#: core_widgets/widget-gowalla-checkins.php:14
+msgid "This widget is used to show Gowalla Check-ins"
+msgstr ""
+
+#: core_widgets/widget-gowalla-checkins.php:20
+msgid "Gowalla - Check-ins"
+msgstr ""
+
+#: core_widgets/widget-gowalla-checkins.php:94
+msgid "Latest Gowalla Check-ins"
+msgstr ""
+
+#: core_widgets/widget-gowalla-checkins.php:113
+msgid "Text above checkins:"
+msgstr ""
+
+#: core_widgets/widget-gowalla-checkins.php:114
+msgid "Text below checkins:"
+msgstr ""
+
+#: core_widgets/widget-gowalla-photos.php:14
+msgid "This widget is used to show Gowalla Customer Photos"
+msgstr ""
+
+#: core_widgets/widget-gowalla-photos.php:20
+msgid "Gowalla - Photos"
+msgstr ""
+
+#: core_widgets/widget-gowalla-photos.php:94
+msgid "Guest photos"
+msgstr ""
+
+#: core_widgets/widget-openingtimes.php:14
+msgid "This widget is used to show Opening Times"
+msgstr ""
+
+#: core_widgets/widget-openingtimes.php:20
+#: core_widgets/widget-openingtimes.php:107
+msgid "Opening Times"
+msgstr ""
+
+#: core_widgets/widget-openingtimes.php:115
+msgid "Enter Opening Hours:"
+msgstr ""
+
+#: core_widgets/widget-opentable.php:14
+msgid "This is used to show the OpenTable reservations widget"
+msgstr ""
+
+#: core_widgets/widget-opentable.php:20
+msgid "OpenTable"
+msgstr ""
+
+#: core_widgets/widget-opentable.php:72
+msgid "Reservations"
+msgstr ""
+
+#: core_widgets/widget-payments.php:14
+msgid "This widget is used to show Payment Types accepeted"
+msgstr ""
+
+#: core_widgets/widget-payments.php:20
+msgid "Payment"
+msgstr ""
+
+#: core_widgets/widget-payments.php:48
+msgid "Visa Accepted"
+msgstr ""
+
+#: core_widgets/widget-payments.php:49
+msgid "Mastercard Accepted"
+msgstr ""
+
+#: core_widgets/widget-payments.php:50
+msgid "American Express Accepted"
+msgstr ""
+
+#: core_widgets/widget-payments.php:51
+msgid "Discover Card Accepted"
+msgstr ""
+
+#: core_widgets/widget-payments.php:52
+msgid "Cirrus Card Accepted"
+msgstr ""
+
+#: core_widgets/widget-payments.php:53
+msgid "Maestro Card Accepted"
+msgstr ""
+
+#: core_widgets/widget-payments.php:86
+msgid "Cards Accepted"
+msgstr ""
+
+#: core_widgets/widget-text-widget-on-page.php:15
+msgid "Single Page Text Widget"
+msgstr ""
+
+#: core_widgets/widget-text-widget-on-page.php:58
+msgid "Text:"
+msgstr ""
+
+#: core_widgets/widget-text-widget-on-page.php:63
+msgid "Display on Page:"
+msgstr ""
+
+#: core_widgets/widget-twitter.php:18
+msgid "Twitter - Display Feed"
+msgstr ""
+
+#: core_widgets/widget-twitter.php:68
+msgid "Twitter Feed"
+msgstr ""
+
+#: core_widgets/widget-twitter.php:76
+msgid "Widget Title:"
+msgstr ""
+
+#: core_widgets/widget-twitter.php:85
+msgid "Twitter Account:"
+msgstr ""
+
+#: core_widgets/widget-twitter.php:96
+msgid "Display Tweets:"
+msgstr ""
+

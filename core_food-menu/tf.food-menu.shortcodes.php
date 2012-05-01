@@ -501,26 +501,24 @@ function tf_food_menu_add_insert_bar_to_edit_page() {
         jQuery( document ).ready( function() {
             jQuery( '#tf-above-editor-insert-area' ).insertBefore( '#postdivrich' );
 
-            jQuery( '#menu-menu-id' ).on( 'change', window.TFInsertMenuSelectChanged );
+            jQuery( '#tf-above-editor-insert-area' ).on( 'change', '#menu-menu-id', function() {
+
+                menu_id = jQuery( '#menu-menu-id' ).val();
+
+                if ( ! menu_id && menu_id != 0 )
+                    return;
+
+                var shortcode = '[foodmenu id="' + menu_id + '"]'
+
+                send_to_editor( shortcode );
+
+            } );
 
             jQuery( '#add-foodmenu-button' ).on( 'click', function(e) {
                 e.preventDefault();
                 jQuery( this ).addClass('hidden');
                 jQuery( '#menu-menu-id' ).fadeIn();
             } )
-
-            window.TFInsertMenuSelectChanged = function() {
-
-                menu_id = jQuery( '#menu-menu-id' ).val()
-
-                if ( ! menu_id )
-                    return;
-
-                var shortcode = '[foodmenu id="' + menu_id + '"]'
-
-                send_to_editor( shortcode );
-            }
-
             window.TFFoodMenus = <?php echo json_encode( tf_foodmenu_get_menus() ) ?>;
         } );
     </script>
