@@ -63,7 +63,7 @@ class TF_Text_Widget_On_Page extends WP_Widget {
 				<label for="<?php echo $this->get_field_id('page_display'); ?>"><?php _e('Display on Page:'); ?></label>
 
 				<!-- find all published pages on the site -->	
-				<?php $pages = new WP_Query( 'post_type=page&post_status=publish' ); ?>
+				<?php $pages = new WP_Query( 'post_type=page&post_status=publish&posts_per_page=99' ); ?>
 						
 				<select class="widefat" id="<?php echo $this->get_field_id('selected_page'); ?>" name="<?php echo $this->get_field_name('selected_page'); ?>" type="text">
 	
