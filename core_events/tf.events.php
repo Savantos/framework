@@ -484,3 +484,12 @@ function set_events_order( $obj){
 	return $obj;
 
 }
+
+add_action( 'admin_footer', function( ) {
+
+    $wp_list_table = _get_list_table('WP_Posts_List_Table');
+
+    if ( ! $wp_list_table->has_items() )
+        $wp_list_table->inline_edit();
+
+} );
