@@ -16,7 +16,7 @@ content where possible.
 // Open
 
 function tf_open_schema_restaurant() {
-	echo '<div itemscope itemtype="http://schema.org/Restaurant">';
+	echo '<div style="margin:0 auto;width:960px;" itemscope itemtype="http://schema.org/Restaurant">';
 }
 
 add_action('tf_body_top', 'tf_open_schema_restaurant', 8);
