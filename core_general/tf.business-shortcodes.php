@@ -41,7 +41,7 @@ add_shortcode( 'tf-address', 'tf_shortcode_address' );
 function tf_shortcode_phone()
 {
 	$phone = get_option( 'tf_business_phone' );
-        $mobilephone = preg_replace('/|\s|[^0-9\s]/','', $phone);
+    $mobilephone = preg_replace('/|\s|[^0-9\s]/','', $phone);
 	$output = '<a href="tel:' . $mobilephone . '" itemprop="telephone">' . $phone . '</a>';
 	return $output;
 }
