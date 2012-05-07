@@ -169,8 +169,8 @@ function tf_display_settings( $options ) {
             <th><label for="<?php echo $value['id']; ?>"><?php echo $value['name']; ?></label></th>
             <td>
                 <select name="<?php echo $value['id']; ?>" id="<?php echo $value['id']; ?>">
-                <?php foreach ($value['options'] as $option) { ?>
-                    <option <?php selected( $option, get_option( $value['id'] ) ) ?>><?php echo $option; ?></option><?php } ?>
+                <?php foreach ($value['options'] as $key => $option) { ?>
+                    <option value="<?php echo ( $value['use_keys'] ) ? $key : $option; ?>" <?php selected( ( $value['use_keys'] ) ? $key : $option, get_option( $value['id'] ) ) ?>><?php echo $option; ?></option><?php } ?>
                 </select>
                 <br /><span class="desc"><?php echo $value['desc'] ?></span>
             </td>
@@ -187,8 +187,8 @@ function tf_display_settings( $options ) {
         	    <th><label for="<?php echo $value['id']; ?>"><?php echo $value['name']; ?></label></th>
         	    <td>
         	        <select name="<?php echo $value['id']; ?>[]" class="chzn-select" multiple id="<?php echo $value['id']; ?>">
-        	        <?php foreach ($value['options'] as $option) { ?>
-        	            <option <?php selected( in_array( $option, $current_values ) ) ?>><?php echo $option; ?></option><?php } ?>
+        	        <?php foreach ($value['options'] as $key => $option) { ?>
+        	            <option value="<?php echo ( $value['use_keys'] ) ? $key : $option; ?>" <?php selected( in_array( ( $value['use_keys'] ) ? $key : $option, $current_values ) ) ?>><?php echo $option; ?></option><?php } ?>
         	        </select>
         	        <br /><span class="desc"><?php echo $value['desc'] ?></span>
         	    </td>

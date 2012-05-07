@@ -24,7 +24,25 @@ function themeforce_business_page() {
     $options_cuisine = array('Afghan', 'African', 'American ( New )', 'American ( Traditional )', 'Argentine', 'Asian Fusion', 'Barbeque', 'Basque', 'Belgian', 'Brasseries', 'Brazilian', 'Breakfast & Brunch', 'British', 'Buffets', 'Burgers', 'Burmese', 'Cafes', 'Cajun/Creole', 'Cambodian', 'Caribbean', 'Cheesesteaks', 'Chicken Wings', 'Chinese', 'Creperies', 'Cuban', 'Delis', 'Diners', 'Ethiopian', 'Fast Food', 'Filipino', 'Fish & Chips', 'Fondue', 'Food Stands', 'French', 'Gastropubs', 'German', 'Gluten-Free', 'Greek', 'Halal', 'Hawaiian', 'Himalayan/Nepalese', 'Hot Dogs', 'Hungarian', 'Indian', 'Indonesian', 'Irish', 'Italian', 'Japanese', 'Korean', 'Kosher', 'Latin American', 'Live/Raw Food', 'Malaysian', 'Mediterranean', 'Mexican', 'Middle Eastern', 'Modern European', 'Mongolian', 'Moroccan', 'Pakistani', 'Persian/Iranian', 'Peruvian', 'Pizza', 'Polish', 'Portuguese', 'Russian', 'Sandwiches', 'Scandinavian', 'Seafood', 'Singaporean', 'Soul Food', 'Soup', 'Southern', 'Spanish', 'Steakhouses', 'Sushi Bars', 'Taiwanese', 'Tapas Bars', 'Tapas/Small Plates', 'Tex-Mex', 'Thai', 'Turkish', 'Ukrainian', 'Vegan', 'Vegetarian', 'Vietnamese');
     $options_pricerange = array ( '$', '$$', '$$$', '$$$$' );
     $options_yesno = array ( __('yes', 'themeforce'), __('no', 'themeforce') );
-	
+
+    //The language code and corresponding string needs to be added here for every new language file added
+    $supported_languages = array(
+        'nl_NL' => __( 'Dutch', 'themeforce' ),
+        'de_DE' => __( 'German', 'themeforce' ),
+        'es_ES' => __( 'Spanish', 'themeforce' ),
+        'sv_SE' => __( 'Swedish', 'themeforce' ),
+        'pt_PT' => __( 'Portuguese', 'themeforce' ),
+    );
+
+    //Work out what to display in terms of language options
+    $options_language = array( 'en_US'=> __( 'English', 'themeforce' ) );
+
+    $language_files = get_available_languages();
+    foreach ( $supported_languages as $key => $language_code ){
+        if ( in_array( $key, $language_files ) )
+            $options_language[$key] = $language_code;
+    }
+
     // Options
     
     $options = array (
@@ -105,6 +123,16 @@ function themeforce_business_page() {
                 'id' => 'tf_googleapps',
                 'std' => '',
                 'type' => 'text'),
+
+    array( 'name' => __('Language', 'themeforce'),
+            'desc' => __('Please select your preferred language', 'themeforce'),
+            'id' => 'tf_language',
+            'std' => '',
+            'type' => 'select',
+            'class' => 'tiny', //mini, tiny, small
+            'use_keys'  => true,
+            'options' => $options_language ),
+
 
 );
 
