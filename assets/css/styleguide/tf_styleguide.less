@@ -2149,6 +2149,7 @@ h2.full-menu {
 
 #foodmenuv2-modal-wrap .content .tf-options-page {
     margin: 0px !important;
+    position:relative;
 }
 
 /* --- Default --- */
@@ -2165,7 +2166,7 @@ h2.full-menu {
 
 /* --- Sizes --- */
 
-tf_foodmenu_options_container {
+.tf_foodmenu_options_container {
     position:relative;
 }
 
@@ -2288,3 +2289,137 @@ a.accordion-unchecked {
     float:left;
     width:30%;
 }
+
+/*---------- NEW SLIDES --------------*/
+
+#tf-slides-list {
+    list-style: none;
+}
+
+#tf-slides-list li {
+    position:relative;
+    margin:10px 0px;
+    padding:10px;
+    border:1px #DFDFDF solid !important;
+    overflow:auto;
+    .border-radius(6px);
+    width:680px;
+    cursor: default;
+}
+
+#tf-slides-list .slide-thumbnail {
+    width:678px;
+    height:180px;
+    position:relative;
+    background-position:top center;
+    background-repeat:no-repeat;
+    border:1px #DFDFDF solid !important;
+    .border-radius(4px);
+    display:block;
+}
+
+#tf-slides-list .slide-content-preview {
+    position:absolute;
+    top:0;
+    padding:0 10px;
+    left:400px;
+    width:258px;
+    height:180px;
+
+    .preview-header {
+        font-weight:bold;
+        font-size:16px;
+        line-height:18px;
+        margin-bottom:5px;
+    }
+
+    .preview-text {
+        font-size:12px;
+        line-height:18px;
+        margin-bottom:5px;
+    }
+}
+
+
+#tf-slides-list .slider-thumbnail img {
+    .border-radius(4px);
+}
+
+.slides-itembar-control {
+    position:absolute;
+    top:25%;
+    left:10px;
+    opacity:0;
+    margin-right:10px;
+    width:32px;
+    padding: 0 0 2px 0;
+    .box-shadow(rgba(0,0,0,0.3) 0px 1px 3px 0px inset);
+    .border-radius(16px);
+    #gradient > .vertical(@tf-primary-highlight, @tf-primary);
+    -webkit-transition: opacity 0.5s ease-in-out;
+    -moz-transition: opacity 0.5s ease-in-out;
+    -o-transition: opacity 0.5s ease-in-out;
+    -ms-transition: opacity 0.5s ease-in-out;
+    transition: opacity 0.5s ease-in-out;
+}
+
+#tf-slides-list li:hover .slides-itembar-control  {
+    opacity:1;
+}
+
+.slides-icon-move {
+    width:36px;
+    height:20px;
+    padding:10px 0 4px 0;
+    background: transparent url('@{themeurl}/framework/assets/images/foodmenu-move.png') no-repeat 8px 10px;
+    cursor:move;
+}
+
+.slides-icon-edit {
+    width:36px;
+    height:20px;
+    padding:4px 0;
+    background: transparent url('@{themeurl}/framework/assets/images/foodmenu-edit.png') no-repeat 8px 5px;
+    cursor:pointer;cursor:hand;
+}
+
+.slides-icon-delete {
+    width:36px;
+    height:20px;
+    padding:4px 0;
+    background: transparent url('@{themeurl}/framework/assets/images/foodmenu-delete.png') no-repeat 8px 5px;
+    cursor:pointer;cursor:hand;
+}
+
+#tf-slides-list .ui-state-highlight {
+    background:#eee !important;
+    .box-shadow(inset 0px 1px 2px 0px rgba(0, 0, 0, 0.1))
+}
+
+.slide-type-selection {
+    height:39px;
+    line-height:39px;
+    padding:10px 0 8px;
+    overflow:auto;
+    border-bottom: 1px solid #ddd;
+}
+
+.slide-type-selection label {
+    width:82px;
+    height:29px;
+    float:left;
+    .border-radius(3px);
+    background-color: transparent;
+    padding:3px;
+}
+
+.slide-type-selection label img {display:block;margin:0 15px 15px 0;}
+.slide-type-selection input[type="radio"] {display:none;width:0px !important;}
+.slide-type-selection input[type="radio"]:checked+label {background-color: #ddd !important; cursor:pointer;}
+
+.slides-edit,
+.slides-edit-content,
+.slides-edit-image {
+    display:none;
+}
+

@@ -8,7 +8,8 @@ jQuery(document).ready(function($) {
         // Slider Placeholder  
         placeholder: 'ui-state-highlight', 
         // Slider Dragger
-        handle : '.handle', 
+        handle : '.handle',
+        revert: true,
         update : function () { 
         // Slider Order Update    
         var order = 1;
