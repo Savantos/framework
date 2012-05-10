@@ -147,8 +147,6 @@ function themeforce_slider_page() {
             
         echo '<li id="listItem_' . $id . '" class="menu-item-handle slides-item">';
 
-
-
                 // ID
                 echo '<input type="hidden" name="' . 'slider[id][' . $id . ']" value="' . $id . '" />';
 
@@ -157,17 +155,17 @@ function themeforce_slider_page() {
 
                 <div class="slide-thumbnail" style="background-image:url(<?php if ( $thumbnail ) {echo $thumbnail;} else { echo TF_URL . '/assets/images/slider-empty.jpg'; } ?>)">
 
-                <div class="slides-itembar-control">
-                        <div class="slides-icon-move"></div>
-                        <div class="slides-icon-edit"></div>
-                        <div class="slides-icon-delete"></div>
-                </div>
+                    <div class="slides-itembar-control">
+                            <div class="slides-icon-move"></div>
+                            <div class="slides-icon-edit"></div>
+                            <div class="slides-icon-delete"></div>
+                    </div>
 
-                <div class="slide-content-preview">
-                        <div class="preview-header"></div>
-                        <div class="preview-text"></div>
-                </div>
-
+                    <div class="slide-content-preview">
+                            <div class="preview-header"></div>
+                            <div class="preview-text"></div>
+                            <div class="preview-button"></div>
+                    </div>
 
                 </div>
 
@@ -190,9 +188,9 @@ function themeforce_slider_page() {
 
                     <div class="slides-edit-content">
                         <input id="slide-content-header" type="text" data-preview="preview-header" placeholder="Title / Header" />
-                        <textarea id="slide-content-text" data-preview="preview-text" rows="3"></textarea>
-                        <input id="slide-content-link" data-preview="preview-link" type="text" placeholder="Link" />
-
+                        <textarea id="slide-content-text" data-preview="preview-text" rows="2"></textarea>
+                        <input id="slide-content-link-text" data-preview="preview-button" type="text" placeholder="Button Text" />
+                        <input id="slide-content-link" data-preview="preview-link" type="text" placeholder="Button Link URL" />
                     </div>
 
                 <?php

@@ -93,7 +93,7 @@ jQuery(document).ready(function($) {
 
     // Update Preview Slide
 
-    $('#slide-content-header, #slide-content-text').on('keyup', function(){
+    $('#slide-content-header, #slide-content-text, #slide-content-link-text, ').on('keyup', function(){
 
             var parent = getParent($(this));
             var destination = $(this).data('preview');
