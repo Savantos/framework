@@ -106,5 +106,20 @@ FullCalendar
 function tf_fullcalendar_js() {
 	wp_enqueue_script('fullcalendar', TF_URL . '/assets/js/fullcalendar.js', array( 'jquery'), TF_VERSION );
 }
-	
+
+/*
+FlexSlider
+ --------------------------------------
+ v 1.8
+
+ */
+
+function tf_flexslider_js() {
+    wp_enqueue_script('flexslider', TF_URL . '/assets/js/jquery.flexslider-min.js', array( 'jquery'), TF_VERSION );
+}
+
+function tf_flexslider_css() {
+    wp_enqueue_style('flexslider', TF_URL . '/assets/css/flexslider.css', array(), TF_VERSION );
+}
+
 ?>

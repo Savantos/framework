@@ -78,7 +78,7 @@ input.tf-major:hover {
  }
  
 .tf-minor {
-        line-height:14px;
+    line-height:14px;
 	color: @tf-primary;
 	#gradient > .vertical(@tf-neutral-highlight, @tf-neutral);
 	text-shadow: 0 1px 0 rgba(255,255,255,.40);
@@ -93,12 +93,13 @@ input.tf-major:hover {
 input.tf-inline,
 input[type="button"].tf-inline,
 input[type="submit"].tf-inline {
-        line-height:14px;
+    line-height:14px;
 	padding:15px;
 	color: desaturate(@tf-primary, 100%) !important;
 	#gradient > .vertical(@tf-neutral-highlight, @tf-neutral);
 	text-shadow: 0 1px 0 rgba(255,255,255,.40);	
 	border:1px solid @tf-neutral;
+    cursor:pointer;cursor:hand;
  }
  
 input[type="button"].tf-tiny:hover,
@@ -2292,19 +2293,33 @@ a.accordion-unchecked {
 
 /*---------- NEW SLIDES --------------*/
 
+.tf-slides-page .tf-options-page {
+    width:722px;
+}
+
 #tf-slides-list {
+    background:@tf-neutral;
+    .box-shadow(inset 0 1px 2px 0 rgba(0,0,0,0.2));
+    .border-radius(6px);
+    padding:10px;
     list-style: none;
 }
 
 #tf-slides-list li {
     position:relative;
-    margin:10px 0px;
+    margin:0 0 10px 0;
     padding:10px;
-    border:1px #DFDFDF solid !important;
+    border:1px #ccc solid !important;
+    background:#fff;
+    .box-shadow(0 1px 2px 0 rgba(0,0,0,0.1));
     overflow:auto;
     .border-radius(6px);
     width:680px;
     cursor: default;
+}
+
+#tf-slides-list li:last-child {
+    margin:0;
 }
 
 #tf-slides-list .slide-thumbnail {
@@ -2316,6 +2331,24 @@ a.accordion-unchecked {
     border:1px #DFDFDF solid !important;
     .border-radius(4px);
     display:block;
+}
+
+#tf-slides-list .slide-switchimage {
+    position:absolute;
+    z-index:10 !important;
+    right:5px;
+    bottom:5px;
+    .box-shadow(0 1px 2px 0 rgba(0,0,0,0.2));
+    opacity:0;
+    -webkit-transition: opacity 0.3s ease-in-out;
+    -moz-transition: opacity 0.3s ease-in-out;
+    -o-transition: opacity 0.3s ease-in-out;
+    -ms-transition: opacity 0.3s ease-in-out;
+    transition: opacity 0.3s ease-in-out;
+}
+
+#tf-slides-list li:hover .slide-switchimage {
+    opacity:1;
 }
 
 #tf-slides-list .slide-content-preview {
@@ -2333,7 +2366,7 @@ a.accordion-unchecked {
         margin-bottom:5px;
     }
 
-    .preview-text {
+    .preview-desc {
         font-size:12px;
         line-height:18px;
         margin-bottom:5px;
@@ -2356,7 +2389,7 @@ a.accordion-unchecked {
     .border-radius(4px);
 }
 
-.slides-itembar-control {
+.slide-itembar-control {
     position:absolute;
     top:25%;
     left:10px;
@@ -2367,18 +2400,18 @@ a.accordion-unchecked {
     .box-shadow(rgba(0,0,0,0.3) 0px 1px 3px 0px inset);
     .border-radius(16px);
     #gradient > .vertical(@tf-primary-highlight, @tf-primary);
-    -webkit-transition: opacity 0.5s ease-in-out;
-    -moz-transition: opacity 0.5s ease-in-out;
-    -o-transition: opacity 0.5s ease-in-out;
-    -ms-transition: opacity 0.5s ease-in-out;
-    transition: opacity 0.5s ease-in-out;
+    -webkit-transition: opacity 0.3s ease-in-out;
+    -moz-transition: opacity 0.3s ease-in-out;
+    -o-transition: opacity 0.3s ease-in-out;
+    -ms-transition: opacity 0.3s ease-in-out;
+    transition: opacity 0.3s ease-in-out;
 }
 
-#tf-slides-list li:hover .slides-itembar-control  {
+#tf-slides-list li:hover .slide-itembar-control  {
     opacity:1;
 }
 
-.slides-icon-move {
+.slide-icon-move {
     width:36px;
     height:20px;
     padding:10px 0 4px 0;
@@ -2386,7 +2419,7 @@ a.accordion-unchecked {
     cursor:move;
 }
 
-.slides-icon-edit {
+.slide-icon-edit {
     width:36px;
     height:20px;
     padding:4px 0;
@@ -2394,7 +2427,7 @@ a.accordion-unchecked {
     cursor:pointer;cursor:hand;
 }
 
-.slides-icon-delete {
+.slide-icon-delete {
     width:36px;
     height:20px;
     padding:4px 0;
@@ -2403,8 +2436,8 @@ a.accordion-unchecked {
 }
 
 #tf-slides-list .ui-state-highlight {
-    background:#eee !important;
-    .box-shadow(inset 0px 1px 2px 0px rgba(0, 0, 0, 0.1))
+    background:rgba(0,0,0,0.05) !important;
+    .box-shadow(inset 0px 1px 3px 0px rgba(0, 0, 0, 0.1))
 }
 
 .slide-type-selection {
@@ -2428,14 +2461,16 @@ a.accordion-unchecked {
 .slide-type-selection input[type="radio"] {display:none;width:0px !important;}
 .slide-type-selection input[type="radio"]:checked+label {background-color: #ddd !important; cursor:pointer;}
 
-.slides-edit,
-.slides-edit-content,
-.slides-edit-image {
+.slide-edit,
+.slide-edit-image,
+.slide-edit-content,
+.slide-content-preview
+ {
     display:none;
 }
 
-.slides-edit-image,
-.slides-edit-content {
+.slide-edit-image,
+.slide-edit-content {
     margin-top:10px;
 
     input,

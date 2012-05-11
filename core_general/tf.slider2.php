@@ -1,7 +1,7 @@
 <?php
 
 /*
- * Goal of TF Slider
+ * Slides (V2)
  * 
  * - Create a Slider Post Type
  * - Create a Single Options Page whereby:
@@ -11,8 +11,9 @@
  */
 
 
-// Create Slider Post Type
-
+/**
+ * Register Custom Post Type
+ */
 function create_slider_postype() {
 
     $args = array(
@@ -33,8 +34,9 @@ function create_slider_postype() {
 
 add_action( 'init', 'create_slider_postype' );
 
-// Register Page
-
+/**
+ * Register Slider Page
+ */
 function themeforce_slider_addpage() {
     add_submenu_page('themes.php', 'Slider Page Title', 'Slides 2', 'manage_options', 'themeforce_slider', 'themeforce_slider_page');
 }
@@ -49,43 +51,39 @@ add_action( 'load-appearance_page_themeforce_slider', function() {
 
 // Load jQuery & relevant CSS
 
-// js
+/**
+ * Load Slider JS Scripts
+ */
 function themeforce_slider_scripts() {
-    // standards
     wp_enqueue_script( 'jquery-ui-sortable' );
     wp_enqueue_script( 'jquery-ui-draggable' );
     wp_enqueue_script( 'thickbox' );
-    // other
     wp_enqueue_script( 'jalerts', TF_URL . '/assets/js/jquery.alerts.js', array(), TF_VERSION  );
-
-    // option page settings
     wp_enqueue_script( 'tfslider', TF_URL . '/assets/js/themeforce-slider2.js', array( 'jquery'), TF_VERSION  );
 }
 
 add_action( 'admin_print_scripts-appearance_page_themeforce_slider', 'themeforce_slider_scripts' );
 
-// css
-function themeforce_slider_styles() {
-    wp_enqueue_style( 'jalerts', TF_URL . '/assets/css/jquery.alerts.css', array(), TF_VERSION );
-    // wp_enqueue_style( 'tfslider', TF_URL . '/assets/css/themeforce-slider.css', array(), TF_VERSION );
-}
-
-add_action( 'admin_print_styles', 'themeforce_slider_styles' );
-
-// Create Page
-
+/**
+ * Create Slider Page
+ */
 function themeforce_slider_page() {
+
     ?>
-    <div class="wrap tf-slider-page">
+
+    <div class="wrap tf-slides-page">
     <div class="tf-options-page">
+
     <?php screen_icon(); ?>
-    <h2>Slider Options</h2>
-    <h3>Manage Slides</h3>
+    <h2>Slides</h2>
+
     <form method="post" action="" name="" onsubmit="return checkformf( this );">
     <ul id="tf-slides-list">
     
     	<?php
-    	// Query Custom Post Types  
+
+        // - query -
+
 		$args = array(
 		    'post_type' => 'tf_slider',
 		    'post_status' => 'publish',
@@ -94,11 +92,9 @@ function themeforce_slider_page() {
 		    'order' => 'ASC',
 		    'posts_per_page' => 99
 		);
-		
-		// - query -
+
 		$my_query = null;
 		$my_query = new WP_query( $args );
-			
 
         while ( $my_query->have_posts() ) : $my_query->the_post();
             
@@ -106,8 +102,14 @@ function themeforce_slider_page() {
 			
             $custom = get_post_custom( get_the_ID() );
             $id = ( $my_query->post->ID );
+
             $order = $custom["_tfslider_order"][0];
-            
+            $type = $custom["_tfslider_type"][0];
+            $types = array('image','content');
+
+            $header = $custom["tfslider_header"][0];
+            $desc = $custom["tfslider_desc"][0];
+            $button = $custom["tfslider_button"][0];
             $link = $custom["tfslider_link"][0];
 
             // - image (with fallback) -
@@ -124,7 +126,9 @@ function themeforce_slider_page() {
             $thumbnail = wpthumb( $image, 'width=680&height=180&crop=1', false);
             
             // Warning Statement
-            $imagesize = getimagesize($image);
+            if ( $image ) {
+                $imagesize = getimagesize($image);
+            }
             
             if ( $imagesize ) {
                 if ( $imagesize[0] < TF_SLIDERWIDTH && $imagesize[1] < TF_SLIDERHEIGHT ) {
@@ -143,86 +147,108 @@ function themeforce_slider_page() {
                 }
             }      
                 
-             // Display Slide   
+             // Display Slide
+
+            ?>
             
-        echo '<li id="listItem_' . $id . '" class="menu-item-handle slides-item">';
+            <li id="listItem_<?php echo $id; ?>" class="menu-item-handle slide-item">
 
-                // ID
-                echo '<input type="hidden" name="' . 'slider[id][' . $id . ']" value="' . $id . '" />';
-
-                // Thumbnail
-                ?>
+                <input type="hidden" name="slider[id][<?php echo $id; ?>]" value="<?php echo $id; ?>" />
 
                 <div class="slide-thumbnail" style="background-image:url(<?php if ( $thumbnail ) {echo $thumbnail;} else { echo TF_URL . '/assets/images/slider-empty.jpg'; } ?>)">
 
-                    <div class="slides-itembar-control">
-                            <div class="slides-icon-move"></div>
-                            <div class="slides-icon-edit"></div>
-                            <div class="slides-icon-delete"></div>
+                    <!-- Controls -->
+
+                    <div class="slide-itembar-control">
+                            <div class="slide-icon-move"></div>
+                            <div class="slide-icon-edit"></div>
+                            <div class="slide-icon-delete"></div>
                     </div>
 
+                    <!-- Auto-Updating Preview -->
+
+                    <input type="button" class="slide-switchimage tf-tiny" value="Switch Image" />
+
+                    <!-- Auto-Updating Preview -->
+
                     <div class="slide-content-preview">
-                            <div class="preview-header"></div>
-                            <div class="preview-text"></div>
-                            <div class="preview-button"></div>
+                            <div class="preview-header"><?php echo $header; ?></div>
+                            <div class="preview-desc"><?php echo $desc; ?></div>
+                            <div class="preview-button"><?php echo $button; ?></div>
                     </div>
 
                 </div>
 
-                <div class="slides-edit">
+                <div class="slide-edit">
 
                     <div class="clear"></div>
+
+                    <!-- Slide Type Selection -->
 
                     <div class="slide-type-selection">
-                        <input type="radio" name="slide-type-<?php echo $id; ?>" id="image-<?php echo $id; ?>" value="image" />
-                        <label for="image-<?php echo $id; ?>"><img src="<?php echo TF_URL . '/assets/images/slide-type-image.png'; ?>" /></label>
-                        <input type="radio" name="slide-type-<?php echo $id; ?>" id="content-<?php echo $id; ?>" value="content" />
-                        <label for="content-<?php echo $id; ?>"><img src="<?php echo TF_URL . '/assets/images/slide-type-content.png'; ?>" /></label>
+
+                        <div class="label" style="float:left;line-height:33px;font-weight:bold;margin-right:10px;">Slide Design</div>
+
+                        <?php
+
+                        echo '<!--' . $type . '-->';
+
+                        foreach ($types as $item) {
+
+                            if ($item == $type) {
+                                $checked = 'checked="checked"';
+                            } else {
+                                $checked = '';
+                            }
+
+                            echo '<input type="radio" name="slide-type-' . $id . '" id="' . $item . '-' . $id . '" value="' . $item . '" ' . $checked . '/>';
+                            echo '<label for="' . $item . '-' . $id . '"><img src="' . TF_URL . '/assets/images/slide-type-' . $item . '.png" /></label>';
+
+                        };
+
+                        ?>
+
                     </div>
 
                     <div class="clear"></div>
 
-                    <div class="slides-edit-image">
-                        blah blah
+                    <!-- Slide Type : Image -->
+
+                    <div class="slide-edit-image">
+
+                        <input class="slide-content-link" data-meta="link" type="text" placeholder="Slide Link URL" value="<?php echo $link; ?>" />
+
                     </div>
 
-                    <div class="slides-edit-content">
-                        <input id="slide-content-header" type="text" data-preview="preview-header" placeholder="Title / Header" />
-                        <textarea id="slide-content-text" data-preview="preview-text" rows="2"></textarea>
-                        <input id="slide-content-link-text" data-preview="preview-button" type="text" placeholder="Button Text" />
-                        <input id="slide-content-link" data-preview="preview-link" type="text" placeholder="Button Link URL" />
+                    <!-- Slide Type : Content -->
+
+                    <div class="slide-edit-content">
+
+                        <input class="slide-content-header" type="text" data-meta="header" placeholder="Title / Header" value="<?php echo $header; ?>" />
+                        <textarea class="slide-content-desc" data-meta="desc" rows="2"><?php echo $desc; ?></textarea>
+                        <input class="slide-content-button" data-meta="button" type="text" placeholder="Button Text" value="<?php echo $button; ?>" />
+                        <input class="slide-content-link" data-meta="link" type="text" placeholder="Button Link URL" value="<?php echo $link; ?>" />
+
                     </div>
 
-                <?php
+                </div>
 
-                // Content
-                echo '<div class="slider-content">';
-                echo '<p><span>' . $link . '</span><input style="display:none;" placeholder=" Link ( Optional )" type="text" name="' . 'slider[link][' . $id . ']" size="45" id="input-title" value="' . $link  . '" /></p>';
-                echo '</div>';
+                <!-- Slide Data : Order -->
 
-            echo '</div>';
+                <input type="hidden" name="slider[order][<?php echo $id; ?>]" value="<?php $order; ?>" />
 
-            // Update Sortable List
-            echo '<input type="hidden" name="' . 'slider[order][' . $id . ']" value="' . $order . '" id="input-title"/>';
-
-            // Update Delete Field
-            echo '<input type="hidden" name="' . 'slider[delete][' . $id . ']" value="false" id="input-title"/>';
-
-        echo '</li>';
+        </li>
                          
-		endwhile;   
-	    ?>
+		<?php endwhile; ?>
 
     </ul> 
     
     <input type="hidden" name="update_post" value="1"/> 
-    
-    <input style="margin-top:10px" type="submit" name="updatepost" value="Update Slides" class="tf-button tf-major right" /> 
+
     </form>
+
     <div style="clear:both"></div>
 
-    <div id="tf-options-panel">
-    
     <h3>Create New Slide</h3>
     <div class="tf-settings-wrap">
     	<form class="form-table" method="post" action="" name="" onsubmit="return checkformf( this );">
@@ -245,14 +271,7 @@ function themeforce_slider_page() {
 			    ?>
 			    </td>
 			</tr>
-			<tr>
-			    <th><label>Slide Link</label></th>
-			    <td>
-			        <input type="text"  placeholder="http:// ( Optional )" name="tfslider_link" size="45" id="input-title"/><br />
-			        <span class="desc">If you'd like your slide to link to a page, enter the URL here.</span>
-			    </td>
-			</tr> 
-		
+
 		</table>
 		</div>
     	    <input type="hidden" name="new_post" value="1"/> 
@@ -261,21 +280,62 @@ function themeforce_slider_page() {
     	    
     	</form>
     </div>
-    </div>
 </div>
+        <div style="clear:both"></div>
     <?php
         
 }
 
+
+// Update Slide Order
+
+add_action( 'wp_ajax_tf_slides_update_order', function() {
+
+    $post_id = (int) $_POST['postid'];
+    $order_id = (int) $_POST['neworder'];
+
+    update_post_meta( $post_id, '_tfslider_order', $order_id );
+
+} );
+
+// Update Slide Type
+
+add_action( 'wp_ajax_tf_slides_update_type', function() {
+
+    $post_id = $_POST['postid'];
+    $type = $_POST['type'];
+
+    update_post_meta( $post_id, '_tfslider_type', $type );
+
+} );
+
+// Update Slide Content
+
+add_action( 'wp_ajax_tf_slides_update_content', function() {
+
+    $post_id = (int) $_POST['postid'];
+    $key = 'tfslider_' . $_POST['key'];
+    $value = $_POST['value'];
+
+    update_post_meta( $post_id, $key, $value );
+
+} );
+
+// Delete Slide
+
+add_action( 'wp_ajax_tf_slides_delete', function() {
+
+    $post_id = (int) $_POST['postid'];
+
+    wp_delete_post( $post_id, true );
+
+} );
+
 // Save New Slide
+// Needs to be updated to Slides V2
 
 function themeforce_slider_catch_submit() {
-        
-        // Establish Defaults
-    
-        $link = null;
-        $button = null;
-    
+
         // Grab POST Data
     
         if ( isset($_POST['new_post'] ) == '1') {
@@ -287,11 +347,12 @@ function themeforce_slider_catch_submit() {
         if ( !$imageurl ) {$imageurl = TF_URL . '/assets/images/slider-empty.jpg'; }
         $link = $_POST['tfslider_link'];
         $button = $_POST['tfslider_button'];
+
         $new_post = array(
               'ID' => '',
               'post_type' => 'tf_slider',
               'post_author' => $user->ID, 
-              'post_content' => '',
+              'post_content' => 'Slides do not have any WP content, everything is stored in meta.',
               'post_title' => $post_title,
               'post_status' => 'publish',
             );
@@ -306,9 +367,7 @@ function themeforce_slider_catch_submit() {
         
         update_post_meta( $post_id, '_tfslider_order', $order_id);
         update_post_meta( $post_id, 'tfslider_image', $imageurl);
-        if ( $link ) {update_post_meta( $post_id, 'tfslider_link', $link);}
-        if ( $button ) {update_post_meta( $post_id, 'tfslider_button', $button);}
-        
+
         // Exit
         wp_redirect( wp_get_referer() );
         exit;
@@ -317,54 +376,8 @@ function themeforce_slider_catch_submit() {
 
 add_action('admin_init', 'themeforce_slider_catch_submit');
 
-// Update Slide
-// TODO Add rest of slide content (only testing sort order atm)
+// Needs to be updated to Slides V2
 
-function themeforce_slider_catch_update() {
-    
-    if ( isset($_POST['update_post'] ) == '1') {
-    	foreach ( $_POST['slider']['order'] as $key => $val ) {
-    	    
-    	    // Grab General Data
-    	    $my_post = array();
-    	    $my_post['ID'] = $_POST['slider']['id'][$key];
-    	    // New - not necessary - $my_post['post_title'] = $_POST['slider']['title'][$key];
-    	    
-    	    // Grab Delete Setting
-    	    $delete = $_POST['slider']['delete'][$key];
-    	          
-    	    if ($delete == 'true') {
-    	        
-    	        // Delete selected sliders
-    	        wp_delete_post( $key, true );
-    	    
-    	            
-    	    } else {
-		
-    	        // Update Regular Post
-    	        wp_update_post( $my_post );
-    	        
-    	        // Establish Defaults
-    	        $link = null;
-    	        $button = null;
-    	        
-    	        // Update Meta
-    	        $link = $_POST['slider']['link'][$key];
-    	        $slider_order = intval( $_POST['slider']['order'][$key] );
-
-    	        if ( $link ) {update_post_meta($key, 'tfslider_link', $link);}
-    	        update_post_meta($key, '_tfslider_order', $slider_order);
-    	    }
-    	}    
-    	    
-    	wp_redirect( wp_get_referer() );
-    	exit;
-    }
-}
-
-add_action('admin_init', 'themeforce_slider_catch_update');
-
-//TODO Could benefit from using transients api for scalability
 function themeforce_slider_display() {
 
     // Query Custom Post Types  
@@ -414,8 +427,10 @@ function themeforce_slider_display() {
             
             if ( TF_THEME == 'baseforce' )
                 {
+                echo '<li>';
                 $b_image = wpthumb( $image, 'width=960&height=250&crop=1', false);
                 echo '<img src="' . $b_image . '" alt="" />';
+                echo '</li>';
             }
             
              if ( TF_THEME == 'chowforce' ) {
