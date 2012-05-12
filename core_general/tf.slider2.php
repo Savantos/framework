@@ -38,7 +38,7 @@ add_action( 'init', 'create_slider_postype' );
  * Register Slider Page
  */
 function themeforce_slider_addpage() {
-    add_submenu_page('themes.php', 'Slider Page Title', 'Slides 2', 'manage_options', 'themeforce_slider', 'themeforce_slider_page');
+    add_submenu_page('themes.php', 'Slider Page Title', 'Slides 2', 'manage_options', 'themeforce_slider', 'tf_slider_page');
 }
 
 add_action( 'admin_menu', 'themeforce_slider_addpage' );
@@ -67,7 +67,7 @@ add_action( 'admin_print_scripts-appearance_page_themeforce_slider', 'themeforce
 /**
  * Create Slider Page
  */
-function themeforce_slider_page() {
+function tf_slider_page() {
 
     ?>
 
