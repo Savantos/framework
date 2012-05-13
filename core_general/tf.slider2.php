@@ -3,10 +3,8 @@
 /*
  * Slides (V2)
  * 
- * - Create a Slider Post Type
- * - Create a Single Options Page whereby:
- * --- All Sliders are created/modified/deleted
- * --- Sorted via jQuery UI
+ * This is the second iteration of TF Slides, with the goal of creating a slider system that scales. Additional
+ * slide types should be easy to add, manage and display.
  * 
  */
 
@@ -38,7 +36,7 @@ add_action( 'init', 'create_slider_postype' );
  * Register Slider Page
  */
 function themeforce_slider_addpage() {
-    add_submenu_page('themes.php', 'Slider Page Title', 'Slides 2', 'manage_options', 'themeforce_slider', 'tf_slider_page');
+    add_submenu_page('themes.php', 'Slider Page Title', 'Slides', 'manage_options', 'themeforce_slider', 'tf_slider_page');
 }
 
 add_action( 'admin_menu', 'themeforce_slider_addpage' );
@@ -58,7 +56,6 @@ function themeforce_slider_scripts() {
     wp_enqueue_script( 'jquery-ui-sortable' );
     wp_enqueue_script( 'jquery-ui-draggable' );
     wp_enqueue_script( 'thickbox' );
-    wp_enqueue_script( 'jalerts', TF_URL . '/assets/js/jquery.alerts.js', array(), TF_VERSION  );
     wp_enqueue_script( 'tfslider', TF_URL . '/assets/js/themeforce-slider2.js', array( 'jquery'), TF_VERSION  );
 }
 
@@ -105,12 +102,24 @@ function tf_slider_page() {
 
             $order = $custom["_tfslider_order"][0];
             $type = $custom["_tfslider_type"][0];
-            $types = array('image','content');
 
             $header = $custom["tfslider_header"][0];
             $desc = $custom["tfslider_desc"][0];
             $button = $custom["tfslider_button"][0];
             $link = $custom["tfslider_link"][0];
+
+            // - slide types per theme
+
+            switch( TF_THEME ) {
+
+                case 'baseforce':
+                $types = array('image','content');
+                break;
+
+                default:
+                $types = array('image');
+
+            }
 
             // - image (with fallback) -
 
@@ -126,23 +135,21 @@ function tf_slider_page() {
             $thumbnail = wpthumb( $image, 'width=680&height=180&crop=1', false);
             
             // Warning Statement
-            if ( $image ) {
-                $imagesize = getimagesize($image);
-            }
+            if ( $image ) { $imagesize = getimagesize($image); }
             
             if ( $imagesize ) {
                 if ( $imagesize[0] < TF_SLIDERWIDTH && $imagesize[1] < TF_SLIDERHEIGHT ) {
 
-                    echo '<div class="tf-notice">Oops, the dimensions of the image below aren\'t quite enough. Please ensure the image is at least <strong>' . TF_SLIDERWIDTH . 'px wide by ' . TF_SLIDERHEIGHT . 'px high.</strong></div>';
+                    $warning = '<div class="tf-notice slide-notice">Oops, the <strong>dimensions</strong> of the image below aren\'t quite enough. Please ensure the image is at least <strong>' . TF_SLIDERWIDTH . 'px wide by ' . TF_SLIDERHEIGHT . 'px high.</strong></div>';
 
                 } else {
                     
                     if ($imagesize[0] < TF_SLIDERWIDTH ) {
-                    	echo '<div class="tf-notice">Oops, the width of the image below is too short. Please ensure the image is at least <strong>' . TF_SLIDERWIDTH . 'px wide.</strong></div>';
+                    	$warning = '<div class="tf-notice slide-notice">Oops, the <strong>width</strong> of the image below is too short. Please ensure the image is at least <strong>' . TF_SLIDERWIDTH . 'px wide.</strong></div>';
                     }
                     
                     if ($imagesize[1] < TF_SLIDERHEIGHT ) {
-                    	echo '<div class="tf-notice">Oops, the height of the image below is too short. Please ensure the image is at least <strong>' . TF_SLIDERHEIGHT . 'px high.</strong></div>';
+                    	$warning = '<div class="tf-notice slide-notice">Oops, the <strong>height</strong> of the image below is too short. Please ensure the image is at least <strong>' . TF_SLIDERHEIGHT . 'px high.</strong></div>';
                     }
                 }
             }      
@@ -164,6 +171,10 @@ function tf_slider_page() {
                             <div class="slide-icon-edit"></div>
                             <div class="slide-icon-delete"></div>
                     </div>
+
+                    <!-- Image Warning -->
+
+                    <?php if ( $warning ) { echo $warning; } ?>
 
                     <!-- Auto-Updating Preview -->
 
@@ -190,8 +201,6 @@ function tf_slider_page() {
                         <div class="label" style="float:left;line-height:33px;font-weight:bold;margin-right:10px;">Slide Design</div>
 
                         <?php
-
-                        echo '<!--' . $type . '-->';
 
                         foreach ($types as $item) {
 
@@ -266,7 +275,7 @@ function tf_slider_page() {
 			    	$val =  $value['std']; 
 			    }
 			    
-			    $well = new TF_Upload_Image_Well( 'tfslider_image', $val, 'width=250&height=100&crop=1' );
+			    $well = new TF_Upload_Image_Well( 'tfslider_image', $val, 'width=350&height=200&crop=1' );
 			    $well->html();
 			    ?>
 			    </td>
@@ -274,16 +283,15 @@ function tf_slider_page() {
 
 		</table>
 		</div>
-    	    <input type="hidden" name="new_post" value="1"/> 
-    	    
-    	    <input style="margin-top:25px" type="submit" name="submitpost" class="tf-button tf-major right" value="Create New Slide"/> 
+
+        <input type="hidden" name="new_post" value="1"/>
+        <input style="margin-top:25px" type="submit" name="submitpost" class="tf-button tf-major right" value="Create New Slide"/>
     	    
     	</form>
     </div>
 </div>
-        <div style="clear:both"></div>
-    <?php
-        
+<div style="clear:both"></div>
+<?php
 }
 
 
@@ -402,6 +410,11 @@ function themeforce_slider_display() {
             $custom = get_post_custom( get_the_ID() );
             $id = ( $my_query->post->ID );
             $order = $custom["_tfslider_order"][0];
+            $type = $custom["_tfslider_type"][0];
+
+            $header = $custom["tfslider_header"][0];
+            $desc = $custom["tfslider_desc"][0];
+            $button = $custom["tfslider_button"][0];
             $link = $custom["tfslider_link"][0];
 
             // - image (with fallback support)
@@ -425,14 +438,35 @@ function themeforce_slider_display() {
             
             // **** Theme Specific
             
-            if ( TF_THEME == 'baseforce' )
-                {
-                echo '<li>';
-                $b_image = wpthumb( $image, 'width=960&height=250&crop=1', false);
-                echo '<img src="' . $b_image . '" alt="" />';
-                echo '</li>';
+            if ( TF_THEME == 'baseforce' ) {
+
+                switch($type) {
+
+                    case 'content':
+
+                        echo '<li class="slide-type-content">';
+                        $b_image = wpthumb( $image, 'width=560&height=250&crop=1', false);
+                        echo '<div class="slide-image" style="background-image:url(' . $b_image . ')"></div>';
+                        echo '<div class="slide-content">';
+                        echo '<h2>'. $header . '</h2>';
+                        echo '<p>'. $desc . '</p>';
+                        echo '<p>'. $button . '</p>';
+                        echo '</div>';
+                        echo '</li>';
+
+                    break;
+
+                    default:
+
+                        echo '<li class="slide-type-image">';
+                        $b_image = wpthumb( $image, 'width=940&height=250&crop=1', false);
+                        echo '<div class="slide-image" style="background-image:url(' . $b_image . ')"></div>';
+                        echo '</li>';
+
+                }
+
             }
-            
+
              if ( TF_THEME == 'chowforce' ) {
                
 				echo '<li>';
@@ -470,6 +504,7 @@ function themeforce_slider_display() {
         
         // **** Theme Specific
         // fallback functions when no slides exist
+        // TODO Consider replacing this with a more universal solution
         
         if ( $emptycheck == '' ) {
             
