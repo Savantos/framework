@@ -135,6 +135,7 @@ function tf_slider_page() {
             $thumbnail = wpthumb( $image, 'width=680&height=180&crop=1', false);
             
             // Warning Statement
+
             if ( $image ) { $imagesize = getimagesize($image); }
             
             if ( $imagesize ) {
@@ -450,7 +451,7 @@ function themeforce_slider_display() {
                         echo '<div class="slide-content">';
                         echo '<h2>'. $header . '</h2>';
                         echo '<p>'. $desc . '</p>';
-                        echo '<p>'. $button . '</p>';
+                        echo '<a class="slide-button" href="' . $link . '">'. $button . '</a>';
                         echo '</div>';
                         echo '</li>';
 
