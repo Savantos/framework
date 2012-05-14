@@ -586,7 +586,7 @@ function themeforce_slider_display() {
 //Slider legacy update
 function tf_slider_legacy_support_update( ) {
 
-    if ( get_option( '_tf_slider_legacy_support_complete_1' ) )
+    if ( get_option( '_tf_slider_legacy_support_complete_2' ) )
         return;
 
     $args = array(
@@ -622,7 +622,12 @@ function tf_slider_legacy_support_update( ) {
 
             $image_rel_path = get_post_meta( $attachment_id, '_wp_attached_file', true );
 
-            $image_name = end( explode( '/', $image_rel_path ) );
+            $image_exploded = explode( '/', $image_rel_path );
+
+            $image_name = end( $image_exploded );
+
+            if ( strpos( $image_name, '.' ) === false || count( $image_exploded ) == 1 )
+                    $image_name = end( explode( '\\', $image_rel_path ) );
 
             copy( $img_url, $dir['path'] . '/' . $image_name );
         }
@@ -631,10 +636,12 @@ function tf_slider_legacy_support_update( ) {
         wp_update_post( array( 'ID' => $attachment_id, 'post_parent' => $post->ID ) );
         update_post_meta( $post->ID, '_thumbnail_id', $attachment_id );
         update_post_meta( $post->ID, 'tfslider_image', wp_get_attachment_url( $attachment_id ) );
-        update_option( '_tf_slider_legacy_support_complete_1', true );
+        update_option( '_tf_slider_legacy_support_complete_2', true );
 
     }
 
+    wp_redirect( add_query_arg( 'updated_legacy', 'true' ) );
+    exit;
 }
 
 ?>
