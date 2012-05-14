@@ -636,9 +636,10 @@ function tf_slider_legacy_support_update( ) {
         wp_update_post( array( 'ID' => $attachment_id, 'post_parent' => $post->ID ) );
         update_post_meta( $post->ID, '_thumbnail_id', $attachment_id );
         update_post_meta( $post->ID, 'tfslider_image', wp_get_attachment_url( $attachment_id ) );
-        update_option( '_tf_slider_legacy_support_complete_2', true );
 
     }
+
+    update_option( '_tf_slider_legacy_support_complete_2', true );
 
     wp_redirect( add_query_arg( 'updated_legacy', 'true' ) );
     exit;
