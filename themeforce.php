@@ -48,8 +48,7 @@ require_once( TF_PATH . '/core_general/tf.business-shortcodes.php' );
 	
 // Common Assets
 require_once( TF_PATH . '/core_general/tf.assets.php' );
-// require_once( TF_PATH . '/core_general/tf.slider.php' );
-require_once( TF_PATH . '/core_general/tf.slider2.php' );
+require_once( TF_PATH . '/core_general/tf.slider.php' );
 require_once( TF_PATH . '/core_general/tf.mobile.php' );
 require_once( TF_PATH . '/core_colors/tf.colors.php' );
 
