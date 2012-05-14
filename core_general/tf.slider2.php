@@ -102,6 +102,7 @@ function tf_slider_page() {
 
             $order = $custom["_tfslider_order"][0];
             $type = $custom["_tfslider_type"][0];
+            if ( !$type ) { $type = 'image'; }
 
             $header = $custom["tfslider_header"][0];
             $desc = $custom["tfslider_desc"][0];
@@ -179,7 +180,7 @@ function tf_slider_page() {
 
                     <!-- Auto-Updating Preview -->
 
-                    <input type="button" class="slide-switchimage tf-tiny" value="Switch Image" />
+                    <!-- <input type="button" class="slide-switchimage tf-tiny" value="Switch Image" /> -->
 
                     <!-- Auto-Updating Preview -->
 
@@ -327,6 +328,8 @@ add_action( 'wp_ajax_tf_slides_update_content', function() {
     $value = $_POST['value'];
 
     update_post_meta( $post_id, $key, $value );
+
+    echo 'ok';
 
 } );
 

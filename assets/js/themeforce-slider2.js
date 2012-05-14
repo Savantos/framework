@@ -158,7 +158,9 @@ jQuery(document).ready(function($) {
         var meta = $(this).data('meta');
         var value = $(this).val();
 
-        jQuery.post( ajaxurl, { action: 'tf_slides_update_content', postid: id, key: meta, value: value } );
+        jQuery.post( ajaxurl, { action: 'tf_slides_update_content', postid: id, key: meta, value: value }, function(data) {
+            console.log(data);
+        } );
 
         console.log('Fired - Update Slide Content - ID: ' + id + ', Meta: ' + meta + ', Value: ' + value);
 
