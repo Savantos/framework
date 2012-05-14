@@ -28,6 +28,7 @@ function create_slider_postype() {
 
 	register_post_type( 'tf_slider', $args);
 
+    tf_slider_legacy_support_update();
 }
 
 add_action( 'init', 'create_slider_postype' );
@@ -154,6 +155,9 @@ function tf_slider_page() {
             } else {
                 $image = $meta_image;
             }
+
+            if (  $post_image[0] )
+                hm( 'this one is using $post_image not $meta_image. woo!' );
 
             $thumbnail = wpthumb( $image, 'width=680&height=180&crop=1', false);
             
@@ -392,14 +396,14 @@ add_action( 'wp_ajax_tf_slides_delete', function() {
 
 function themeforce_slider_catch_submit() {
 
-        // Grab POST Data
-    
-        if ( isset($_POST['new_post'] ) == '1') {
+    // Grab POST Data
+
+    if ( isset($_POST['new_post'] ) == '1') {
         $post_title = 'Slide'; // New - Static as one field is always required between post title & content. This field will always be hidden now.
 
         $imageurl = reset( wp_get_attachment_image_src( $_POST['tfslider_image'], 'large' ) );
         $imageid = (int) $_POST['tfslider_image'];
-        
+
         if ( !$imageurl ) {$imageurl = TF_URL . '/assets/images/slider-empty.jpg'; }
         $link = $_POST['tfslider_link'];
         $button = $_POST['tfslider_button'];
@@ -407,7 +411,7 @@ function themeforce_slider_catch_submit() {
         $new_post = array(
               'ID' => '',
               'post_type' => 'tf_slider',
-              'post_author' => $user->ID, 
+              'post_author' => $user->ID,
               'post_content' => 'Slides do not have any WP content, everything is stored in meta.',
               'post_title' => $post_title,
               'post_status' => 'publish',
@@ -415,19 +419,19 @@ function themeforce_slider_catch_submit() {
 
         // Create New Slide
         $post_id = wp_insert_post( $new_post );
-        
+
         // Update Meta Data
         $order_id = intval( $post_id )*100;
-        
+
         set_post_thumbnail( $post_id, $imageid );
-        
+
         update_post_meta( $post_id, '_tfslider_order', $order_id);
         update_post_meta( $post_id, 'tfslider_image', $imageurl);
 
         // Exit
         wp_redirect( wp_get_referer() );
         exit;
-        }
+    }
 }
 
 add_action('admin_init', 'themeforce_slider_catch_submit');
@@ -436,146 +440,201 @@ add_action('admin_init', 'themeforce_slider_catch_submit');
 
 function themeforce_slider_display() {
 
-    // Query Custom Post Types  
-        $args = array(
-            'post_type' => 'tf_slider',
-            'post_status' => 'publish',
-            'orderby' => 'meta_value_num',
-            'meta_key' => '_tfslider_order',
-            'order' => 'ASC',
-            'posts_per_page' => 99
-        );
+    // Query Custom Post Types
+    $args = array(
+        'post_type' => 'tf_slider',
+        'post_status' => 'publish',
+        'orderby' => 'meta_value_num',
+        'meta_key' => '_tfslider_order',
+        'order' => 'ASC',
+        'posts_per_page' => 99
+    );
 
-        // - query -
-        $my_query = null;
-        $my_query = new WP_query( $args );
+    // - query -
+    $my_query = null;
+    $my_query = new WP_query( $args );
 
-        $c = 1;
-        
-        while ( $my_query->have_posts() ) : $my_query->the_post();
-                
-            // - variables -
-            $custom = get_post_custom( get_the_ID() );
-            $id = ( $my_query->post->ID );
-            $order = $custom["_tfslider_order"][0];
-            $type = $custom["_tfslider_type"][0];
+    $c = 1;
 
-            $header = $custom["tfslider_header"][0];
-            $desc = $custom["tfslider_desc"][0];
-            $button = $custom["tfslider_button"][0];
-            $link = $custom["tfslider_link"][0];
+    while ( $my_query->have_posts() ) : $my_query->the_post();
 
-            // - image (with fallback support)
-            $meta_image = $custom["tfslider_image"][0];
-            $post_image = wp_get_attachment_image_src( get_post_thumbnail_id( get_the_ID() ), 'full' );
+        // - variables -
+        $custom = get_post_custom( get_the_ID() );
+        $id = ( $my_query->post->ID );
+        $order = $custom["_tfslider_order"][0];
+        $type = $custom["_tfslider_type"][0];
 
-            if ( $post_image[0] ) {
-                $image = $post_image[0];
-            } else {
-                $image = $meta_image;
-            }
+        $header = $custom["tfslider_header"][0];
+        $desc = $custom["tfslider_desc"][0];
+        $button = $custom["tfslider_button"][0];
+        $link = $custom["tfslider_link"][0];
 
-            // output
+        // - image (with fallback support)
+        $meta_image = $custom["tfslider_image"][0];
+        $post_image = wp_get_attachment_image_src( get_post_thumbnail_id( get_the_ID() ), 'full' );
 
-            // update mobile bg if not set yet
-            if ($c == 1 && get_option( 'tf_mobilebg' ) == '') { 
-            	update_option('tf_mobilebg', $image);
-            }
-            
-            $c++;
-            
-            // **** Theme Specific
-            
-            if ( TF_THEME == 'baseforce' ) {
+        if ( $post_image[0] ) {
+            $image = $post_image[0];
+        } else {
+            $image = $meta_image;
+        }
 
-                switch($type) {
+        // output
 
-                    case 'content':
+        // update mobile bg if not set yet
+        if ($c == 1 && get_option( 'tf_mobilebg' ) == '') {
+        	update_option('tf_mobilebg', $image);
+        }
 
-                        echo '<li class="slide-type-content">';
-                        $b_image = wpthumb( $image, 'width=560&height=250&crop=1', false);
-                        echo '<div class="slide-image" style="background-image:url(' . $b_image . ')"></div>';
-                        echo '<div class="slide-content">';
-                        echo '<h2>'. $header . '</h2>';
-                        echo '<p>'. $desc . '</p>';
-                        echo '<a class="slide-button" href="' . $link . '">'. $button . '</a>';
-                        echo '</div>';
-                        echo '</li>';
+        $c++;
 
-                    break;
-
-                    default:
-
-                        echo '<li class="slide-type-image">';
-                        $b_image = wpthumb( $image, 'width=940&height=250&crop=1', false);
-                        echo '<div class="slide-image" style="background-image:url(' . $b_image . ')"></div>';
-                        echo '</li>';
-
-                }
-
-            }
-
-             if ( TF_THEME == 'chowforce' ) {
-               
-				echo '<li>';
-				    if ( $link ) {echo '<a href="' . $link . '">';}
-				        $resized_image = wpthumb( $image, 'width=960&height=250&crop=1', false);
-				        echo '<div class="slideimage-full" style="background:url(' . $resized_image . ') no-repeat;" alt="' . __('Slide', 'themeforce') . '"></div>';
-				    if ( $link ) {echo '</a>';}
-				echo '</li>';
-
-              }
-                
-              if ( TF_THEME == 'pubforce' ) {
-                    echo '<li>';
-                        if ( $link ) {echo '<a href="' . $link . '">';}
-                            $resized_image = wpthumb( $image, 'width=540&height=300&crop=1', false);
-                            echo '<div class="slideimage" style="background:url(' . $resized_image . ') no-repeat;" alt="' . __('Slide', 'themeforce') . '"></div>';
-                        if ( $link ) {echo '</a>';}
-                    echo '</li>';
-			  }   
-                
-              if ( TF_THEME == 'fineforce' )
-                {
-                    echo '<li>';
-                        if ( $link ) {echo '<a href="' . $link . '">';}
-                            $resized_image = wpthumb( $image, 'width=1000&height=250&crop=1', false);
-                            echo '<div class="slideimage" style="background:url(' . $resized_image . ') no-repeat;" alt="' . __('Slide', 'themeforce') . '"></div>';
-                        if ( $link ) {echo '</a>';}
-                    echo '</li>';
-                }   
-                
-             // fallback check   
-             $emptycheck[] = $image;   
-                    
-        endwhile;
-        
         // **** Theme Specific
-        // fallback functions when no slides exist
-        // TODO Consider replacing this with a more universal solution
-        
-        if ( $emptycheck == '' ) {
-            
-            if ( TF_THEME == 'chowforce' ) {
-                echo '<li><div class="slideimage-full" style="background:url(' . get_bloginfo( 'template_url' ) . '/images/defaults/slide1.jpg) no-repeat;" alt="Slide"></li>';
-                echo '<li><div class="slidetext"><h3>Yelp Integration</h3><p>Want to show off your Yelp rating? That\'s no problem. If you\'re not in a Yelp country, but use Qype instead, that works too! Just add your API and you\'ll be all set.</p></div><div class="slideimage" style="background:url(' . get_bloginfo( 'template_url' ) . '/images/defaults/slide2.jpg) no-repeat;" alt="Slide"></li>';
-                echo '<li><div class="slidetext"><h3>No more PDF Menus</h3><p>With our designs, search engines will recognize your food menus and visitors won\'t have to download any PDF\'s or otherwise.</p></div><div class="slideimage" style="background:url(' . get_bloginfo( 'template_url' ) . '/images/defaults/slide3.jpg) no-repeat;" alt="Slide"></li>';
-                echo '<li><div class="slidetext"><h3>Foursquare Integration</h3><p>Display your Foursquare Photos & Tips without any problem. You can do similar things with Gowalla. All you need to do is sign-up for an API Key & enter it (everyone gets one and it takes 2 minutes).</p></div><div class="slideimage" style="background:url(' . get_bloginfo( 'template_url' ) . '/images/defaults/slide4.jpg) no-repeat;" alt="Slide"></li>';
-            }           
-            
-            if ( TF_THEME == 'pubforce' ) {
-                echo '<li><div class="slideimage" style="background:url(' . get_bloginfo( 'template_url' ) . '/images/defaults/slide1.jpg) no-repeat;" alt="Slide"></li>';
-                echo '<li><div class="slideimage" style="background:url(' . get_bloginfo( 'template_url' ) . '/images/defaults/slide2.jpg) no-repeat;" alt="Slide"></li>';
-                echo '<li><div class="slideimage" style="background:url(' . get_bloginfo( 'template_url' ) . '/images/defaults/slide3.jpg) no-repeat;" alt="Slide"></li>';
+
+        if ( TF_THEME == 'baseforce' ) {
+
+            switch($type) {
+
+                case 'content':
+
+                    echo '<li class="slide-type-content">';
+                    $b_image = wpthumb( $image, 'width=560&height=250&crop=1', false);
+                    echo '<div class="slide-image" style="background-image:url(' . $b_image . ')"></div>';
+                    echo '<div class="slide-content">';
+                    echo '<h2>'. $header . '</h2>';
+                    echo '<p>'. $desc . '</p>';
+                    echo '<a class="slide-button" href="' . $link . '">'. $button . '</a>';
+                    echo '</div>';
+                    echo '</li>';
+
+                break;
+
+                default:
+
+                    echo '<li class="slide-type-image">';
+                    $b_image = wpthumb( $image, 'width=940&height=250&crop=1', false);
+                    echo '<div class="slide-image" style="background-image:url(' . $b_image . ')"></div>';
+                    echo '</li>';
+
             }
-            
-            if ( TF_THEME == 'fineforce' ) {
-                echo '<li><div class="slideimage" style="background:url(' . get_bloginfo( 'template_url' ) . '/images/default_food_1.jpg) no-repeat;" alt="Slide"></li>';
-                echo '<li><div class="slideimage" style="background:url(' . get_bloginfo( 'template_url' ) . '/images/default_food_2.jpg) no-repeat;" alt="Slide"></li>';
-                echo '<li><div class="slideimage" style="background:url(' . get_bloginfo( 'template_url' ) . '/images/default_food_3.jpg) no-repeat;" alt="Slide"></li>';
-            }
-            
-        }
 
         }
+
+         if ( TF_THEME == 'chowforce' ) {
+
+    		echo '<li>';
+    		    if ( $link ) {echo '<a href="' . $link . '">';}
+    		        $resized_image = wpthumb( $image, 'width=960&height=250&crop=1', false);
+    		        echo '<div class="slideimage-full" style="background:url(' . $resized_image . ') no-repeat;" alt="' . __('Slide', 'themeforce') . '"></div>';
+    		    if ( $link ) {echo '</a>';}
+    		echo '</li>';
+
+          }
+
+          if ( TF_THEME == 'pubforce' ) {
+                echo '<li>';
+                    if ( $link ) {echo '<a href="' . $link . '">';}
+                        $resized_image = wpthumb( $image, 'width=540&height=300&crop=1', false);
+                        echo '<div class="slideimage" style="background:url(' . $resized_image . ') no-repeat;" alt="' . __('Slide', 'themeforce') . '"></div>';
+                    if ( $link ) {echo '</a>';}
+                echo '</li>';
+    	  }
+
+          if ( TF_THEME == 'fineforce' )
+            {
+                echo '<li>';
+                    if ( $link ) {echo '<a href="' . $link . '">';}
+                        $resized_image = wpthumb( $image, 'width=1000&height=250&crop=1', false);
+                        echo '<div class="slideimage" style="background:url(' . $resized_image . ') no-repeat;" alt="' . __('Slide', 'themeforce') . '"></div>';
+                    if ( $link ) {echo '</a>';}
+                echo '</li>';
+            }
+
+         // fallback check
+         $emptycheck[] = $image;
+
+    endwhile;
+
+    // **** Theme Specific
+    // fallback functions when no slides exist
+    // TODO Consider replacing this with a more universal solution
+
+    if ( $emptycheck == '' ) {
+
+        if ( TF_THEME == 'chowforce' ) {
+            echo '<li><div class="slideimage-full" style="background:url(' . get_bloginfo( 'template_url' ) . '/images/defaults/slide1.jpg) no-repeat;" alt="Slide"></li>';
+            echo '<li><div class="slidetext"><h3>Yelp Integration</h3><p>Want to show off your Yelp rating? That\'s no problem. If you\'re not in a Yelp country, but use Qype instead, that works too! Just add your API and you\'ll be all set.</p></div><div class="slideimage" style="background:url(' . get_bloginfo( 'template_url' ) . '/images/defaults/slide2.jpg) no-repeat;" alt="Slide"></li>';
+            echo '<li><div class="slidetext"><h3>No more PDF Menus</h3><p>With our designs, search engines will recognize your food menus and visitors won\'t have to download any PDF\'s or otherwise.</p></div><div class="slideimage" style="background:url(' . get_bloginfo( 'template_url' ) . '/images/defaults/slide3.jpg) no-repeat;" alt="Slide"></li>';
+            echo '<li><div class="slidetext"><h3>Foursquare Integration</h3><p>Display your Foursquare Photos & Tips without any problem. You can do similar things with Gowalla. All you need to do is sign-up for an API Key & enter it (everyone gets one and it takes 2 minutes).</p></div><div class="slideimage" style="background:url(' . get_bloginfo( 'template_url' ) . '/images/defaults/slide4.jpg) no-repeat;" alt="Slide"></li>';
+        }
+
+        if ( TF_THEME == 'pubforce' ) {
+            echo '<li><div class="slideimage" style="background:url(' . get_bloginfo( 'template_url' ) . '/images/defaults/slide1.jpg) no-repeat;" alt="Slide"></li>';
+            echo '<li><div class="slideimage" style="background:url(' . get_bloginfo( 'template_url' ) . '/images/defaults/slide2.jpg) no-repeat;" alt="Slide"></li>';
+            echo '<li><div class="slideimage" style="background:url(' . get_bloginfo( 'template_url' ) . '/images/defaults/slide3.jpg) no-repeat;" alt="Slide"></li>';
+        }
+
+        if ( TF_THEME == 'fineforce' ) {
+            echo '<li><div class="slideimage" style="background:url(' . get_bloginfo( 'template_url' ) . '/images/default_food_1.jpg) no-repeat;" alt="Slide"></li>';
+            echo '<li><div class="slideimage" style="background:url(' . get_bloginfo( 'template_url' ) . '/images/default_food_2.jpg) no-repeat;" alt="Slide"></li>';
+            echo '<li><div class="slideimage" style="background:url(' . get_bloginfo( 'template_url' ) . '/images/default_food_3.jpg) no-repeat;" alt="Slide"></li>';
+        }
+
+    }
+
+}
+
+//Slider legacy update
+function tf_slider_legacy_support_update( ) {
+
+    if ( get_option( '_tf_slider_legacy_support_complete_1' ) )
+        return;
+
+    $args = array(
+        'post_type' => 'tf_slider',
+        'post_status' => 'publish',
+        'orderby' => 'meta_value_num',
+        'meta_key' => '_tfslider_order',
+        'order' => 'ASC',
+        'posts_per_page' => -1,
+
+    );
+
+    $post_query = new WP_Query( $args );
+
+    foreach( $post_query->posts as $post ) {
+
+        if ( ! get_post_meta( $post->ID, 'tfslider_image', true ) || get_post_meta( $post->ID, '_thumbnail_id', true ) )
+            continue;
+
+        $img_url = get_post_meta( $post->ID, 'tfslider_image', true );
+
+        global $wpdb;
+
+        $attachment_id = $wpdb->get_var( "SELECT ID FROM wp_posts WHERE post_type = 'attachment' AND guid = '$img_url'" );
+
+        if ( ! $attachment_id )
+            return;
+
+        //if its a pre-created example image, just re-upload
+        if ( strpos( $img_url, 'http://template' ) !== false ) {
+
+            $dir = wp_upload_dir();
+
+            $image_rel_path = get_post_meta( $attachment_id, '_wp_attached_file', true );
+
+            $image_name = end( explode( '/', $image_rel_path ) );
+
+            copy( $img_url, $dir['path'] . '/' . $image_name );
+        }
+
+        update_post_meta( $attachment_id, '_wp_attached_file', $dir['subdir'] . '/' . $image_name );
+        wp_update_post( array( 'ID' => $attachment_id, 'post_parent' => $post->ID ) );
+        update_post_meta( $post->ID, '_thumbnail_id', $attachment_id );
+        update_post_meta( $post->ID, 'tfslider_image', wp_get_attachment_url( $attachment_id ) );
+        update_option( '_tf_slider_legacy_support_complete_1', true );
+
+    }
+
+}
+
 ?>
