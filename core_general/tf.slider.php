@@ -67,283 +67,237 @@ add_action( 'admin_print_scripts-appearance_page_tf_slider', 'themeforce_slider_
  */
 function tf_slider_page() {
 
-    ?>
+    $slide_data = tf_get_slide_data(); ?>
 
     <div class="wrap tf-slides-page">
-    <div class="tf-options-page">
+        <div class="tf-options-page">
 
-    <?php screen_icon(); ?>
-    <h2>Slides</h2>
+        <?php screen_icon(); ?>
+        <h2>Slides</h2>
 
-    <form method="post" action="" name="" onsubmit="return checkformf( this );">
-    <ul id="tf-slides-list">
-    
-    	<?php
+        <form method="post" action="" name="" onsubmit="return checkformf( this );">
 
-        // - query -
+            <ul id="tf-slides-list">
 
-		$args = array(
-		    'post_type' => 'tf_slider',
-		    'post_status' => 'publish',
-		    'orderby' => 'meta_value_num',
-		    'meta_key' => '_tfslider_order',
-		    'order' => 'ASC',
-		    'posts_per_page' => 99
-		);
+                <?php foreach ( $slide_data as $slide ): ?>
 
-		$my_query = null;
-		$my_query = new WP_query( $args );
+                    <!--Display Slide-->
+                    <li id="listItem_<?php echo $slide->ID; ?>" class="menu-item-handle slide-item">
 
-        while ( $my_query->have_posts() ) : $my_query->the_post();
-            
-            // - variables -
-			
-            $custom = get_post_custom( get_the_ID() );
-            $id = ( $my_query->post->ID );
+                        <input type="hidden" name="slider[id][<?php echo $slide->ID; ?>]" value="<?php echo $slide->ID; ?>" />
 
-            $order = $custom["_tfslider_order"][0];
-            $type = $custom["_tfslider_type"][0];
-            if ( !$type ) { $type = 'image'; }
+                        <div class="slide-thumbnail" style="background-image:url( <?php echo ( $slide->thumbnail ) ? $slide->thumbnail : TF_URL . '/assets/images/slider-empty.jpg'; ?> )">
 
-            $header = $custom["tfslider_header"][0];
-            $desc = $custom["tfslider_desc"][0];
-            $button = $custom["tfslider_button"][0];
-            $link = $custom["tfslider_link"][0];
+                            <div class="slide-image-well"><?php tf_output_edit_slide_image_well( $slide ); ?></div>
 
-            // - slide types per theme
+                            <!-- Controls -->
+                            <div class="slide-itembar-control">
+                                    <div class="slide-icon-move"></div>
+                                    <div class="slide-icon-edit"></div>
+                                    <div class="slide-icon-delete"></div>
+                            </div>
 
-            switch( TF_THEME ) {
+                            <!-- Image Warning -->
+                            <?php echo ( $slide->warning ) ? $slide->warning : ''; ?>
 
-                case 'baseforce':
-                $types = array('image','content');
-                break;
+                            <div class="slide-change-image" ><a href="#" class="button">Change image</a></div>
 
-                default:
-                $types = array('image');
+                            <div class="clear"></div>
 
+
+                        </div>
+
+                        <!-- Auto-Updating Preview -->
+                        <!-- <input type="button" class="slide-switchimage tf-tiny" value="Switch Image" /> -->
+
+                        <!-- Auto-Updating Preview -->
+                        <div class="slide-content-preview">
+                            <div class="preview-header"><?php echo $slide->header; ?></div>
+                            <div class="preview-desc"><?php echo $slide->desc; ?></div>
+                            <div class="preview-button"><?php echo $slide->button; ?></div>
+                        </div>
+
+
+                        <div class="slide-edit">
+
+                            <div class="clear"></div>
+
+                            <!-- Slide Type Selection -->
+                            <div class="slide-type-selection">
+                                <div class="label" style="float:left;line-height:33px;font-weight:bold;margin-right:10px;">Slide Design</div>
+                                <?php tf_output_slide_types( $slide ); ?>
+                            </div>
+
+                            <div class="clear"></div>
+
+                            <!-- Slide Type : Image -->
+                            <div class="slide-edit-image">
+                                <input class="slide-content-link" data-meta="link" type="text" placeholder="Slide Link URL" value="<?php echo $slide->link; ?>" />
+                            </div>
+
+                            <!-- Slide Type : Content -->
+                            <div class="slide-edit-content">
+                                <input class="slide-content-header" type="text" data-meta="header" placeholder="Title / Header" value="<?php echo $slide->header; ?>" />
+                                <textarea class="slide-content-desc" data-meta="desc" rows="2"><?php echo $slide->desc; ?></textarea>
+                                <input class="slide-content-button" data-meta="button" type="text" placeholder="Button Text" value="<?php echo $slide->button; ?>" />
+                                <input class="slide-content-link" data-meta="link" type="text" placeholder="Button Link URL" value="<?php echo $slide->link; ?>" />
+                            </div>
+
+                        </div>
+
+                        <!-- Slide Data : Order -->
+                        <input type="hidden" name="slider[order][<?php echo $slide->ID; ?>]" value="<?php $slide->order; ?>" />
+
+                    </li>
+
+	    	<?php endforeach; ?>
+
+        </ul>
+
+        <input type="hidden" name="update_post" value="1"/>
+
+        </form>
+
+        <div style="clear:both"></div>
+
+        <?php tf_output_new_slide_image_well(); ?>
+
+        </div>
+        <div style="clear:both"></div>
+    </div>
+    <?php
+}
+
+function tf_get_slide_data() {
+
+    $postdata = array();
+
+    $args = array(
+        'post_type' => 'tf_slider',
+        'post_status' => 'publish',
+        'orderby' => 'meta_value_num',
+        'meta_key' => '_tfslider_order',
+        'order' => 'ASC',
+        'posts_per_page' => 99
+    );
+
+    $slide_posts = get_posts( $args );
+
+    foreach( $slide_posts as $key => $slide_post ) {
+
+        $postdata[$key]->post = $slide_post;
+        $postdata[$key]->ID = ( $slide_post->ID );
+
+        $postdata[$key]->meta = get_post_custom( $postdata[$key]->ID );
+
+        $postdata[$key]->image_id = $postdata[$key]->meta["_thumbnail_id"][0];
+        $postdata[$key]->order = $postdata[$key]->meta["_tfslider_order"][0];
+        $postdata[$key]->type = ( $postdata[$key]->meta["_tfslider_type"][0] ) ? $postdata[$key]->meta["_tfslider_type"][0] : 'image';
+        $postdata[$key]->header = $postdata[$key]->meta["tfslider_header"][0];
+        $postdata[$key]->desc = $postdata[$key]->meta["tfslider_desc"][0];
+        $postdata[$key]->button = $postdata[$key]->meta["tfslider_button"][0];
+        $postdata[$key]->link = $postdata[$key]->meta["tfslider_link"][0];
+
+        $postdata[$key]->image = reset( wp_get_attachment_image_src( get_post_thumbnail_id( $postdata[$key]->ID ), 'full' ) );
+        $postdata[$key]->thumbnail = wpthumb( $postdata[$key]->image, 'width=680&height=180&crop=1', false );
+
+        // Warning Statement
+        $postdata[$key]->image_side = getimagesize( $postdata[$key]->image );
+
+        if ( $postdata[$key]->image_side && $postdata[$key]->image_side[0] < TF_SLIDERWIDTH && $postdata[$key]->image_side[1] < TF_SLIDERHEIGHT ) {
+
+            $warning = '<div class="tf-notice slide-notice">Oops, the <strong>dimensions</strong> of the image below aren\'t quite enough. Please ensure the image is at least <strong>' . TF_SLIDERWIDTH . 'px wide by ' . TF_SLIDERHEIGHT . 'px high.</strong></div>';
+
+        } else if ( $postdata[$key]->image_side  ) {
+
+            if ( $postdata[$key]->image_side[0] < TF_SLIDERWIDTH ) {
+                $warning = '<div class="tf-notice slide-notice">Oops, the <strong>width</strong> of the image below is too short. Please ensure the image is at least <strong>' . TF_SLIDERWIDTH . 'px wide.</strong></div>';
             }
 
-            // - image (with fallback) -
-
-            $meta_image = $custom["tfslider_image"][0];
-            /*
-
-            Issue
-            https://github.com/themeforce/framework/issues/84
-            ==================================================
-
-            We have images that are not bound to the post which is an issue
-            somewhat for our imagewell as it requires image ID's to pass
-            through it. $val is the image ID which is then passed onto to
-            the imagewell further below. $meta_image is the old legacy image
-            we've been using.
-
-            $val = get_post_thumbnail_id( get_the_ID() );
-
-            if ( !$val && $meta_image ) {
-                $attach_id = wp_insert_attachment( $attachment, $meta_image, 37 );
-                set_post_thumbnail( $post_id, $attach_id );
-                $val = get_post_thumbnail_id( get_the_ID() );
+            if ( $postdata[$key]->image_side[1] < TF_SLIDERHEIGHT ) {
+                $warning = '<div class="tf-notice slide-notice">Oops, the <strong>height</strong> of the image below is too short. Please ensure the image is at least <strong>' . TF_SLIDERHEIGHT . 'px high.</strong></div>';
             }
+        }
 
-            */
+    }
+    return $postdata;
+}
 
-            $post_image = wp_get_attachment_image_src( get_post_thumbnail_id( get_the_ID() ), 'full' );
+function tf_output_slide_types( $slide_data ) {
 
-            if ( $post_image[0] ) {
-                $image = $post_image[0];
-            } else {
-                $image = $meta_image;
-            }
+    // - slide types per theme
+    switch( TF_THEME ) {
 
-            if (  $post_image[0] )
-                hm( 'this one is using $post_image not $meta_image. woo!' );
+        case 'baseforce':
+            $types = array('image','content');
+            break;
 
-            $thumbnail = wpthumb( $image, 'width=680&height=180&crop=1', false);
-            
-            // Warning Statement
+        default:
+            $types = array('image');
+    }
 
-            if ( $image ) { $imagesize = getimagesize($image); }
-            
-            if ( $imagesize ) {
-                if ( $imagesize[0] < TF_SLIDERWIDTH && $imagesize[1] < TF_SLIDERHEIGHT ) {
+    foreach ( $types as $item ) {
 
-                    $warning = '<div class="tf-notice slide-notice">Oops, the <strong>dimensions</strong> of the image below aren\'t quite enough. Please ensure the image is at least <strong>' . TF_SLIDERWIDTH . 'px wide by ' . TF_SLIDERHEIGHT . 'px high.</strong></div>';
+        if ( $item == $slide_data->type )
+            $checked = 'checked="checked"';
+        else
+            $checked = '';
 
-                } else {
-                    
-                    if ($imagesize[0] < TF_SLIDERWIDTH ) {
-                    	$warning = '<div class="tf-notice slide-notice">Oops, the <strong>width</strong> of the image below is too short. Please ensure the image is at least <strong>' . TF_SLIDERWIDTH . 'px wide.</strong></div>';
-                    }
-                    
-                    if ($imagesize[1] < TF_SLIDERHEIGHT ) {
-                    	$warning = '<div class="tf-notice slide-notice">Oops, the <strong>height</strong> of the image below is too short. Please ensure the image is at least <strong>' . TF_SLIDERHEIGHT . 'px high.</strong></div>';
-                    }
-                }
-            }      
-                
-             // Display Slide
+        echo '<input type="radio" name="slide-type-' . $slide_data->ID . '" id="' . $item . '-' . $slide_data->ID . '" value="' . $item . '" ' . $checked . '/>';
+        echo '<label for="' . $item . '-' . $slide_data->ID . '"><img src="' . TF_URL . '/assets/images/slide-type-' . $item . '.png" /></label>';
+    }
+}
 
-            ?>
-            
-            <li id="listItem_<?php echo $id; ?>" class="menu-item-handle slide-item">
+function tf_output_edit_slide_image_well( $slide ) {
 
-                <input type="hidden" name="slider[id][<?php echo $id; ?>]" value="<?php echo $id; ?>" />
+    $value['allowed_extensions'] = ( ! empty( $value['allowed_extensions'] ) ) ? $value['allowed_extensions'] : array( 'jpeg', 'jpg', 'png', 'gif' );
+    $drop_text = ! empty( $value['drop_text'] ) ? $value['drop_text'] : __( 'Drop image here', 'themeforce');
 
-                <?php
+    $value['size'] = $value['size'] ? $value['size'] : 'width=680&height=180&crop=1';
 
-                /*
-                Issue
-                https://github.com/themeforce/framework/issues/84
-                ==================================================
+    $uploader = new TF_Upload_Image_Well( '_tf_slider_slide_image_well_' . $slide->ID, $slide->image_id,
+        array(
+            'size' => $value['size'],
+            'drop_text' => $drop_text,
+            'allowed_extensions' => $value['allowed_extensions'],
+            'display_placeholder' => false,
+            'html_fields' => array( array( 'class' => '', 'name' => 'post_id', 'value' => $slide->ID ) )
+        )
+    );
+    $uploader->admin_print_styles();
+    $uploader->html();
+}
 
-                echo '<div class="slide-thumbnail">';
-
-                $value['allowed_extensions'] = $value['allowed_extensions'] ? $value['allowed_extensions'] : array( 'jpeg', 'jpg', 'png', 'gif' );
-                $drop_text = ! empty( $value['drop_text'] ) ? $value['drop_text'] : __( 'Drop image here', 'themeforce');
-
-                $value['size'] = $value['size'] ? $value['size'] : 'width=440&height=220&crop=1';
-
-                $uploader = new TF_Upload_Image_Well( $value['id'], $val, $value['size'], $drop_text, $value['allowed_extensions'] );
-                $uploader->admin_print_styles();
-                $uploader->html();
-
-                */
-
-                ?>
-
-                <div class="slide-thumbnail" style="background-image:url(<?php if ( $thumbnail ) {echo $thumbnail;} else { echo TF_URL . '/assets/images/slider-empty.jpg'; } ?>)">
-
-                    <!-- Controls -->
-
-                    <div class="slide-itembar-control">
-                            <div class="slide-icon-move"></div>
-                            <div class="slide-icon-edit"></div>
-                            <div class="slide-icon-delete"></div>
-                    </div>
-
-                    <!-- Image Warning -->
-
-                    <?php if ( $warning ) { echo $warning; } ?>
-
-                    <!-- Auto-Updating Preview -->
-
-                    <!-- <input type="button" class="slide-switchimage tf-tiny" value="Switch Image" /> -->
-
-                    <!-- Auto-Updating Preview -->
-
-                    <div class="slide-content-preview">
-                            <div class="preview-header"><?php echo $header; ?></div>
-                            <div class="preview-desc"><?php echo $desc; ?></div>
-                            <div class="preview-button"><?php echo $button; ?></div>
-                    </div>
-
-                </div>
-
-                <div class="slide-edit">
-
-                    <div class="clear"></div>
-
-                    <!-- Slide Type Selection -->
-
-                    <div class="slide-type-selection">
-
-                        <div class="label" style="float:left;line-height:33px;font-weight:bold;margin-right:10px;">Slide Design</div>
-
-                        <?php
-
-                        foreach ($types as $item) {
-
-                            if ($item == $type) {
-                                $checked = 'checked="checked"';
-                            } else {
-                                $checked = '';
-                            }
-
-                            echo '<input type="radio" name="slide-type-' . $id . '" id="' . $item . '-' . $id . '" value="' . $item . '" ' . $checked . '/>';
-                            echo '<label for="' . $item . '-' . $id . '"><img src="' . TF_URL . '/assets/images/slide-type-' . $item . '.png" /></label>';
-
-                        };
-
-                        ?>
-
-                    </div>
-
-                    <div class="clear"></div>
-
-                    <!-- Slide Type : Image -->
-
-                    <div class="slide-edit-image">
-
-                        <input class="slide-content-link" data-meta="link" type="text" placeholder="Slide Link URL" value="<?php echo $link; ?>" />
-
-                    </div>
-
-                    <!-- Slide Type : Content -->
-
-                    <div class="slide-edit-content">
-
-                        <input class="slide-content-header" type="text" data-meta="header" placeholder="Title / Header" value="<?php echo $header; ?>" />
-                        <textarea class="slide-content-desc" data-meta="desc" rows="2"><?php echo $desc; ?></textarea>
-                        <input class="slide-content-button" data-meta="button" type="text" placeholder="Button Text" value="<?php echo $button; ?>" />
-                        <input class="slide-content-link" data-meta="link" type="text" placeholder="Button Link URL" value="<?php echo $link; ?>" />
-
-                    </div>
-
-                </div>
-
-                <!-- Slide Data : Order -->
-
-                <input type="hidden" name="slider[order][<?php echo $id; ?>]" value="<?php $order; ?>" />
-
-        </li>
-                         
-		<?php endwhile; ?>
-
-    </ul> 
-    
-    <input type="hidden" name="update_post" value="1"/> 
-
-    </form>
-
-    <div style="clear:both"></div>
-
+function tf_output_new_slide_image_well() {
+    ?>
     <h3>Create New Slide</h3>
     <div class="tf-settings-wrap">
     	<form class="form-table" method="post" action="" name="" onsubmit="return checkformf( this );">
-    	
+
     	<table>
    			<tr>
-			    <?php 
-			    // TODO Would be nice to have the 250x100 thumbnail replace the upload button once the image is ready 
+			    <?php
+			    // TODO Would be nice to have the 250x100 thumbnail replace the upload button once the image is ready
 			    ?>
 			    <th><label>Pick an Image<span class="required">*</span></label></th>
-			    <td><?php
-			    if ( get_option( $value['id'] ) != "") { 
-			    	$val = stripslashes(get_option( $value['id'])  ); 
-			    } else { 
-			    	$val =  $value['std']; 
-			    }
-			    
-			    $well = new TF_Upload_Image_Well( 'tfslider_image', $val, 'width=350&height=200&crop=1' );
-			    $well->html();
-			    ?>
-			    </td>
+			    <td>
+                    <?php //TODO: $value['id'] -- whats this doing? ID should be the ID of post to attach to
+                    $id = ( get_option( $value['id'] ) != "" ) ? stripslashes( get_option( $value['id'] ) ) : $value['std'];
+                    $well = new TF_Upload_Image_Well( 'tfslider_image', $id, array( 'size' => 'width=420&height=200&crop=1' ) );
+                    $well->html();
+                    ?>
+                </td>
 			</tr>
 
 		</table>
-		</div>
 
         <input type="hidden" name="new_post" value="1"/>
         <input style="margin-top:25px" type="submit" name="submitpost" class="tf-button tf-major right" value="Create New Slide"/>
-    	    
+
     	</form>
     </div>
-</div>
-<div style="clear:both"></div>
-<?php
+    <?php
 }
-
 
 // Update Slide Order
 
@@ -391,6 +345,22 @@ add_action( 'wp_ajax_tf_slides_delete', function() {
 
 } );
 
+//Change Slide Image
+add_action( 'wp_ajax_tf_slides_change_image', function() {
+
+    $post_id = (int) $_POST['post_id'];
+    $image_id = (int) $_POST['image_id'];
+
+    $src = wp_get_attachment_image_src( $image_id, 'width=680&height=180&crop=1' );
+
+    update_post_meta( $post_id, '_thumbnail_id', $image_id );
+    update_post_meta( $post_id, 'tfslider_image', $src['url'] );
+
+    echo $src[0];
+
+    exit;
+} );
+
 // Save New Slide
 // Needs to be updated to Slides V2
 
@@ -411,7 +381,7 @@ function themeforce_slider_catch_submit() {
         $new_post = array(
               'ID' => '',
               'post_type' => 'tf_slider',
-              'post_author' => $user->ID,
+              'post_author' => get_current_user_id(),
               'post_content' => 'Slides do not have any WP content, everything is stored in meta.',
               'post_title' => $post_title,
               'post_status' => 'publish',
@@ -586,7 +556,7 @@ function themeforce_slider_display() {
 //Slider legacy update
 function tf_slider_legacy_support_update( ) {
 
-    if ( get_option( '_tf_slider_legacy_support_complete_2' ) )
+    if ( get_option( '_tf_slider_legacy_support_complete_3' ) )
         return;
 
     $args = array(
@@ -632,17 +602,23 @@ function tf_slider_legacy_support_update( ) {
             copy( $img_url, $dir['path'] . '/' . $image_name );
         }
 
-        update_post_meta( $attachment_id, '_wp_attached_file', $dir['subdir'] . '/' . $image_name );
+        $image_rel = substr( $dir['subdir'], 1 ) . '/' . $image_name;
+
+        update_post_meta( $attachment_id, '_wp_attached_file', $image_rel );
         wp_update_post( array( 'ID' => $attachment_id, 'post_parent' => $post->ID ) );
         update_post_meta( $post->ID, '_thumbnail_id', $attachment_id );
         update_post_meta( $post->ID, 'tfslider_image', wp_get_attachment_url( $attachment_id ) );
 
+        $meta =  wp_get_attachment_metadata( $attachment_id );
+        $meta['sizes'] = array();
+        $meta['file'] = $image_rel;
+
+        wp_update_attachment_metadata( $attachment_id, $meta );
+
     }
 
-    update_option( '_tf_slider_legacy_support_complete_2', true );
+    update_option( '_tf_slider_legacy_support_complete_3', true );
 
     wp_redirect( add_query_arg( 'updated_legacy', 'true' ) );
     exit;
 }
-
-?>

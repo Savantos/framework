@@ -1,5 +1,35 @@
 var tf_image_uploaders = {};
 
+var ImageWellController = new function() {
+
+    var self = this;
+
+    self.addFileUploadCallbackForImageWell = function( well_id, callback ) {
+
+        if ( ! tf_image_uploaders[ well_id ] ) {
+
+            setTimeout( function() {
+                self.addFileUploadCallbackForImageWell( well_id, callback );
+            }, 1000 );
+
+            return;
+        }
+
+            tf_image_uploaders[ well_id ].bind( 'FileUploaded', function() {
+
+                // we set a timeout, else the input value won;t be set yet.
+                setTimeout( function() {
+
+                   callback();
+
+                }, 100 );
+
+            } );
+
+    }
+
+}
+
 jQuery( document ).ready( function($) {
 	// Object containing all the plupload uploaders
 	var 
@@ -44,7 +74,7 @@ jQuery( document ).ready( function($) {
 		
 		tf_well_plupload_init.multipart_params.field_id = prefix;
 		tf_well_plupload_init.multipart_params.size = input.parent().find( '.upload-form' ).attr( 'data-size' );
-				
+
 		if ( totalRWMB == 1 )
 			tf_well_plupload_init.filters[0].extensions = input.parent().find( '.upload-form' ).attr( 'data-extensions' );
 

@@ -6,25 +6,43 @@ class TF_Upload_Image_Well {
 	public $allowed_extensions;
 	public $drop_text;
     
-    function __construct( $id, $attachment_id, $size = '', $drop_text = 'Drop image here', $allowed_extensions = array( 'jpg', 'jpeg', 'png', 'gif' ) ) {
-    	$this->id 				= $id;
+    function __construct( $id, $attachment_id, $args = array() ) {
+
+        $this->id 				= $id;
     	$this->attachment_id 	= $attachment_id;
-    	$this->size 			= wp_parse_args( $size, 'width=440&height=200&crop=1' );
-    	$this->drop_text 		= $drop_text;
-    	$this->allowed_extensions = $allowed_extensions;
-    	$this->save_on_upload	= false;
-    	
+
+        $args = wp_parse_args( $args, array(
+
+            'allowed_extensions'  => array( 'jpg', 'jpeg', 'png', 'gif' ),
+            'drop_text'           => 'Drop image here',
+            'size'                => 'width=440&height=200&crop=1',
+            'save_on_upload'      => false,
+            'display_placeholder' => true,
+            'html_fields'         => array()
+
+        ) );
+
+        $this->size = wp_parse_args( $args['size'] );
+
+        $this->drop_text 		= $args['drop_text'];
+    	$this->allowed_extensions = $args['allowed_extensions'];
+    	$this->save_on_upload	= $args['save_on_upload'];
+        $this->display_placeholder = $args['display_placeholder'];
+
+        $this->html_fields = $args['html_fields'];
+
     	if ( empty( $this->size['width'] ) )
     		$this->size['width'] = '440';
     	
     	if ( empty( $this->size['height'] ) )
     		$this->size['height'] = '200';
     	
-    	if ( ! is_string( $size ) )
+    	if ( ! is_string( $this->size ) )
 	    	$this->size_str = sprintf( 'width=%d&height=%d&crop=%s', $this->size['width'], $this->size['height'], $this->size['crop'] );
 	    
 	    else
-	    	$this->size_str = $size;
+	    	$this->size_str = $this->size;
+
     }
 	
 	static function enqueue_scripts() {
@@ -83,7 +101,8 @@ class TF_Upload_Image_Well {
     		'post_mime_type'	=> $file_attr['type'],
     		'post_title'		=> preg_replace( '/\.[^.]+$/', '', basename( $file['name'] ) ),
     		'post_content'		=> '',
-    		'post_status'		=> 'inherit'
+    		'post_status'		=> 'inherit',
+
     	);
 
     	// Adds file as attachment to WordPress
@@ -141,16 +160,20 @@ class TF_Upload_Image_Well {
     	$img_prefix		= $this->id;
     	$style = sprintf( 'width: %dpx; height: %dpx;', $this->size['width'], $this->size['height'] );
     	
-    	$html = "<div style='$style' class='hm-uploader " . ( $this->attachment_id ? 'with-image' : '' ) . "' id='{$img_prefix}-container'>";
+    	$html = "<div style='$style' class='hm-uploader " . ( ( $this->attachment_id && $this->display_placeholder ) ? 'with-image' : '' ) . "' id='{$img_prefix}-container'>";
     	
     	$html .= "<input type='hidden' class='field-id rwmb-image-prefix' value='{$img_prefix}' />";
     	$html .= "<input type='hidden' class='field-val' name='{$this->id}' value='{$this->attachment_id}' />";
-    	
+
+        foreach ( $this->html_fields as $field )
+            $html .= "<input type='hidden' class='{$field['class']}' name='{$field['name']}' value='{$field['value']}' />";
+
+
     	echo $html;
     	
     	$html = '';
     	?>
-    	<div style="<?php echo $style ?> <?php echo $this->attachment_id ? '' : 'display: none;' ?> line-height: <?php echo $this->size['height'] ?>px;" class="current-image">
+    	<div style="<?php echo $style ?><?php echo ( $this->attachment_id && $this->display_placeholder ) ? '' : 'display: none;' ?> line-height: <?php echo $this->size['height'] ?>px;" class="current-image">
     		<?php if ( $this->attachment_id && wp_get_attachment_image( $this->attachment_id, $this->size, false, 'id=' . $this->id ) ) : ?>
 	    		<?php echo wp_get_attachment_image( $this->attachment_id, $this->size, false, 'id=' . $this->id ) ?>
 	    	<?php else : ?>

@@ -266,7 +266,7 @@ function tf_display_settings( $options ) {
             	
             	$value['size'] = $value['size'] ? $value['size'] : 'width=440&height=220&crop=1';
             	
-            	$uploader = new TF_Upload_Image_Well( $value['id'], $val, $value['size'], $drop_text, $value['allowed_extensions'] );
+            	$uploader = new TF_Upload_Image_Well( $value['id'], $val, array( 'size' => $value['size'], 'drop_text' => $drop_text, 'allowed_extensions' => $value['allowed_extensions'] ) );
             	$uploader->admin_print_styles();
             	$uploader->html();
             	

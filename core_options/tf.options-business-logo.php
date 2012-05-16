@@ -87,7 +87,7 @@ function tf_logo( $size ='width=250&height=200&crop=0' ) {
 	
 	if ( is_user_logged_in() ) :
 		
-		$uploader = new TF_Upload_Image_Well( 'tf_logo_id', get_option( 'tf_logo_id', 0 ), $size );
+		$uploader = new TF_Upload_Image_Well( 'tf_logo_id', get_option( 'tf_logo_id', 0 ), array( 'size' => $size ) );
 		$uploader->drop_text = __('Drop your logo here', 'themeforce');
 	    ?>
 

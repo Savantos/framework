@@ -6,8 +6,18 @@ jQuery(document).ready(function($) {
         $('.slide-edit-image, .slide-edit-content').hide();
     }
 
+    var resetImageWells = function( ) {
+
+        jQuery( '.slide-item').each( function() {
+            jQuery( this ).find( '.slide-thumbnail' ).css( 'background-position', 'center 0' );
+            jQuery( this ).find( '.slide-thumbnail .slide-image-well' ).css( 'margin-top', '182px' );
+            jQuery( this ).find( '.slide-thumbnail .slide-change-image' ).show();
+        } );
+    }
+
     var resetSlide = function() {
         $('.slide-edit').hide();
+        resetImageWells();
         resetTypes();
     }
 
@@ -19,7 +29,7 @@ jQuery(document).ready(function($) {
         return $(selector).closest('li.slide-item').find('input[name*="id"]').val();
     }
 
-    var shortenText = function(text, amount) {
+    var shortenText = function( text, amount ) {
         var short = text.trim().substring(0, amount);
         if ( text.length > amount ) {
             return short + "...";
@@ -39,8 +49,10 @@ jQuery(document).ready(function($) {
         {
             case 'content':
                 parent.find('.slide-edit-content').show('slow');
-                parent.find('.slide-thumbnail').animate({'width':'400px'}, 'slow');
-                parent.find('.slide-content-preview').show('slow');
+                parent.find('.slide-thumbnail').animate({'width':'400px'}, 'slow', function(){
+                    parent.find('.slide-content-preview').show('fast');
+                } );
+                resizeImageWell( parent, '400px' );
                 break;
 
             default:
@@ -48,6 +60,7 @@ jQuery(document).ready(function($) {
                 parent.find('.slide-content-preview').hide();
                 parent.find('.slide-edit-image').show('slow');
                 parent.find('.slide-thumbnail').animate({'width':'678px'}, 'slow');
+                resizeImageWell( parent, '678px' );
         }
 
     }
@@ -55,21 +68,36 @@ jQuery(document).ready(function($) {
     var switchPreview = function(selector, slideType) {
 
         var parent = getParent(selector);
-        console.log(parent);
 
         switch (slideType)
 
         {
             case 'content':
-                parent.find('.slide-thumbnail').animate({'width':'400px'}, 'slow');
-                parent.find('.slide-content-preview').show('slow');
+                parent.find('.slide-thumbnail').animate({'width':'400px'}, 'slow', function() {
+                    parent.find('.slide-content-preview').show('fast');
+                });
+                resizeImageWell( parent, '400px' );
                 break;
 
             default:
                 parent.find('.slide-content-preview').hide();
                 parent.find('.slide-thumbnail').animate({'width':'678px'}, 'slow');
+                resizeImageWell( parent, '678px' );
+
         }
 
+    }
+
+    var resizeImageWell = function( slide, width ) {
+
+        slide.find('.slide-image-well').animate({'width': width }, 'slow' );
+        slide.find('.slide-image-well>div').animate({'width': width }, 'slow' );
+
+        slide.find('.slide-image-well>div>div').each( function() {
+
+            if( jQuery( this ).css('z-index') != '-1' )
+                jQuery( this ).animate({'width': width }, 'slow' );
+        } );
     }
 
     // Init
@@ -101,7 +129,8 @@ jQuery(document).ready(function($) {
     // Sort - Reset size of Slide when clicking on Handle
 
     $('.slide-icon-move').mousedown(function(){
-        resetSlide();
+
+        resetSlide( jQuery( this ).closest( '.slide-item' ) );
     });
 
     // Sort - Match UI Highlight Placeholder to height of selected Slide
@@ -117,11 +146,18 @@ jQuery(document).ready(function($) {
     
     $('.slide-icon-edit').click(function () {
 
-        resetSlide();
+        if ( jQuery( this).closest( '.slide-item').find( '.slide-edit').css( 'display' ) != 'none' ) {
+            resetSlide( jQuery( this ).closest( '.slide-item' ) );
+            return;
+        }
+
+        resetSlide( jQuery( this ).closest( '.slide-item' ) );
+
         getParent($(this)).find('.slide-edit').show();
 
         var slideType = getParent($(this)).find('.slide-edit .slide-type-selection input:checked').val();
         getParent($(this)).find( '.slide-edit-' + slideType ).show();
+        getParent($(this)).find( '.slide-change-image' ).show();
 
     });
 
@@ -166,6 +202,13 @@ jQuery(document).ready(function($) {
 
     });
 
+    //Update Slide Image
+
+    $('#tf-slides-list').on( 'click', '.slide-change-image', function() {
+
+        tf_show_slide_image_well( jQuery( this ).closest( '.slide-item' ), 'show' );
+    } );
+
     // Delete Slide
     
     $('.slide-icon-delete').click(function () {
@@ -175,7 +218,49 @@ jQuery(document).ready(function($) {
 
         console.log('Fired - Delete Slide');
 
-    });
+    } );
+
+
+    //Add slige image change upload callbacks
+
+    jQuery( '#tf-slides-list .hm-uploader').each( function() {
+
+        tf_add_image_well_upload_callback( jQuery( this).find( '.field-id' ).val() );
+
+    } );
+
+    //Function to add an upload callback via well ID
+
+    function tf_add_image_well_upload_callback( well_id ) {
+
+        var self = this;
+        self.image_id = 0;
+
+        jQuery( document ).ready( function () {
+
+            ImageWellController.addFileUploadCallbackForImageWell( well_id, function() {
+
+                var well_container_selector = '#' + well_id + '-container';
+
+                var image_id = jQuery( 'input[name="'+well_id+'"]' ).val();
+                var post_id  = jQuery( well_container_selector + ' input[name="post_id"]' ).val();
+
+                jQuery.post( ajaxurl, { action: 'tf_slides_change_image', image_id: image_id, post_id: post_id }, function( background_url ) {
+                    console.log( jQuery( well_container_selector ).closest( '.slide-thumbnail').css( 'background-image') );
+                    jQuery( well_container_selector ).closest( '.slide-thumbnail').css( 'background-image','url(' + background_url + ')' );
+                    console.log( jQuery( well_container_selector ).closest( '.slide-thumbnail').css( 'background-image') );
+                } );
+
+            } );
+        } );
+    }
+
+    function tf_show_slide_image_well( slide ) {
+
+        slide.find( '.slide-thumbnail').css( 'background-position', 'center -180px' );
+        slide.find( '.slide-thumbnail .slide-image-well' ).css( 'margin-top', '0' );
+        slide.find( '.slide-thumbnail .slide-change-image' ).hide();
+    }
     
     // Upload Slide Image (still useful?)
     

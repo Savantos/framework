@@ -200,7 +200,7 @@ function themeforce_slider_page() {
 			    	$val =  $value['std']; 
 			    }
 			    
-			    $well = new TF_Upload_Image_Well( 'tfslider_image', $val, 'width=250&height=100&crop=1' );
+			    $well = new TF_Upload_Image_Well( 'tfslider_image', $val, array( 'size' => 'width=250&height=100&crop=1' ) );
 			    $well->html();
 			    ?>
 			    </td>
