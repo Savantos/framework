@@ -104,7 +104,6 @@ jQuery(document).ready(function($) {
 
     $('ul#tf-slides-list li.slide-item').each(function(index) {
         var slideType = $(this).find('.slide-edit .slide-type-selection input:checked').val();
-        console.log(slideType);
         switchPreview($(this),slideType);
     });
 
@@ -120,7 +119,6 @@ jQuery(document).ready(function($) {
                 $(this).find('input[name*="order"]').val(order);
                 var id = $(this).find('input[name*="id"]').val();
                 jQuery.post( ajaxurl, { action: 'tf_slides_update_order', postid: id, neworder: order } );
-                console.log('Fired - Update Slide Order - ID: ' + id + ', Order: ' + order);
                 order++;
             });
         }
@@ -194,11 +192,7 @@ jQuery(document).ready(function($) {
         var meta = $(this).data('meta');
         var value = $(this).val();
 
-        jQuery.post( ajaxurl, { action: 'tf_slides_update_content', postid: id, key: meta, value: value }, function(data) {
-            console.log(data);
-        } );
-
-        console.log('Fired - Update Slide Content - ID: ' + id + ', Meta: ' + meta + ', Value: ' + value);
+        jQuery.post( ajaxurl, { action: 'tf_slides_update_content', postid: id, key: meta, value: value } );
 
     });
 
@@ -215,8 +209,6 @@ jQuery(document).ready(function($) {
 
         getParent($(this)).css({opacity:'0.8', "background-color":"#B81D21"}).animate({opacity: "0.1"}, 650, "swing").hide('slow');
         jQuery.post( ajaxurl, { action: 'tf_slides_delete', postid: getID($(this)) } );
-
-        console.log('Fired - Delete Slide');
 
     } );
 
@@ -246,9 +238,7 @@ jQuery(document).ready(function($) {
                 var post_id  = jQuery( well_container_selector + ' input[name="post_id"]' ).val();
 
                 jQuery.post( ajaxurl, { action: 'tf_slides_change_image', image_id: image_id, post_id: post_id }, function( background_url ) {
-                    console.log( jQuery( well_container_selector ).closest( '.slide-thumbnail').css( 'background-image') );
                     jQuery( well_container_selector ).closest( '.slide-thumbnail').css( 'background-image','url(' + background_url + ')' );
-                    console.log( jQuery( well_container_selector ).closest( '.slide-thumbnail').css( 'background-image') );
                 } );
 
             } );

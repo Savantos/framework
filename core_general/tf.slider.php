@@ -554,9 +554,9 @@ function themeforce_slider_display() {
 }
 
 //Slider legacy update
-function tf_slider_legacy_support_update( ) {
+function tf_slider_legacy_support_update() {
 
-    if ( get_option( '_tf_slider_legacy_support_complete_3' ) )
+    if ( get_option( '_tf_slider_legacy_support_complete_1' ) )
         return;
 
     $args = array(
@@ -617,8 +617,11 @@ function tf_slider_legacy_support_update( ) {
 
     }
 
-    update_option( '_tf_slider_legacy_support_complete_3', true );
+    tfh_update_theme_css_file();
+
+    update_option( '_tf_slider_legacy_support_complete_1', true );
 
     wp_redirect( add_query_arg( 'updated_legacy', 'true' ) );
+
     exit;
 }
