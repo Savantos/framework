@@ -258,9 +258,10 @@ function tf_output_slide_types( $slide_data ) {
 function tf_output_edit_slide_image_well( $slide ) {
 
     $value['allowed_extensions'] = ( ! empty( $value['allowed_extensions'] ) ) ? $value['allowed_extensions'] : array( 'jpeg', 'jpg', 'png', 'gif' );
+
     $drop_text = ! empty( $value['drop_text'] ) ? $value['drop_text'] : __( 'Drop image here', 'themeforce');
 
-    $value['size'] = $value['size'] ? $value['size'] : 'width=680&height=180&crop=1';
+    $value['size'] = ( get_current_theme() == 'Pubforce' ) ? 'width=680&height=300&crop=1' : 'width=680&height=180&crop=1';
 
     $uploader = new TF_Upload_Image_Well( '_tf_slider_slide_image_well_' . $slide->ID, $slide->image_id,
         array(
@@ -276,6 +277,7 @@ function tf_output_edit_slide_image_well( $slide ) {
 }
 
 function tf_output_new_slide_image_well() {
+
     ?>
     <h3>Create New Slide</h3>
     <div class="tf-settings-wrap">
@@ -358,7 +360,9 @@ add_action( 'wp_ajax_tf_slides_change_image', function() {
     $post_id = (int) $_POST['post_id'];
     $image_id = (int) $_POST['image_id'];
 
-    $src = wp_get_attachment_image_src( $image_id, 'width=680&height=180&crop=1' );
+    $size = ( get_current_theme() == 'Pubforce' ) ? 'width=680&height=300&crop=1' : 'width=680&height=180&crop=1';
+
+    $src = wp_get_attachment_image_src( $image_id, $size );
 
     update_post_meta( $post_id, '_thumbnail_id', $image_id );
     update_post_meta( $post_id, 'tfslider_image', $src['url'] );

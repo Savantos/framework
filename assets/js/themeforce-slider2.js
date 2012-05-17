@@ -263,17 +263,21 @@ jQuery(document).ready(function($) {
 
                 jQuery.post( ajaxurl, { action: 'tf_slides_change_image', image_id: image_id, post_id: post_id }, function( background_url ) {
                     jQuery( well_container_selector ).closest( '.slide-thumbnail').css( 'background-image','url(' + background_url + ')' );
+                    jQuery( well_container_selector ).closest( '.slide-thumbnail').find( '.slide-notice' ).remove();
                 } );
 
             } );
         } );
     }
 
+    $( '.slide-item').each( function() {
+
+        setImageWellHeight( $( this ), '180px' );
+    } );
+
     function tf_show_slide_image_well( slide ) {
 
         slide.find( '.slide-thumbnail').css( 'background-position', 'center -500px' );
-
-        slide.find( '.slide-thumbnail').css( 'background-color', 'inherit' );
         slide.find( '.slide-thumbnail .slide-image-well' ).css( 'margin-top', '0' );
         slide.find( '.slide-thumbnail .slide-change-image' ).hide();
     }
