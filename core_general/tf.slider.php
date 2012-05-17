@@ -600,21 +600,27 @@ function tf_slider_legacy_support_update() {
                     $image_name = end( explode( '\\', $image_rel_path ) );
 
             copy( $img_url, $dir['path'] . '/' . $image_name );
+
+            $image_rel = substr( $dir['subdir'], 1 ) . '/' . $image_name;
+
+            wp_update_post( array( 'ID' => $attachment_id, 'post_parent' => $post->ID ) );
+            update_post_meta( $post->ID, '_thumbnail_id', $attachment_id );
+            update_post_meta( $post->ID, 'tfslider_image', wp_get_attachment_url( $attachment_id ) );
+
+            update_post_meta( $attachment_id, '_wp_attached_file', $image_rel );
+
+            $meta =  wp_get_attachment_metadata( $attachment_id );
+            $meta['sizes'] = array();
+            $meta['file'] = $image_rel;
+
+            wp_update_attachment_metadata( $attachment_id, $meta );
+        } else {
+            
+            wp_update_post( array( 'ID' => $attachment_id, 'post_parent' => $post->ID ) );
+            update_post_meta( $post->ID, '_thumbnail_id', $attachment_id );
+            update_post_meta( $post->ID, 'tfslider_image', wp_get_attachment_url( $attachment_id ) );
+
         }
-
-        $image_rel = substr( $dir['subdir'], 1 ) . '/' . $image_name;
-
-        update_post_meta( $attachment_id, '_wp_attached_file', $image_rel );
-        wp_update_post( array( 'ID' => $attachment_id, 'post_parent' => $post->ID ) );
-        update_post_meta( $post->ID, '_thumbnail_id', $attachment_id );
-        update_post_meta( $post->ID, 'tfslider_image', wp_get_attachment_url( $attachment_id ) );
-
-        $meta =  wp_get_attachment_metadata( $attachment_id );
-        $meta['sizes'] = array();
-        $meta['file'] = $image_rel;
-
-        wp_update_attachment_metadata( $attachment_id, $meta );
-
     }
 
     tfh_update_theme_css_file();
