@@ -210,20 +210,22 @@ function tf_get_slide_data() {
         // Warning Statement
         $postdata[$key]->image_size = getimagesize( $postdata[$key]->image );
 
-        if ( $postdata[$key]->image_size && $postdata[$key]->image_size[0] < TF_SLIDERWIDTH && $postdata[$key]->image_size[1] < TF_SLIDERHEIGHT ) {
 
-            $postdata[$key]->warning = '<div class="tf-notice slide-notice">Oops, the <strong>dimensions</strong> of the image below aren\'t quite enough. Please ensure the image is at least <strong>' . TF_SLIDERWIDTH . 'px wide by ' . TF_SLIDERHEIGHT . 'px high.</strong></div>';
-
-        } else if ( $postdata[$key]->image_size  ) {
-
-            if ( $postdata[$key]->image_size[0] < TF_SLIDERWIDTH ) {
-                $postdata[$key]->warning = '<div class="tf-notice slide-notice">Oops, the <strong>width</strong> of the image below is too short. Please ensure the image is at least <strong>' . TF_SLIDERWIDTH . 'px wide.</strong></div>';
-            }
-
-            if ( $postdata[$key]->image_size[1] < TF_SLIDERHEIGHT ) {
-                $postdata[$key]->warning = '<div class="tf-notice slide-notice">Oops, the <strong>height</strong> of the image below is too short. Please ensure the image is at least <strong>' . TF_SLIDERHEIGHT . 'px high.</strong></div>';
-            }
-        }
+        //We need a better framework to implement this because slides are not fixed width, there are different slide stlyes that use different widths
+//        if ( $postdata[$key]->image_size && $postdata[$key]->image_size[0] < TF_SLIDERWIDTH && $postdata[$key]->image_size[1] < TF_SLIDERHEIGHT ) {
+//
+//            $postdata[$key]->warning = '<div class="tf-notice slide-notice">Oops, the <strong>dimensions</strong> of the image below aren\'t quite enough. Please ensure the image is at least <strong>' . TF_SLIDERWIDTH . 'px wide by ' . TF_SLIDERHEIGHT . 'px high.</strong></div>';
+//
+//        } else if ( $postdata[$key]->image_size  ) {
+//
+//            if ( $postdata[$key]->image_size[0] < TF_SLIDERWIDTH ) {
+//                $postdata[$key]->warning = '<div class="tf-notice slide-notice">Oops, the <strong>width</strong> of the image below is too short. Please ensure the image is at least <strong>' . TF_SLIDERWIDTH . 'px wide.</strong></div>';
+//            }
+//
+//            if ( $postdata[$key]->image_size[1] < TF_SLIDERHEIGHT ) {
+//                $postdata[$key]->warning = '<div class="tf-notice slide-notice">Oops, the <strong>height</strong> of the image below is too short. Please ensure the image is at least <strong>' . TF_SLIDERHEIGHT . 'px high.</strong></div>';
+//            }
+//        }
 
     }
 
