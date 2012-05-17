@@ -77,6 +77,8 @@ function tf_slider_page() {
 
         <form method="post" action="" name="" onsubmit="return checkformf( this );">
 
+            <input type="hidden" name="tf_current_theme" id="tf_current_theme" value="<?php echo get_current_theme(); ?>" />
+
             <ul id="tf-slides-list">
 
                 <?php foreach ( $slide_data as $slide ): ?>

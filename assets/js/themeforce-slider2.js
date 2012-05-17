@@ -173,9 +173,11 @@ jQuery(document).ready(function($) {
         getParent($(this)).find( '.slide-edit-' + slideType ).show();
         getParent($(this)).find( '.slide-change-image' ).show();
 
-        getParent($(this)).find( '.slide-thumbnail' ).css( 'height', '303' );
+        if ( $('#tf_current_theme').val() == 'Pubforce' ) {
 
-        setImageWellHeight( getParent( $(this) ), '303px' );
+            getParent($(this)).find( '.slide-thumbnail' ).css( 'height', '303' );
+            setImageWellHeight( getParent( $(this) ), '303px' );
+        }
 
     });
 
