@@ -88,8 +88,6 @@ function tf_slider_page() {
 
                         <div class="slide-thumbnail" style="background-image:url( <?php echo ( $slide->thumbnail ) ? $slide->thumbnail : TF_URL . '/assets/images/slider-empty.jpg'; ?> )">
 
-                            <div class="slide-image-well"><?php tf_output_edit_slide_image_well( $slide ); ?></div>
-
                             <!-- Controls -->
                             <div class="slide-itembar-control">
                                     <div class="slide-icon-move"></div>
@@ -101,6 +99,8 @@ function tf_slider_page() {
                             <?php echo ( $slide->warning ) ? $slide->warning : ''; ?>
 
                             <div class="slide-change-image" ><a href="#" class="button">Change image</a></div>
+
+                            <div class="slide-image-well"><?php tf_output_edit_slide_image_well( $slide ); ?></div>
 
                             <div class="clear"></div>
 
@@ -199,27 +199,32 @@ function tf_get_slide_data() {
         $postdata[$key]->link = $postdata[$key]->meta["tfslider_link"][0];
 
         $postdata[$key]->image = reset( wp_get_attachment_image_src( get_post_thumbnail_id( $postdata[$key]->ID ), 'full' ) );
-        $postdata[$key]->thumbnail = wpthumb( $postdata[$key]->image, 'width=680&height=180&crop=1', false );
+
+        if ( get_current_theme() == 'Pubforce' )
+            $postdata[$key]->thumbnail = wpthumb( $postdata[$key]->image, 'width=520&height=303&crop=1', false );
+        else
+            $postdata[$key]->thumbnail = wpthumb( $postdata[$key]->image, 'width=680&height=180&crop=1', false );
 
         // Warning Statement
-        $postdata[$key]->image_side = getimagesize( $postdata[$key]->image );
+        $postdata[$key]->image_size = getimagesize( $postdata[$key]->image );
 
-        if ( $postdata[$key]->image_side && $postdata[$key]->image_side[0] < TF_SLIDERWIDTH && $postdata[$key]->image_side[1] < TF_SLIDERHEIGHT ) {
+        if ( $postdata[$key]->image_size && $postdata[$key]->image_size[0] < TF_SLIDERWIDTH && $postdata[$key]->image_size[1] < TF_SLIDERHEIGHT ) {
 
-            $warning = '<div class="tf-notice slide-notice">Oops, the <strong>dimensions</strong> of the image below aren\'t quite enough. Please ensure the image is at least <strong>' . TF_SLIDERWIDTH . 'px wide by ' . TF_SLIDERHEIGHT . 'px high.</strong></div>';
+            $postdata[$key]->warning = '<div class="tf-notice slide-notice">Oops, the <strong>dimensions</strong> of the image below aren\'t quite enough. Please ensure the image is at least <strong>' . TF_SLIDERWIDTH . 'px wide by ' . TF_SLIDERHEIGHT . 'px high.</strong></div>';
 
-        } else if ( $postdata[$key]->image_side  ) {
+        } else if ( $postdata[$key]->image_size  ) {
 
-            if ( $postdata[$key]->image_side[0] < TF_SLIDERWIDTH ) {
-                $warning = '<div class="tf-notice slide-notice">Oops, the <strong>width</strong> of the image below is too short. Please ensure the image is at least <strong>' . TF_SLIDERWIDTH . 'px wide.</strong></div>';
+            if ( $postdata[$key]->image_size[0] < TF_SLIDERWIDTH ) {
+                $postdata[$key]->warning = '<div class="tf-notice slide-notice">Oops, the <strong>width</strong> of the image below is too short. Please ensure the image is at least <strong>' . TF_SLIDERWIDTH . 'px wide.</strong></div>';
             }
 
-            if ( $postdata[$key]->image_side[1] < TF_SLIDERHEIGHT ) {
-                $warning = '<div class="tf-notice slide-notice">Oops, the <strong>height</strong> of the image below is too short. Please ensure the image is at least <strong>' . TF_SLIDERHEIGHT . 'px high.</strong></div>';
+            if ( $postdata[$key]->image_size[1] < TF_SLIDERHEIGHT ) {
+                $postdata[$key]->warning = '<div class="tf-notice slide-notice">Oops, the <strong>height</strong> of the image below is too short. Please ensure the image is at least <strong>' . TF_SLIDERHEIGHT . 'px high.</strong></div>';
             }
         }
 
     }
+
     return $postdata;
 }
 

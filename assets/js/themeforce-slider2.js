@@ -9,14 +9,18 @@ jQuery(document).ready(function($) {
     var resetImageWells = function( ) {
 
         jQuery( '.slide-item').each( function() {
-            jQuery( this ).find( '.slide-thumbnail' ).css( 'background-position', 'center 0' );
-            jQuery( this ).find( '.slide-thumbnail .slide-image-well' ).css( 'margin-top', '182px' );
+            jQuery( this ).find( '.slide-thumbnail' ).css( 'background-position', 'center center' );
+            jQuery( this ).find( '.slide-thumbnail .slide-image-well' ).css( 'margin-top', '500px' );
             jQuery( this ).find( '.slide-thumbnail .slide-change-image' ).show();
+
+            setImageWellHeight( jQuery( this ), '180px' );
         } );
+
     }
 
     var resetSlide = function() {
         $('.slide-edit').hide();
+        $('.slide-thumbnail').css( 'height', '180px' );
         resetImageWells();
         resetTypes();
     }
@@ -88,7 +92,7 @@ jQuery(document).ready(function($) {
 
     }
 
-    var resizeImageWell = function( slide, width ) {
+    var resizeImageWell = function( slide, width, height ) {
 
         slide.find('.slide-image-well').animate({'width': width }, 'slow' );
         slide.find('.slide-image-well>div').animate({'width': width }, 'slow' );
@@ -97,6 +101,18 @@ jQuery(document).ready(function($) {
 
             if( jQuery( this ).css('z-index') != '-1' )
                 jQuery( this ).animate({'width': width }, 'slow' );
+        } );
+    }
+
+    var setImageWellHeight = function ( slide, height ) {
+
+        slide.find('.slide-image-well').css( 'height', height );
+        slide.find('.slide-image-well>div').css( 'height', height );
+
+        slide.find('.slide-image-well>div>div').each( function() {
+
+            if( jQuery( this ).css('z-index') != '-1' )
+                jQuery( this ).css( 'height', height );
         } );
     }
 
@@ -157,6 +173,10 @@ jQuery(document).ready(function($) {
         getParent($(this)).find( '.slide-edit-' + slideType ).show();
         getParent($(this)).find( '.slide-change-image' ).show();
 
+        getParent($(this)).find( '.slide-thumbnail' ).css( 'height', '303' );
+
+        setImageWellHeight( getParent( $(this) ), '303px' );
+
     });
 
     // Edit - Change Slide Type
@@ -198,7 +218,9 @@ jQuery(document).ready(function($) {
 
     //Update Slide Image
 
-    $('#tf-slides-list').on( 'click', '.slide-change-image', function() {
+    $('#tf-slides-list').on( 'click', '.slide-change-image', function( e ) {
+
+        e.preventDefault();
 
         tf_show_slide_image_well( jQuery( this ).closest( '.slide-item' ), 'show' );
     } );
@@ -247,7 +269,9 @@ jQuery(document).ready(function($) {
 
     function tf_show_slide_image_well( slide ) {
 
-        slide.find( '.slide-thumbnail').css( 'background-position', 'center -180px' );
+        slide.find( '.slide-thumbnail').css( 'background-position', 'center -500px' );
+
+        slide.find( '.slide-thumbnail').css( 'background-color', 'inherit' );
         slide.find( '.slide-thumbnail .slide-image-well' ).css( 'margin-top', '0' );
         slide.find( '.slide-thumbnail .slide-change-image' ).hide();
     }
