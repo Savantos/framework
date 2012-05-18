@@ -291,10 +291,8 @@ function tf_output_new_slide_image_well() {
 			    // TODO Would be nice to have the 250x100 thumbnail replace the upload button once the image is ready
 			    ?>
 			    <th><label>Pick an Image<span class="required">*</span></label></th>
-			    <td>
-                    <?php //TODO: $value['id'] -- whats this doing? ID should be the ID of post to attach to
-                    $id = ( get_option( $value['id'] ) != "" ) ? stripslashes( get_option( $value['id'] ) ) : $value['std'];
-                    $well = new TF_Upload_Image_Well( 'tfslider_image', $id, array( 'size' => 'width=420&height=200&crop=1' ) );
+			    <td><?php
+                    $well = new TF_Upload_Image_Well( 'tfslider_image', '', array( 'size' => 'width=420&height=200&crop=1' ) );
                     $well->html();
                     ?>
                 </td>
