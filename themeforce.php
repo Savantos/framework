@@ -29,7 +29,7 @@ Theme Force changed to happytables in Feb. '12, the vendor prefix "tf_" will rem
 define( 'TF_DIR_SLUG', end( explode( DIRECTORY_SEPARATOR, dirname( __FILE__ ) ) ) );
 define( 'TF_PATH', dirname( __FILE__ ) );
 define( 'TF_URL', get_bloginfo( 'template_directory' ) . '/' . TF_DIR_SLUG );
-define ('TF_VERSION', '3.3.1');
+define ('TF_VERSION', '3.3.5');
 
 /* Theme Force Core Tools
 =========================================*/
@@ -152,7 +152,7 @@ add_action( 'admin_print_scripts-edit.php', 'tf_sortable_admin_rows_scripts' );
 =========================================*/
 
 function tf_less_css() {
-        wp_enqueue_style( 'lessstyle', TF_URL . '/assets/css/styleguide/tf_styleguide.less' );
+    wp_enqueue_style( 'lessstyle', TF_URL . '/assets/css/styleguide/tf_styleguide.less', array(), TF_VERSION );
 }
 add_action('admin_enqueue_scripts','tf_less_css');
 
