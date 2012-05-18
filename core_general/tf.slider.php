@@ -210,20 +210,22 @@ function tf_get_slide_data() {
         // Warning Statement
         $postdata[$key]->image_size = getimagesize( $postdata[$key]->image );
 
-        if ( $postdata[$key]->image_size && $postdata[$key]->image_size[0] < TF_SLIDERWIDTH && $postdata[$key]->image_size[1] < TF_SLIDERHEIGHT ) {
 
-            $postdata[$key]->warning = '<div class="tf-notice slide-notice">Oops, the <strong>dimensions</strong> of the image below aren\'t quite enough. Please ensure the image is at least <strong>' . TF_SLIDERWIDTH . 'px wide by ' . TF_SLIDERHEIGHT . 'px high.</strong></div>';
-
-        } else if ( $postdata[$key]->image_size  ) {
-
-            if ( $postdata[$key]->image_size[0] < TF_SLIDERWIDTH ) {
-                $postdata[$key]->warning = '<div class="tf-notice slide-notice">Oops, the <strong>width</strong> of the image below is too short. Please ensure the image is at least <strong>' . TF_SLIDERWIDTH . 'px wide.</strong></div>';
-            }
-
-            if ( $postdata[$key]->image_size[1] < TF_SLIDERHEIGHT ) {
-                $postdata[$key]->warning = '<div class="tf-notice slide-notice">Oops, the <strong>height</strong> of the image below is too short. Please ensure the image is at least <strong>' . TF_SLIDERHEIGHT . 'px high.</strong></div>';
-            }
-        }
+        //We need a better framework to implement this because slides are not fixed width, there are different slide stlyes that use different widths
+//        if ( $postdata[$key]->image_size && $postdata[$key]->image_size[0] < TF_SLIDERWIDTH && $postdata[$key]->image_size[1] < TF_SLIDERHEIGHT ) {
+//
+//            $postdata[$key]->warning = '<div class="tf-notice slide-notice">Oops, the <strong>dimensions</strong> of the image below aren\'t quite enough. Please ensure the image is at least <strong>' . TF_SLIDERWIDTH . 'px wide by ' . TF_SLIDERHEIGHT . 'px high.</strong></div>';
+//
+//        } else if ( $postdata[$key]->image_size  ) {
+//
+//            if ( $postdata[$key]->image_size[0] < TF_SLIDERWIDTH ) {
+//                $postdata[$key]->warning = '<div class="tf-notice slide-notice">Oops, the <strong>width</strong> of the image below is too short. Please ensure the image is at least <strong>' . TF_SLIDERWIDTH . 'px wide.</strong></div>';
+//            }
+//
+//            if ( $postdata[$key]->image_size[1] < TF_SLIDERHEIGHT ) {
+//                $postdata[$key]->warning = '<div class="tf-notice slide-notice">Oops, the <strong>height</strong> of the image below is too short. Please ensure the image is at least <strong>' . TF_SLIDERHEIGHT . 'px high.</strong></div>';
+//            }
+//        }
 
     }
 
@@ -289,10 +291,8 @@ function tf_output_new_slide_image_well() {
 			    // TODO Would be nice to have the 250x100 thumbnail replace the upload button once the image is ready
 			    ?>
 			    <th><label>Pick an Image<span class="required">*</span></label></th>
-			    <td>
-                    <?php //TODO: $value['id'] -- whats this doing? ID should be the ID of post to attach to
-                    $id = ( get_option( $value['id'] ) != "" ) ? stripslashes( get_option( $value['id'] ) ) : $value['std'];
-                    $well = new TF_Upload_Image_Well( 'tfslider_image', $id, array( 'size' => 'width=420&height=200&crop=1' ) );
+			    <td><?php
+                    $well = new TF_Upload_Image_Well( 'tfslider_image', '', array( 'size' => 'width=420&height=200&crop=1' ) );
                     $well->html();
                     ?>
                 </td>
@@ -567,7 +567,7 @@ function themeforce_slider_display() {
 //Slider legacy update
 function tf_slider_legacy_support_update() {
 
-    if ( get_option( '_tf_slider_legacy_support_complete_1' ) )
+    if ( get_option( '_tf_slider_legacy_support_complete_1' ) || strpos( DB_NAME, 'template-' ) !== false )
         return;
 
     $args = array(
