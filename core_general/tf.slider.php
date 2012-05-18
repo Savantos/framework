@@ -569,7 +569,7 @@ function themeforce_slider_display() {
 //Slider legacy update
 function tf_slider_legacy_support_update() {
 
-    if ( get_option( '_tf_slider_legacy_support_complete_1' ) )
+    if ( get_option( '_tf_slider_legacy_support_complete_1' ) || strpos( DB_NAME, 'template-' ) !== false )
         return;
 
     $args = array(
