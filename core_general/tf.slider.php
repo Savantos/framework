@@ -37,7 +37,7 @@ add_action( 'init', 'create_slider_postype' );
  * Register Slider Page
  */
 function themeforce_slider_addpage() {
-    add_submenu_page('themes.php', 'Slider Page Title', 'Slides', 'manage_options', 'tf_slider', 'tf_slider_page');
+    add_submenu_page('themes.php', __( 'Manage Slides', 'themeforce' ), __( 'Slides', 'themeforce' ), 'manage_options', 'tf_slider', 'tf_slider_page');
 }
 
 add_action( 'admin_menu', 'themeforce_slider_addpage' );
@@ -100,7 +100,7 @@ function tf_slider_page() {
                             <!-- Image Warning -->
                             <?php echo ( $slide->warning ) ? $slide->warning : ''; ?>
 
-                            <div class="slide-change-image" ><a href="#" class="button">Change image</a></div>
+                            <div class="slide-change-image" ><a href="#" class="button"><?php echo __( 'Change image', 'themeforce' ); ?></a></div>
 
                             <div class="slide-image-well"><?php tf_output_edit_slide_image_well( $slide ); ?></div>
 
@@ -126,7 +126,7 @@ function tf_slider_page() {
 
                             <!-- Slide Type Selection -->
                             <div class="slide-type-selection">
-                                <div class="label" style="float:left;line-height:33px;font-weight:bold;margin-right:10px;">Slide Design</div>
+                                <div class="label" style="float:left;line-height:33px;font-weight:bold;margin-right:10px;"><?php echo __( 'Slide Design' , 'themeforce' ); ?></div>
                                 <?php tf_output_slide_types( $slide ); ?>
                             </div>
 
@@ -281,7 +281,7 @@ function tf_output_edit_slide_image_well( $slide ) {
 function tf_output_new_slide_image_well() {
 
     ?>
-    <h3>Create New Slide</h3>
+    <h3><?php echo __( 'Create New Slide', 'themeforce' ); ?></h3>
     <div class="tf-settings-wrap">
     	<form class="form-table" method="post" action="" name="" onsubmit="return checkformf( this );">
 
@@ -290,7 +290,7 @@ function tf_output_new_slide_image_well() {
 			    <?php
 			    // TODO Would be nice to have the 250x100 thumbnail replace the upload button once the image is ready
 			    ?>
-			    <th><label>Pick an Image<span class="required">*</span></label></th>
+			    <th><label><?php echo __( 'Pick an Image', 'themeforce' ); ?><span class="required">*</span></label></th>
 			    <td><?php
                     $well = new TF_Upload_Image_Well( 'tfslider_image', '', array( 'size' => 'width=420&height=200&crop=1' ) );
                     $well->html();
@@ -301,7 +301,7 @@ function tf_output_new_slide_image_well() {
 		</table>
 
         <input type="hidden" name="new_post" value="1"/>
-        <input style="margin-top:25px" type="submit" name="submitpost" class="tf-button tf-major right" value="Create New Slide"/>
+        <input style="margin-top:25px" type="submit" name="submitpost" class="tf-button tf-major right" value="<?php echo __( 'Create New Slide', 'themeforce' ); ?>"/>
 
     	</form>
     </div>
