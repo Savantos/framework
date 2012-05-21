@@ -14,7 +14,7 @@ class TF_Upload_Image_Well {
         $args = wp_parse_args( $args, array(
 
             'allowed_extensions'  => array( 'jpg', 'jpeg', 'png', 'gif' ),
-            'drop_text'           => 'Drop image here',
+            'drop_text'           => __( 'Drop image here', 'themeforce' ),
             'size'                => 'width=440&height=200&crop=1',
             'save_on_upload'      => false,
             'display_placeholder' => true,
@@ -190,7 +190,7 @@ class TF_Upload_Image_Well {
     	<div style='{$style}' id='{$img_prefix}-dragdrop' data-extensions='$extensions' data-size='{$this->size_str}' class='rwmb-drag-drop upload-form'>
     		<div class = 'rwmb-drag-drop-inside'>
     			<p>{$drop_text}</p>
-				<p>or</p>
+				<p>" . __( 'or', 'themeforce' ) . "</p>
     			<p><input id='{$img_prefix}-browse-button' type='button' value='{$i18n_select}' class='button' /></p>
     		</div>
     	</div>";
