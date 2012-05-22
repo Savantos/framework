@@ -8,12 +8,11 @@
 function tf_foursquare_api() {
 
 	// - setup -
-	$fs_api = 'https://api.foursquare.com/v2/venues/';
 
 	$fs_venue = get_option( 'tf_fsquare_venue_id' );
 	$fs_id = '?client_id=' . get_option( 'tf_fsquare_client_id' );
 	$fs_secret = '&client_secret=' . get_option( 'tf_fsquare_client_secret' );
-	$fs_url = $fs_api . $fs_venue . $fs_id . $fs_secret;
+	$fs_url = 'https://api.foursquare.com/v2/venues/' . $fs_venue . $fs_id . $fs_secret;
 
 	// - response -
 
@@ -26,9 +25,10 @@ function tf_foursquare_api() {
 
 	$response = json_decode( $json );
 
-	// error checking
+	// - error checking -
 	if ( !isset( $response->meta->code ) || $response->meta->code != 200 )
-		return new WP_Error( 'fs-not-200', 'Foursquare did not return a valid code, returned: ' . $response->meta->code );
+
+		return new WP_Error( 'fs-not-200', 'Foursquare did not return a valid code, API is possibly down (returned: ' . $response->meta->code . ' )' );
 
 	return $response;
 }
@@ -38,6 +38,7 @@ function tf_foursquare_api() {
  *
  * @return object
  */
+
 function tf_foursquare_transient() {
 
 	// - get transient -
@@ -60,6 +61,7 @@ function tf_delete_foursquare_transient_on_update_option() {
 
 	delete_transient( 'tf_foursquare_json' );
 }
+
 add_action( 'update_option_tf_fsquare_venue_id', 'tf_delete_foursquare_transient_on_update_option' );
 add_action( 'update_option_tf_fsquare_client_id', 'tf_delete_foursquare_transient_on_update_option' );
 add_action( 'update_option_tf_fsquare_client_secret', 'tf_delete_foursquare_transient_on_update_option' );
