@@ -56,10 +56,10 @@ function tf_foursquare_transient() {
 /*
  * Delete & Update the Transient upon settings update.
  */
-function tf_delete_forsquare_transient_on_update_option() {
+function tf_delete_foursquare_transient_on_update_option() {
 
 	delete_transient( 'tf_foursquare_json' );
 }
-add_action( 'update_option_tf_fsquare_venue_id', 'tf_delete_forsquare_transient_on_update_option' );
-add_action( 'update_option_tf_fsquare_client_id', 'tf_delete_forsquare_transient_on_update_option' );
-add_action( 'update_option_tf_fsquare_client_secret', 'tf_delete_forsquare_transient_on_update_option' );
+add_action( 'update_option_tf_fsquare_venue_id', 'tf_delete_foursquare_transient_on_update_option' );
+add_action( 'update_option_tf_fsquare_client_id', 'tf_delete_foursquare_transient_on_update_option' );
+add_action( 'update_option_tf_fsquare_client_secret', 'tf_delete_foursquare_transient_on_update_option' );
