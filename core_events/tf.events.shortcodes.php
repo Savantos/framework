@@ -312,7 +312,7 @@ function tf_events_add_tinymce_plugins( $plugin_array ) {
 
 function tf_events_add_insert_events_above_editor() {
 	?>
-	<a class="tf-button tf-tiny" href="javascript:tinyMCE.activeEditor.execCommand( 'mceExecTFEventsInsertShortcode' );"><img src="<?php echo TF_URL . '/core_events/tinymce_plugins/event_16.png' ?>"/><span>Events</span></a>
+	<a class="tf-button tf-inlinemce" href="javascript:tinyMCE.activeEditor.execCommand( 'mceExecTFEventsInsertShortcode' );"><img src="<?php echo TF_URL . '/core_events/tinymce_plugins/event_16.png' ?>"/><span>Events</span></a>
 	<?php
 }
 add_action( 'tf_above_editor_insert_items', 'tf_events_add_insert_events_above_editor' );

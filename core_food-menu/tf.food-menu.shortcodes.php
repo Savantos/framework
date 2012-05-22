@@ -478,23 +478,27 @@ function tf_food_menu_add_insert_bar_to_edit_page() {
 <div id="tf-above-editor-insert-area">
 
     <style type="text/css">
-        #tf-above-editor-insert-area { padding:10px 10px; border: 1px solid #e3e3e3; background: #f3f3f3; border-radius:5px; line-height: 30px; font-size: 11.5px; min-height:32px; clear:both; margin-bottom: 15px;  }
+        #tf-above-editor-insert-area { overflow:auto; position:relative; padding:10px 10px 10px 50px; border: 1px solid #e3e3e3; background: #f3f3f3; border-radius:5px; line-height: 10px; font-size: 11.5px; min-height:32px; clear:both; margin-bottom: 15px;  }
         #tf-above-editor-insert-area a { color: #666; text-decoration: none; margin-left: 15px; }
         #tf-above-editor-insert-area a.button { border-radius: 3px; padding-left: 4px; }
-        #tf-above-editor-insert-area img { vertical-align: middle; margin-right: 5px; }
+        #tf-above-editor-insert-area img { margin-right: 5px; }
         #tf-above-editor-insert-area a.tf-button.hidden { display: none !important; }
+        #tf-above-editor-insert-area strong { position:absolute; top:10px; left:10px; float:left; height:36px; line-height:36px; }
+        #tf-above-editor-insert-area #menu-menu-id-wrap { padding:10px 0; overflow:auto; float:left; }
     </style>
 
     <strong>Insert:</strong>
 
-    <a class="tf-button tf-tiny" id="add-foodmenu-button" href="#"><img src="<?php echo TF_URL . '/core_food-menu/tinymce_plugins/food_20.png' ?>"/><span>Food Menu</span></a>
+    <a class="tf-button tf-inlinemce" id="add-foodmenu-button" href="#"><img src="<?php echo TF_URL . '/core_food-menu/tinymce_plugins/food_20.png' ?>"/><span>Food Menu</span></a>
 
-    <select id="menu-menu-id" class="hidden">
+    <div id="menu-menu-id-wrap" class="hidden">
+    <select id="menu-menu-id">
         <option value="">- Select Food Menu -</option>
         <?php foreach ( tf_foodmenu_get_menus() as $key => $menu ) : ?>
         <option value="<?php echo $key ?>"><?php echo $menu['menu-name'] ?></option>
         <?php endforeach; ?>
     </select>
+        </div>
 
     <?php do_action( 'tf_above_editor_insert_items' ) ?>
     <script type="text/javascript">
@@ -517,7 +521,7 @@ function tf_food_menu_add_insert_bar_to_edit_page() {
             jQuery( '#add-foodmenu-button' ).on( 'click', function(e) {
                 e.preventDefault();
                 jQuery( this ).addClass('hidden');
-                jQuery( '#menu-menu-id' ).fadeIn();
+                jQuery( '#menu-menu-id-wrap' ).fadeIn();
             } )
             window.TFFoodMenus = <?php echo json_encode( tf_foodmenu_get_menus() ) ?>;
         } );

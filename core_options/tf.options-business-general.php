@@ -138,6 +138,7 @@ function themeforce_business_page() {
 
 $options = apply_filters( 'tf_options_general', $options );
 
+// Can remove this option once we migrate users
 if ( TF_THEME == 'chowforce' ) {
 				$options[]= array( 'name' => 'Tagline',
                 'desc' => 'This will appear in the top right of every page. ',

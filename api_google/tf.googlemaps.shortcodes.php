@@ -77,7 +77,7 @@ function tf_google_maps_add_tinymce_plugins( $plugin_array ) {
 
 function tf_google_maps_add_insert_events_above_editor() {
 	?>
-	<a class="tf-button tf-tiny" href="javascript:tinyMCE.activeEditor.execCommand( 'mceExecTFGoogleMapsInsertShortcode' );"><img src="<?php echo TF_URL . '/api_google/tinymce_plugins/map_20.png' ?>"/>Maps</a>
+	<a class="tf-button tf-inlinemce" href="javascript:tinyMCE.activeEditor.execCommand( 'mceExecTFGoogleMapsInsertShortcode' );"><img src="<?php echo TF_URL . '/api_google/tinymce_plugins/map_20.png' ?>"/><span>Maps</span></a>
 	<script>
 		var TFAddress = '<?php echo preg_replace( '![^a-z0-9]+!i', '+', get_option( 'tf_address_street' ) . ', ' . get_option( 'tf_address_locality' ) . ', ' . get_option( 'tf_address_postalcode' ) . ' ' . get_option( 'tf_address_region' ) . ' ' . get_option( 'tf_address_country' ) ) ?>';
 	</script>

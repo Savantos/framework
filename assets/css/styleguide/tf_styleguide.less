@@ -1,24 +1,33 @@
 /*
-Theme Force - Styleguide (including core admin css overwrite)
-*/   
 
+happytables
+Styles for WP-Admin & related functions (contains no front-end styling)
+
+- Imports
+
+- Base
+--- General
+--- Gradients
+
+- Elements
+--- Buttons
+
+*/   
 
 /* Imports
 * ----------------------------------------------------------------- */
 
-
-
-/* -- tf specific -- */
-
 @import "tf_variables.less";
 @import "tf_mixins.less";
 
-
-/* Basics (non-TF related)
+/* Base - General
 * ----------------------------------------------------------------- */ 
 
 .right {float:right;}
 .left {float:left;}
+
+/* Base - Gradients
+* ----------------------------------------------------------------- */
 
 .tf-primary-gradient {
 	color: @white !important;
@@ -39,36 +48,35 @@ Theme Force - Styleguide (including core admin css overwrite)
 input.tf-button,
 input[type="button"].tf-button,
 input[type="submit"].tf-button {
-
+    display:inline-block !important;
+    text-decoration:none !important;
+    padding:15px 20px;
+    .border-radius(7px);
+    .box-shadow (~"0 1px 0px rgba(0,0,0,.20),0 2px 3px rgba(0,0,0,.10)");
 	font-size: 14px;
 	font-weight: 500;
-	padding:15px 20px;
-	text-align:center;
-	display:inline-block !important;
-    text-decoration:none !important;
+    text-align:center;
 	text-shadow: 0 -1px 0 rgba(0,0,0,.25);
-	.border-radius(7px);
-	.box-shadow (0 1px 3px rgba(0,0,0,.20));
     cursor:pointer;cursor:hand;
- }
+}
 
 .tf-button:hover,
 input.tf-button:hover  {
-        border-color:rgba(255,255,255,0);
+    border-color:rgba(255,255,255,0);
 }
  
 .tf-major,
 input.tf-major,
 input[type="button"].tf-major,
 input[type="submit"].tf-major {
-        line-height:14px;
-        display:inline-block !important;
-        color: @white !important;
-        #gradient > .vertical(@tf-primary-highlight, @tf-primary);
-        text-shadow: 0 -1px 0 rgba(0,0,0,.30);
-        border-width: 1px;
-        border-style: solid;
-        border-color: @tf-primary @tf-primary darken(@tf-primary, 15%);
+    display:inline-block !important;
+    line-height:14px;
+    color: @white !important;
+    text-shadow: 0 -1px 0 rgba(0,0,0,.30);
+    #gradient > .vertical(@tf-primary-highlight, @tf-primary);
+    border-width: 1px;
+    border-style: solid;
+    border-color: @tf-primary @tf-primary darken(@tf-primary, 15%);
  }
  
 .tf-major:hover
@@ -77,18 +85,30 @@ input.tf-major:hover {
 	#gradient > .vertical((@tf-primary-highlight + #111), (@tf-primary + #111));
  }
  
-.tf-minor {
-    line-height:14px;
+.tf-inlinemce,
+input.tf-inlinemce,
+input[type="button"].tf-inlinemce,
+input[type="submit"].tf-inlinemce {
+    overflow:auto;
+    line-height:16px;
+    height:16px;
+    display:inline-block !important;
+    .border-radius(5px);
+    padding:10px 12px !important;
+    line-height:16px !important;
+    font-size: 13px !important;
 	color: @tf-primary;
 	#gradient > .vertical(@tf-neutral-highlight, @tf-neutral);
-	text-shadow: 0 1px 0 rgba(255,255,255,.40);
+	text-shadow: 0 1px 0 rgba(255,255,255,.80);
 	border:1px solid @tf-neutral;
  }
- 
-.tf-minor:hover {
+
+.tf-inlinemce span, .tf-inlinemce img {height:16px;display:inline-block !important;float:left;}
+
+.tf-inlinemce:hover {
 	#gradient > .vertical((@tf-neutral-highlight + #111), (@tf-neutral + #111));
  }
- 
+
 .tf-inline,
 input.tf-inline,
 input[type="button"].tf-inline,
@@ -111,21 +131,21 @@ input[type="button"].tf-tiny:hover,
 input[type="button"].tf-tiny,
 .tf-tiny {
 	padding: 5px 10px;
-        margin:1px;
+    margin:1px;
 	font-size: 12px;
-        line-height:12px;
+    line-height:12px;
 	color: desaturate(@tf-primary, 100%);
 	#gradient > .vertical(@tf-neutral-highlight, @tf-neutral);
 	text-shadow: 0 1px 0 rgba(255,255,255,.40);	
 	border:1px solid @tf-neutral;
-        .border-radius(11px);
-        text-decoration:none;
-        cursor:pointer;cursor:hand;
+    .border-radius(11px);
+    text-decoration:none;
+    cursor:pointer;cursor:hand;
  }
  
-  .tf-tiny:hover {
+.tf-tiny:hover {
 	#gradient > .vertical((@tf-neutral-highlight + #111), (@tf-neutral + #111));
- }
+}
  
  .color-button {
     border-color:#cfcfcf;
@@ -134,7 +154,6 @@ input[type="button"].tf-tiny,
     -moz-border-radius: 10px !important;
     display:inline-block !important;
     font-weight:bold;
-
     height:40px !important;
     font-size:15px;
     line-height:15px;
@@ -301,6 +320,9 @@ textarea {
         }
 
 }
+
+/* Dashboard
+* ----------------------------------------------------------------- */
 
 .tf-db-block {width:600px; margin:20px 20px 10px 10px;}
 .tf-db-block h2 {
@@ -660,7 +682,7 @@ Theme Force Stylesheet - Options & Settings
     text-shadow: 0 1px 0 rgba(255,255,255,.30);
 }
 
-/* iPhone and Dropdown
+/* iPhone
 * ----------------------------------------------------------------- */
 
 .iPhoneCheckContainer {
@@ -744,6 +766,9 @@ label.iPhoneCheckLabelOn {
   height: 100%;
   width: 100%;
   background: url('@{themeurl}/framework/assets/images/iphone-style-checkboxes/slider_center.png'); }
+
+/* Chosen Select
+* ----------------------------------------------------------------- */
 
 select.chzn-select {
   visibility: hidden;
@@ -1017,7 +1042,6 @@ select.chzn-select {
   padding: 4px 5px 4px 20px;
 }
 
-
 /* REWRITING WP CORE CSS - WP Admin Bar
 *  TAKE OUT FOR DEV VERSIONS !!! (everything below)
 * ----------------------------------------------------------------- */
@@ -1055,7 +1079,7 @@ text-shadow: none;
     background: #dddddd !important;
     border:none;
     min-height:10px;
-    .box-shadow(inset 0 2px 2px rgba(0,0,0,0.2))
+    .box-shadow(~"inset 0 3px 3px rgba(0,0,0,0.1),inset 0 1px 0 rgba(0,0,0,0.05)")
 }
 
 #adminmenu > li:nth-last-child(2) {
@@ -2518,5 +2542,3 @@ a.accordion-unchecked {
     background-color: #ddd;
     .border-radius(5px);
 }
-
-
