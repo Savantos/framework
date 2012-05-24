@@ -97,7 +97,7 @@ function tf_yelp_bar() {
                         </div>
                         <div class="yelptext"><?php _e('users have rated our establishment', 'themeforce'); ?></div>
                         <a href="<?php echo $yelp->businesses[0]->url; ?>">
-                            <div class="yelpimg"><span itemprop="ratingValue" content="<?php echo $yelp->businesses[0]->avg_rating; ?>"><img src="<?php echo $yelp->businesses[0]->rating_img_url;  ?>" alt="<?php echo $yelp->businesses[0]->avg_rating; ?>" style="padding-top:7px;" alt="Yelp Rating" /></span><meta itemprop="bestRating" content="5" /></div>
+                            <div class="yelpimg" itemprop="ratingValue"><img src="<?php echo $yelp->businesses[0]->rating_img_url;  ?>" alt="<?php echo $yelp->businesses[0]->avg_rating; ?>" style="padding-top:7px;" /><meta itemprop="bestRating" content="5" /></div>
                         </a>
                         <div class="yelptext"><?php _e('through', 'themeforce'); ?></div>
                         <div class="yelptext">

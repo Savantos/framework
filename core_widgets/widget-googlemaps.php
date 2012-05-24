@@ -56,7 +56,7 @@ class tf_googlemaps_widget extends WP_Widget {
 
                 $address_url = preg_replace( '![^a-z0-9]+!i', '+', $valid_address );
 
-                echo '<span itemprop="maps"><a href="http://maps.google.com/maps?q=' . $address_url . '" target="_blank"><img class="tf-googlemaps-front" src="http://maps.google.com/maps/api/staticmap?center=' . $address_url . '?>&zoom=' . $zoom . '&size=300x' . $height . '&markers=color:white|' . $address_url . '&sensor=false" /></a></span>';
+                echo '<span itemprop="maps"><a href="http://maps.google.com/maps?q=' . $address_url . '" target="_blank"><img class="tf-googlemaps-front" src="http://maps.google.com/maps/api/staticmap?center=' . $address_url . '?>&amp;zoom=' . $zoom . '&amp;size=300x' . $height . '&amp;markers=color:white|' . $address_url . '&amp;sensor=false" /></a></span>';
 
                 if ( $footdesc ) {echo '<p>' . $footdesc . '</p>';}
 
