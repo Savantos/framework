@@ -20,7 +20,7 @@ Discussion & News: 	        http://www.facebook.com/happytables
 Important
 ---------------
 
-Theme Force changed to happytables in Feb. '12, the vendor prefix "tf_" will remain for now.
+Theme Force changed to happytables in Feb. '12, the vendor prefix "tf_" will remain.
 
 
  /* Definitions
