@@ -32,7 +32,7 @@ function tf_events_add_fields_to_quick_edit( $column_name, $post_type ) {
 	
 	add_action( 'admin_footer', 'tf_events_add_inline_js_to_footer' );
 	?>
-	
+
 	<?php if ( $column_name == 'tf_col_ev_cat' ): ?>
 		
 		<div class="tf-quickedit-header tf-primary-gradient">
@@ -66,15 +66,25 @@ function tf_events_add_fields_to_quick_edit( $column_name, $post_type ) {
 }
 add_action( 'quick_edit_custom_box', 'tf_events_add_fields_to_quick_edit', 10, 2 );
 
+//make sure the javascript required for inline edit is loaded, even when there are no events because the quick_edit_custom_box hook is not fired in that case
+add_action( 'admin_footer', function() {
+
+    if ( $_GET['post_type'] != 'tf_events' )
+        return;
+
+    tf_events_add_inline_js_to_footer();
+} );
+
 /**
  * Extra JavaScript needed for the food menu quick edit.
  * 
  */
 function tf_events_add_inline_js_to_footer() {
-	?>
+
+    ?>
 	<script type="text/javascript">
 	    jQuery( document ).ready( function() {
-	    	
+
 	    	var TFInlineAddedElements = [];
 	    	
 	    	jQuery( '.row-actions .edit' ).css( 'display', 'none' );
@@ -100,9 +110,9 @@ function tf_events_add_inline_js_to_footer() {
 			
 			//move stuff around
 	    	jQuery( '#inlineedit .inline-edit-date' ).closest( '.inline-edit-col').append( jQuery( '#tf-inline-edit-dates' ) );
-	    	
+
 	    	jQuery( '.tf-quickedit-header' ).prependTo( jQuery( '.tf-quickedit-header' ).closest( 'td' ) );
-	    	
+
 	    	jQuery( "#tf-inline-edit-add-new-size").live( 'click', function(e) {
 	    		e.preventDefault();
 				
