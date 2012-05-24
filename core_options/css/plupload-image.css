@@ -38,7 +38,7 @@ div.rwmb-drag-drop-inside {
 	margin: -40px auto 0;
 	width: 100%;
 	position: absolute; top: 50%;
-    text-shadow: 0 1px 0 #fff;
+
 }
 
 a.delete-image,
@@ -54,7 +54,7 @@ div.rwmb-drag-drop-inside input[type=button] {
     -moz-box-sizing: content-box;
     -webkit-box-sizing: content-box;
     box-sizing: content-box;
-    color: gray !important;
+    color: rgba(0,0,0,0.5) !important;
     background-color: #DDD;
     background-repeat: repeat-x;
     background-image: -khtml-gradient(linear, left top, left bottom, from(#ffffff), to(#dddddd));
