@@ -105,10 +105,12 @@ function tf_foodmenu_custom_columns( $column ) {
 	$custom = get_post_custom();
 	switch ( $column ) {
 		case "tf_col_menu_id":
+            
 				echo $post->ID;
 				break;
 
 		case "tf_col_menu_cat":
+
 				$menucats = get_the_terms($post->ID, "tf_foodmenucat");
 				$menucats_html = array();
 				if ( $menucats ) {
@@ -120,18 +122,23 @@ function tf_foodmenu_custom_columns( $column ) {
 				        _e('None', 'themeforce');;
 				}
 				break;
+
 		case "tf_col_menu_desc":
+
 				add_filter( 'excerpt_length', '_tf_food_menu_excerpt_length' );
 		       	the_excerpt();
 		       	tf_food_menu_inline_date( $post->ID );
 		       	break;
+
 		case "tf_col_menu_thumb":
 		       
 				echo '<div class="table-thumb">';
 				the_post_thumbnail( 'width=60&height=60&crop=1' );
 				echo '</div>';
 				break;
+
 		case "tf_col_menu_size":
+
 				$size1 = $custom["tf_menu_size1"][0];
 				$size2 = $custom["tf_menu_size2"][0];
 				$size3 = $custom["tf_menu_size3"][0];
@@ -139,8 +146,10 @@ function tf_foodmenu_custom_columns( $column ) {
 				if ($size1 != '') { echo $size1; }
 				if ($size2 != '') { echo '<br />'; echo $size2; }
 				if ($size3 != '') { echo '<br />'; echo $size3; }
-				break;    
+				break;
+
 		case "tf_col_menu_price":
+
 				$price1 = $custom["tf_menu_price1"][0];
 				$price2 = $custom["tf_menu_price2"][0];
 				$price3 = $custom["tf_menu_price3"][0];
