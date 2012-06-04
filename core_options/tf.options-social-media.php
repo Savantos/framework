@@ -9,7 +9,6 @@
 
 // Create Page
 // -----------------------------------------
-// TODO Add functionality to edit existing slides.
 
 function themeforce_social_media_overview_page() {
     ?>

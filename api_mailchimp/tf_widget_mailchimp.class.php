@@ -62,7 +62,9 @@ class TF_Widget_MailChimp extends WP_Widget {
 		
 		$mcapi = $this->tf_mc_plugin->get_mcapi();
                 
-		if (false != $mcapi) {
+		if ( false != $mcapi ) {
+
+            var_dump($mcapi);
 			
 			$this->lists = $mcapi->lists();                       
                         

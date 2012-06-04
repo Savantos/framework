@@ -14,11 +14,7 @@ function themeforce_social_twitter_page() {
     <form class="form-table" action="options.php" method="post">
    
     <?php 
-    
-    // List of Options used within Dropdowns, etc.
-    
-    $shortname = "tf";
-    
+
     // Options
     
     $options = array (
@@ -29,7 +25,7 @@ function themeforce_social_twitter_page() {
 
 	array( 'name' => __( 'Twitter Link', 'themeforce'),
                 'desc' => __( 'The link to your Twitter profile/username.', 'themeforce'),
-                'id' => $shortname.'_twitter',
+                'id' => 'tf_twitter',
                 'std' => '',
                 'type' => 'text'),     
       

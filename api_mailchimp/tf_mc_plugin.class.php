@@ -7,7 +7,6 @@
 class TF_MC_Plugin {
 	
 	private $options;
-	private $donate_link = 'https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=JSL4JTA4KMZLG';
 	private static $instance;
 	private static $mcapi;
 	private static $name = 'TF_MC_Plugin';
@@ -28,18 +27,6 @@ class TF_MC_Plugin {
 		 */
 		
 		add_action('admin_menu', array(&$this, 'set_up_admin_page'));
-		
-		/**
-		 * Fetch the options, and, if they haven't been set up yet, display a notice to the user.
-		 */
-		 
-		$this->get_options();
-		
-		if ('' == $this->options) {
-			
-			add_action('admin_notices', array(&$this, 'admin_notices'));
-			
-		}
 
 		/**
 		 * Add our widget when widgets get intialized.
@@ -84,12 +71,6 @@ class TF_MC_Plugin {
 	/**
 	 *
 	 */
-	
-	public function admin_notices () {
-		
-		// echo '<div class="error fade">' . $this->get_admin_notices() . '</div>';
-		
-	}
 
 	/* public function admin_page () {
 		
@@ -164,20 +145,7 @@ class TF_MC_Plugin {
 	<?php
 	} */
 	
-	public function get_admin_notices () {
-		
-		global $blog_id;
-		
-		$notice = '<p>';
-		
-		$notice .= __('You\'ll need to add your MailChimp API key within the options before being able to use it. ', 'mailchimp-widget');
-		
-		$notice .= '</p>';
-		
-		return $notice;
-		
-	}
-	
+
 	public function get_mcapi () {
 		
 		$api_key = get_option('tf_mailchimp_api_key');

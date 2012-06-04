@@ -14,11 +14,7 @@ function themeforce_social_facebook_page() {
     <form class="form-table" action="options.php" method="post">
    
     <?php 
-    
-    // List of Options used within Dropdowns, etc.
-    
-    $shortname = "tf";
-    
+
     // Options
     
     $options = array (
@@ -29,7 +25,7 @@ function themeforce_social_facebook_page() {
 
  		array( 'name' => __( 'Facebook Link', 'themeforce'),
  	               'desc' => __( 'The link to your Facebook fan page/profile.', 'themeforce'),
- 	               'id' => $shortname.'_facebook',
+ 	               'id' => 'tf_facebook',
  	               'std' => '',
  	               'type' => 'text'),     
  	     

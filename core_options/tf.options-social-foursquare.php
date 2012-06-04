@@ -13,11 +13,7 @@ function themeforce_social_foursquare_page() {
     <div class="tf-options-panel">
     <form class='form-table' action='options.php' method='post'>
    
-    <?php 
-    
-    // List of Options used within Dropdowns, etc.
-    
-    $shortname = 'tf';
+    <?php
 
     // Options
     

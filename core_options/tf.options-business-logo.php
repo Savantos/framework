@@ -9,12 +9,11 @@
 
 // Create Page
 // -----------------------------------------
-// TODO Add functionality to edit existing slides.
 
 function themeforce_logo_page() {
 	
-	
 	// migrate tf_logo to tf_logo_id
+
 	if ( ! get_option( 'tf_logo_id' ) && get_option( 'tf_logo' ) ) {
 	
 		$logo = hm_remote_get_file( get_option( 'tf_logo' ) );
@@ -37,10 +36,6 @@ function themeforce_logo_page() {
     <form class="form-table" action="options.php" method="post">
    
     <?php 
-    
-    // List of Options used within Dropdowns, etc.
-    
-    $shortname = "tf";
 
     // Options
     
@@ -52,14 +47,14 @@ function themeforce_logo_page() {
 
 	array( 'name' => __('Logo', 'themeforce'),
                 'desc' => __('Your business logo (choose from an array of formats .JPG, .GIF, .PNG)', 'themeforce'),
-                'id' => $shortname.'_logo_id',
+                'id' => 'tf_logo_id',
                 'std' => '',
                 'size' => 'width=300&height=300&crop=0',
                 'type' => 'image'),
 
    	array( 'name' => __('Favicon', 'themeforce'),
                 'desc' => __('Your Favicon, make sure it is 16px by 16px (you can <a href=\'http://www.favicon.cc/\' target=\'_blank\'>generate one here</a>)', 'themeforce'),
-                'id' => $shortname.'_favicon',
+                'id' => 'tf_favicon',
                 'std' => '',
                 'type' => 'image',
                 'allowed_extensions' => array( 'ico' ),

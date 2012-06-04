@@ -19,11 +19,6 @@ function themeforce_location_page() {
     <form class="form-table" action="options.php" method="post">
    
     <?php 
-    
-    // List of Options used within Dropdowns, etc.
-    
-    $shortname = "tf";
-
     // Options
     
     $options = array (
@@ -34,31 +29,31 @@ function themeforce_location_page() {
 
 	array( 'name' => __('Street Name', 'themeforce'),
                 'desc' => __('The street address. For exampl: 1600 Amphitheatre Pkwy', 'themeforce'),
-                'id' => $shortname.'_address_street',
+                'id' => 'tf_address_street',
                 'std' => '',
                 'type' => 'text'),
 
 	array( 'name' => __('Town or Locality', 'themeforce'),
                 'desc' => __('The locality. For example, Mountain View, Miami, Sydney, etc.', 'themeforce'),
-                'id' => $shortname.'_address_locality',
+                'id' => 'tf_address_locality',
                 'std' => '',
                 'type' => 'text'), 					
 
 	array( 'name' => 'State or Region',
                 'desc' => __('The region. For example, CA.', 'themeforce'),
-                'id' => $shortname.'_address_region',
+                'id' => 'tf_address_region',
                 'std' => '',
                 'type' => 'text'), 		
 
 	array( 'name' => __('Country', 'themeforce'),
                 'desc' => __('Select your country', 'themeforce'),
-                'id' => $shortname.'_address_country',
+                'id' => 'tf_address_country',
                 'std' => '',
                 'type' => 'text'), 	
 						
 	array( 'name' => __('Phone Number', 'themeforce'),
                 'desc' => __('Your business phone number.', 'themeforce'),
-                'id' => $shortname.'_business_phone',
+                'id' => 'tf_business_phone',
                 'std' => __('( 123 ) 456 789', 'themeforce'),
                 'type' => 'text'),
 							
