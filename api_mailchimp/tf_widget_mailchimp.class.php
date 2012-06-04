@@ -64,8 +64,6 @@ class TF_Widget_MailChimp extends WP_Widget {
                 
 		if ( false != $mcapi ) {
 
-            var_dump($mcapi);
-			
 			$this->lists = $mcapi->lists();                       
                         
 			$defaults = array(
