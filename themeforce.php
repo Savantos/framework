@@ -1,6 +1,6 @@
 <?php /*
 
-Theme-Force.com - WordPress Framework (v 3.3.1)
+Theme-Force.com - WordPress Framework (v 3.3.5)
 ===================================================
 
 Introduction
@@ -17,7 +17,7 @@ Developer Homepage: 	    http://www.happytables.com/framework-developers
 GitHub Homepage: 	        https://github.com/themeforce/framework
 Discussion & News: 	        http://www.facebook.com/happytables
 
-Important
+***Important***
 ---------------
 
 Theme Force changed to happytables in Feb. '12, the vendor prefix "tf_" will remain.
@@ -122,17 +122,14 @@ if( current_theme_supports( 'tf_yelp' ) ) {
 }
 
 // OpenTable
-
-    require_once( TF_PATH . '/api_opentable/tf.opentable.php' );
-    require_once( TF_PATH . '/core_widgets/widget-opentable.php' );
+require_once( TF_PATH . '/api_opentable/tf.opentable.php' );
+require_once( TF_PATH . '/core_widgets/widget-opentable.php' );
 
 // OpenDining
-
-    require_once( TF_PATH . '/api_opendining/tf.opendining.php' );
+require_once( TF_PATH . '/api_opendining/tf.opendining.php' );
 
 // Localina
-
-    require_once( TF_PATH . '/api_localina/tf.localina.php' );
+require_once( TF_PATH . '/api_localina/tf.localina.php' );
 
 // MailChimp
 if( current_theme_supports( 'tf_mailchimp' ) )
@@ -162,20 +159,34 @@ function tf_enqueue_admin_css() {
 add_action('admin_init', 'tf_enqueue_admin_css');
 
 /* Food Menu Sorting
-=========================================*/	
+=========================================*/
 
+/**
+ * Still needed?
+ */
 function tf_sortable_admin_rows_order_table_rows_hook() {
 	if( !empty( $_GET['post_type'] ) && $_GET['post_type'] == 'tf_foodmenu' && !empty( $_GET['term'] ) )
 		add_action( 'parse_query', 'tf_sortable_admin_rows_order_table_rows' );
 }
 add_action( 'load-edit.php', 'tf_sortable_admin_rows_order_table_rows_hook' );
 
+/**
+ * Still needed?
+ *
+ * @param $wp_query
+ */
 function tf_sortable_admin_rows_order_table_rows( $wp_query ) {
 	global $wpdb;
 	$wp_query->query_vars['orderby'] = 'menu_order';
 	$wp_query->query_vars['order'] = 'ASC';
 }
 
+/**
+ * Still needed?
+ *
+ * @param $columns
+ * @return array
+ */
 function tf_sortable_admin_rows_column( $columns ) {
 
 	if( !isset( $columns['tf_col_menu_cat'] ) || empty( $_GET['term'] ) )
@@ -191,6 +202,12 @@ function tf_sortable_admin_rows_column( $columns ) {
 }
 add_action( 'manage_edit-tf_foodmenu_columns', 'tf_sortable_admin_rows_column', 11 );
 
+/**
+ * Still needed?
+ *
+ * @param $column
+ * @return mixed
+ */
 function tf_sortable_admin_row_cell( $column ) {
 	
 	if( $column != 'tf_sortable_column' )
@@ -203,6 +220,9 @@ function tf_sortable_admin_row_cell( $column ) {
 }
 add_action( 'manage_posts_custom_column', 'tf_sortable_admin_row_cell' );
 
+/**
+ * Still needed?
+ */
 function tf_sortable_admin_row_request() {
 	
 	global $wpdb;
@@ -215,15 +235,6 @@ function tf_sortable_admin_row_request() {
 }
 add_action( 'wp_ajax_tf_sort_admin_rows', 'tf_sortable_admin_row_request' );
 
-
-/* Theme Force Upgrade Tools
-=========================================
-   You won't require this for a fresh install, can likely be deleted soonish (Mar'12)
-*/	
-
-require_once( TF_PATH . '/tf.upgrade.php' );
-
-
 /* Remaining Functions
 =========================================*/	
 
@@ -233,7 +244,7 @@ function tf_add_tf_icon_classes_to_widgets() {
 	?>
 	 <script type="text/javascript">
      	jQuery( document ).ready( function() {
-    		
+
      		jQuery( '.widget' ).filter( function( i, object ) {
      			if( jQuery( this ).attr('id').indexOf( '_tf' ) > 1 )
 					jQuery( object ).addClass('tf-admin-widget');
@@ -258,16 +269,17 @@ function tf_add_tf_icon_classes_to_widgets() {
      			if( jQuery( this ).attr('id').indexOf( 'googlemaps' ) > 1 )
 					jQuery( object ).addClass('tf-google-widget');
      		} );
-                	jQuery( '.widget' ).filter( function( i, object ) {
+            jQuery( '.widget' ).filter( function( i, object ) {
      			if( jQuery( this ).attr('id').indexOf( '-fb_' ) > 1 )
 					jQuery( object ).addClass('tf-facebook-widget');
      		} );
-                        jQuery( '.widget' ).filter( function( i, object ) {
+            jQuery( '.widget' ).filter( function( i, object ) {
      			if( jQuery( this ).attr('id').indexOf( '-opentable-' ) > 1 )
 					jQuery( object ).addClass('tf-opentable-widget');
      		} );
-                        jQuery('.widget-top').prepend('<div class="widget-accent"></div>');
-     		
+
+            jQuery('.widget-top').prepend('<div class="widget-accent"></div>');
+
      	} );
      </script>
      
@@ -316,7 +328,7 @@ function tf_add_quick_add_js_to_supported_post_types() {
 }
 add_action( 'load-edit.php', 'tf_add_quick_add_js_to_supported_post_types' );
 
-function tf_modify_add_new_meni_item_for_quick_add() {
+function tf_modify_add_new_menu_item_for_quick_add() {
 
 	global $menu, $submenu;
 	
@@ -327,7 +339,7 @@ function tf_modify_add_new_meni_item_for_quick_add() {
 	
 
 }
-add_action( 'admin_menu', 'tf_modify_add_new_meni_item_for_quick_add', 1 );
+add_action( 'admin_menu', 'tf_modify_add_new_menu_item_for_quick_add', 1 );
 
 function tf_admin_ajax_get_new_post_row() {
 	
