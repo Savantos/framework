@@ -105,7 +105,7 @@ function tf_foodmenu_custom_columns( $column ) {
 	$custom = get_post_custom();
 	switch ( $column ) {
 		case "tf_col_menu_id":
-            
+
 				echo $post->ID;
 				break;
 

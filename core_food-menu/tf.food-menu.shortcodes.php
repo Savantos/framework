@@ -139,7 +139,7 @@ function tf_menu_full( $atts ) {
     $term_name = $term->name;
 
     if ( $header == "yes" ) {
-        echo '<h2 class="full-menu">' . $term_name . '</h2>';
+        echo '<h2 class="menu-title">' . $term_name . '</h2>';
     }
 
     $my_query = new WP_Query( $args );
@@ -278,7 +278,7 @@ function tf_menu_list ( $atts ) {
     $term_name = $term->name;
 
     if ( $header=="yes" ) {
-        echo '<h2 class="full-menu">'.  $term_name .'</h2>';
+        echo '<h2 class="menu-title">'.  $term_name .'</h2>';
     }
 
     // - query -
@@ -393,7 +393,7 @@ function tf_menu_short ( $atts ) {
     $term_name = $term->name;
 
     if ( $header=="yes" ) {
-        echo '<h2 class="full-menu">'.  $term_name .'</h2>';
+        echo '<h2 class="menu-title">'.  $term_name .'</h2>';
     }
 
     // - query -

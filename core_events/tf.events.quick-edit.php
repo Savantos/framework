@@ -153,8 +153,16 @@ function tf_events_add_inline_js_to_footer() {
                         // *** Commented out for Datepicker ***
 	    		jQuery( '#inlineedit .inline-edit-date' ).closest( '.inline-edit-col').find('#tf-inline-edit-dates .start-date').html( data.start_date );
 	    		jQuery( '#inlineedit .inline-edit-date' ).closest( '.inline-edit-col').find('#tf-inline-edit-dates .end-date').html( data.end_date );
-	    		
-				//image
+
+                // Update end date if it occurs earlier then start date
+
+                jQuery('input#event_start_date-day').change( function() {
+                    var start = jQuery(this).val();
+                    jQuery('input#event_end_date-day').val(start);
+                });
+
+
+                //image
 	    		if ( data.image_id )
 		    		jQuery( "#tf-inline-edit-image #_tf_events_image_container" ).html( '<span class="image-wrapper" id="' + data.image_id + '"><img src="' + data.image + '" /><a class="delete_custom_image" rel="_tf_events_image:' + data.image_id + '">Remove</a></span>' );
 		    	else
@@ -195,9 +203,8 @@ function tf_events_add_inline_js_to_footer() {
 		    	jQuery( '.row-actions .editinline' ).text( '<?php _e( 'Edit' ); ?>' );
 		    	jQuery( '.row-title' ).addClass( 'editinline' );
 	    		
-	    	} ); 
+	    	} );
 
-	    	
 	    	//sync description teaxtarea and input
 	    	jQuery( "#tf-inline-edit-description textarea" ).change( function() {
 
