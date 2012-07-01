@@ -1,6 +1,4 @@
 <?php
-/* ------------------- THEME FORCE --------------------- */
-
 /*
  * FOOD MENU SHORTCODES (CUSTOM POST TYPE)
  *
@@ -21,12 +19,14 @@ function tf_menu_all ( $atts ) {
     $menu = $menus[$atts['id']];
 
     $i = 1;
+    $output = '';
 
     foreach ( $menu['categories'] as $key => $id ) {
 
         $style = get_term_meta( $id, '_design_style_' . $atts['id'], true );
         $atts['header'] = get_term_meta( $id, '_show_header_' . $atts['id'], true ) ? 'yes' : 'no';
         $category = get_term( $id, 'tf_foodmenucat' );
+
         if ( is_page_template('page-full.php')) { $align = ( ($i % 2) ? 'left' : 'right' ); }
 
         $cat_atts = array(
@@ -39,32 +39,32 @@ function tf_menu_all ( $atts ) {
         switch ( $style ){
 
             case 'full':
-                $out .= tf_menu_full( $cat_atts );
+                $output .= tf_menu_full( $cat_atts );
                 break;
 
             case 'list':
-                $out .= tf_menu_list ( $cat_atts );
+                $output .= tf_menu_list ( $cat_atts );
                 break;
 
             case 'short':
                 if ( is_page_template('page-full.php')) {
-                    $out .= tf_menu_list ( $cat_atts );
+                    $output .= tf_menu_list ( $cat_atts );
                 } else {
-                    $out .= tf_menu_short ( $cat_atts );
+                    $output .= tf_menu_short ( $cat_atts );
                 }
                 break;
 
             default:
-                $out .= tf_menu_full ( $cat_atts );
+                $output .= tf_menu_full ( $cat_atts );
                 break;
         }
 
         $i++;
     }
 
-    $out .= '<div class="clearfix"></div>';
+    $output .= '<div class="clearfix"></div>';
 
-    return $out;
+    return $output;
 }
 
 add_shortcode('foodmenu', 'tf_menu_all' );
