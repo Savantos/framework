@@ -2,7 +2,7 @@
 
 (function ($) {
 	
-	jQuery.fn.ns_mc_widget = function (options) {
+	jQuery.fn.tf_mc_widget = function (options) {
 		
 		var defaults, eL, opts;
 		
