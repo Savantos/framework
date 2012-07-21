@@ -18,6 +18,7 @@ function tf_menu_all ( $atts ) {
 
     $menu = $menus[$atts['id']];
 
+    $i = 1;
     $output = '';
 
     foreach ( $menu['categories'] as $key => $id ) {
@@ -25,6 +26,8 @@ function tf_menu_all ( $atts ) {
         $style = get_term_meta( $id, '_design_style_' . $atts['id'], true );
         $atts['header'] = get_term_meta( $id, '_show_header_' . $atts['id'], true ) ? 'yes' : 'no';
         $category = get_term( $id, 'tf_foodmenucat' );
+
+        if ( is_page_template('page-full.php')) { $align = ( ($i % 2) ? 'left' : 'right' ); }
 
         $cat_atts = array(
             'id' => $category->slug, // Menu Name or Post ID
@@ -88,7 +91,7 @@ function tf_menu_full( $atts ) {
     // ===== OPTIONS =====
 
     // - full-width check -
-
+    if ( $align ) { echo '<div style="clear:' . $align . '"></div><div class="' . $align . ' half-col">';}
 
     // - full-width fallback -
     // is page template doesn't work within shortcode, will need to force an align on "visual shortcodes".
@@ -141,14 +144,10 @@ function tf_menu_full( $atts ) {
 
     $my_query = new WP_Query( $args );
 
-    $i = 1;
-
     while ( $my_query->have_posts() ) : $my_query->the_post();
 
-        // - full page col switching -
-        if ( is_page_template('page-full.php')) { $align = ( ($i % 2) ? 'left' : 'right' ); }
-
         // - variables -
+
         $custom = get_post_custom( get_the_ID() );
         $category = get_terms( 'tf_foodmenucat' );
         $price1 = $custom["tf_menu_price1"][0];
@@ -167,8 +166,6 @@ function tf_menu_full( $atts ) {
         }
 
         // - output -
-        if ( $align ) { echo '<div style="clear:' . $align . '"></div><div class="' . $align . ' half-col">';}
-
         ?>
         <div class="full-menu" itemprop="menu">
 
@@ -180,7 +177,7 @@ function tf_menu_full( $atts ) {
         <?php } ?>
 
         <div class="title">
-            <div class="left menu-item-title"><?php the_title(); ?></div>
+            <div class="left"><?php the_title(); ?></div>
             <div class="right"><?php echo $fx; echo $price1 ?></div>
         </div>
         <div class="desc"><?php the_content_rss(); ?></div>
@@ -191,16 +188,12 @@ function tf_menu_full( $atts ) {
             <?php if ( $size3 == "" ) {?></div></div><?php ;} else { ?> , <?php echo $size3 ?><strong> <?php echo $fx; echo $price3 ?></strong></div></div><?php ;}} ?>
     </div>
 
+    <div class="clearfix"></div>
+
     <?php
 
-    // - full page col switching -
-    if ( $align ) { echo '</div>'; }
-
-    $i++;
-
     endwhile;
-
-    echo '<div class="clearfix"></div>';
+    if ( $align ) { echo '</div>'; }
 
     wp_reset_query();
 
@@ -212,7 +205,6 @@ function tf_menu_full( $atts ) {
     return $output;
 
 }
-
 add_shortcode('tf-menu-full', 'tf_menu_full');
 
 
@@ -240,7 +232,7 @@ function tf_menu_list ( $atts ) {
     // ===== OPTIONS =====
 
     // - full-width check -
-
+    if ( $align ) { echo '<div style="clear:' . $align . '"></div><div class="' . $align . ' half-col">';}
 
     // - currency -
     $fx = null;
@@ -294,11 +286,7 @@ function tf_menu_list ( $atts ) {
     $my_query = null;
     $my_query = new WP_query( $args );
 
-    $i = 1;
-
     while ( $my_query->have_posts() ) : $my_query->the_post();
-
-        if ( is_page_template('page-full.php')) { $align = ( ($i % 2) ? 'left' : 'right' ); }
 
         // - variables -
         $custom = get_post_custom( get_the_ID() );
@@ -310,32 +298,22 @@ function tf_menu_list ( $atts ) {
         $size3 = $custom["tf_menu_size3"][0];
 
         // - output -
-
-        // - full page col switching -
-        if ( $align ) { echo '<div style="clear:' . $align . '"></div><div class="' . $align . ' half-col">';}
         ?>
 
     <div class="mid-menu" itemprop="menu">
         <div class="leftbox">
-            <div class="title"><div class="left menu-item-title"><?php the_title(); ?></div></div>
+            <div class="title"><div class="left"><?php the_title(); ?></div></div>
             <div class="desc"><?php the_content_rss(); ?></div>
         </div>
         <div class="rightbox"><?php if ( $size1!="" ) { ?><div class="size"><?php echo $size1 ?></div><?php ;} ?><div class="price"><?php echo $fx; echo $price1 ?></div></div>
         <?php if ( $size2!="" ) {?><div class="rightbox"><div class="size"><?php echo $size2 ?></div><div class="price"><?php echo $fx; echo $price2 ?></div></div><?php ;} ?>
         <?php if ( $size3!="" ) {?><div class="rightbox"><div class="size"><?php echo $size3 ?></div><div class="price"><?php echo $fx; echo $price3 ?></div></div><?php ;} ?>
     </div>
-
+    <div class="clearfix"></div>
     <?php
-
-    // - full page col switching -
-    if ( $align ) { echo '</div>';}
-
-    $i++;
-
     endwhile;
 
-    echo '<div class="clearfix"></div>';
-
+    if ( $align ) { echo '</div>';}
 
     wp_reset_query();
 
@@ -440,7 +418,7 @@ function tf_menu_short ( $atts ) {
         ?>
     <div class="small-menu <?php if ( !$odd_even_checker ) { ?>right<?php } else { ?>left<?php } ?>"  itemprop="menu">
         <div class="leftbox">
-            <div class="title"><div class="lefttext menu-item-title"><?php the_title(); ?></div></div>
+            <div class="title"><div class="lefttext"><?php the_title(); ?></div></div>
             <div class="desc"><?php the_content_rss(); ?></div>
         </div>
         <div class="rightbox"><?php if ( $size1!="" ) { ?><div class="size"><?php echo $size1 ?></div><?php ;} ?><div class="price"><?php echo $fx; echo $price1 ?></div></div>

@@ -149,7 +149,7 @@ add_action( 'admin_print_scripts-edit.php', 'tf_sortable_admin_rows_scripts' );
 =========================================*/
 
 function tf_less_css() {
-    wp_enqueue_style( 'adminstyles', TF_URL . '/assets/css/backend/tf_htcom_master.less', array(), TF_VERSION );
+    wp_enqueue_style( 'admin-styles', TF_URL . '/assets/css/backend/tf_htcom_master.less', array(), TF_VERSION );
 }
 add_action('admin_enqueue_scripts','tf_less_css');
 
