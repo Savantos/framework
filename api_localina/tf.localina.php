@@ -84,4 +84,4 @@ function load_localina_footer() {
 
 <?php
 
-} );
+}
