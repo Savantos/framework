@@ -17,7 +17,7 @@ function tf_opendining_desktop() {
     
     $output = '';
     
-    if ( get_option('tf_opendining_enabled' ) == 'true') {
+    if ( get_option( 'tf_opendining_enabled' ) == 'true') {
 
             $appid = trim(get_option(tf_opendining_app_id));
             $output .= '<!-- opendining (desktop) -->';
@@ -30,7 +30,7 @@ function tf_opendining_desktop() {
     
 };
 
-add_action('tf_body_top', 'tf_opendining_desktop', 12);
+add_action( 'tf_body_top', 'tf_opendining_desktop', 12);
 
 /**
  * Returns JS Drop-in for Open Dining (fixed position button) for Mobile
@@ -41,7 +41,7 @@ function tf_opendining_mobile() {
 
     $output = '';
 
-    if ( get_option('tf_opendining_enabled' ) == 'true') {
+    if ( get_option( 'tf_opendining_enabled' ) == 'true') {
 
             $restid = trim(get_option(tf_opendining_rest_id));
             $output .= '<!-- opendining (mobile) -->';
