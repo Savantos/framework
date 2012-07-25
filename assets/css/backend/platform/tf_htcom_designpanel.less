@@ -4,7 +4,17 @@
 @import "../core/tf_mixins.less";
 
 #tf-content-wrap {
-    padding-left:320px;
+   // padding-left:320px;
+}
+
+
+#tf-panel-secondary-wrap {
+
+    width:320px;
+    background:#f2f2f2;
+    height:100%;
+    .box-shadow(~"8px 0px 20px 0px rgba(0, 0, 0, 0.1),4px 0px 8px 0px rgba(0, 0, 0, 0.2),0px 0px 3px 0px rgba(0, 0, 0, 0.6)");
+    overflow: hidden;
 }
 
 #tf-panel-wrap {
@@ -12,11 +22,30 @@
     position:fixed;
     left:0;
     top:0;
-    width:320px;
     padding:0;
-    background:#f2f2f2;
     height:100%;
-    .box-shadow(~"8px 0px 20px 0px rgba(0, 0, 0, 0.1),4px 0px 8px 0px rgba(0, 0, 0, 0.2),0px 0px 3px 0px rgba(0, 0, 0, 0.6)");
+    //width: 360px;
+    overflow: visible;
+    min-width: 50px;
+    #tf-designpanel-toggle {
+        position:absolute;
+        display:block;
+        right:-42px;
+        top:0;
+        height:42px;
+        width:42px;
+        background:#333 url(@{themeurl}/framework/assets/images/designpanel-close.png) no-repeat 0 0;
+    /*
+    border-bottom:1px solid rgba(0,0,0,0.1);
+    border-right:1px solid rgba(0,0,0,0.05);
+    -webkit-border-radius: 0px 0px 5px 0px;
+    border-radius: 0px 0px 5px 0px;
+    */
+
+        &.toggle-on { background:#333 url(@{themeurl}/framework/assets/images/designpanel-close.png) no-repeat 0 0; }
+        &.toggle-off { background:#333 url(@{themeurl}/framework/assets/images/designpanel-open.png) no-repeat 0 0; }
+
+    }
 
     .tf-panel-header {
         position:relative;
@@ -28,26 +57,6 @@
         padding:10px;
         margin:0;
         border-bottom:1px solid rgba(0,0,0,0.2);
-
-        #tf-designpanel-toggle {
-            position:absolute;
-            display:block;
-            right:-42px;
-            top:0;
-            height:42px;
-            width:42px;
-            background:#333 url(@{themeurl}/framework/assets/images/designpanel-close.png) no-repeat 0 0;
-            /*
-            border-bottom:1px solid rgba(0,0,0,0.1);
-            border-right:1px solid rgba(0,0,0,0.05);
-            -webkit-border-radius: 0px 0px 5px 0px;
-            border-radius: 0px 0px 5px 0px;
-            */
-
-            &.toggle-on { background:#333 url(@{themeurl}/framework/assets/images/designpanel-close.png) no-repeat 0 0; }
-            &.toggle-off { background:#333 url(@{themeurl}/framework/assets/images/designpanel-open.png) no-repeat 0 0; }
-
-        }
 
     }
 
