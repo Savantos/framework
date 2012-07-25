@@ -1,11 +1,29 @@
 <?php
 /* ------------------- THEME FORCE ---------------------- */
-
-require_once( TF_PATH . '/core_events/tf.events.widget.php' );
-require_once( TF_PATH . '/core_events/tf.events.shortcodes.php' );
-require_once( TF_PATH . '/core_events/tf.events.rss.php' );
+if ( tf_is_premium_active() ) {
+    require_once( TF_PATH . '/core_events/tf.events.widget.php' );
+    require_once( TF_PATH . '/core_events/tf.events.rss.php' );
+}
 require_once( TF_PATH . '/core_events/tf.events.ical.php' );
 require_once( TF_PATH . '/core_events/tf.events.quick-edit.php' );
+require_once( TF_PATH . '/core_events/tf.events.shortcodes.php' );
+
+
+if ( ! tf_is_premium_active() ) {
+
+    add_filter( 'admin_menu', function(){
+
+        global $menu;
+
+        foreach( $menu as $key => &$menu_item ) {
+
+            if( in_array( $menu_item[0], array( 'Events' ) ) )
+                unset( $menu[$key] );
+        }
+
+    }, 11 );
+}
+
 /*
  * EVENTS FUNCTION (CUSTOM POST TYPE)
  */
