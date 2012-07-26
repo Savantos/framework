@@ -43,6 +43,10 @@ function tf_menu_all ( $atts ) {
                 $output .= tf_menu_list ( $cat_atts );
                 break;
 
+            case 'relaxed':
+                $output .= tf_menu_relaxed ( $cat_atts );
+                break;
+
             case 'short':
                 if ( is_page_template('page-full.php')) {
                     $output .= tf_menu_list ( $cat_atts );
@@ -464,6 +468,157 @@ function tf_menu_short ( $atts ) {
 }
 
 add_shortcode('tf-menu-short', 'tf_menu_short');
+
+// 4) RELAXED MENU
+//***********************************************
+function tf_menu_relaxed( $atts ) {
+
+    // - get options -
+    $defaultfx = get_option( 'tf_menu_currency_symbol' );
+
+    // - define arguments -
+    extract(shortcode_atts(array(
+        'id' => '', // Menu Name or Post ID
+        'header' => 'yes', // Menu Section Header On or Off
+        'currency'=> $defaultfx, // Currency On or Off
+        'type' => 'menu', // Menu or Single
+        'align' => '', // For full width
+        'posts_per_page' => 99,
+    ), $atts));
+
+    ob_start();
+
+    // ===== OPTIONS =====
+
+    // - full-width check -
+
+
+    // - full-width fallback -
+    // is page template doesn't work within shortcode, will need to force an align on "visual shortcodes".
+
+    // - currency -
+    $fx = null;
+    if ( $currency == 'true' ) {
+        $fx = get_option( 'tf_currency_symbol' );
+    }
+
+    // - taxonomy group or single post -
+    if ( $type == "menu" ) {
+        $posttype = 'tf_foodmenucat';
+    } else {
+        $posttype = 'p';
+    }
+
+    // ===== LOOP: FULL MENU SECTION =====
+
+    // - get options -
+    $sortfield = get_option( 'tf_menu_sort_key' );
+    $metakey = null;
+    $orderby = 'title';
+
+    if ( $sortfield == 'true' ) {
+        $orderby = 'menu_order';
+    }
+
+    if ( $posttype == 'p' ) {
+        $metakey = 'null';
+        $orderby = 'title';
+    }
+
+    $args = array(
+        'post_type' => 'tf_foodmenu',
+        $posttype => $id,
+        'post_status' => 'publish',
+        'orderby' => $orderby,
+        'meta_key' => $metakey,
+        'order' => 'ASC',
+        'posts_per_page' => 99
+    );
+
+    $term = get_term_by( 'slug', $id, 'tf_foodmenucat' );
+    $term_name = $term->name;
+
+    if ( $header == "yes" ) {
+        echo '<h2 class="menu-title">' . $term_name . '</h2>';
+    }
+
+    $my_query = new WP_Query( $args );
+
+    $i = 1;
+
+    while ( $my_query->have_posts() ) : $my_query->the_post();
+
+        // - full page col switching -
+        if ( is_page_template('page-full.php')) { $align = ( ($i % 2) ? 'left' : 'right' ); }
+
+        // - variables -
+        $custom = get_post_custom( get_the_ID() );
+        $category = get_terms( 'tf_foodmenucat' );
+        $price1 = $custom["tf_menu_price1"][0];
+        $price2 = $custom["tf_menu_price2"][0];
+        $price3 = $custom["tf_menu_price3"][0];
+        $size2 = $custom["tf_menu_size2"][0];
+        $size3 = $custom["tf_menu_size3"][0];
+        $post_image_id = get_post_thumbnail_id( get_the_ID() );
+
+        if ( $post_image_id ) {
+            if ( $thumbnail = wp_get_attachment_image_src( $post_image_id, 'width=60&height=60&crop=1', false) )
+                (string) $thumbnail = $thumbnail[0];
+
+            if ( $large = wp_get_attachment_image_src( $post_image_id, 'large' ) )
+                ( string ) $large = $large[0];
+        }
+
+        // - output -
+        if ( $align ) { echo '<div style="clear:' . $align . '"></div><div class="' . $align . ' half-col">';}
+
+        ?>
+        <div class="full-menu" itemprop="menu">
+
+        <?php if ( has_post_thumbnail() ) { ?>
+            <a class="thumb" href="<?php echo $large; ?>"><img src="<?php echo $thumbnail; ?>" alt="<?php the_title(); ?>" /></a>
+            <div class="thumb-text">
+        <?php } else { ?>
+            <div class="text">
+        <?php } ?>
+
+        <div class="title-relaxed">
+            <div class="left menu-item-title"><?php the_title(); ?><span><?php echo $fx; echo $price1 ?></span></div>
+        </div>
+        <div class="desc-relaxed">
+        <?php the_content_rss(); ?>
+        <?php if ( $size2 == "" ) { ?>
+	        		<?php } else { ?>
+            <br /> ( <?php echo $size2 ?> <?php echo $fx; echo $price2 ?>
+            <?php if ( $size3 == "" ) {?> ) <?php ;} else { ?> , <?php echo $size3 ?> <?php echo $fx; echo $price3 ?> ) <?php ;}} ?>
+        </div>
+    </div>
+    </div>
+
+    <?php
+
+        // - full page col switching -
+        if ( $align ) { echo '</div>'; }
+
+        $i++;
+
+    endwhile;
+
+    echo '<div class="clearfix"></div>';
+
+    wp_reset_query();
+
+    // ===== RETURN: FULL MENU SECTION =====
+
+    $output = ob_get_contents();
+    ob_end_clean();
+
+    return $output;
+
+}
+
+add_shortcode('tf-menu-relaxed', 'tf_menu_relaxed');
+
 
 /**
  * Registers the Insert Shortcode tinymce plugin for Food menu.
