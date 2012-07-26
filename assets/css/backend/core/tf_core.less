@@ -21,7 +21,7 @@
 
 .tf-white-gradient {
     color: @tf-primary !important;
-    #gradient > .vertical(#fff, #e9e9e9);
+    #gradient > .vertical(#ffffff, #e9e9e9);
     text-shadow: 0 -1px 0 rgba(0,0,0,.30);
 }
 
@@ -48,6 +48,8 @@ input[type="submit"].tf-button {
     text-align:center;
 	text-shadow: 0 -1px 0 rgba(0,0,0,.25);
     cursor:pointer;cursor:hand;
+    background: transparent url('@{themeurl}/framework/assets/images/color_button.jpg') no-repeat top left;
+    behavior: url('@{themeurl}/framework/assets/other/PIE.htc');
 }
 
 .tf-button:hover,
@@ -67,6 +69,7 @@ input[type="submit"].tf-major {
     border-width: 1px;
     border-style: solid;
     border-color: @tf-primary @tf-primary darken(@tf-primary, 15%);
+    behavior: url('@{themeurl}/framework/assets/other/PIE.htc');
  }
  
 .tf-major:hover
@@ -91,6 +94,7 @@ input[type="submit"].tf-inlinemce {
 	#gradient > .vertical(@tf-neutral-highlight, @tf-neutral);
 	text-shadow: 0 1px 0 rgba(255,255,255,.80);
 	border:1px solid @tf-neutral;
+    behavior: url('@{themeurl}/framework/assets/other/PIE.htc');
  }
 
 .tf-inlinemce span, .tf-inlinemce img {height:16px;display:inline-block !important;float:left;}
@@ -110,6 +114,7 @@ input[type="submit"].tf-inline {
 	text-shadow: 0 1px 0 rgba(255,255,255,.40);	
 	border:1px solid @tf-neutral;
     cursor:pointer;cursor:hand;
+    behavior: url('@{themeurl}/framework/assets/other/PIE.htc');
  }
  
 input[type="button"].tf-tiny:hover,
@@ -131,6 +136,7 @@ input[type="button"].tf-tiny,
     .border-radius(11px);
     text-decoration:none;
     cursor:pointer;cursor:hand;
+    behavior: url('@{themeurl}/framework/assets/other/PIE.htc');
  }
  
 .tf-tiny:hover {
@@ -156,6 +162,7 @@ input[type="button"].tf-tiny,
     white-space:pre;
     padding:15px 30px 15px 45px;
     background: transparent url('@{themeurl}/framework/assets/images/color_button.jpg') no-repeat top left;
+    behavior: url('@{themeurl}/framework/assets/other/PIE.htc');
  }   
  
  /* Notices
@@ -199,7 +206,7 @@ input[type="text"].tf-input-text, textarea.tf-input-text {
     border: 1px solid #dfdfdf;
     color: #555;
     padding: 10px;
-    background: #fff;
+    background: #ffffff;
     .border-radius(5px);
     /* Can't use mixin here as position of secondary color isn't 0 */
     background-image: -webkit-gradient(
@@ -215,7 +222,7 @@ input[type="text"].tf-input-text, textarea.tf-input-text {
         rgb(235,235,235) 100%,
         rgb(255,255,255) 70%
     );
-    -webkit-box-shadow: 1px 1px 1px #fff;
+    -webkit-box-shadow: 1px 1px 1px #ffffff;
  }
  
 textarea {
@@ -267,7 +274,7 @@ Theme Force Stylesheet - Options & Settings
     font-size:18px;
     margin:20px 0px 20px 0px;
     padding-bottom:20px;
-    border-bottom:1px solid #ddd;
+    border-bottom:1px solid #dddddd;
 }
 
 .tf-options-panel th {
@@ -281,7 +288,7 @@ Theme Force Stylesheet - Options & Settings
     line-height:34px;
     vertical-align:middle;
     display:block;
-    text-shadow:0px 1px #fff;  
+    text-shadow:0px 1px #ffffff;
 }
 
 .tf-options-page td {
@@ -310,7 +317,7 @@ Theme Force Stylesheet - Options & Settings
     padding: 0.5em;
     width:100%;
     line-height: 1.2em;
-    background: #fff;
+    background: #ffffff;
     background-image: -webkit-gradient(
         linear,
         left bottom,
@@ -324,7 +331,7 @@ Theme Force Stylesheet - Options & Settings
         rgb(235,235,235) 100%,
         rgb(255,255,255) 70%
     );
-    -webkit-box-shadow: 1px 1px 1px #fff;
+    -webkit-box-shadow: 1px 1px 1px #ffffff;
 
  }
  
@@ -365,7 +372,7 @@ Theme Force Stylesheet - Options & Settings
   }
   
   .tf-radio-img-img {
-	border:3px solid #fff;
+	border:3px solid #ffffff;
 	margin:0 5px 10px 0;
 
 	cursor:pointer;
@@ -399,7 +406,7 @@ Theme Force Stylesheet - Options & Settings
     margin:20px 0;
   }
   
- .tf-options-page .image-radio label img {display:block;border:5px solid #eee;padding:10px;margin:0 15px 15px 0;border-radius:5px;}  
+ .tf-options-page .image-radio label img {display:block;border:5px solid #eeeeee;padding:10px;margin:0 15px 15px 0;border-radius:5px;}
  .tf-options-page .image-radio input[type="radio"] {display:none;width:0px !important; }
  .tf-options-page .image-radio input[type="radio"]:checked+label img {border:5px solid #0086ba !important; cursor:pointer;}
  .tf-options-page .image-radio label img:hover {opacity:0.7}
@@ -459,7 +466,7 @@ Theme Force Stylesheet - Options & Settings
    }
    
 .colorwell-selected {
-    border: 2px solid #000;
+    border: 2px solid #000000;
     font-weight: bold;
     background-image: none !important;
    }
@@ -477,7 +484,7 @@ Theme Force Stylesheet - Options & Settings
     padding:20px 20px 20px 104px;
     margin:40px 0px 20px 0px;
     background: #f0f0f0 url('@{themeurl}/framework/assets/images/options-tip.png') no-repeat 20px 10px;
-    text-shadow:0px 1px 0px #fff;
+    text-shadow:0px 1px 0px #ffffff;
     -webkit-box-shadow: 0px 2px 3px 0px #9e9e9e;
     -moz-box-shadow: 0px 2px 3px 0px #9e9e9e;
     box-shadow: 0px 2px 3px 0px #9e9e9e;
@@ -564,7 +571,7 @@ span {outline:1px dashed orange}
     font-size:18px;
     margin:40px 0px 20px 0px;
     padding-bottom:20px;
-    border-bottom:1px solid #ddd;
+    border-bottom:1px solid #dddddd;
     }
 
 .accordion-header {
