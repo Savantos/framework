@@ -1,6 +1,5 @@
-jQuery(document).ready(function($) {	
+jQuery(document).ready(function($) {
 
-	
 	if( typeof themeforce != "undefined" ) {
 		$(".tfdate").datepicker({
 		    dateFormat: 'D, M d, yy',

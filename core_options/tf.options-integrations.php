@@ -82,7 +82,7 @@ function themeforce_integrations_page() {
     <script>
 
         jQuery(document).ready(function() {
-            jQuery(".accordion").accordion({ active: false, collapsible: true});
+            jQuery(".accordion").accordion({ active: false, collapsible: true, autoHeight: false});
         });
 
     </script>
