@@ -117,12 +117,6 @@ function themeforce_business_page() {
                 'std' => '',
                 'type' => 'text'),
 
-    array( 'name' => __('Google Apps Domain Verification', 'themeforce'),
-                'desc' => __('Please enter the key here if you need to verfiy a domain, i.e. <em>&lt;meta name="google-site-verification" content="<strong>THIS_IS_THE_KEY</strong>" /&gt;</em>', 'themeforce'),
-                'id' => 'tf_googleapps',
-                'std' => '',
-                'type' => 'text'),
-
     array( 'name' => __('Language', 'themeforce'),
             'desc' => __('Please select your preferred language', 'themeforce'),
             'id' => 'tf_language',

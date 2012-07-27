@@ -69,6 +69,19 @@ function themeforce_integrations_page() {
         <div class="accordion">
 
             <div class="accordion-header">
+                <a class="accordion-expand  accordion-<?php if ( get_option('tf_ua_analytics') ) { echo 'checked'; } else { echo 'unchecked'; } ?>" href="#">Google Analytics</a>
+                <div class="accordion-desc"></div>
+            </div>
+            <div class="accordion-content"><?php themeforce_analytics_page(); ?></div>
+
+
+            <div class="accordion-header">
+                <a class="accordion-expand  accordion-<?php if ( get_option('tf_googleapps') ) { echo 'checked'; } else { echo 'unchecked'; } ?>" href="#">Google Apps & Webmaster</a>
+                <div class="accordion-desc"></div>
+            </div>
+            <div class="accordion-content"><?php themeforce_google_page(); ?></div>
+
+            <div class="accordion-header">
                 <a class="accordion-expand  accordion-<?php if ( get_option('tf_mailchimp_api_key') ) { echo 'checked'; } else { echo 'unchecked'; } ?>" href="#">MailChimp</a>
                 <div class="accordion-desc">Global & Free Plans</div>
                 <!-- <div class="accordion-link">More Information</div> -->
