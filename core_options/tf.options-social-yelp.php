@@ -17,9 +17,26 @@ function themeforce_social_yelp_page() {
     
     // List of Options used within Dropdowns, etc.
     
-    $shortname = "tf";
-    $options_yelp = array('US', 'CA', 'GB', 'IE', 'FR', 'DE', 'AT', 'NL', 'ES', 'AU', 'BE', 'IT', 'CH');
-    
+    $options_yelp = array(
+        'US',
+        'AT',
+        'AU',
+        'BE',
+        'CA',
+        'CH',
+        'DE',
+        'DK',
+        'ES',
+        'FI',
+        'FR',
+        'GB',
+        'IE',
+        'IT',
+        'NL',
+        'NO',
+        'SE'
+    );
+
     // Options
     
     $options = array (
