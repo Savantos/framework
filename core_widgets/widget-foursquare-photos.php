@@ -42,7 +42,7 @@ class tf_fs_photos_widget extends WP_Widget {
                 echo '<div class="fs-photos">';
 
                 $venue = tf_foursquare_transient();
-				    
+
 				if ( is_wp_error( $venue ) || !$venue ) {
                 	echo '<p>Please configure your foursquare settings (under Social Media)</p>';
 					
@@ -55,7 +55,7 @@ class tf_fs_photos_widget extends WP_Widget {
                 	    if ($counter < $limit) {
                 	        $counter++;
                 	        echo '<div class="fs-photos-item">';
-                	        echo '<div class="fs-photos-thumb"><a class="thumb" href="' . $items->sizes->items[0]->url . '"><img src="' . $items->sizes->items[2]->url . '" style="padding:0;margin:0" /></a></div>';
+                	        echo '<div class="fs-photos-thumb"><a class="thumb" href="' . $items->sizes->items[0]->url . '"><img src="' . $items->sizes->items[2]->url . '" style="padding:0;margin:0" alt="' . __('Foursquare Photo','themeforce') . '" /></a></div>';
                 	        echo '</div>';
                 	    }   
 				    }

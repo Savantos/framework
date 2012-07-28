@@ -34,7 +34,7 @@ function tf_googlemaps ( $atts ) {
     
     // Display ?>
 
-    <span itemprop="maps"><a href="<?php echo 'http://maps.google.com/maps?q=' . $address_url; ?>" target="_blank"><img class="align<?php echo $align; ?> tf-googlemaps" src="http://maps.googleapis.com/maps/api/staticmap?size=<?php echo $width; ?>x<?php echo $height; ?>&zoom=<?php echo $zoom; ?>&markers=color:red%7C<?php echo $address_url; ?>&sensor=true"></a></span>
+    <span itemprop="maps"><a href="<?php echo 'http://maps.google.com/maps?q=' . $address_url; ?>" target="_blank"><img class="align<?php echo $align; ?> tf-googlemaps" src="http://maps.googleapis.com/maps/api/staticmap?size=<?php echo $width; ?>x<?php echo $height; ?>&zoom=<?php echo $zoom; ?>&markers=color:red%7C<?php echo $address_url; ?>&sensor=true" alt="<?php _e('Google Map of Location', 'themeforce'); ?>"></a></span>
 
     
     <?php
