@@ -16,7 +16,7 @@ function themeforce_social_yelp_page() {
     <?php 
     
     // List of Options used within Dropdowns, etc.
-    
+
     $options_yelp = array(
         'US',
         'AT',
