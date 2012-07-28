@@ -36,20 +36,9 @@ class TF_Widget_MailChimp extends WP_Widget {
 
 		$this->default_loader_graphic = get_bloginfo( 'template_url' ) . $this->default_loader_graphic;
 
-		add_action('init', array(&$this, 'add_scripts'));
-
 		add_action('parse_request', array(&$this, 'process_submission'));
 
-	}
-
-	/**
-	 * @author James Lafferty
-	 * @since 0.1
-	 */
-
-	public function add_scripts () {
-
-		wp_enqueue_script('tf-mc-widget', TF_URL . '/assets/js/mailchimp-widget-min.js', array( 'jquery' ), TF_VERSION );
+        add_action('init' , array(&$this, 'mailchimp_js'));
 
 	}
 
@@ -362,6 +351,16 @@ class TF_Widget_MailChimp extends WP_Widget {
 		return $options[$number]['success_message'];
 
 	}
+
+    public function mailchimp_js() {
+
+            if ( is_active_widget(false, false, $this->id_base, true) ) {
+
+                wp_enqueue_script('tf-mc-widget', TF_URL . '/assets/js/mailchimp-widget-min.js', array( 'jquery' ), TF_VERSION );
+
+            }
+
+    }
 
 }
 

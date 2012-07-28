@@ -51,7 +51,6 @@ function load_localina_js() {
 
 }
 
-
 /**
  * Auto-load scripts if API & Phone filled out
  */
