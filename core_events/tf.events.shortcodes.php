@@ -31,7 +31,10 @@ function tf_list_cats() {
 //***********************************************************************************
 
 function tf_events_full ( $atts ) {
-	
+
+    if ( ! tf_is_premium_active() )
+        return null;
+
 	// - define arguments -
 	extract(shortcode_atts(array(
 	    'limit' => '20', // # of events to show
@@ -208,6 +211,10 @@ function tf_events_add_tinymce_plugins( $plugin_array ) {
 }
 
 function tf_events_add_insert_events_above_editor() {
+
+    if ( ! tf_is_premium_active() )
+        return null;
+
 	?>
 	<a class="tf-button tf-inlinemce" href="javascript:tinyMCE.activeEditor.execCommand( 'mceExecTFEventsInsertShortcode' );"><img src="<?php echo TF_URL . '/core_events/tinymce_plugins/event_16.png' ?>"/><span>Events</span></a>
 	<?php
