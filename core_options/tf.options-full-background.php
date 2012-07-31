@@ -32,7 +32,7 @@ function themeforce_themeoptions_page() {
         array( 'name' => __('Use Full-Screen Background?', 'themeforce'),
                 'desc' => __('Check this box if you\'d like to use a full background image that resizes with the browser.', 'themeforce'),
                 'id' => 'tf_full_background',
-                'std' => 'true',
+                'std' => 'false',
                 'type' => 'checkbox'),
 	
         array( 'name' => __('Background Image', 'themeforce'),
