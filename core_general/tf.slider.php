@@ -81,14 +81,17 @@ function tf_slider_page() {
 
             <ul id="tf-slides-list">
 
-                <?php foreach ( $slide_data as $slide ): ?>
+                <?php foreach ( $slide_data as $slide ):
+
+                    //Check to see if the slide is a template slide from the template database, if it is, use the direct url to the file as stored in meta
+                    $slide_img_url = ( strpos( $slide->meta['tfslider_image'][0], 'http://template-' ) !== false ) ? $slide->meta['tfslider_image'][0] : $slide->thumbnail; ?>
 
                     <!--Display Slide-->
                     <li id="listItem_<?php echo $slide->ID; ?>" class="menu-item-handle slide-item">
 
                         <input type="hidden" name="slider[id][<?php echo $slide->ID; ?>]" value="<?php echo $slide->ID; ?>" />
 
-                        <div class="slide-thumbnail" style="background-image:url( <?php echo ( $slide->thumbnail ) ? $slide->thumbnail : TF_URL . '/assets/images/slider-empty.jpg'; ?> )">
+                        <div class="slide-thumbnail" style="background-image:url( <?php echo ( $slide_img_url ) ? $slide_img_url : TF_URL . '/assets/images/slider-empty.jpg'; ?> )">
 
                             <!-- Controls -->
                             <div class="slide-itembar-control">
@@ -454,7 +457,7 @@ function themeforce_slider_display() {
         $meta_image = $custom["tfslider_image"][0];
         $post_image = wp_get_attachment_image_src( get_post_thumbnail_id( get_the_ID() ), 'full' );
 
-        if ( $post_image[0] ) {
+        if ( $post_image[0] && strpos( $meta_image, 'http://template-' ) === false ) {
             $image = $post_image[0];
         } else {
             $image = $meta_image;
