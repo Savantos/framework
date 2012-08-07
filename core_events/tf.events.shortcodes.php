@@ -60,8 +60,9 @@ function tf_events_full ( $atts ) {
     $args = array(
         'post_type' => 'tf_events',
         'post_status' => 'publish',
-        'orderby' => 'tf_events_startdate',
-        'order' => 'DESC',
+        'orderby' => 'meta_value_num',
+        'meta_key' => 'tf_events_startdate',
+        'order' => 'ASC',
         'posts_per_page' => $limit,
         'meta_query' => array(
             array(
