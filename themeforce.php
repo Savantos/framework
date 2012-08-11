@@ -50,6 +50,7 @@ require_once( TF_PATH . '/core_general/tf.business-shortcodes.php' );
 require_once( TF_PATH . '/core_general/tf.assets.php' );
 require_once( TF_PATH . '/core_general/tf.slider.php' );
 require_once( TF_PATH . '/core_general/tf.mobile.php' );
+require_once( TF_PATH . '/core_general/tf.cta-button.php' );
 require_once( TF_PATH . '/core_colors/tf.colors.php' );
 
 // LESS
