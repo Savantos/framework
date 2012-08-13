@@ -24,9 +24,11 @@ function themeforce_integrations_page() {
 
     ?>
 
-    <div class="wrap accordion-wrap">
+<div class="wrap accordion-wrap">
 
-        <h3>Online Reservations</h3>
+    <p>We have a number of reservation and online ordering integrations going live in the coming weeks, in the meantime, <a href="http://www.happytables.com/contact-us/" target="_blank">let us know</a> who you already use.</p>
+
+    <h3>Online Reservations</h3>
 
         <!-- not translated yet, still need to finalize -->
 
