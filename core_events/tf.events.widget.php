@@ -26,43 +26,51 @@ class Example_Widget extends WP_Widget {
 	function widget( $args, $instance ) {
 		extract( $args );
 
-                // - our variables from the widget settings -
+        // - our variables from the widget settings -
+        $title = apply_filters('widget_title', $instance['title'] );
+        $limit = $instance['limit'];
+        $limit = intval( $limit );
 
-		$title = apply_filters('widget_title', $instance['title'] );
-		$limit = $instance['limit'];
-                $limit = intval( $limit );
+        echo $before_widget;
+        if ( $title ) echo $before_title . $title . $after_title;
 
-                echo $before_widget;
-                if ( $title ) echo $before_title . $title . $after_title;
+        // - hide events that are older than 6am today (because some parties go past your bedtime) -
 
-                // - hide events that are older than 6am today (because some parties go past your bedtime) -
+        $today6am = strtotime('today 6:00') + ( get_option( 'gmt_offset' ) * 3600 );
 
-                $today6am = strtotime('today 6:00') + ( get_option( 'gmt_offset' ) * 3600 );
+        $yesterday6pm = strtotime('yesterday 18:00') + ( get_option( 'gmt_offset' ) * 3600 );
+        // - query -
+        $args = array(
+            'post_type' => 'tf_events',
+            'post_status' => 'publish',
+            'orderby' => 'meta_value_num',
+            'meta_key' => 'tf_events_startdate',
+            'order' => 'ASC',
+            'posts_per_page' => $limit,
+            'meta_query' => array(
+                array(
+                    'key' => 'tf_events_enddate',
+                    'value' => $yesterday6pm,
+                    'compare' => '>'
+                ),
+                array(
+                    'key' => 'tf_events_startdate',
+                    'value' => '1',
+                    'compare' => '>'
+                )
+            )
 
-                // TODO Replace SQL SELECT with WP query
+        );
 
-                // - query -
-                global $wpdb;
-                $querystr = "
-                    SELECT *
-                    FROM $wpdb->posts wposts, $wpdb->postmeta metastart, $wpdb->postmeta metaend
-                    WHERE (wposts.ID = metastart.post_id AND wposts.ID = metaend.post_id)
-                    AND (metaend.meta_key = 'tf_events_enddate' AND metaend.meta_value > $today6am )
-                    AND metastart.meta_key = 'tf_events_enddate'
-                    AND wposts.post_type = 'tf_events'
-                    AND wposts.post_status = 'publish'
-                    ORDER BY metastart.meta_value ASC LIMIT $limit
-                 ";
+        $events = new WP_Query( $args );
 
-                $events = $wpdb->get_results($querystr, OBJECT);
+        // - declare fresh day -
+        $daycheck = null;
 
-                // - declare fresh day -
-                $daycheck = null;
-
-                // - loop -
-                if ( $events ):
-                global $post;
-                foreach ($events as $post):
+        // - loop -
+        if ( $events->have_posts() ):
+            global $post;
+            foreach ($events->get_posts() as $post ):
                 setup_postdata( $post );
 
                 // - date option -
@@ -73,40 +81,41 @@ class Example_Widget extends WP_Widget {
                 $sd = $custom["tf_events_startdate"][0];
                 $ed = $custom["tf_events_enddate"][0];
                 $post_image_id = get_post_thumbnail_id( get_the_ID() );
-                        if ( $post_image_id ) {
-                                $thumbnail = wp_get_attachment_image_src( $post_image_id, 'post-thumbnail', false);
-                                if ( $thumbnail ) ( string )$thumbnail = $thumbnail[0];
-                        }
+
+                if ( $post_image_id ) {
+                    $thumbnail = wp_get_attachment_image_src( $post_image_id, 'post-thumbnail', false);
+                    if ( $thumbnail ) (string) $thumbnail = $thumbnail[0];
+                }
 
                 // - determine if it's a new day -
-
                 ?><div class="events-widget"><?php
-                $sqldate = date('Y-m-d H:i:s', $sd);
-                $longdate = mysql2date($date_format, $sqldate);
-                if ($daycheck == null) { echo '<div class="longdate">' . $longdate . '</div>'; }
-                if ($daycheck != $longdate && $daycheck != null) { echo '<div class="longdate">' . $longdate . '</div>'; }
+                    $sqldate = date('Y-m-d H:i:s', $sd);
+                    $longdate = mysql2date($date_format, $sqldate);
+                    if ($daycheck == null) { echo '<div class="longdate">' . $longdate . '</div>'; }
+                    if ($daycheck != $longdate && $daycheck != null) { echo '<div class="longdate">' . $longdate . '</div>'; }
 
-                // - local time format -
-                $time_format = get_option( 'time_format' );
-                $stime = date($time_format, $sd);
-                $etime = date($time_format, $ed);
+                    // - local time format -
+                    $time_format = get_option( 'time_format' );
+                    $stime = date($time_format, $sd);
+                    $etime = date($time_format, $ed);
 
-                // - output - ?>
+                    // - output - ?>
 
-                        <div class="eventitem"><a href="<?php the_permalink(); ?>"><?php echo $stime; ?> - <?php the_title(); ?></a></div>
-                    </div>
+                    <div class="eventitem"><a href="<?php the_permalink(); ?>"><?php echo $stime; ?> - <?php the_title(); ?></a></div>
+                </div>
                 <?php
 
                 // - fill daycheck with the current day -
                 $daycheck = $longdate;
                 // - .... and back to the top now -
 
-                endforeach;
-                else :
-                endif;
+            endforeach;
+        else :
 
-                echo $after_widget;
-                }
+        endif;
+
+        echo $after_widget;
+    }
 
 
 
