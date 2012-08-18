@@ -70,12 +70,16 @@ if ( get_option( 'tf_opendining_enabled' ) == 'true') {
  */
 function tf_opendining_mobile() {
 
-    $partner = array(
+    $args = array(
 
-        "id" => "opendining",
-        "type" => "onlineordering",
+        "mp_target" => "a#cta-header",
+        "mp_name" => "Clicked Call to Action (Main)",
+        "partner" => "opendining",
+        "revenue_type" => "onlineordering",
+        "placement" => "header",
+        "device" => "desktop",
         "headline" => "Order Online",
-        "variant" => "default"
+        "color" => "default"
 
     );
 
@@ -85,8 +89,8 @@ function tf_opendining_mobile() {
 
             ?>
 
-            <a href="http://www.opendining.net/m/<?php echo $restid; ?>" id="cta-header" class="cta-mobile cta-<?php echo $partner["color"]; ?>">
-                <span class="cta-icon icon-cart"></span> <span class="cta-headline"><?php echo $partner["headline"]; ?></span>
+            <a href="http://www.opendining.net/m/<?php echo $restid; ?>" class="cta-mobile cta-<?php echo $args["color"]; ?>">
+                <span class="cta-icon icon-cart"></span> <span class="cta-headline"><?php echo $args["headline"]; ?></span>
             </a>
 
             <div class="clearfix"></div>
