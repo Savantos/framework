@@ -19,7 +19,9 @@
 // header
 function tf_head_bottom() { tf_do_atomic( 'tf_head_bottom' ); }					
 function tf_body_top() { tf_do_atomic( 'tf_body_top' ); }					
-function tf_body_bottom() { tf_do_atomic( 'tf_body_bottom' ); }					
+function tf_body_desktop_cta() { tf_do_atomic( 'tf_body_desktop_cta' ); }
+function tf_body_mobile_cta() { tf_do_atomic( 'tf_body_mobile_cta' ); }
+function tf_body_bottom() { tf_do_atomic( 'tf_body_bottom' ); }
 				
 
 // Do Hook

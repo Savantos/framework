@@ -8,12 +8,12 @@ jQuery(document).ready(function() {
     });
     
     jQuery("a.thumb-iframe").fancybox({
-            'width'		: '75%',
+            'width'		    : '75%',
             'height'		: '75%',
-            'autoScale'     	: false,
+            'autoScale'     : false,
             'transitionIn'	: 'none',
             'transitionOut'	: 'none',
-            'type'		: 'iframe'
+            'type'		    : 'iframe'
     });	
 
 });
