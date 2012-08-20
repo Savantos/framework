@@ -55,7 +55,9 @@ function tf_cta_mixpanel($args) {
 
     <script>
 
-        mixpanel.track_links("<?php echo $args['mp_target'];?>", "<?php echo $args['mp_name'];?>", {
+    jQuery("<?php echo $args['mp_target'];?>").click(function() {
+
+        mixpanel.track("<?php echo $args['mp_name'];?>", {
             'revenue_type' : '<?php echo $args['revenue_type'];?>', // 'reservation' or 'onlineordering'
             'partner' : '<?php echo $args['partner'];?>', // name of partner
             'device' : '<?php echo $args['device'];?>', // 'default' or others
@@ -63,6 +65,8 @@ function tf_cta_mixpanel($args) {
             'headline' : '<?php echo $args['headline'];?>', // 'default' or others
             'color' : '<?php echo $args['color'];?>' // true or false, does partner branding help?
         });
+
+    });
 
     </script>
 

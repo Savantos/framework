@@ -46,6 +46,10 @@ function tf_bf_opendining_desktop() {
 
         ?>
 
+        <script>
+            mixpanel.track("Viewed Page");
+        </script>
+
         <a href="http://www.opendining.net/app/locations/<?php echo $appid; ?>" id="cta-header" class="cta-desktop cta-<?php echo $args["color"]; ?> thumb-iframe">
             <span class="cta-icon icon-cart"></span> <span class="cta-headline"><?php echo $args["headline"]; ?></span>
         </a>
@@ -74,7 +78,7 @@ function tf_bf_opendining_mobile() {
     $args = array(
 
         "tracklinks" => true,
-        "mp_target" => "a#cta-header",
+        "mp_target" => "a.cta-mobile",
         "mp_name" => "Clicked Call to Action (Main)",
         "partner" => "opendining",
         "revenue_type" => "onlineordering",
