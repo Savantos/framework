@@ -14,7 +14,7 @@
  *
  * @return string DOM output
  */
-function tf_opendining_desktop() {
+function tf_bf_opendining_desktop() {
 
         // A/B Testing
 
@@ -28,6 +28,7 @@ function tf_opendining_desktop() {
 
         $args = array(
 
+            "tracklinks" => false,
             "mp_target" => "a#cta-header",
             "mp_name" => "Clicked Call to Action (Main)",
             "partner" => "opendining",
@@ -59,7 +60,7 @@ function tf_opendining_desktop() {
 
 if ( get_option( 'tf_opendining_enabled' ) == 'true') {
 
-    add_action( 'tf_body_desktop_cta', 'tf_opendining_desktop', 12);
+    add_action( 'tf_body_desktop_cta', 'tf_bf_opendining_desktop', 12);
 
 }
 
@@ -68,10 +69,11 @@ if ( get_option( 'tf_opendining_enabled' ) == 'true') {
  *
  * @return string DOM output
  */
-function tf_opendining_mobile() {
+function tf_bf_opendining_mobile() {
 
     $args = array(
 
+        "tracklinks" => true,
         "mp_target" => "a#cta-header",
         "mp_name" => "Clicked Call to Action (Main)",
         "partner" => "opendining",
@@ -103,6 +105,53 @@ function tf_opendining_mobile() {
 
 if ( get_option( 'tf_opendining_enabled' ) == 'true') {
 
-    add_action( 'tf_body_mobile_cta', 'tf_opendining_mobile', 12);
+    add_action( 'tf_body_mobile_cta', 'tf_bf_opendining_mobile', 12);
+
+}
+
+// LEGACY ( Fineforce & Pubforce )
+
+function tf_opendining_desktop() {
+
+    $output = '';
+
+    if ( get_option( 'tf_opendining_enabled' ) == 'true') {
+
+        $appid = trim(get_option(tf_opendining_app_id));
+        $output .= '<!-- opendining (desktop) -->';
+        $output .= '<script type="text/javascript">(function(){function b(){var c=document.createElement("script"),a=document.getElementsByTagName("script")[0];c.type="text/javascript";c.async=true;c.src=(("https:"==document.location.protocol)?"https":"http")+"://www.opendining.net/media/js/order-button.js?id=' . $appid . '";a.parentNode.insertBefore(c,a)}if(window.attachEvent){window.attachEvent("onload",b)}else{window.addEventListener("load",b,false)}})();</script>';
+        $output .= '<!-- / opendining (desktop) -->';
+
+    }
+
+    echo $output;
+
+};
+
+if ( TF_THEME != 'baseforce') {
+
+    add_action( 'tf_body_top', 'tf_opendining_desktop', 12);
+
+}
+
+/**
+ * Returns JS Drop-in for Open Dining (fixed position button) for Mobile
+ *
+ * @return string DOM output
+ */
+function tf_opendining_mobile() {
+
+    $output = '';
+
+    if ( get_option( 'tf_opendining_enabled' ) == 'true') {
+
+        $restid = trim(get_option(tf_opendining_rest_id));
+        $output .= '<!-- opendining (mobile) -->';
+        $output .= '<div class="opendining-mobile"><a style="color:white !important;" href="http://www.opendining.net/m/' . $restid . '">Order Online</a></div>';
+        $output .= '<!-- / opendining (mobile) -->';
+
+    }
+
+    echo $output;
 
 }
