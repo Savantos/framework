@@ -4,6 +4,76 @@
  * Adds the OpenGraph meta tags to the head.
  * 
  */
+
+function tf_add_og_meta_tags() {
+
+    global $post;
+
+    if ( is_admin() )
+        return;
+
+    // Required OG Title
+
+    ?>
+
+    <meta property="og:title" content="<?php the_title(); ?>" />
+    <meta property="og:url" content="<?php the_permalink(); ?>" />
+
+    <?php
+
+    // Required OG Image
+
+    ?>
+
+    <meta property="og:image" content="<?php $logo = wp_get_attachment_image_src( get_option('tf_logo_id'), 'large' ); echo $logo[0]; ?>" />
+
+    <?php
+
+        if ( is_single() ) {
+
+                ?>
+
+                <meta property="og:type" content="article" />
+
+                <?php
+
+        }
+
+        if ( is_front_page() ) {
+
+                ?>
+
+                <meta property="og:type" content="website" />
+
+                <?php
+
+
+        } elseif ( !is_front_page() && is_home() ) {
+
+        ?>
+
+        <meta property="og:type" content="blog" />
+
+        <?php
+
+        } elseif ( is_page() ) {
+
+                ?>
+
+                <meta property="og:type" content="article" />
+
+                <?php
+
+    }
+
+    ?>
+
+    <?php
+
+}
+
+/*
+
 function tf_add_og_meta_tags() {
 	
 	global $post;
@@ -13,7 +83,7 @@ function tf_add_og_meta_tags() {
 	
 	$meta = array();
 	
-        $image = array( 'property' => 'og:image', 'content' => get_option( 'tf_logo' ) );
+    $image = array( 'property' => 'og:image', 'content' => get_option( 'tf_logo' ) );
 	
 	//Site name
 	$meta[] = array( 'property' => 'og:site_name', 'content' => get_bloginfo() );
@@ -78,14 +148,7 @@ function tf_add_og_meta_tags() {
 	} elseif ( is_front_page() ) {
 		
 		$meta[] = array( 'property' => 'og:type', 'content' => 'restaurant' );
-		
-		/*
-		We don't have this as an available option, so commetning out for now
 
-        if ( $description = get_bloginfo( 'description' ) )
-			$meta[] = array( 'property' => 'og:description', 'content' => $description );
-		*/
-				
 		if ( $phone_number = get_option( 'tf_business_phone' ) ) {
 			$meta[] = array( 'property' => 'og:phone_number', 'content' => $phone_number );
 		}
@@ -104,5 +167,7 @@ function tf_add_og_meta_tags() {
 	endforeach;
 
 }
+
+*/
 
 add_action( 'wp_head', 'tf_add_og_meta_tags' );

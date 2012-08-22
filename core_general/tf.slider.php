@@ -534,9 +534,18 @@ function themeforce_slider_display() {
             }
 
          // fallback check
+
          $emptycheck[] = $image;
 
     endwhile;
+
+    if ( $emptycheck ) {
+
+        foreach ( $emptycheck as $image ) {
+            echo '<meta property="og:image" content="' . $image . '">';
+        }
+
+    }
 
     // **** Theme Specific
     // fallback functions when no slides exist
