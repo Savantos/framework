@@ -29,6 +29,44 @@ function tf_add_og_meta_tags() {
 
     <?php
 
+    // Slider Images
+
+        // Query Custom Post Types
+        $args = array(
+            'post_type' => 'tf_slider',
+            'post_status' => 'publish',
+            'orderby' => 'meta_value_num',
+            'meta_key' => '_tfslider_order',
+            'order' => 'ASC',
+            'posts_per_page' => 99
+        );
+
+        // - query -
+        $my_query = null;
+        $my_query = new WP_query( $args );
+
+
+    while ( $my_query->have_posts() ) : $my_query->the_post();
+
+        // - variables -
+        $custom = get_post_custom( get_the_ID() );
+
+        // - image (with fallback support)
+        $meta_image = $custom["tfslider_image"][0];
+        $post_image = wp_get_attachment_image_src( get_post_thumbnail_id( get_the_ID() ), 'full' );
+
+        if ( $post_image[0] && strpos( $meta_image, 'http://template-' ) === false ) {
+            $image = $post_image[0];
+        } else {
+            $image = $meta_image;
+        }
+
+        echo '<meta property="og:image" content="' . $image . '">';
+
+    endwhile;
+
+   // Template specific
+
         if ( is_single() ) {
 
                 ?>

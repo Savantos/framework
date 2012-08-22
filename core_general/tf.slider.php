@@ -539,14 +539,6 @@ function themeforce_slider_display() {
 
     endwhile;
 
-    if ( $emptycheck ) {
-
-        foreach ( $emptycheck as $image ) {
-            echo '<meta property="og:image" content="' . $image . '">';
-        }
-
-    }
-
     // **** Theme Specific
     // fallback functions when no slides exist
     // TODO Consider replacing this with a more universal solution
