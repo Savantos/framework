@@ -200,7 +200,7 @@ wp_admin_css( 'colors-fresh', true );
 				<select name="tf_eventscat">
 					<option value="">All</option>
 					<?php foreach( get_terms( 'tf_eventcategory' ) as $term ) : ?>
-						<option <?php selected( isset( $_GET['group'] ) && ( $_GET['group'] == $term->slug || $_GET['group'] == $term->name ) ) ?>  value="<?php echo $term->name ?>"><?php echo $term->name ?></option>
+						<option <?php selected( isset( $_GET['group'] ) && ( $_GET['group'] == $term->slug || $_GET['group'] == $term->name ) ) ?>  value="<?php echo $term->slug ?>"><?php echo $term->name ?></option>
 					<?php endforeach; ?>
 				</select>
 			</p>

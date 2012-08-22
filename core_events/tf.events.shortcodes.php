@@ -39,7 +39,7 @@ function tf_events_full ( $atts ) {
 	extract(shortcode_atts(array(
 	    'limit' => '20', // # of events to show
 	 ), $atts));
-	
+
 	// ===== OUTPUT FUNCTION =====
 	
 	ob_start();
@@ -56,6 +56,19 @@ function tf_events_full ( $atts ) {
 	$name = stripslashes( get_option('tf_business_name') );
     $address = stripslashes( get_option('tf_business_address') );
     $location = $name . ', ' . $address;
+
+    $tax_query = array();
+
+    if ( ! empty ( $atts['group'] )  ) {
+
+        $tax_query = array(
+                array(
+                    'taxonomy' => 'tf_eventcategory',
+                    'field' => 'slug',
+                    'terms' => $atts['group']
+                )
+        );
+    }
 
     $args = array(
         'post_type' => 'tf_events',
@@ -75,14 +88,14 @@ function tf_events_full ( $atts ) {
                 'value' => '1',
                 'compare' => '>'
             )
-        )
+        ),
+        'tax_query'  => $tax_query
 
     );
 
     $events = new WP_Query( $args );
 
 	// - declare fresh day -
-
 	$date_format = get_option( 'date_format' );
 	
 	echo '<!-- www.schema.org -->';
