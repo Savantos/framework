@@ -61,7 +61,7 @@ function tf_add_og_meta_tags() {
             $image = $meta_image;
         }
 
-        echo '<meta property="og:image" content="' . $image . '">';
+        echo '<meta property="og:image" content="' . $image . '" />';
 
     endwhile;
 
@@ -72,6 +72,7 @@ function tf_add_og_meta_tags() {
                 ?>
 
                 <meta property="og:type" content="article" />
+                <meta property="og:description" content="<?php the_excerpt(); ?>" />
 
                 <?php
 
