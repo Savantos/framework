@@ -41,18 +41,30 @@ function tf_bf_opendining_desktop() {
         );
 
         $appid = trim(get_option(tf_opendining_app_id));
+        $restid = trim(get_option(tf_opendining_rest_id));
 
         // Display
 
         ?>
 
-        <script>
-            mixpanel.track("Viewed Page");
-        </script>
-
         <a href="http://www.opendining.net/app/locations/<?php echo $appid; ?>" id="cta-header" class="cta-desktop cta-<?php echo $args["color"]; ?> thumb-iframe">
             <span class="cta-icon icon-cart"></span> <span class="cta-headline"><?php echo $args["headline"]; ?></span>
         </a>
+
+        <script>
+            mixpanel.track("Viewed Page");
+
+            jQuery(document).ready(function($) {
+
+                var userAgent = navigator.userAgent.toLowerCase().indexOf("ipad");
+
+                if (userAgent > -1) {
+                    $("a#cta-header").unbind('click.fb').removeClass("thumb-iframe");
+                    $("a#cta-header").attr("href","http://www.opendining.net/m/<?php echo $restid; ?>");
+                }
+
+            });
+        </script>
 
         <?php tf_cta_mixpanel($args); ?>
 
