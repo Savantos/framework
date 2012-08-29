@@ -52,7 +52,7 @@ function themeforce_opendining_page() {
             'type' => 'checkbox'
         ),
               
-	array( 'type' => 'close'), 
+	    array( 'type' => 'close'),
  
 	);
 	

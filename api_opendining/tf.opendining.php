@@ -171,3 +171,31 @@ function tf_opendining_mobile() {
     echo $output;
 
 }
+
+/**
+ * Display OpenDining iFrame
+ *
+ * @param $restid
+ */
+function tf_opendining_displaymenu($restid) {
+
+    echo '<div class="od_menu"><iframe src="http://opendining.net/menu/' . $restid . '?embed=true" border="0" id="order-frame" style="border:0;width:100%"></iframe><script src="http://opendining.net/media/js/order-frame.js"></script></div>';
+
+}
+
+/**
+ * Shortcode to display OpenDining iFrame
+ *
+ * @param $atts
+ */
+function tf_opendining_displaymenu_shortcode( $atts ) {
+
+        extract( shortcode_atts( array(
+            'restid' => trim(get_option(tf_opendining_rest_id))
+        ), $atts ) );
+
+        tf_opendining_displaymenu($restid);
+
+    }
+
+add_shortcode( 'opendining-menu', 'tf_opendining_displaymenu_shortcode' );
