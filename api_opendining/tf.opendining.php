@@ -95,7 +95,7 @@ function tf_bf_opendining_mobile() {
         "partner" => "opendining",
         "revenue_type" => "onlineordering",
         "placement" => "header",
-        "device" => "desktop",
+        "device" => "mobile",
         "headline" => "Order Online",
         "color" => "default"
 
@@ -112,6 +112,10 @@ function tf_bf_opendining_mobile() {
             </a>
 
             <div class="clearfix"></div>
+
+            <script>mixpanel.track("Viewed Page");</script>
+
+            <?php tf_cta_mixpanel($args); ?>
 
             <?php
 

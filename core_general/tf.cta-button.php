@@ -45,6 +45,14 @@ function tf_cta_mixpanel($args) {
             'color' : '<?php echo $args['color'];?>' // true or false, does partner branding help?
         });
 
+        <?php if ( $args['eval'] ) { ?>
+
+        jQuery("<?php echo $args['mp_target'];?>").click(function() {
+            <?php echo $args['eval']; ?>
+        }
+
+        <?php ; } ?>
+
     </script>
 
     <?php
@@ -65,6 +73,10 @@ function tf_cta_mixpanel($args) {
             'headline' : '<?php echo $args['headline'];?>', // 'default' or others
             'color' : '<?php echo $args['color'];?>' // true or false, does partner branding help?
         });
+
+        <?php if ( $args['eval'] ) { ?>
+            <?php echo $args['eval']; ?>
+        <?php ; } ?>
 
     });
 

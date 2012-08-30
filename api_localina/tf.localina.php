@@ -1,49 +1,136 @@
 <?php
 /*
- * Localina Integration
+ * Opendining Integration
  * ---------------------------------------------
  *
  * This is a pretty light integration to see how visitors will use it. Similar to Yelp, the feature
- * will degrade for mobile.
+ * will degrade for mobile (not self-hosting for now, though code here: github.com/opendining/opendining-mobile)
  *
 */
 
+
 /**
- * Creates Localina Bar at the top
+ * Returns JS Drop-in for Open Dining (fixed position button) for Desktop
  *
  * @return string DOM output
  */
-function tf_localina_bar() {
+function tf_localina_desktop() {
 
-    ob_start();
+        // A/B Testing
 
-    if ( get_option('tf_localina_bar_enabled' ) == 'true') {
+        if ( date('j') % 2 ) { // day of month will likely be less biased then day of week, or hour of day.
+            //even
+        } else {
+            //odd
+        }
+
+        // Arguments
+
+        $args = array(
+
+            "tracklinks" => false,
+            "mp_target" => "a#cta-header",
+            "mp_name" => "Clicked Call to Action (Main)",
+            "partner" => "localina",
+            "revenue_type" => "reservations",
+            "placement" => "header",
+            "device" => "desktop",
+            "headline" => "Online Reservation",
+            "color" => "default"
+
+        );
 
         $api = trim(get_option(tf_localina_api));
         $phone = trim(get_option(tf_localina_phone));
-        $text = trim(get_option(tf_localina_bar_text));
 
-        echo '<div id="localinabar">';
+        // Trigger Localine Fancybox after MixPanel hit
 
-            echo '<div id="localinabar-center">'; ?>
-            <a class="localinalink" href="javascript:;" onclick="TFOpenLocalinaBookingForm()"><?php echo $text; ?></a>
-            <?php
-            echo '</div>';
+        $args['eval'] = "Localina.startBooking( '" . $phone . "', '" . $api . "', 'de' );";
 
-        echo '</div>';
+        // Display
 
-    }
+        ?>
 
-    $output = ob_get_contents();
-    ob_end_clean();
-    echo $output;
+        <a id="cta-header" class="cta-desktop cta-<?php echo $args["color"]; ?>">
+            <span class="cta-icon icon-event"></span> <span class="cta-headline"><?php echo $args["headline"]; ?></span>
+        </a>
 
-};
+        <script>mixpanel.track("Viewed Page");</script>
 
-add_action('tf_body_top', 'tf_localina_bar', 12);
+        <?php tf_cta_mixpanel($args); ?>
+
+        <div class="clearfix"></div>
+
+        <?php
+
+}
+
+if ( get_option( 'tf_localina_enabled' ) == 'true') {
+
+    add_action( 'tf_body_desktop_cta', 'tf_localina_desktop', 12);
+
+}
 
 /**
- * Enqueues Localina JS if API & Phone field are populated
+ * Returns JS Drop-in for Open Dining (fixed position button) for Mobile
+ *
+ * @return string DOM output
+ */
+function tf_localina_mobile() {
+
+    // Arguments
+
+    $args = array(
+
+        "tracklinks" => false,
+        "mp_target" => "a.cta-mobile",
+        "mp_name" => "Clicked Call to Action (Main)",
+        "partner" => "localina",
+        "revenue_type" => "reservations",
+        "placement" => "header",
+        "device" => "mobile",
+        "headline" => "Online Reservation",
+        "color" => "default"
+
+    );
+
+    $api = trim(get_option(tf_localina_api));
+    $phone = trim(get_option(tf_localina_phone));
+
+    // Trigger Localine Fancybox after MixPanel hit
+
+    $args['eval'] = "Localina.startBooking( '" . $phone . "', '" . $api . "', 'de' );";
+
+    // Display
+
+    if ( get_option( 'tf_localina_enabled' ) == 'true') {
+
+            ?>
+
+            <a class="cta-mobile cta-<?php echo $args["color"]; ?>">
+                <span class="cta-icon icon-event"></span> <span class="cta-headline"><?php echo $args["headline"]; ?></span>
+            </a>
+
+            <div class="clearfix"></div>
+
+            <script>mixpanel.track("Viewed Page");</script>
+
+            <?php tf_cta_mixpanel($args); ?>
+
+            <?php
+
+        }
+
+}
+
+if ( get_option( 'tf_localina_enabled' ) == 'true') {
+
+    add_action( 'tf_body_mobile_cta', 'tf_localina_mobile', 12);
+
+}
+
+/**
+ * Load Localina JS if active
  */
 function load_localina_js() {
 
@@ -51,36 +138,8 @@ function load_localina_js() {
 
 }
 
-/**
- * Auto-load scripts if API & Phone filled out
- */
-if ( get_option( 'tf_localina_api' ) && get_option( 'tf_localina_phone' ) ) {
+if ( get_option( 'tf_localina_enabled' ) == 'true') {
 
     add_action( 'wp_print_scripts', 'load_localina_js');
-    add_action( 'wp_footer', 'load_localina_footer');
-
-}
-
-function load_localina_footer() {
-
-    $api = trim(get_option(tf_localina_api));
-    $phone = trim(get_option(tf_localina_phone));
-
-    ?>
-
-<script>
-    var $ = jQuery;
-
-    function TFOpenLocalinaBookingForm() {
-
-        jQuery( document).ready( function ($) {
-            Localina.startBooking( '<?php echo $phone; ?>', '<?php echo $api; ?>', 'de' );
-        } );
-
-        return false;
-    }
-</script>
-
-<?php
 
 }

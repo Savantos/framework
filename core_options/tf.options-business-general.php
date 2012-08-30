@@ -111,23 +111,26 @@ function themeforce_business_page() {
                 'std' => 'false',
                 'type' => 'checkbox'),
 
-    array( 'name' => __('Notice in Footer', 'themeforce'),
-                'desc' => __('A short text snippet to indicate any copyright or otherwise (you may also leave it blank)', 'themeforce'),
-                'id' => 'tf_terminalnotice',
-                'std' => '',
-                'type' => 'text'),
-
     array( 'name' => __('Language', 'themeforce'),
-            'desc' => __('Please select your preferred language', 'themeforce'),
-            'id' => 'tf_language',
-            'std' => '',
-            'type' => 'select',
-            'class' => 'tiny', //mini, tiny, small
-            'use_keys'  => true,
-            'options' => $options_language ),
-
+                'desc' => __('Please select your preferred language', 'themeforce'),
+                'id' => 'tf_language',
+                'std' => '',
+                'type' => 'select',
+                'class' => 'tiny', //mini, tiny, small
+                'use_keys'  => true,
+                'options' => $options_language )
 
 );
+
+if ( get_current_theme() != 'Baseforce' ) {
+
+$options[] = array( 'name' => __('Notice in Footer', 'themeforce'),
+    'desc' => __('A short text snippet to indicate any copyright or otherwise (you may also leave it blank)', 'themeforce'),
+    'id' => 'tf_terminalnotice',
+    'std' => '',
+    'type' => 'text');
+
+}
 
 $options = apply_filters( 'tf_options_general', $options );
 

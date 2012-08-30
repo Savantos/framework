@@ -42,21 +42,13 @@ function themeforce_localina_page() {
         ),
 
         array( 
-		'name' => __( 'Enable Localina Reservation Bar?', 'themeforce'),
-		'desc' => __( 'This will show the Localina bar at the top of your website on every page', 'themeforce'),
-		'id' => 'tf_localina_bar_enabled',
+		'name' => __( 'Enable Localina Button?', 'themeforce'),
+		'desc' => __( 'This will show the Localina button at the top of your website on every page', 'themeforce'),
+		'id' => 'tf_localina_enabled',
 		'std' => 'false',
 		'type' => 'checkbox'
         ),
 
-        array(
-        'name' => __( 'Reservation Bar Text', 'themeforce'),
-        'desc' => __( 'Text used for the link', 'themeforce'),
-        'id' => 'tf_localina_bar_text',
-        'std' => __( 'Reserve a table online', 'themeforce'),
-        'type' => 'text'
-        ),
-              
 	array( 'type' => 'close'), 
  
 	);
