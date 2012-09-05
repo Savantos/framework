@@ -31,16 +31,26 @@ function themeforce_business_page() {
         'es_ES' => __( 'Spanish', 'themeforce' ),
         'sv_SE' => __( 'Swedish', 'themeforce' ),
         'pt_PT' => __( 'Portuguese', 'themeforce' ),
+        'nl_BE' => __( 'Dutch (Belgium)', 'themeforce' ),
     );
 
     //Work out what to display in terms of language options
     $options_language = array( 'en_US'=> __( 'English', 'themeforce' ) );
 
     $language_files = get_available_languages();
+
+    //we offer support for nl_BE on our own code, even though theres no wordpress core translation for it yet
+    //instead we fallback on nl_NL for wordpress core, so lets pretend we support nl_BE
+    if ( ! in_array( 'nl_BE', $language_files ) )
+        $language_files[] = 'nl_BE';
+
     foreach ( $supported_languages as $key => $language_code ){
         if ( in_array( $key, $language_files ) )
             $options_language[$key] = $language_code;
+
     }
+
+    $options_language['nl_BE'] =
 
     // Options
     
