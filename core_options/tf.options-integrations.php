@@ -58,6 +58,16 @@ function themeforce_integrations_page() {
         <div class="accordion">
 
             <div class="accordion-header">
+                <a class="accordion-expand  accordion-<?php if ( get_option('tf_grubhub_id') ) { echo 'checked'; } else { echo 'unchecked'; } ?>" href="#">GrubHub</a>
+                <div class="accordion-desc">USA</div>
+            </div>
+            <div class="accordion-content"><?php themeforce_grubhub_page(); ?></div>
+
+        </div>
+
+        <div class="accordion">
+
+            <div class="accordion-header">
                 <a class="accordion-expand  accordion-<?php if ( get_option('tf_opendining_app_id') && get_option('tf_opendining_rest_id') ) { echo 'checked'; } else { echo 'unchecked'; } ?>" href="#">Open Dining</a>
                 <div class="accordion-desc">Global & Free Plans</div>
                <!--  <div class="accordion-link">More Information</div> -->

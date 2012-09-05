@@ -132,6 +132,9 @@ require_once( TF_PATH . '/api_opendining/tf.opendining.php' );
 // Localina
 require_once( TF_PATH . '/api_localina/tf.localina.php' );
 
+// Grubhub
+require_once( TF_PATH . '/api_grubhub/tf.grubhub.php' );
+
 // MailChimp
 if( current_theme_supports( 'tf_mailchimp' ) )
 	require_once( TF_PATH . '/api_mailchimp/mailchimp-widget.php' );
