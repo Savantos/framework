@@ -46,7 +46,7 @@ function tf_grubhub_desktop() {
 
         ?>
 
-        <a style="margin-bottom: 80px;" href="http://www.grubhub.com/order_redir.jsp?custId=<?php echo $id; ?>&amp;affId=1101" id="cta-header" class="cta-desktop cta-<?php echo $args["color"]; ?>">
+        <a style="margin-bottom: 80px;" href="http://www.grubhub.com/order_redir.jsp?custId=<?php echo $id; ?>&affId=1101" id="cta-header" class="cta-desktop cta-<?php echo $args["color"]; ?>">
             <span class="cta-icon icon-cart"></span> <span class="cta-headline"><?php echo $args["headline"]; ?></span>
             <div class="poweredby-grubhub-desktop"></div>
         </a>
@@ -101,7 +101,7 @@ function tf_grubhub_mobile() {
 
             ?>
 
-            <a style="margin-bottom: 50px;" href="http://www.grubhub.com/order_redir.jsp?custId=<?php echo $id; ?>&amp;affId=#detailsInfo" class="cta-mobile cta-<?php echo $args["color"]; ?>">
+            <a style="margin-bottom: 50px;" href="http://www.grubhub.com/order_redir.jsp?custId=<?php echo $id; ?>&affId=1101" class="cta-mobile cta-<?php echo $args["color"]; ?>">
                 <span class="cta-icon icon-cart"></span> <span class="cta-headline"><?php echo $args["headline"]; ?></span>
                 <div class="poweredby-grubhub-mobile"></div>
             </a>
