@@ -52,6 +52,12 @@ function themeforce_logo_page() {
                 'size' => 'width=300&height=300&crop=0',
                 'type' => 'image'),
 
+    array( 'name' => __( 'Text Logo', 'themeforce' ),
+            'desc' => __( 'Don\'t have an image logo yet? Choose some text to appear in the logo area instead.' ),
+            'id' => 'blogname',
+            'std' => '',
+            'type' => 'text'),
+
    	array( 'name' => __('Favicon', 'themeforce'),
                 'desc' => __('Your Favicon, make sure it is 16px by 16px (you can <a href=\'http://www.favicon.cc/\' target=\'_blank\'>generate one here</a>)', 'themeforce'),
                 'id' => 'tf_favicon',
@@ -78,29 +84,43 @@ function themeforce_logo_page() {
 function tf_logo( $size ='width=250&height=200&crop=0' ) {
 	
 	$logo_src = tf_logo_url( $size );
+
 	$logomobile = wpthumb( $logo_src, 'width=200&height=160&crop=0' );
-	
+
 	if ( is_user_logged_in() ) :
 		
 		$uploader = new TF_Upload_Image_Well( 'tf_logo_id', get_option( 'tf_logo_id', 0 ), array( 'size' => $size ) );
 		$uploader->drop_text = __('Drop your logo here', 'themeforce');
 	    ?>
 
-
-	    <div style="float:left;">
+	    <div class="logo-image-well" style="float:left; <?php echo ( ! $logo_src ) ? 'display: none;' : ''; ?>">
 	    	<?php $uploader->html() ?>
 	    </div>
-	
+
+        <?php if ( ! $logo_src ) : ?>
+            <a id="nologo-wrap" href="<?php echo home_url(); ?>"><div id="nologo"><?php echo tf_get_logo_text(); ?></div><input type="button" class="frontend tf_switch_to_image_logo" value="Upload logo instead?" /></a>
+        <?php endif; ?>
+
 	<?php else : ?>
-	
-	    <div style=""><a href="<?php bloginfo('url'); ?>"><div id="logo" style="background-image:url(<?php echo $logo_src; ?>)"></div></a></div>
-	
+
+        <?php if ( $logo_src ): ?>
+	        <div style=""><a href="<?php bloginfo('url'); ?>"><div id="logo" style="background-image:url(<?php echo $logo_src; ?>)"></div></a></div>
+	    <?php else: ?>
+            <a id="nologo-wrap" href="<?php echo home_url(); ?>"><div id="nologo"><?php echo tf_get_logo_text(); ?></div></a>
+        <?php endif; ?>
+
 	<?php endif; ?>
-	    
-    <div id="logo-mobile" style="display:none;">
-        <a href="<?php bloginfo('url'); ?>"><div style="background:url('<?php echo $logomobile; ?>') no-repeat center center"></div></a>
-    </div>
-	
+
+    <?php if ( $logo_src ) : ?>
+        <div id="logo-mobile" style="display:none;">
+            <a href="<?php bloginfo('url'); ?>"><div style="background:url('<?php echo $logomobile; ?>') no-repeat center center"></div></a>
+        </div>
+	<?php else: ?>
+        <div id="logo-mobile" class="no-logo" style="display:none;">
+            <a id="nologo-wrap-mobile" href="<?php echo home_url(); ?>"><div id="nologo"><?php echo tf_get_logo_text(); ?></div></a>
+        </div>
+    <?php endif; ?>
+
 	<?php
 
 }
@@ -148,3 +168,11 @@ add_action( 'wp_head', function() {
 	if ( is_user_logged_in() )
 		TF_Upload_Image_Well::enqueue_scripts();
 }, 1 );
+
+function tf_get_logo_text() {
+
+    if ( get_option( 'tf_logo_text' ) )
+        return get_option( 'tf_logo_text' );
+
+    return get_option( 'blogname' );
+}
