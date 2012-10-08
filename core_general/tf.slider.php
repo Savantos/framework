@@ -172,12 +172,15 @@ function tf_slider_page() {
 
         <div style="clear:both"></div>
 
-        <div style="margin-top: 20px;">
-            <label for="tf_global_disable_slideshows"><strong><?php echo __( 'Disable slide shows', 'themeforce' ); ?></strong></label>
-            <div style="float:right"><input type="checkbox" name="tf_global_disable_slideshows" class="iphone" id="tf_global_disable_slideshows" value="true" <?php checked( get_option( 'tf_global_hide_slideshows' ) ); ?> /><br /></div>
-            <div style="clear:both"></div>
-        </div>
-        <span class="desc"><?php echo __( 'This will disable the slide shows across your entire site. Alternatively, you can disable slide shows on a page by page basis by editing any specific page.', 'themeforce'); ?></span>
+        <!-- allow deactivation of sliders -->
+        <?php if ( get_current_theme() == 'Baseforce' ): ?>
+            <div style="margin-top: 20px;">
+                <label for="tf_global_disable_slideshows"><strong><?php echo __( 'Disable slide shows', 'themeforce' ); ?></strong></label>
+                <div style="float:right"><input type="checkbox" name="tf_global_disable_slideshows" class="iphone" id="tf_global_disable_slideshows" value="true" <?php checked( get_option( 'tf_global_hide_slideshows' ) ); ?> /><br /></div>
+                <div style="clear:both"></div>
+            </div>
+            <span class="desc"><?php echo __( 'This will disable the slide shows across your entire site. Alternatively, you can disable slide shows on a page by page basis by editing any specific page.', 'themeforce'); ?></span>
+        <?php endif; ?>
 
     </div>
     <div style="clear:both"></div>
@@ -719,7 +722,7 @@ function tf_add_slider_option_to_page_properties_meta( $post_type ) {
  */
 function tf_page_properties_meta_box_draw( $post ) { ?>
 
-    <?php if ( ! get_option( 'tf_global_hide_slideshows' ) ): ?>
+    <?php if ( ! get_option( 'tf_global_hide_slideshows' ) && get_current_theme() == 'Baseforce' ): ?>
         <p>
             <strong><?php echo __( 'Hide slide show', 'themeforce' ); ?></strong> <input type="checkbox" <?php checked( get_post_meta( $post->ID, 'tf_hide_slideshow', true ) ); ?> name="tf_hide_slideshow" value="true" />
         </p>
@@ -735,7 +738,7 @@ add_action( 'save_post', 'tf_save_custom_properties_meta' );
  */
 function tf_save_custom_properties_meta( $post_id ) {
 
-    if ( get_option( 'tf_global_hide_slideshows' ) )
+    if ( get_option( 'tf_global_hide_slideshows' ) || ! get_current_theme() == 'Baseforce' )
         return;
 
     if ( empty( $_POST['tf_hide_slideshow'] ) )
