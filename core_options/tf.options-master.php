@@ -234,7 +234,7 @@ function tf_display_settings( $options ) {
         	        <br /><span class="desc"><?php echo $value['desc'] ?></span>
         	    </td>
         	</tr>
-			
+
         	<?php break;
 
         case "radio":

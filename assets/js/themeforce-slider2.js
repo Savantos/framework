@@ -119,6 +119,12 @@ jQuery(document).ready(function($) {
     // Init
 
     $('ul#tf-slides-list li.slide-item').each(function(index) {
+
+        $('.iphone:checkbox').iphoneStyle({
+            checkedLabel: 'YES',
+            uncheckedLabel: 'NO'
+        });
+
         var slideType = $(this).find('.slide-edit .slide-type-selection input:checked').val();
         switchPreview($(this),slideType);
     });
@@ -140,6 +146,17 @@ jQuery(document).ready(function($) {
         }
     });
 
+    //change global slideshow display setting
+
+    // Edit - Change Slide Type
+
+    $( '#tf_global_disable_slideshows' ).change( function() {
+
+        jQuery.post( ajaxurl, { action: 'tf_slides_update_global_display_setting', postid: getID($(this)), hide: ( jQuery( this).prop( 'checked' ) ) } );
+
+    } );
+
+
     // Sort - Reset size of Slide when clicking on Handle
 
     $('.slide-icon-move').mousedown(function(){
@@ -155,7 +172,7 @@ jQuery(document).ready(function($) {
         $('li.ui-state-highlight').css('min-height', uiHeight );
 
     });
-      
+
     // Edit - Click on main Edit Button
     
     $('.slide-icon-edit').click(function () {

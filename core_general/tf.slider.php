@@ -54,10 +54,13 @@ add_action( 'load-appearance_page_tf_slider', function() {
  * Load Slider JS Scripts
  */
 function themeforce_slider_scripts() {
+
+    wp_enqueue_script( 'jquery' );
     wp_enqueue_script( 'jquery-ui-sortable' );
     wp_enqueue_script( 'jquery-ui-draggable' );
     wp_enqueue_script( 'thickbox' );
     wp_enqueue_script( 'tfslider', TF_URL . '/assets/js/themeforce-slider2.js', array( 'jquery'), TF_VERSION  );
+
 }
 
 add_action( 'admin_print_scripts-appearance_page_tf_slider', 'themeforce_slider_scripts' );
@@ -155,11 +158,11 @@ function tf_slider_page() {
 
                     </li>
 
-	    	<?php endforeach; ?>
+	    	    <?php endforeach; ?>
 
-        </ul>
+            </ul>
 
-        <input type="hidden" name="update_post" value="1"/>
+            <input type="hidden" name="update_post" value="1"/>
 
         </form>
 
@@ -167,8 +170,18 @@ function tf_slider_page() {
 
         <?php tf_output_new_slide_image_well(); ?>
 
-        </div>
         <div style="clear:both"></div>
+
+        <div style="margin-top: 20px;">
+            <label for="tf_global_disable_slideshows"><strong><?php echo __( 'Disable slide shows', 'themeforce' ); ?></strong></label>
+            <div style="float:right"><input type="checkbox" name="tf_global_disable_slideshows" class="iphone" id="tf_global_disable_slideshows" value="true" <?php checked( get_option( 'tf_global_hide_slideshows' ) ); ?> /><br /></div>
+            <div style="clear:both"></div>
+        </div>
+        <span class="desc"><?php echo __( 'This will disable the slide shows across your entire site. Alternatively, you can disable slide shows on a page by page basis by editing any specific page.', 'themeforce'); ?></span>
+
+    </div>
+    <div style="clear:both"></div>
+
     </div>
     <?php
 }
@@ -310,6 +323,18 @@ function tf_output_new_slide_image_well() {
     </div>
     <?php
 }
+
+
+//Update global slides display setting
+add_action( 'wp_ajax_tf_slides_update_global_display_setting', function() {
+
+    $post_id = (int) $_POST['postid'];
+    $hide = ( $_POST['hide'] == 'true' ) ? true : false;
+
+    update_option( 'tf_global_hide_slideshows', $hide );
+
+} );
+
 
 // Update Slide Order
 
@@ -645,4 +670,77 @@ function tf_slider_legacy_support_update() {
     wp_redirect( add_query_arg( 'updated_legacy', 'true' ) );
 
     exit;
+}
+
+//check whether to display a slider on the current page
+function tf_is_display_slider() {
+
+    $post = get_queried_object();
+
+    // if we cant recognise the current queried post as a standard page
+    if ( empty( $post ) || $post->post_type != 'page' )
+        return true;
+
+    //if the current queried post is a page and the slider settings are set to hide the slideshow
+    if ( get_option( 'tf_global_hide_slideshows' ) || get_post_meta(  $post->ID, 'tf_hide_slideshow', true ) )
+        return false;
+
+    return true;
+
+}
+
+add_action( 'add_meta_boxes', 'tf_add_slider_option_to_page_properties_meta' );
+
+/**
+ * Adds the meta box to the page screen
+ */
+function tf_add_slider_option_to_page_properties_meta( $post_type ) {
+
+    // remove the default
+    remove_meta_box(
+        'pageparentdiv',
+        'page',
+        'side'
+    );
+
+    // add our own
+    add_meta_box(
+        'modified-page-properties-meta-box',
+        'page' == $post_type ? __('Page Attributes') : __('Attributes'),
+        'tf_page_properties_meta_box_draw',
+        'page',
+        'side',
+        'low'
+    );
+}
+
+/**
+ * Callback function to display the custom page properties meta box
+ */
+function tf_page_properties_meta_box_draw( $post ) { ?>
+
+    <?php if ( ! get_option( 'tf_global_hide_slideshows' ) ): ?>
+        <p>
+            <strong><?php echo __( 'Hide slide show', 'themeforce' ); ?></strong> <input type="checkbox" <?php checked( get_post_meta( $post->ID, 'tf_hide_slideshow', true ) ); ?> name="tf_hide_slideshow" value="true" />
+        </p>
+    <?php endif; ?>
+
+    <?php page_attributes_meta_box( $post );
+}
+
+add_action( 'save_post', 'tf_save_custom_properties_meta' );
+
+/**
+ * Save our custom field values
+ */
+function tf_save_custom_properties_meta( $post_id ) {
+
+    if ( get_option( 'tf_global_hide_slideshows' ) )
+        return;
+
+    if ( empty( $_POST['tf_hide_slideshow'] ) )
+        update_post_meta( $post_id, 'tf_hide_slideshow', false );
+    else
+        update_post_meta( $post_id, 'tf_hide_slideshow', true );
+
 }
