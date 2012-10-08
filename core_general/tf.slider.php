@@ -175,7 +175,7 @@ function tf_slider_page() {
         <!-- allow deactivation of sliders -->
         <?php if ( get_current_theme() == 'Baseforce' ): ?>
             <div style="margin-top: 20px;">
-                <label for="tf_global_disable_slideshows"><strong><?php echo __( 'Disable slide shows', 'themeforce' ); ?></strong></label>
+                <label for="tf_global_disable_slideshows"><h3><?php echo __( 'Disable slide shows', 'themeforce' ); ?></h3></label>
                 <div style="float:right"><input type="checkbox" name="tf_global_disable_slideshows" class="iphone" id="tf_global_disable_slideshows" value="true" <?php checked( get_option( 'tf_global_hide_slideshows' ) ); ?> /><br /></div>
                 <div style="clear:both"></div>
             </div>
