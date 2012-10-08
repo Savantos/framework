@@ -41,34 +41,37 @@ function themeforce_logo_page() {
     
     $options = array (
  
-    array( 'name' => __('Logo', 'themeforce'), 'type' => 'title'),
+        array( 'name' => __('Logo', 'themeforce'), 'type' => 'title'),
 
-    array( 'type' => 'open'),
+        array( 'type' => 'open'),
 
-	array( 'name' => __('Logo', 'themeforce'),
-                'desc' => __('Your business logo (choose from an array of formats .JPG, .GIF, .PNG)', 'themeforce'),
-                'id' => 'tf_logo_id',
+	    array( 'name' => __('Logo', 'themeforce'),
+                    'desc' => __('Your business logo (choose from an array of formats .JPG, .GIF, .PNG)', 'themeforce'),
+                    'id' => 'tf_logo_id',
+                    'std' => '',
+                    'size' => 'width=300&height=300&crop=0',
+                    'type' => 'image'),
+
+        array( 'name' => __( 'Text Logo', 'themeforce' ),
+                'desc' => __( 'Don\'t have an image logo yet? Choose some text to appear in the logo area instead.' ),
+                'id' => 'blogname',
                 'std' => '',
-                'size' => 'width=300&height=300&crop=0',
-                'type' => 'image'),
+                'type' => 'text'),
 
-    array( 'name' => __( 'Text Logo', 'themeforce' ),
-            'desc' => __( 'Don\'t have an image logo yet? Choose some text to appear in the logo area instead.' ),
-            'id' => 'blogname',
-            'std' => '',
-            'type' => 'text'),
+   	    array( 'name' => __('Favicon', 'themeforce'),
+                    'desc' => __('Your Favicon, make sure it is 16px by 16px (you can <a href=\'http://www.favicon.cc/\' target=\'_blank\'>generate one here</a>)', 'themeforce'),
+                    'id' => 'tf_favicon',
+                    'std' => '',
+                    'type' => 'image',
+                    'allowed_extensions' => array( 'ico' ),
+                    'drop_text' => __('Drop favicon here', 'themeforce')),
 
-   	array( 'name' => __('Favicon', 'themeforce'),
-                'desc' => __('Your Favicon, make sure it is 16px by 16px (you can <a href=\'http://www.favicon.cc/\' target=\'_blank\'>generate one here</a>)', 'themeforce'),
-                'id' => 'tf_favicon',
-                'std' => '',
-                'type' => 'image',
-                'allowed_extensions' => array( 'ico' ),
-                'drop_text' => __('Drop favicon here', 'themeforce')),
-      
-	array( 'type' => 'close'), 
+	    array( 'type' => 'close'),
  
-);
+    );
+
+    if ( ! get_current_theme() == 'Baseforce' )
+        unset( $options[3] );
 
     tf_display_settings( $options );
     ?> 
@@ -87,41 +90,64 @@ function tf_logo( $size ='width=250&height=200&crop=0' ) {
 
 	$logomobile = wpthumb( $logo_src, 'width=200&height=160&crop=0' );
 
-	if ( is_user_logged_in() ) :
-		
-		$uploader = new TF_Upload_Image_Well( 'tf_logo_id', get_option( 'tf_logo_id', 0 ), array( 'size' => $size ) );
-		$uploader->drop_text = __('Drop your logo here', 'themeforce');
-	    ?>
+    $uploader = new TF_Upload_Image_Well( 'tf_logo_id', get_option( 'tf_logo_id', 0 ), array( 'size' => $size ) );
+    $uploader->drop_text = __('Drop your logo here', 'themeforce');
 
-	    <div class="logo-image-well" style="float:left; <?php echo ( ! $logo_src ) ? 'display: none;' : ''; ?>">
-	    	<?php $uploader->html() ?>
-	    </div>
 
-        <?php if ( ! $logo_src ) : ?>
-            <a id="nologo-wrap" href="<?php echo home_url(); ?>"><div id="nologo"><?php echo tf_get_logo_text(); ?></div><input type="button" class="frontend tf_switch_to_image_logo" value="Upload logo instead?" /></a>
-        <?php endif; ?>
+    switch( get_current_theme() ) :
 
-	<?php else : ?>
+        case 'Baseforce':
 
-        <?php if ( $logo_src ): ?>
-	        <div style=""><a href="<?php bloginfo('url'); ?>"><div id="logo" style="background-image:url(<?php echo $logo_src; ?>)"></div></a></div>
-	    <?php else: ?>
-            <a id="nologo-wrap" href="<?php echo home_url(); ?>"><div id="nologo"><?php echo tf_get_logo_text(); ?></div></a>
-        <?php endif; ?>
+            if ( is_user_logged_in() ) : ?>
+                <div class="logo-image-well" style="float:left; <?php echo ( ! $logo_src ) ? 'display: none;' : ''; ?>">
+                    <?php $uploader->html() ?>
+                </div>
 
-	<?php endif; ?>
+                <?php if ( ! $logo_src ) : ?>
+                    <a id="nologo-wrap" href="<?php echo home_url(); ?>"><div class="nologo"><?php echo tf_get_logo_text(); ?></div><input type="button" class="frontend tf_switch_to_image_logo" value="Upload logo instead?" /></a>
+                <?php endif; ?>
 
-    <?php if ( $logo_src ) : ?>
-        <div id="logo-mobile" style="display:none;">
-            <a href="<?php bloginfo('url'); ?>"><div style="background:url('<?php echo $logomobile; ?>') no-repeat center center"></div></a>
-        </div>
-	<?php else: ?>
-        <div id="logo-mobile" class="no-logo" style="display:none;">
-            <a id="nologo-wrap-mobile" href="<?php echo home_url(); ?>"><div id="nologo"><?php echo tf_get_logo_text(); ?></div></a>
-        </div>
-    <?php endif; ?>
+            <?php else : ?>
 
-	<?php
+                <?php if ( $logo_src ): ?>
+                    <div style=""><a href="<?php bloginfo('url'); ?>"><div id="logo" style="background-image:url(<?php echo $logo_src; ?>)"></div></a></div>
+                    <?php else: ?>
+                    <a id="nologo-wrap" href="<?php echo home_url(); ?>"><div class="nologo"><?php echo tf_get_logo_text(); ?></div></a>
+                    <?php endif; ?>
+
+            <?php endif; ?>
+
+
+            <?php if ( $logo_src ) : ?>
+                <div id="logo-mobile" style="display:none;">
+                    <a href="<?php bloginfo('url'); ?>"><div style="background:url('<?php echo $logomobile; ?>') no-repeat center center"></div></a>
+                </div>
+            <?php else: ?>
+                <div id="logo-mobile" class="no-logo" style="display:none;">
+                    <a id="nologo-wrap-mobile" href="<?php echo home_url(); ?>"><div class="nologo"><?php echo tf_get_logo_text(); ?></div></a>
+                </div>
+            <?php endif;
+
+            break;
+
+        default:
+
+            if ( is_user_logged_in() ) : ?>
+                <div class="logo-image-well" style="float:left;">
+                    <?php $uploader->html() ?>
+                </div>
+
+            <?php else : ?>
+                <div style=""><a href="<?php bloginfo('url'); ?>"><div id="logo" style="background-image:url(<?php echo $logo_src; ?>)"></div></a></div>
+            <?php endif; ?>
+
+            <div id="logo-mobile" style="display:none;">
+                <a href="<?php bloginfo('url'); ?>"><div style="background:url('<?php echo $logomobile; ?>') no-repeat center center"></div></a>
+            </div>
+
+            <?php break;
+
+    endswitch;
 
 }
 
