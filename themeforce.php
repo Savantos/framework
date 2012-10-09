@@ -361,3 +361,15 @@ function tf_admin_ajax_get_new_post_row() {
 	exit;
 }
 add_action( 'wp_ajax_tf_get_new_post_row', 'tf_admin_ajax_get_new_post_row' );
+
+add_action( 'wp_head', function() {
+
+    if ( ! get_current_user_id() )
+        return;
+    ?>
+    <script type="text/javascript">
+        if ( typeof( ajaxurl ) == 'undefined' )
+            var ajaxurl = '<?php echo admin_url( 'admin-ajax.php' ); ?>';
+    </script>
+    <?php
+} );

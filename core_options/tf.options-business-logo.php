@@ -93,23 +93,22 @@ function tf_logo( $size ='width=250&height=200&crop=0' ) {
     $uploader = new TF_Upload_Image_Well( 'tf_logo_id', get_option( 'tf_logo_id', 0 ), array( 'size' => $size ) );
     $uploader->drop_text = __('Drop your logo here', 'themeforce');
 
+    $use_image_logo = ( ( get_option( 'tf_image_logo_selected' ) && ! get_option( 'tf_text_logo_selected' ) ) || ( ! get_option( 'tf_text_logo_selected' ) && $logo_src ) ) ? true : false;
 
     switch( get_current_theme() ) :
 
         case 'Baseforce':
 
             if ( is_user_logged_in() ) : ?>
-                <div class="logo-image-well" style="float:left; <?php echo ( ! $logo_src ) ? 'display: none;' : ''; ?>">
+                <div class="logo-image-well logo_container" style="float:left; <?php echo ( ! $use_image_logo ) ? 'display: none;' : ''; ?>">
                     <?php $uploader->html() ?>
                 </div>
 
-                <?php if ( ! $logo_src ) : ?>
-                    <a id="nologo-wrap" href="<?php echo home_url(); ?>"><div class="nologo"><?php echo tf_get_logo_text(); ?></div><input type="button" class="frontend tf_switch_to_image_logo" value="Upload logo instead?" /></a>
-                <?php endif; ?>
+                <a id="nologo-wrap" class="logo_container" style="<?php echo ( $use_image_logo ) ? 'display: none;' : ''; ?>" href="<?php echo home_url(); ?>"><div class="nologo"><?php echo tf_get_logo_text(); ?></div><input type="button" class="frontend tf_switch_logo_type" value="Switch to Image" /></a>
 
             <?php else : ?>
 
-                <?php if ( $logo_src ): ?>
+                <?php if ( $use_image_logo ): ?>
                     <div style=""><a href="<?php bloginfo('url'); ?>"><div id="logo" style="background-image:url(<?php echo $logo_src; ?>)"></div></a></div>
                     <?php else: ?>
                     <a id="nologo-wrap" href="<?php echo home_url(); ?>"><div class="nologo"><?php echo tf_get_logo_text(); ?></div></a>
@@ -117,8 +116,7 @@ function tf_logo( $size ='width=250&height=200&crop=0' ) {
 
             <?php endif; ?>
 
-
-            <?php if ( $logo_src ) : ?>
+            <?php if ( $use_image_logo ) : ?>
                 <div id="logo-mobile" style="display:none;">
                     <a href="<?php bloginfo('url'); ?>"><div style="background:url('<?php echo $logomobile; ?>') no-repeat center center"></div></a>
                 </div>
@@ -202,3 +200,24 @@ function tf_get_logo_text() {
 
     return get_option( 'blogname' );
 }
+
+
+add_action( 'wp_ajax_tf_switch_logo_display_type', function() {
+
+    if ( ! get_current_user_id() || empty( $_POST['action'] ) || $_POST['action'] != 'tf_switch_logo_display_type' )
+        exit;
+
+    $switch_to = (string) $_POST['switch_to'];
+
+    if ( $switch_to == 'text' ) {
+        update_option( 'tf_image_logo_selected', false );
+        update_option( 'tf_text_logo_selected', true );
+
+    } elseif ( $switch_to == 'image' ) {
+        update_option( 'tf_image_logo_selected', true );
+        update_option( 'tf_text_logo_selected', false );
+    }
+
+    exit;
+
+} );

@@ -22,14 +22,5 @@ jQuery(document).ready(function($) {
 	    e.stopPropagation();
 
 	} );
-
-    jQuery( '.tf_switch_to_image_logo').click( function(e) {
-
-        e.preventDefault();
-
-        jQuery( '#tf_logo_id-container').parent().show();
-        jQuery( this ).closest( 'a' ).hide();
-
-    } );
     
 });
