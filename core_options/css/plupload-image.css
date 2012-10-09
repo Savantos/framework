@@ -43,7 +43,7 @@ div.rwmb-drag-drop-inside {
 
 a.delete-image,
 div.rwmb-drag-drop-inside input[type=button] {
-    position.relative;
+    position:relative;
     box-shadow: 0 2px 3px 1px rgba( 0, 0, 0, .25 );
     font-family: sans-serif;
     text-decoration: none;

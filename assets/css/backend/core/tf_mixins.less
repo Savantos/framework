@@ -50,6 +50,12 @@
 	        background-clip: @clip;
 }
 
+.box-sizing(@style) {
+    -webkit-box-sizing: @style;
+    -moz-box-sizing: @style;
+    box-sizing: @style;
+}
+
 // CSS3 Content Columns
 .content-columns(@columnCount, @columnGap: 20px) {
 	-webkit-column-count: @columnCount;
