@@ -37,7 +37,7 @@ function tf_add_mobile_nav_menu ( $args = array() ){
 ?>
 	<!-- mobile nav menu -->
 	<div class="mobile-nav-container" style="display: none;">
-		<a href="#" class="show-nav">Press here for Site Navigation</a>
+		<a href="#" class="nav-button-nav">Press here for Site Navigation</a>
 		 
 		 <?php $default_args = array(
 	     	'theme_location'  => 'primary',

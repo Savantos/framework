@@ -1,7 +1,7 @@
 jQuery(document).ready(function($) {
 
 	// Mobile site navigation toggle script
-	jQuery( '.mobile-nav-container .nav-button-nav, .show-nav' ).click( function(e) {
+	jQuery( '.mobile-nav-container .nav-button-nav' ).click( function(e) {
 
 	    e.preventDefault();
 	    jQuery( this ).parent().parent().find('.nav-mobile').stop(true,true).slideToggle();
