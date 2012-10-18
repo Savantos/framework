@@ -29,7 +29,7 @@ Theme Force changed to happytables in Feb. '12, the vendor prefix "tf_" will rem
 define( 'TF_DIR_SLUG', end( explode( DIRECTORY_SEPARATOR, dirname( __FILE__ ) ) ) );
 define( 'TF_PATH', dirname( __FILE__ ) );
 define( 'TF_URL', get_bloginfo( 'template_directory' ) . '/' . TF_DIR_SLUG );
-define ('TF_VERSION', '3.3.9');
+define ('TF_VERSION', '3.4.0');
 
 /* Theme Force Core Tools
 =========================================*/
