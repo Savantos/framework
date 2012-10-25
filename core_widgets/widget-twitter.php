@@ -38,11 +38,13 @@ class tf_twitter_widget extends WP_Widget {
 
 		// start
 
+        $url = 'https://api.twitter.com/1/statuses/user_timeline/' . $account . '.json?callback=twitterCallback2&amp;count=' . $show;
+
         if ( $title ) {echo $before_title . $title . $after_title;}
         
 		echo '<ul id="twitter_update_list"></ul>
 		      <script type="text/javascript" src="http://twitter.com/javascripts/blogger.js"></script>';
-		echo '<script type="text/javascript" src="http://twitter.com/statuses/user_timeline/'.$account.'.json?callback=twitterCallback2&amp;count='.$show.'"></script>';
+		echo '<script type="text/javascript" src="' . $url . '"></script>';
 
 		// echo widget closing tag
         
