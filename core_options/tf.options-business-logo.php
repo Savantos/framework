@@ -174,8 +174,8 @@ function tf_logo_url( $size ='width=250&height=200&crop=0' ) {
 }
 
 function tf_get_favicon_url() {
-	
-	if ( is_numeric( get_option( 'tf_favicon' ) ) )
+
+	if ( is_numeric( $logo_id = get_option( 'tf_favicon' ) ) )
 		$logo_src = wp_get_attachment_image_src( $logo_id, 'width=16&height=16' ) ? reset( wp_get_attachment_image_src( $logo_id, 'width=16&height=16' ) ) : '';
 	
 	elseif ( get_option( 'tf_favicon' ) )
@@ -183,7 +183,7 @@ function tf_get_favicon_url() {
 	
 	elseif ( get_option( 'tf_custom_favicon' ) )
 		$logo_src = get_option( 'tf_custom_favicon' );
-	
+
 	return $logo_src;
 }
 
