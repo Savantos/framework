@@ -37,7 +37,7 @@ class tf_payments_widget extends WP_Widget {
                 $disc = isset( $instance['payment-disc'] ) ? $instance['payment-disc'] : true;
                 $cirr = isset( $instance['payment-cirr'] ) ? $instance['payment-cirr'] : true;
                 $maes = isset( $instance['payment-maes'] ) ? $instance['payment-maes'] : true;
-
+				$eftpos = isset( $instance['payment-eftpos'] ) ? $instance['payment-eftpos'] : true;
                 // widget display
 
                 echo $before_widget;
@@ -51,6 +51,7 @@ class tf_payments_widget extends WP_Widget {
                 if ( $disc == true ) { echo '<li class="payment-type"><img src="' . get_bloginfo( 'template_url' ) . '/framework/assets/images/payment-disc.png" alt="' . __('Discover Card Accepted', 'themeforce') . '" /></li>'; }
                 if ( $cirr == true ) { echo '<li class="payment-type"><img src="' . get_bloginfo( 'template_url' ) . '/framework/assets/images/payment-cirr.png" alt="' . __('Cirrus Card Accepted', 'themeforce') . '" /></li>'; }
                 if ( $maes == true ) { echo '<li class="payment-type"><img src="' . get_bloginfo( 'template_url' ) . '/framework/assets/images/payment-maes.png" alt="' . __('Maestro Card Accepted', 'themeforce') . '" /></li>'; }
+				if ( $eftpos == true ) { echo '<li class="payment-type"><img src="' . get_bloginfo( 'template_url' ) . '/framework/assets/images/payment-eftpos.png" alt="' . __('eftpos Card Accepted', 'themeforce') . '" /></li>'; }
                 echo '</ul>';
                 if ( $footdesc ) {echo '<p>' . $footdesc . '</p>';}
 
@@ -63,7 +64,7 @@ class tf_payments_widget extends WP_Widget {
 	function update( $new_instance, $old_instance ) {
 		$instance = $old_instance;
 
-			  $instance = array( 'payment-visa' => 0, 'payment-mast' => 0, 'payment-amex' => 0, 'payment-disc' => 0, 'payment-cirr' => 0, 'payment-maes' => 0);
+			  $instance = array( 'payment-visa' => 0, 'payment-mast' => 0, 'payment-amex' => 0, 'payment-disc' => 0, 'payment-cirr' => 0, 'payment-maes' => 0,  'payment-eftpos' => 0 );
 				  	foreach ( $instance as $field => $val ) {
 				   if ( isset( $new_instance[$field] ) )
 				    $instance[$field] = 1;
@@ -115,7 +116,11 @@ class tf_payments_widget extends WP_Widget {
                     <input class="checkbox" type="checkbox" <?php checked( $instance['payment-maes'], true ); ?> id="<?php echo $this->get_field_id( 'payment-maes' ); ?>" name="<?php echo $this->get_field_name( 'payment-maes' ); ?>" />
 					<label for="<?php echo $this->get_field_id( 'payment-maes' ); ?>">Maestro Card</label>
                 </p>
-                 <p><textarea class="widefat" rows="5" cols="20" id="<?php echo $this->get_field_id( 'payment-footdesc' ); ?>" name="<?php echo $this->get_field_name( 'payment-footdesc' ); ?>"><?php echo $instance['payment-footdesc']; ?></textarea></p>
+    			<p>
+    			    <input class="checkbox" type="checkbox" <?php checked( $instance['payment-eftpos'], true ); ?> id="<?php echo $this->get_field_id( 'payment-eftpos' ); ?>" name="<?php echo $this->get_field_name( 'payment-eftpos' ); ?>" />
+    			    <label for="<?php echo $this->get_field_id( 'payment-eftpos' ); ?>">eftpos Card</label>
+    			</p>
+                <p><textarea class="widefat" rows="5" cols="20" id="<?php echo $this->get_field_id( 'payment-footdesc' ); ?>" name="<?php echo $this->get_field_name( 'payment-footdesc' ); ?>"><?php echo $instance['payment-footdesc']; ?></textarea></p>
 	<?php
 	}
 }
