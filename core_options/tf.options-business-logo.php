@@ -198,7 +198,7 @@ function tf_get_logo_text() {
     if ( get_option( 'tf_logo_text' ) )
         return get_option( 'tf_logo_text' );
 
-    return get_option( 'blogname' );
+    return get_option( 'tf_business_name' );
 }
 
 
