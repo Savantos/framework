@@ -198,7 +198,7 @@ function tf_get_logo_text() {
     if ( get_option( 'tf_logo_text' ) )
         return get_option( 'tf_logo_text' );
 
-    return get_option( 'tf_business_name' );
+    return ( ( $name = get_option( 'tf_business_name' ) ) != 'Your Business Name' ) ? $name : get_option( 'blogname' );
 }
 
 
