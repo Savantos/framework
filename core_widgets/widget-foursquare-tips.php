@@ -54,7 +54,7 @@ class tf_fs_tips_widget extends WP_Widget {
 		       		echo '<!-- Foursquare Response Code: ' . $venue->meta->code . ' -->';
 		       		
 		       		$counter=0;
-		       		foreach ($venue->response->venue->tips->groups[0]->items as $items) {
+		       		foreach ($venue->response->venue->tips->groups[2]->items as $items) {
 		       		    if ($counter < $limit) {
 		       		        $counter++;
 		       		        echo '<div class="fs-tips-item">';
