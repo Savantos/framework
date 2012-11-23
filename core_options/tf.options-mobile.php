@@ -43,26 +43,31 @@ function themeforce_mobile_page() {
         array( 'name' => __( 'Mobile Settings', 'themeforce'), 'type' => 'title'),
 
         array( 'type' => 'open'),  
-        
-        array( 'name' => __( 'Backgroung Image', 'themeforce'),
-                'desc' => __( 'We by default take your first Slider Image, but you may wish', 'themeforce'),
-                'id' => $shortname.'_mobilebg',
-                'std' => '',
-                'type' => 'image'),
-        
+
         array(
                 'name' => __( 'Navigation Menu', 'themeforce'),
                 'desc' => __( 'If you\'d like to display a shorter or different Navigation Menu, select it here.', 'themeforce'),
                 'id' => 'tf_mobilemenu',
                 'type' => 'select',
                 'class' => 'mini', //mini, tiny, small
-                'options' => $options_menus),
-      
-        array( 'type' => 'close'),
- 
-);
+                'options' => $options_menus)
+
+    );
+
+    if ( get_current_theme() != 'Baseforce' ) {
+
+    $options[] =  array( 'name' => __( 'Background Image', 'themeforce'),
+            'desc' => __( 'We by default take your first Slider Image, but you may wish', 'themeforce'),
+            'id' => $shortname.'_mobilebg',
+            'std' => '',
+            'type' => 'image');
+
+    }
+
+    $options[] = array( 'type' => 'close');
 
     tf_display_settings( $options );
+
     ?> 
 	 <input type="submit" class="tf-button tf-major right" name="options_submit" value=" <?php _e( 'Save Changes' )  ?>" />
          <div style="clear:both;"></div>

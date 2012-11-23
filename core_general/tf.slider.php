@@ -724,7 +724,7 @@ function tf_page_properties_meta_box_draw( $post ) { ?>
 
     <?php if ( ! get_option( 'tf_global_hide_slideshows' ) && get_current_theme() == 'Baseforce' ): ?>
         <p>
-            <strong><?php echo __( 'Hide slide show', 'themeforce' ); ?></strong> <input type="checkbox" <?php checked( get_post_meta( $post->ID, 'tf_hide_slideshow', true ) ); ?> name="tf_hide_slideshow" value="true" />
+            <strong><?php echo __( 'Hide slider on this page', 'themeforce' ); ?></strong><br /><input style="margin-top:10px" type="checkbox" <?php checked( get_post_meta( $post->ID, 'tf_hide_slideshow', true ) ); ?> name="tf_hide_slideshow" value="true" />
         </p>
     <?php endif; ?>
 

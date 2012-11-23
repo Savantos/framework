@@ -47,7 +47,7 @@ function tf_add_mobile_nav_menu ( $args = array() ){
 	     	'before'          => '<div class="nav-link-mobile">',
 	     	'after'           => '</div>',
 	     	'menu_id'         => '',
-	     	'depth' 	  => 2,
+	     	'depth' 	      => 2,
 	     	'fallback_cb'     => 'tf_nomenu');
 	     
 	     $menuargs = wp_parse_args ( $args, $default_args);

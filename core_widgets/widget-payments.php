@@ -52,7 +52,7 @@ class tf_payments_widget extends WP_Widget {
                 if ( $cirr == true ) { echo '<li class="payment-type"><img src="' . get_bloginfo( 'template_url' ) . '/framework/assets/images/payment-cirr.png" alt="' . __('Cirrus Card Accepted', 'themeforce') . '" /></li>'; }
                 if ( $maes == true ) { echo '<li class="payment-type"><img src="' . get_bloginfo( 'template_url' ) . '/framework/assets/images/payment-maes.png" alt="' . __('Maestro Card Accepted', 'themeforce') . '" /></li>'; }
 				if ( $eftpos == true ) { echo '<li class="payment-type"><img src="' . get_bloginfo( 'template_url' ) . '/framework/assets/images/payment-eftpos.png" alt="' . __('eftpos Card Accepted', 'themeforce') . '" /></li>'; }
-                echo '</ul>';
+                echo '</ul><div class="clearfix"></div>';
                 if ( $footdesc ) {echo '<p>' . $footdesc . '</p>';}
 
                 echo $after_widget;

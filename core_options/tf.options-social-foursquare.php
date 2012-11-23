@@ -29,7 +29,9 @@ function themeforce_social_foursquare_page() {
                 'id' => 'tf_fsquare_venue_id',
                 'std' => '',
                 'type' => 'text'),   
-        
+
+        /*
+
         array( 
                	'name' => __( 'Client ID', 'themeforce'),
                 'desc' => __('Request API access here, register <a href=\'https://foursquare.com/oauth/\' target=\'_blank\'>here</a>. Callback URL does not matter for the Venues APIv2 we\'ll be using.', 'themeforce'),
@@ -42,7 +44,9 @@ function themeforce_social_foursquare_page() {
                 'desc' => __('Provided together with the Client ID above.', 'themeforce'),
                 'id' => 'tf_fsquare_client_secret',
                 'std' => '',
-                'type' => 'text'),        
+                'type' => 'text'),
+
+        */
       
 	array( 'type' => 'close'), 
  

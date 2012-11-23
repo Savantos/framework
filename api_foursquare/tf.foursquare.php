@@ -9,9 +9,21 @@ function tf_foursquare_api() {
 
 	// - setup -
 
+    if ( get_option('tf_fsquare_client_id') != '' ) {
+        $client_id = get_option( 'tf_fsquare_client_id' );
+    } else {
+        $client_id = 'HQ0CMMQ4KQRUFNN5XF53HK0DAV2YEZYBH2H14ZUGLOQW3QE2';
+    }
+
+    if ( get_option('tf_fsquare_client_secret') != '' ) {
+        $client_secret = get_option( 'tf_fsquare_client_secret' );
+    } else {
+        $client_secret = 'N0KTGPFJYZQ5LE1TPUA3YAE2NC0I1ANRESC1QJQWPZXLXS3W';
+    }
+
 	$fs_venue = get_option( 'tf_fsquare_venue_id' );
-	$fs_id = '?client_id=' . get_option( 'tf_fsquare_client_id' );
-	$fs_secret = '&client_secret=' . get_option( 'tf_fsquare_client_secret' );
+	$fs_id = '?client_id=' . $client_id;
+	$fs_secret = '&client_secret=' . $client_secret;
 	$fs_url = 'https://api.foursquare.com/v2/venues/' . $fs_venue . $fs_id . $fs_secret;
 
 	// - response -
