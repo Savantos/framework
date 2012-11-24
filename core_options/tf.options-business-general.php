@@ -147,7 +147,7 @@ $options[] = array( 'name' => __('Notice in Footer', 'themeforce'),
 $options = apply_filters( 'tf_options_general', $options );
 
 // Can remove this option once we migrate users
-if ( TF_THEME == 'chowforce' ) {
+if ( get_template() == 'chowforce' ) {
 				$options[]= array( 'name' => 'Tagline',
                 'desc' => 'This will appear in the top right of every page. ',
                 'id' => 'chowforce_biz_contactinfo',

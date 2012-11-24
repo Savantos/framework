@@ -378,7 +378,7 @@ function themeforce_slider_display() {
                 echo '<img src="' . $b_image . '" alt="" />';
             }
             
-             if ( TF_THEME == 'chowforce' ) {
+             if ( get_template() == 'chowforce' ) {
                
 				echo '<li>';
 				    if ( $link ) {echo '<a href="' . $link . '">';}
@@ -389,7 +389,7 @@ function themeforce_slider_display() {
 
               }
                 
-              if ( TF_THEME == 'pubforce' ) {
+              if ( get_template() == 'pubforce' ) {
                     echo '<li>';
                         if ( $link ) {echo '<a href="' . $link . '">';}
                             $resized_image = wpthumb( $image, 'width=540&height=300&crop=1', false);
@@ -398,7 +398,7 @@ function themeforce_slider_display() {
                     echo '</li>';
 			  }   
                 
-              if ( TF_THEME == 'fineforce' )
+              if ( get_template() == 'fineforce' )
                 {
                     echo '<li>';
                         if ( $link ) {echo '<a href="' . $link . '">';}
@@ -418,20 +418,20 @@ function themeforce_slider_display() {
         
         if ( $emptycheck == '' ) {
             
-            if ( TF_THEME == 'chowforce' ) {
+            if ( get_template() == 'chowforce' ) {
                 echo '<li><div class="slideimage-full" style="background:url(' . get_bloginfo( 'template_url' ) . '/images/defaults/slide1.jpg) no-repeat;" alt="Slide"></li>';
                 echo '<li><div class="slidetext"><h3>Yelp Integration</h3><p>Want to show off your Yelp rating? That\'s no problem. If you\'re not in a Yelp country, but use Qype instead, that works too! Just add your API and you\'ll be all set.</p></div><div class="slideimage" style="background:url(' . get_bloginfo( 'template_url' ) . '/images/defaults/slide2.jpg) no-repeat;" alt="Slide"></li>';
                 echo '<li><div class="slidetext"><h3>No more PDF Menus</h3><p>With our designs, search engines will recognize your food menus and visitors won\'t have to download any PDF\'s or otherwise.</p></div><div class="slideimage" style="background:url(' . get_bloginfo( 'template_url' ) . '/images/defaults/slide3.jpg) no-repeat;" alt="Slide"></li>';
                 echo '<li><div class="slidetext"><h3>Foursquare Integration</h3><p>Display your Foursquare Photos & Tips without any problem. You can do similar things with Gowalla. All you need to do is sign-up for an API Key & enter it (everyone gets one and it takes 2 minutes).</p></div><div class="slideimage" style="background:url(' . get_bloginfo( 'template_url' ) . '/images/defaults/slide4.jpg) no-repeat;" alt="Slide"></li>';
             }           
             
-            if ( TF_THEME == 'pubforce' ) {
+            if ( get_template() == 'pubforce' ) {
                 echo '<li><div class="slideimage" style="background:url(' . get_bloginfo( 'template_url' ) . '/images/defaults/slide1.jpg) no-repeat;" alt="Slide"></li>';
                 echo '<li><div class="slideimage" style="background:url(' . get_bloginfo( 'template_url' ) . '/images/defaults/slide2.jpg) no-repeat;" alt="Slide"></li>';
                 echo '<li><div class="slideimage" style="background:url(' . get_bloginfo( 'template_url' ) . '/images/defaults/slide3.jpg) no-repeat;" alt="Slide"></li>';
             }
             
-            if ( TF_THEME == 'fineforce' ) {
+            if ( get_template() == 'fineforce' ) {
                 echo '<li><div class="slideimage" style="background:url(' . get_bloginfo( 'template_url' ) . '/images/default_food_1.jpg) no-repeat;" alt="Slide"></li>';
                 echo '<li><div class="slideimage" style="background:url(' . get_bloginfo( 'template_url' ) . '/images/default_food_2.jpg) no-repeat;" alt="Slide"></li>';
                 echo '<li><div class="slideimage" style="background:url(' . get_bloginfo( 'template_url' ) . '/images/default_food_3.jpg) no-repeat;" alt="Slide"></li>';
