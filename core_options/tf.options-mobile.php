@@ -54,7 +54,7 @@ function themeforce_mobile_page() {
 
     );
 
-    if ( get_current_theme() != 'Baseforce' ) {
+    if ( get_template() != 'baseforce' ) {
 
     $options[] =  array( 'name' => __( 'Background Image', 'themeforce'),
             'desc' => __( 'We by default take your first Slider Image, but you may wish', 'themeforce'),

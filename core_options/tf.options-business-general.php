@@ -134,7 +134,7 @@ function themeforce_business_page() {
 
 );
 
-if ( get_current_theme() != 'Baseforce' ) {
+if ( get_template() != 'baseforce' ) {
 
 $options[] = array( 'name' => __('Notice in Footer', 'themeforce'),
     'desc' => __('A short text snippet to indicate any copyright or otherwise (you may also leave it blank)', 'themeforce'),

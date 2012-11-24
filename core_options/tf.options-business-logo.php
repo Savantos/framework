@@ -70,7 +70,7 @@ function themeforce_logo_page() {
  
     );
 
-    if ( ! get_current_theme() == 'Baseforce' )
+    if ( ! get_template() == 'baseforce' )
         unset( $options[3] );
 
     tf_display_settings( $options );
@@ -95,9 +95,9 @@ function tf_logo( $size ='width=250&height=200&crop=0' ) {
 
     $use_image_logo = ( ( get_option( 'tf_image_logo_selected' ) && ! get_option( 'tf_text_logo_selected' ) ) || ( ! get_option( 'tf_text_logo_selected' ) && $logo_src ) ) ? true : false;
 
-    switch( get_current_theme() ) :
+    switch( get_template() ) :
 
-        case 'Baseforce':
+        case 'baseforce':
 
             if ( is_user_logged_in() ) : ?>
                 <div class="logo-image-well logo_container" style="float:left; <?php echo ( ! $use_image_logo ) ? 'display: none;' : ''; ?>">

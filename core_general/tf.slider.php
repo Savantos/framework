@@ -173,7 +173,7 @@ function tf_slider_page() {
         <div style="clear:both"></div>
 
         <!-- allow deactivation of sliders -->
-        <?php if ( get_current_theme() == 'Baseforce' ): ?>
+        <?php if ( get_template() == 'baseforce' ): ?>
             <div style="margin-top: 20px;">
                 <label for="tf_global_disable_slideshows"><h3><?php echo __( 'Disable slide shows', 'themeforce' ); ?></h3></label>
                 <div style="float:right"><input type="checkbox" name="tf_global_disable_slideshows" class="iphone" id="tf_global_disable_slideshows" value="true" <?php checked( get_option( 'tf_global_hide_slideshows' ) ); ?> /><br /></div>
@@ -502,7 +502,7 @@ function themeforce_slider_display() {
 
         // **** Theme Specific
 
-        if ( TF_THEME == 'baseforce' ) {
+        if ( get_template() == 'baseforce' ) {
 
             switch($type) {
 
@@ -722,7 +722,7 @@ function tf_add_slider_option_to_page_properties_meta( $post_type ) {
  */
 function tf_page_properties_meta_box_draw( $post ) { ?>
 
-    <?php if ( ! get_option( 'tf_global_hide_slideshows' ) && get_current_theme() == 'Baseforce' ): ?>
+    <?php if ( ! get_option( 'tf_global_hide_slideshows' ) && get_template() == 'baseforce' ): ?>
         <p>
             <strong><?php echo __( 'Hide slider on this page', 'themeforce' ); ?></strong><br /><input style="margin-top:10px" type="checkbox" <?php checked( get_post_meta( $post->ID, 'tf_hide_slideshow', true ) ); ?> name="tf_hide_slideshow" value="true" />
         </p>
@@ -738,7 +738,7 @@ add_action( 'save_post', 'tf_save_custom_properties_meta' );
  */
 function tf_save_custom_properties_meta( $post_id ) {
 
-    if ( get_option( 'tf_global_hide_slideshows' ) || ! get_current_theme() == 'Baseforce' )
+    if ( get_option( 'tf_global_hide_slideshows' ) || ! get_template() == 'baseforce' )
         return;
 
     if ( empty( $_POST['tf_hide_slideshow'] ) )

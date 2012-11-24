@@ -148,7 +148,7 @@ function tf_opendining_desktop() {
 
 };
 
-if ( TF_THEME != 'baseforce') {
+if ( get_template() != 'baseforce') {
 
     add_action( 'tf_body_top', 'tf_opendining_desktop', 12);
 

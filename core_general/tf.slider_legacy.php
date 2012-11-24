@@ -372,7 +372,7 @@ function themeforce_slider_display() {
             
             // **** Theme Specific
             
-            if ( TF_THEME == 'baseforce' )
+            if ( get_template() == 'baseforce' )
                 {
                 $b_image = wpthumb( $image, 'width=960&height=250&crop=1', false);
                 echo '<img src="' . $b_image . '" alt="" />';

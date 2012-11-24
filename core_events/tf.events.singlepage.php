@@ -32,7 +32,7 @@
 	
 	$title = get_the_title( get_the_ID() );
 	
-	if ( TF_THEME == 'baseforce' ) {
+	if ( get_template() == 'baseforce' ) {
 		$headertags = '<div class="page-title-wrap"><h1 class="entry-title" itemprop="summary">'.$title.'</h1></div><div class="clearfix"></div>';
 	} else {
 		$headertags = '<h1 class="post-title" itemprop="summary">'.$title.'</h1><div class="clearfix"></div>';
