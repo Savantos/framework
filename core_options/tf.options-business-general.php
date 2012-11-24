@@ -69,12 +69,14 @@ function themeforce_business_page() {
                 'std' => __( 'Your Business Name', 'themeforce'),
                 'type' => 'text'),
 
+    /* Not sure if we need this anymore?
 	array( 'name' => __('Description', 'themeforce'),
                 'desc' => __('A short description of the location.', 'themeforce'),
                 'id' => 'tf_business_description',
                 'std' => '',
                 'type' => 'textarea'),
-						
+    */
+
 	array( 
                 'name' => __('Cuisine', 'themeforce'),
                 'desc' => __('The cuisine of the restaurant. Uses the Yelp cuisine categorization.', 'themeforce'),
