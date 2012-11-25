@@ -376,3 +376,17 @@ add_action( 'wp_head', function() {
     </script>
     <?php
 } );
+
+/**
+ * Hook into wp-less to set the themeurl (which is used for resolving relative paths) to the template_directory
+ * as opposed to stylesheet_directory as we will be using the less files from the parent theme.
+ * 
+ * This should be done automatically in WP Less (see https://github.com/sanchothefat/wp-less/issues/25)
+ * 
+ * Current limitation is less can now use relative urls for images in the stylesheet_directory
+ */
+add_filter( 'less_vars', function( $themeurl, $handle ) {
+
+	$themeurl['themeurl'] = '~"' . get_template_directory_uri() . '"';
+	return $themeurl;
+}, 10, 2 );
