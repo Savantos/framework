@@ -32,6 +32,7 @@ require_once( TF_PATH . '/core_options/tf.options-opentable.php' );
 require_once( TF_PATH . '/core_options/tf.options-grubhub.php' );
 require_once( TF_PATH . '/core_options/tf.options-opendining.php' );
 require_once( TF_PATH . '/core_options/tf.options-localina.php' );
+require_once( TF_PATH . '/core_options/tf.options-foratable.php' );
 require_once( TF_PATH . '/core_options/tf.options-analytics.php' );
 require_once( TF_PATH . '/core_options/tf.options-google.php' );
 

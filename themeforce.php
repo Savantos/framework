@@ -132,6 +132,9 @@ require_once( TF_PATH . '/api_opendining/tf.opendining.php' );
 // Localina
 require_once( TF_PATH . '/api_localina/tf.localina.php' );
 
+// forAtable
+require_once( TF_PATH . '/api_foratable/tf.foratable.php' );
+
 // Grubhub
 require_once( TF_PATH . '/api_grubhub/tf.grubhub.php' );
 

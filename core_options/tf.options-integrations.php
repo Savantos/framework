@@ -51,6 +51,13 @@ function themeforce_integrations_page() {
             </div>
             <div class="accordion-content"><?php themeforce_localina_page(); ?></div>
 
+            <div class="accordion-header">
+                <a class="accordion-expand  accordion-<?php if ( get_option('tf_foratable_enabled') == true ) { echo 'checked'; } else { echo 'unchecked'; } ?>" href="#">forAtable</a>
+                <div class="accordion-desc">Switzerland</div>
+                <!--  <div class="accordion-link">Sign-up</div> -->
+            </div>
+            <div class="accordion-content"><?php themeforce_foratable_page(); ?></div>
+
         </div>
 
         <h3>Online Ordering</h3>

@@ -1,20 +1,80 @@
 <?php
+
 /*
- * Localina Integration
+ * forAtable Integration
  * ---------------------------------------------
  *
- * This is a pretty light integration to see how visitors will use it. Similar to Yelp, the feature
- * will degrade for mobile (not self-hosting for now, though code here: github.com/opendining/opendining-mobile)
+ * Adds reservation button.
  *
 */
 
+/**
+ * Get forAtable API Response
+ *
+ * @return array|mixed|null Fresh API Response
+ */
+function tf_foratable_api() {
+
+    $api_id = get_option( 'lunchgate_restaurant_id' );
+    // Fallback to visible Option Value (not using lunchgate_restaurant_id as don't want users to be able to overwrite)
+    if ( !$api_id ) {
+        $api_id = get_option( 'tf_foratable_id' );
+    }
+
+    $api_hash = 'e6df957b54422bd88511455308c163e4';
+
+    $api_response = wp_remote_post( "http://foratable.com//api/getUrl", array(
+        body => array('lunchgate_id' => $api_id, 'mediapartner_hash' => $api_hash) )
+    );
+
+    $foratablefile = wp_remote_retrieve_body( $api_response );
+    $foratable = json_decode( $foratablefile );
+    var_dump($foratable);
+
+    if ( !isset( $foratable->status ) || $foratable->status != 'ok' ) {
+        return null;
+    }
+
+    return $foratable;
+}
 
 /**
- * Returns JS Drop-in for Open Dining (fixed position button) for Desktop
+ * Check forAtable API Transient
+ *
+ * @return array|mixed|null Transient API Response
+ */
+function tf_foratable_transient() {
+
+    // - get transient -
+    $json = get_transient( 'themeforce_foratable_json' );
+
+    // - refresh transient -
+    if ( !$json ) {
+        $json = tf_foratable_api();
+        set_transient('themeforce_foratable_json', $json, 1);
+    }
+
+    // - data -
+    return $json;
+}
+
+
+/**
+ * Returns forAtable for Desktop
  *
  * @return string DOM output
  */
 function tf_foratable_desktop() {
+
+    $foratable = tf_foratable_transient();
+
+    if ( !$foratable ) {
+
+        return;
+
+    } else {
+
+        $link = $foratable->url;
 
         // A/B Testing
 
@@ -40,17 +100,12 @@ function tf_foratable_desktop() {
 
         );
 
-        $id = trim(get_option(tf_foratable_id));
-
-        // Trigger Localina Fancybox after MixPanel hit
-
-        $args['eval'] = "ForAtable.startBooking( '" . $phone . "', '" . $api . "', 'de' );";
 
         // Display
 
         ?>
 
-        <a id="cta-header" class="cta-desktop cta-<?php echo $args["color"]; ?>" href="http://foratable.com/book/restaurant/<?php echo 'id'; ?>">
+        <a id="cta-header" class="cta-desktop cta-<?php echo $args["color"]; ?>" href="<?php echo $link; ?>">
             <span class="cta-icon icon-event"></span> <span class="cta-headline"><?php echo $args["headline"]; ?></span>
         </a>
 
@@ -62,6 +117,8 @@ function tf_foratable_desktop() {
 
         <?php
 
+    }
+
 }
 
 if ( get_option( 'tf_foratable_enabled' ) == 'true') {
@@ -71,53 +128,59 @@ if ( get_option( 'tf_foratable_enabled' ) == 'true') {
 }
 
 /**
- * Returns JS Drop-in for Open Dining (fixed position button) for Mobile
+ * Returns forAtable for Mobile
  *
  * @return string DOM output
  */
 function tf_foratable_mobile() {
 
-    // Arguments
+    $foratable = tf_foratable_transient();
 
-    $args = array(
+    if ( !$foratable ) {
 
-        "tracklinks" => false,
-        "mp_target" => "a.cta-mobile",
-        "mp_name" => "Clicked Call to Action (Main)",
-        "partner" => "foratable",
-        "revenue_type" => "reservations",
-        "placement" => "header",
-        "device" => "mobile",
-        "headline" => "Tisch reservieren",
-        "color" => "default"
+        return;
 
-    );
+    } else {
 
-    $api = trim(get_option(tf_foratable_id));
+        $link = $foratable->url;
 
-    // Trigger Localine Fancybox after MixPanel hit
+        // Arguments
 
-    $args['eval'] = "ForAtable.startBooking( '" . $phone . "', '" . $api . "', 'de' );";
+        $args = array(
 
-    // Display
+            "tracklinks" => false,
+            "mp_target" => "a.cta-mobile",
+            "mp_name" => "Clicked Call to Action (Main)",
+            "partner" => "foratable",
+            "revenue_type" => "reservations",
+            "placement" => "header",
+            "device" => "mobile",
+            "headline" => "Tisch reservieren",
+            "color" => "default"
 
-    if ( get_option( 'tf_foratable_enabled' ) == 'true') {
+        );
 
-            ?>
+        // Display
 
-            <a class="cta-mobile cta-<?php echo $args["color"]; ?>" href="http://foratable.com/book/restaurant/<?php echo 'id'; ?>">
-                <span class="cta-icon icon-event"></span> <span class="cta-headline"><?php echo $args["headline"]; ?></span>
-            </a>
+        if ( get_option( 'tf_foratable_enabled' ) == 'true') {
 
-            <div class="clearfix"></div>
+                ?>
 
-            <script>mixpanel.track("Viewed Page");</script>
+                <a class="cta-mobile cta-<?php echo $args["color"]; ?>" href="<?php echo $link; ?>">
+                    <span class="cta-icon icon-event"></span> <span class="cta-headline"><?php echo $args["headline"]; ?></span>
+                </a>
 
-            <?php tf_cta_mixpanel($args); ?>
+                <div class="clearfix"></div>
 
-            <?php
+                <script>mixpanel.track("Viewed Page");</script>
+
+                <?php tf_cta_mixpanel($args); ?>
+
+                <?php
 
         }
+
+    }
 
 }
 
