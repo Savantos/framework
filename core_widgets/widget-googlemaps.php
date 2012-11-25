@@ -54,10 +54,25 @@ class tf_googlemaps_widget extends WP_Widget {
                     $valid_address = get_option( 'tf_business_address' );
                 }
 
-                $address_url = preg_replace( '![^a-z0-9]+!i', '+', $valid_address );
+                //$address_url = preg_replace( '![^a-z0-9]+!i', '+', $valid_address );
+                $address_url = $valid_address;
+                $url = add_query_arg( 'q', $valid_address, 'http://maps.google.com/maps' );
+                $map_url = add_query_arg( array(
+                    'center' => $valid_address,
+                    'zoom' => $zoom,
+                    'size' => '300x' . $height,
+                    'markers' => 'color:white|' . $valid_address,
+                    'sensor' => 'false'
+                ), 'http://maps.google.com/maps/api/staticmap' );
+                ?>
 
-                echo '<span itemprop="maps"><a href="http://maps.google.com/maps?q=' . $address_url . '" target="_blank"><img class="tf-googlemaps-front" src="http://maps.google.com/maps/api/staticmap?center=' . $address_url . '?>&amp;zoom=' . $zoom . '&amp;size=300x' . $height . '&amp;markers=color:white|' . $address_url . '&amp;sensor=false" alt="'. __('Google Map of Location', 'themeforce') . '" /></a></span>';
+                <span itemprop="maps">
+                    <a href="<?php echo  $url ?>" target="_blank">
+                        <img class="tf-googlemaps-front" src="<?php echo $map_url ?>" alt="<?php echo __('Google Map of Location', 'themeforce') ?>" />
+                    </a>
+                </span>
 
+                <?php
                 if ( $footdesc ) {echo '<p>' . $footdesc . '</p>';}
 
                 echo $after_widget;
