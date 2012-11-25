@@ -15,27 +15,26 @@
  */
 function tf_foratable_api() {
 
-    $api_id = get_option( 'lunchgate_restaurant_id' );
-    // Fallback to visible Option Value (not using lunchgate_restaurant_id as don't want users to be able to overwrite)
-    if ( !$api_id ) {
-        $api_id = get_option( 'tf_foratable_id' );
-    }
+	$api_id = get_option( 'lunchgate_restaurant_id' );
+	// Fallback to visible Option Value (not using lunchgate_restaurant_id as don't want users to be able to overwrite)
+	if ( !$api_id ) {
+		$api_id = get_option( 'tf_foratable_id' );
+	}
 
-    $api_hash = 'e6df957b54422bd88511455308c163e4';
+	$api_hash = 'e6df957b54422bd88511455308c163e4';
 
-    $api_response = wp_remote_post( "http://foratable.com//api/getUrl", array(
-        body => array('lunchgate_id' => $api_id, 'mediapartner_hash' => $api_hash) )
-    );
+	$api_response = wp_remote_post( "http://foratable.com//api/getUrl", array(
+		body => array('lunchgate_id' => $api_id, 'mediapartner_hash' => $api_hash) )
+	);
 
-    $foratablefile = wp_remote_retrieve_body( $api_response );
-    $foratable = json_decode( $foratablefile );
-    var_dump($foratable);
+	$foratablefile = wp_remote_retrieve_body( $api_response );
+	$foratable = json_decode( $foratablefile );
 
-    if ( !isset( $foratable->status ) || $foratable->status != 'ok' ) {
-        return null;
-    }
+	if ( !isset( $foratable->status ) || $foratable->status != 'ok' ) {
+		return null;
+	}
 
-    return $foratable;
+	return $foratable;
 }
 
 /**
@@ -45,17 +44,17 @@ function tf_foratable_api() {
  */
 function tf_foratable_transient() {
 
-    // - get transient -
-    $json = get_transient( 'themeforce_foratable_json' );
+	// - get transient -
+	$json = get_transient( 'themeforce_foratable_json' );
 
-    // - refresh transient -
-    if ( !$json ) {
-        $json = tf_foratable_api();
-        set_transient('themeforce_foratable_json', $json, 1);
-    }
+	// - refresh transient -
+	if ( !$json ) {
+		$json = tf_foratable_api();
+		set_transient('themeforce_foratable_json', $json, 1);
+	}
 
-    // - data -
-    return $json;
+	// - data -
+	return $json;
 }
 
 
@@ -66,65 +65,64 @@ function tf_foratable_transient() {
  */
 function tf_foratable_desktop() {
 
-    $foratable = tf_foratable_transient();
+	$foratable = tf_foratable_transient();
 
-    if ( !$foratable ) {
+	if ( !$foratable ) {
 
-        return;
+		return;
 
-    } else {
+	} else {
 
-        $link = $foratable->url;
+		$link = $foratable->url;
 
-        // A/B Testing
+		// A/B Testing
 
-        if ( date('j') % 2 ) { // day of month will likely be less biased then day of week, or hour of day.
-            //even
-        } else {
-            //odd
-        }
+		if ( date('j') % 2 ) { // day of month will likely be less biased then day of week, or hour of day.
+			//even
+		} else {
+			//odd
+		}
 
-        // Arguments
+		// Arguments
 
-        $args = array(
+		$args = array(
 
-            "tracklinks" => false,
-            "mp_target" => "a#cta-header",
-            "mp_name" => "Clicked Call to Action (Main)",
-            "partner" => "foratable",
-            "revenue_type" => "reservations",
-            "placement" => "header",
-            "device" => "desktop",
-            "headline" => "Tisch reservieren",
-            "color" => "default"
+			"tracklinks" => false,
+			"mp_target" => "a#cta-header",
+			"mp_name" => "Clicked Call to Action (Main)",
+			"partner" => "foratable",
+			"revenue_type" => "reservations",
+			"placement" => "header",
+			"device" => "desktop",
+			"headline" => "Tisch reservieren",
+			"color" => "default"
 
-        );
+		);
 
 
-        // Display
+		// Display
 
-        ?>
+		?>
 
-        <a id="cta-header" class="cta-desktop cta-<?php echo $args["color"]; ?>" href="<?php echo $link; ?>">
-            <span class="cta-icon icon-event"></span> <span class="cta-headline"><?php echo $args["headline"]; ?></span>
-        </a>
+		<a id="cta-header" class="cta-desktop cta-<?php echo $args["color"]; ?>" href="<?php echo $link; ?>">
+			<span class="cta-icon icon-event"></span> <span class="cta-headline"><?php echo $args["headline"]; ?></span>
+		</a>
 
-        <script>mixpanel.track("Viewed Page");</script>
+		<script>mixpanel.track("Viewed Page");</script>
 
-        <?php tf_cta_mixpanel($args); ?>
+		<?php tf_cta_mixpanel($args); ?>
 
-        <div class="clearfix"></div>
+		<div class="clearfix"></div>
 
-        <?php
+		<?php
 
-    }
+	}
 
 }
 
-if ( get_option( 'tf_foratable_enabled' ) == 'true') {
+if ( get_option( 'tf_foratable_enabled' ) ) {
 
-    add_action( 'tf_body_desktop_cta', 'tf_foratable_desktop', 12);
-
+	add_action( 'tf_body_desktop_cta', 'tf_foratable_desktop', 12);
 }
 
 /**
@@ -134,59 +132,59 @@ if ( get_option( 'tf_foratable_enabled' ) == 'true') {
  */
 function tf_foratable_mobile() {
 
-    $foratable = tf_foratable_transient();
+	$foratable = tf_foratable_transient();
 
-    if ( !$foratable ) {
+	if ( !$foratable ) {
 
-        return;
+		return;
 
-    } else {
+	} else {
 
-        $link = $foratable->url;
+		$link = $foratable->url;
 
-        // Arguments
+		// Arguments
 
-        $args = array(
+		$args = array(
 
-            "tracklinks" => false,
-            "mp_target" => "a.cta-mobile",
-            "mp_name" => "Clicked Call to Action (Main)",
-            "partner" => "foratable",
-            "revenue_type" => "reservations",
-            "placement" => "header",
-            "device" => "mobile",
-            "headline" => "Tisch reservieren",
-            "color" => "default"
+			"tracklinks" => false,
+			"mp_target" => "a.cta-mobile",
+			"mp_name" => "Clicked Call to Action (Main)",
+			"partner" => "foratable",
+			"revenue_type" => "reservations",
+			"placement" => "header",
+			"device" => "mobile",
+			"headline" => "Tisch reservieren",
+			"color" => "default"
 
-        );
+		);
 
-        // Display
+		// Display
 
-        if ( get_option( 'tf_foratable_enabled' ) == 'true') {
+		if ( get_option( 'tf_foratable_enabled' ) == 'true') {
 
-                ?>
+				?>
 
-                <a class="cta-mobile cta-<?php echo $args["color"]; ?>" href="<?php echo $link; ?>">
-                    <span class="cta-icon icon-event"></span> <span class="cta-headline"><?php echo $args["headline"]; ?></span>
-                </a>
+				<a class="cta-mobile cta-<?php echo $args["color"]; ?>" href="<?php echo $link; ?>">
+					<span class="cta-icon icon-event"></span> <span class="cta-headline"><?php echo $args["headline"]; ?></span>
+				</a>
 
-                <div class="clearfix"></div>
+				<div class="clearfix"></div>
 
-                <script>mixpanel.track("Viewed Page");</script>
+				<script>mixpanel.track("Viewed Page");</script>
 
-                <?php tf_cta_mixpanel($args); ?>
+				<?php tf_cta_mixpanel($args); ?>
 
-                <?php
+				<?php
 
-        }
+		}
 
-    }
+	}
 
 }
 
 if ( get_option( 'tf_foratable_enabled' ) == 'true') {
 
-    add_action( 'tf_body_mobile_cta', 'tf_foratable_mobile', 12);
+	add_action( 'tf_body_mobile_cta', 'tf_foratable_mobile', 12);
 
 }
 
@@ -195,12 +193,12 @@ if ( get_option( 'tf_foratable_enabled' ) == 'true') {
  */
 function load_foratable_js() {
 
-    wp_enqueue_script('foratable', 'http://foratable.com/code/foratable.js', array('jquery'), TF_VERSION );
+	wp_enqueue_script('foratable', 'http://foratable.com/code/foratable.js', array('jquery'), TF_VERSION );
 
 }
 
 if ( get_option( 'tf_foratable_enabled' ) == 'true') {
 
-    add_action( 'wp_print_scripts', 'load_foratable_js');
+	add_action( 'wp_print_scripts', 'load_foratable_js');
 
 }
