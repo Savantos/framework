@@ -58,10 +58,10 @@ class tf_googlemaps_widget extends WP_Widget {
                 $address_url = $valid_address;
                 $url = add_query_arg( 'q', $valid_address, 'http://maps.google.com/maps' );
                 $map_url = add_query_arg( array(
-                    'center' => $valid_address,
+                    'center' => urlencode( $valid_address ),
                     'zoom' => $zoom,
                     'size' => '300x' . $height,
-                    'markers' => 'color:white|' . $valid_address,
+                    'markers' => 'color:white|' . urlencode( $valid_address ),
                     'sensor' => 'false'
                 ), 'http://maps.google.com/maps/api/staticmap' );
                 ?>
