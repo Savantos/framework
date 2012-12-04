@@ -64,6 +64,7 @@ function tf_foursquare_transient() {
 			set_transient( 'tf_foursquare_json', $json, 180 );
 	}
 	return $json;
+
 }
 
 /*
