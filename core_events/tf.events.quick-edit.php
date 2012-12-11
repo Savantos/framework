@@ -190,10 +190,7 @@ function tf_events_add_inline_js_to_footer() {
                                             changeYear: true,
                                             numberOfMonths: 3});
 				}, 1);
-                                
-   
 
-	    		
 	    	} );
 	    	
 	    	//re-modify the Edit links when quick edit finished
@@ -204,6 +201,14 @@ function tf_events_add_inline_js_to_footer() {
 		    	jQuery( '.row-title' ).addClass( 'editinline' );
 	    		
 	    	} );
+
+			jQuery( "#tf-inline-edit-description textarea" ).keydown(function(e){
+
+				// if Return was pressed, don't propagate the event as WordPress will trigger a Quick Edit save
+				if ( e.which == 13 )
+					e.stopPropagation();
+
+			});
 
 	    	//sync description teaxtarea and input
 	    	jQuery( "#tf-inline-edit-description textarea" ).change( function() {
@@ -271,17 +276,21 @@ function tf_events_inline_edit_save_post( $post_id, $post ) {
 	$end_date = new TFDateSelector( 'event_end_date' );
 	update_post_meta( $post_id, 'tf_events_enddate', $end_date->getDateFromPostDataDatePicker() );
 	
-	// description
-	global $wpdb;
-	$data['post_content'] = strip_tags( stripslashes( $_POST['tf_description'] ), '<br><p>' );
-	
-	$wpdb->update( $wpdb->posts, $data, array( 'ID' => $post_id ) );
-	
 	//post image
 	set_post_thumbnail( $post_id, ( int ) $_POST['_tf_events_image'] );
 }
 add_action( 'save_post', 'tf_events_inline_edit_save_post', 10, 2 );
 
+add_action( 'wp_insert_post_data', function( $data ) {
+
+	if ( !isset( $_POST['_inline_edit'] ) || $data['post_type'] !== 'tf_events' )
+		return $data;
+
+	$data['post_content'] = strip_tags( stripslashes( $_POST['tf_description'] ), '<br><p>' );
+
+	return $data;
+
+} );
 
 function quick_edit_events_styles() {
     global $post_type;
