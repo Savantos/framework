@@ -79,7 +79,7 @@
     
     </div>
 
-    <?php comments_template( '', true ); ?>
+    <?php //comments_template( '', true ); ?>
 
 <?php endwhile; else: ?>
 
